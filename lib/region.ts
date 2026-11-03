@@ -1,0 +1,36 @@
+/**
+ * Region constants shared by proxy.ts (edge of the request), server components and the client switcher.
+ * Labels and phones live in the DB; only routing facts live here.
+ */
+
+export type RegionCode = "IN" | "UK" | "AE";
+export type RegionSlug = "in" | "uk" | "ae";
+
+export const REGION_COOKIE = "region";
+export const REGION_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+
+export const REGION_SLUGS: readonly RegionSlug[] = ["in", "uk", "ae"] as const;
+
+export const slugToCode: Record<RegionSlug, RegionCode> = { in: "IN", uk: "UK", ae: "AE" };
+export const codeToSlug: Record<RegionCode, RegionSlug> = { IN: "in", UK: "uk", AE: "ae" };
+
+export function isRegionSlug(v: string | undefined | null): v is RegionSlug {
+  return !!v && (REGION_SLUGS as readonly string[]).includes(v);
+}
+
+const GCC = new Set(["AE", "SA", "QA", "KW", "BH", "OM"]);
+
+/** ISO 3166-1 alpha-2 country → region slug. */
+export function regionForCountry(country: string | null | undefined, fallback: RegionSlug): RegionSlug {
+  const c = country?.toUpperCase();
+  if (!c) return fallback;
+  if (c === "IN") return "in";
+  if (c === "GB" || c === "UK" || c === "IE") return "uk";
+  if (GCC.has(c)) return "ae";
+  return fallback;
+}
+
+export function defaultRegion(): RegionSlug {
+  const env = process.env.DEFAULT_REGION?.toLowerCase();
+  return isRegionSlug(env) ? env : "uk";
+}

@@ -1,0 +1,881 @@
+// AdamasTech Consulting: content + submissions schema.
+//
+// Conventions (kept consistent for the Phase 2 CMS):
+// - Every content model has: status, publishedAt, createdAt, updatedAt, sortOrder,
+//   needsReview + editorNote (placeholder / conflict flag shown to editors).
+// - Models that render as their own page also have SEO fields:
+//   seoTitle, seoDescription, ogImageId, noindex.
+// - Public pages only ever read rows with status = PUBLISHED.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// DRAFT: awaiting client sign-off (local previews show it when PREVIEW_DRAFTS=true).
+// ARCHIVED: deliberately retired; never rendered, not even in previews. Kept so it can be restored.
+enum Status {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum RegionCode {
+  IN
+  UK
+  AE
+}
+
+enum MediaKind {
+  IMAGE
+  VIDEO
+  DOCUMENT
+}
+
+enum NavMenu {
+  HEADER
+  FOOTER
+  LEGAL
+  SOCIAL
+}
+
+enum SolutionKind {
+  PRODUCT
+  AI_SOLUTION
+  ARIVOO_MODULE
+}
+
+enum LogoKind {
+  PARTNER
+  CERTIFICATION
+  CLIENT
+}
+
+enum Prominence {
+  HIDDEN
+  STANDARD
+  FEATURED
+}
+
+// ─────────────────────────────────────────────── Media
+
+model MediaAsset {
+  id            String    @id @default(cuid())
+  /// Path relative to MEDIA_BASE_URL, e.g. "images/hero/sap-poster.webp"
+  key           String    @unique
+  kind          MediaKind @default(IMAGE)
+  mimeType      String?
+  width         Int?
+  height        Int?
+  alt           String    @default("")
+  blurDataUrl   String?
+  /// Marked true when the asset is a stand-in until the client supplies the real one
+  isPlaceholder Boolean   @default(false)
+  /// Where the file came from (e.g. the old WordPress upload URL)
+  sourceUrl     String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  heroPosters     HeroSlide[]          @relation("HeroPoster")
+  heroVideos      HeroSlide[]          @relation("HeroVideo")
+  pillarImages    ServicePillar[]      @relation("PillarImage")
+  serviceImages   Service[]            @relation("ServiceImage")
+  solutionImages  Solution[]           @relation("SolutionImage")
+  industryImages  Industry[]           @relation("IndustryImage")
+  caseStudyImages CaseStudy[]          @relation("CaseStudyImage")
+  logoItems       LogoItem[]
+  certBadges      Certification[]      @relation("CertBadge")
+  certFiles       Certification[]      @relation("CertFile")
+  personPhotos    Person[]
+  milestoneImages Milestone[]          @relation("MilestoneImage")
+  eventImages     Event[]              @relation("EventImage")
+  technologyLogos Technology[]
+  solutionShots   SolutionScreenshot[]
+  regionHomeOg    RegionHome[]         @relation("RegionHomeOg")
+  pageOg          Page[]               @relation("PageOg")
+  pageImages      Page[]               @relation("PageImage")
+  pillarOg        ServicePillar[]      @relation("PillarOg")
+  serviceOg       Service[]            @relation("ServiceOg")
+  solutionOg      Solution[]           @relation("SolutionOg")
+  caseStudyOg     CaseStudy[]          @relation("CaseStudyOg")
+  eventOg         Event[]              @relation("EventOg")
+  certOg          Certification[]      @relation("CertOg")
+}
+
+// ─────────────────────────────────────────────── Regions & homepages
+
+model Region {
+  code             RegionCode @id
+  /// URL segment: "in" | "uk" | "ae"
+  slug             String     @unique
+  /// UI label: "India" | "UK & Ireland" | "GCC"
+  label            String
+  /// BCP 47 language tag used on the homepage <html lang>
+  locale           String
+  /// hreflang values pointing at this homepage
+  hreflang         String[]
+  phone            String?
+  phoneHref        String?
+  whatsapp         String?
+  email            String?
+  featuredOfficeId String?
+  featuredOffice   Office?    @relation("FeaturedOffice", fields: [featuredOfficeId], references: [id])
+  sortOrder        Int        @default(0)
+  updatedAt        DateTime   @updatedAt
+
+  home    RegionHome?
+  offices Office[]    @relation("OfficeRegion")
+}
+
+model RegionHome {
+  id              String     @id @default(cuid())
+  region          RegionCode @unique
+  regionRef       Region     @relation(fields: [region], references: [code])
+  featuredEventId String?
+  featuredEvent   Event?     @relation(fields: [featuredEventId], references: [id])
+  eventProminence Prominence @default(STANDARD)
+  showTrustStrip  Boolean    @default(true)
+  showWhyUs       Boolean    @default(true)
+  /// Optional region-only promo band (e.g. GCC e-invoicing). Shape: { eyebrow?, heading, body?, ctaLabel, ctaHref, external? }
+  promoBanner     Json?
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  seoTitle       String?
+  seoDescription String?
+  ogImageId      String?
+  ogImage        MediaAsset? @relation("RegionHomeOg", fields: [ogImageId], references: [id])
+  noindex        Boolean     @default(false)
+
+  heroSlides   HeroSlide[]
+  /// Service cards shown in the explorer's "also" strip for regions that differ (e.g. GCC)
+  serviceCards HomeServiceCard[]
+}
+
+model HeroSlide {
+  id       String      @id @default(cuid())
+  homeId   String
+  home     RegionHome  @relation(fields: [homeId], references: [id], onDelete: Cascade)
+  /// Short label on the story navigator tab
+  navLabel String
+  eyebrow  String?
+  headline String
+  body     String?
+  ctaLabel String
+  ctaHref  String
+  /// Interim source: Vimeo background player
+  vimeoId  String?
+  /// Target source: self-hosted MP4/WebM on S3/CloudFront
+  videoId  String?
+  video    MediaAsset? @relation("HeroVideo", fields: [videoId], references: [id])
+  posterId String?
+  poster   MediaAsset? @relation("HeroPoster", fields: [posterId], references: [id])
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+}
+
+/// A homepage service card (the live site's per-region "services" grid).
+model HomeServiceCard {
+  id     String     @id @default(cuid())
+  homeId String
+  home   RegionHome @relation(fields: [homeId], references: [id], onDelete: Cascade)
+  title  String
+  body   String?
+  href   String?
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+}
+
+/// Section headers and other short copy, keyed by section.
+/// A row with a region overrides the global row (region = null) for that region.
+model ContentBlock {
+  id       String      @id @default(cuid())
+  key      String
+  region   RegionCode?
+  eyebrow  String?
+  heading  String?
+  body     String?
+  ctaLabel String?
+  ctaHref  String?
+  /// Free-form extras for a block (kept small; typed in lib/data)
+  extra    Json?
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  @@unique([key, region])
+}
+
+// ─────────────────────────────────────────────── Navigation
+
+model NavItem {
+  id                  String     @id @default(cuid())
+  menu                NavMenu
+  parentId            String?
+  parent              NavItem?   @relation("NavTree", fields: [parentId], references: [id], onDelete: Cascade)
+  children            NavItem[]  @relation("NavTree")
+  /// Stable key so code can find a specific item (e.g. "solutions.arivoo")
+  key                 String?    @unique
+  label               String
+  descriptor          String?
+  href                String?
+  external            Boolean    @default(false)
+  comingSoon          Boolean    @default(false)
+  featuredCaseStudyId String?
+  featuredCaseStudy   CaseStudy? @relation(fields: [featuredCaseStudyId], references: [id])
+  featuredEventId     String?
+  featuredEvent       Event?     @relation(fields: [featuredEventId], references: [id])
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+}
+
+// ─────────────────────────────────────────────── Services
+
+model ServicePillar {
+  id          String      @id @default(cuid())
+  slug        String      @unique
+  name        String
+  tagline     String?
+  summary     String?
+  outcomeLine String?
+  challenge   String?
+  imageId     String?
+  image       MediaAsset? @relation("PillarImage", fields: [imageId], references: [id])
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  seoTitle       String?
+  seoDescription String?
+  ogImageId      String?
+  ogImage        MediaAsset? @relation("PillarOg", fields: [ogImageId], references: [id])
+  noindex        Boolean     @default(false)
+
+  services    Service[]
+  faqs        Faq[]
+  caseStudies CaseStudy[]
+}
+
+model Service {
+  id         String        @id @default(cuid())
+  pillarId   String
+  pillar     ServicePillar @relation(fields: [pillarId], references: [id])
+  slug       String
+  name       String
+  /// One-line descriptor used in menus and cards
+  descriptor String?
+  summary    String?
+  whoFor     String?
+  /// Typed in lib/data: { title: string; body: string }[]
+  whatWeDo   Json?
+  /// Typed in lib/data: { title: string; body: string }[] (e.g. "Did you know?" facts from the old page)
+  highlights Json?
+  imageId    String?
+  image      MediaAsset?   @relation("ServiceImage", fields: [imageId], references: [id])
+  /// Old WordPress path that feeds this page (for reference and redirects)
+  legacyPath String?
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  seoTitle       String?
+  seoDescription String?
+  ogImageId      String?
+  ogImage        MediaAsset? @relation("ServiceOg", fields: [ogImageId], references: [id])
+  noindex        Boolean     @default(false)
+
+  steps        ApproachStep[]
+  technologies Technology[]
+  faqs         Faq[]
+  caseStudies  CaseStudy[]
+
+  @@unique([pillarId, slug])
+}
+
+model ApproachStep {
+  id        String  @id @default(cuid())
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  title     String
+  body      String?
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+}
+
+model Technology {
+  id     String      @id @default(cuid())
+  name   String      @unique
+  logoId String?
+  logo   MediaAsset? @relation(fields: [logoId], references: [id])
+
+  status      Status    @default(PUBLISHED)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  services    Service[]
+  solutions   Solution[]
+  caseStudies CaseStudy[]
+}
+
+model Faq {
+  id         String         @id @default(cuid())
+  question   String
+  answer     String
+  pillarId   String?
+  pillar     ServicePillar? @relation(fields: [pillarId], references: [id], onDelete: Cascade)
+  serviceId  String?
+  service    Service?       @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  solutionId String?
+  solution   Solution?      @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+  pageId     String?
+  page       Page?          @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+}
+
+// ─────────────────────────────────────────────── Solutions
+
+model Solution {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  kind        SolutionKind
+  name        String
+  tagline     String?
+  summary     String?
+  body        String?
+  /// When set, cards and menus link here (new tab) instead of /solutions/[slug]
+  externalUrl String?
+  parentId    String?
+  parent      Solution?    @relation("SolutionTree", fields: [parentId], references: [id])
+  children    Solution[]   @relation("SolutionTree")
+  imageId     String?
+  image       MediaAsset?  @relation("SolutionImage", fields: [imageId], references: [id])
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  seoTitle       String?
+  seoDescription String?
+  ogImageId      String?
+  ogImage        MediaAsset? @relation("SolutionOg", fields: [ogImageId], references: [id])
+  noindex        Boolean     @default(false)
+
+  features     SolutionFeature[]
+  screenshots  SolutionScreenshot[]
+  integrations Technology[]
+  caseStudies  CaseStudy[]
+  faqs         Faq[]
+}
+
+model SolutionFeature {
+  id         String   @id @default(cuid())
+  solutionId String
+  solution   Solution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+  title      String
+  body       String?
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+}
+
+model SolutionScreenshot {
+  id         String     @id @default(cuid())
+  solutionId String
+  solution   Solution   @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+  imageId    String
+  image      MediaAsset @relation(fields: [imageId], references: [id])
+  caption    String?
+  sortOrder  Int        @default(0)
+}
+
+// ─────────────────────────────────────────────── Industries & case studies
+
+model Industry {
+  id       String      @id @default(cuid())
+  slug     String      @unique
+  /// Short label (e.g. "Supply chain")
+  tabLabel String
+  /// Panel title (e.g. "Manufacturing and Supply Chain Optimization")
+  title    String
+  body     String
+  imageId  String?
+  image    MediaAsset? @relation("IndustryImage", fields: [imageId], references: [id])
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  caseStudies CaseStudy[]
+}
+
+model CaseStudy {
+  id               String       @id @default(cuid())
+  slug             String       @unique
+  /// Category label shown above the title (e.g. "Smart Cities")
+  label            String
+  title            String
+  summary          String?
+  /// The biggest element on the card, e.g. "99%"
+  headlineMetric   String
+  metricLabel      String?
+  clientDescriptor String?
+  overview         String?
+  challenge        String?
+  /// Typed in lib/data: { title: string; body: string }[]
+  solution         Json?
+  quote            String?
+  quoteBy          String?
+  industryId       String?
+  industry         Industry?    @relation(fields: [industryId], references: [id])
+  regions          RegionCode[]
+  /// Regions whose homepage rail features this case study
+  featuredIn       RegionCode[]
+  imageId          String?
+  image            MediaAsset?  @relation("CaseStudyImage", fields: [imageId], references: [id])
+  legacyPath       String?
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  seoTitle       String?
+  seoDescription String?
+  ogImageId      String?
+  ogImage        MediaAsset? @relation("CaseStudyOg", fields: [ogImageId], references: [id])
+  noindex        Boolean     @default(false)
+
+  results      CaseResult[]
+  services     Service[]
+  pillars      ServicePillar[]
+  solutions    Solution[]
+  technologies Technology[]
+  navFeatures  NavItem[]
+}
+
+model CaseResult {
+  id          String    @id @default(cuid())
+  caseStudyId String
+  caseStudy   CaseStudy @relation(fields: [caseStudyId], references: [id], onDelete: Cascade)
+  value       String
+  label       String
+  sortOrder   Int       @default(0)
+}
+
+// ─────────────────────────────────────────────── Trust
+
+model Stat {
+  id         String       @id @default(cuid())
+  key        String       @unique
+  value      String
+  /// For count-up animation; null when the value isn't numeric
+  numeric    Float?
+  prefix     String?
+  suffix     String?
+  label      String
+  /// Only verified stats are rendered
+  verified   Boolean      @default(false)
+  /// Where the figure came from / why it is unverified
+  sourceNote String?
+  /// Where it may appear: "trust-strip" | "cta-band" | "about" | "credentials"
+  placements String[]
+  regions    RegionCode[]
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+}
+
+model LogoItem {
+  id      String       @id @default(cuid())
+  kind    LogoKind
+  name    String
+  logoId  String
+  logo    MediaAsset   @relation(fields: [logoId], references: [id])
+  url     String?
+  regions RegionCode[]
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+}
+
+model Certification {
+  id                String      @id @default(cuid())
+  slug              String      @unique
+  name              String
+  issuer            String?
+  standard          String?
+  description       String?
+  badgeId           String?
+  badge             MediaAsset? @relation("CertBadge", fields: [badgeId], references: [id])
+  certificateFileId String?
+  certificateFile   MediaAsset? @relation("CertFile", fields: [certificateFileId], references: [id])
+  certificateNumber String?
+  validUntil        DateTime?
+  verified          Boolean     @default(false)
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  seoTitle       String?
+  seoDescription String?
+  ogImageId      String?
+  ogImage        MediaAsset? @relation("CertOg", fields: [ogImageId], references: [id])
+  noindex        Boolean     @default(false)
+}
+
+model Office {
+  id           String     @id @default(cuid())
+  slug         String     @unique
+  city         String
+  /// Label shown in the UI (e.g. "Palo Alto")
+  label        String
+  country      String
+  region       RegionCode
+  regionRef    Region     @relation("OfficeRegion", fields: [region], references: [code])
+  addressLines String[]
+  phone        String?
+  phoneHref    String?
+  whatsapp     String?
+  lat          Float?
+  lng          Float?
+  /// false until the client confirms address/label
+  confirmed    Boolean    @default(false)
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  featuredFor Region[] @relation("FeaturedOffice")
+}
+
+model Person {
+  id          String      @id @default(cuid())
+  slug        String      @unique
+  name        String
+  role        String
+  bio         String?
+  photoId     String?
+  photo       MediaAsset? @relation(fields: [photoId], references: [id])
+  linkedinUrl String?
+  showOnTeam  Boolean     @default(true)
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  speakerAt EventSpeaker[]
+}
+
+/// Company journey on /about ("Our Company: Mission & Journey"), rendered in sortOrder.
+/// `year` stays null until the client confirms it; the page then shows "Milestone 0N" with a "Year to be confirmed" tag.
+model Milestone {
+  id          String      @id @default(cuid())
+  year        String?
+  title       String
+  description String?
+  imageId     String?
+  image       MediaAsset? @relation("MilestoneImage", fields: [imageId], references: [id])
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  @@index([status, sortOrder])
+}
+
+// ─────────────────────────────────────────────── Events
+
+model Event {
+  id               String      @id @default(cuid())
+  slug             String      @unique
+  title            String
+  eyebrow          String?
+  summary          String?
+  body             String?
+  startsAt         DateTime
+  endsAt           DateTime?
+  /// IANA zone, e.g. "Europe/London"
+  timezone         String      @default("Europe/London")
+  venueName        String?
+  venueAddress     String?
+  imageId          String?
+  image            MediaAsset? @relation("EventImage", fields: [imageId], references: [id])
+  registrationOpen Boolean     @default(false)
+  capacity         Int?
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  seoTitle       String?
+  seoDescription String?
+  ogImageId      String?
+  ogImage        MediaAsset? @relation("EventOg", fields: [ogImageId], references: [id])
+  noindex        Boolean     @default(false)
+
+  agenda        AgendaItem[]
+  speakers      EventSpeaker[]
+  registrations EventRegistration[]
+  regionHomes   RegionHome[]
+  navFeatures   NavItem[]
+}
+
+model AgendaItem {
+  id       String   @id @default(cuid())
+  eventId  String
+  event    Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  startsAt DateTime
+  title    String
+  body     String?
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+}
+
+model EventSpeaker {
+  eventId   String
+  event     Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  personId  String
+  person    Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+  sortOrder Int    @default(0)
+
+  @@id([eventId, personId])
+}
+
+// ─────────────────────────────────────────────── Announcements
+
+/// Hero announcement strip: upcoming events and good news. Shown only when published,
+/// inside its date window and for the current region.
+model Announcement {
+  id       String       @id @default(cuid())
+  /// Small coloured label, e.g. "Event" | "News" | "Partnership"
+  label    String
+  text     String
+  /// Event page or news link; internal paths or absolute URLs
+  href     String?
+  /// Window in which the item shows (open-ended when null)
+  startsAt DateTime?
+  endsAt   DateTime?
+  regions  RegionCode[]
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  @@index([status, sortOrder])
+}
+
+// ─────────────────────────────────────────────── Generic pages
+
+model Page {
+  id       String      @id @default(cuid())
+  /// Full path, e.g. "/about", "/privacy-policy"
+  path     String      @unique
+  /// "about" | "team" | "credentials" | "legal" | "coming-soon" | "contact" | "thank-you" | "services-overview" | "solutions-overview"
+  template String
+  title    String
+  eyebrow  String?
+  intro    String?
+  /// Typed + validated with zod in lib/data
+  blocks   Json?
+  imageId  String?
+  image    MediaAsset? @relation("PageImage", fields: [imageId], references: [id])
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  seoTitle       String?
+  seoDescription String?
+  ogImageId      String?
+  ogImage        MediaAsset? @relation("PageOg", fields: [ogImageId], references: [id])
+  noindex        Boolean     @default(false)
+
+  faqs Faq[]
+}
+
+model Redirect {
+  id          String   @id @default(cuid())
+  fromPath    String   @unique
+  toPath      String
+  statusCode  Int      @default(301)
+  active      Boolean  @default(true)
+  /// Client questionnaire ref, e.g. "Q2.4"
+  decisionRef String?
+  note        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─────────────────────────────────────────────── Submissions (not content)
+
+model ContactSubmission {
+  id             String      @id @default(cuid())
+  createdAt      DateTime    @default(now())
+  name           String
+  email          String
+  phone          String?
+  country        String
+  message        String
+  region         RegionCode?
+  sourcePath     String?
+  serviceContext String?
+  ipHash         String?
+  userAgent      String?
+  mailedAt       DateTime?
+}
+
+model EventRegistration {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  eventId   String
+  event     Event     @relation(fields: [eventId], references: [id])
+  name      String
+  email     String
+  company   String?
+  jobTitle  String?
+  phone     String?
+  notes     String?
+  consent   Boolean   @default(false)
+  ipHash    String?
+  mailedAt  DateTime?
+
+  @@unique([eventId, email])
+}
+
+model NewsletterSubscriber {
+  id        String      @id @default(cuid())
+  createdAt DateTime    @default(now())
+  email     String      @unique
+  region    RegionCode?
+  consent   Boolean     @default(false)
+}
+
+model RateLimitHit {
+  key         String
+  windowStart DateTime
+  count       Int      @default(1)
+
+  @@id([key, windowStart])
+}

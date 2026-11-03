@@ -1,0 +1,458 @@
+{
+  "/about-us": [
+    "/about",
+    301
+  ],
+  "/consulting": [
+    "/services",
+    301
+  ],
+  "/sap-solution-consulting": [
+    "/services/digital-transformation/sap",
+    301
+  ],
+  "/ai-data-analytics": [
+    "/services/ai-services/ai-ml",
+    301
+  ],
+  "/openedx": [
+    "/services/digital-transformation/edtech-openedx",
+    301
+  ],
+  "/aws-solutions": [
+    "/services/cloud-services",
+    301
+  ],
+  "/aws-solutions-old": [
+    "/services/cloud-services",
+    301
+  ],
+  "/technology-transformation": [
+    "/services/digital-transformation",
+    301
+  ],
+  "/application-development": [
+    "/services/digital-transformation/application-development",
+    301
+  ],
+  "/cloud-transformation": [
+    "/services/cloud-services/cloud-transformation",
+    301
+  ],
+  "/master-data-governance": [
+    "/services/digital-transformation/master-data-governance",
+    301
+  ],
+  "/data-science-analytics": [
+    "/services/digital-transformation/data-analytics",
+    301
+  ],
+  "/oracle-netsuite-solutions": [
+    "/services/cloud-services/oracle-netsuite",
+    301
+  ],
+  "/e-invoicing-uae": [
+    "/ae",
+    301
+  ],
+  "/sap-treasury-investment-and-cash-management-implementation": [
+    "/solutions/cash-forecasting",
+    301
+  ],
+  "/clients": [
+    "/case-studies",
+    301
+  ],
+  "/invoiceai-automated-invoice-processing-reconciliation": [
+    "/case-studies/invoiceai-invoice-processing",
+    301
+  ],
+  "/information-retriever-chatbot-enterprise-knowledge-assistant": [
+    "/case-studies/rag-knowledge-assistant",
+    301
+  ],
+  "/sap-analytics-cloud-implementation": [
+    "/case-studies/sap-analytics-cloud-liquor",
+    301
+  ],
+  "/sap-inter-company-reconciliation-functionalities": [
+    "/case-studies/sap-intercompany-reconciliation",
+    301
+  ],
+  "/sap-inter-company-reconciliation": [
+    "/case-studies/sap-intercompany-reconciliation",
+    301
+  ],
+  "/sap-bank-communication-management": [
+    "/case-studies/sap-bank-communication-management",
+    301
+  ],
+  "/sap-s4hana-business-partners-creation-with-workflow-management-functionalities": [
+    "/case-studies/sap-business-partner-workflow",
+    301
+  ],
+  "/condition-contract-management-settlement-management": [
+    "/case-studies/sap-condition-contract-management",
+    301
+  ],
+  "/proactive-and-predictive-machine-health-monitoring-with-iot-integration-solution": [
+    "/case-studies/predictive-machine-health-monitoring",
+    301
+  ],
+  "/sap-fiori-and-btp-cloud-solution-for-capex-project-management-tool-for-real-estate": [
+    "/case-studies/sap-fiori-btp-capex-real-estate",
+    301
+  ],
+  "/advanced-steel-plate-inspection": [
+    "/case-studies/steel-plate-inspection",
+    301
+  ],
+  "/car-parking-lot": [
+    "/case-studies/car-parking-lot",
+    301
+  ],
+  "/fruit-recognition": [
+    "/case-studies/fruit-recognition",
+    301
+  ],
+  "/face-recognition": [
+    "/case-studies/face-recognition",
+    301
+  ],
+  "/ppe-detection": [
+    "/case-studies/ppe-detection",
+    301
+  ],
+  "/cinema-hall-person-count": [
+    "/case-studies/cinema-hall-person-count",
+    301
+  ],
+  "/entry-exit-time-tracker-monitoring-ingress-and-egress-activity": [
+    "/case-studies/entry-exit-time-tracker",
+    301
+  ],
+  "/surveillance-system": [
+    "/case-studies/ai-traffic-monitoring",
+    301
+  ],
+  "/ai-smarter-spaces-traffic-monitoring": [
+    "/case-studies/ai-traffic-monitoring",
+    301
+  ],
+  "/crowd-movement": [
+    "/case-studies/face-recognition",
+    301
+  ],
+  "/case-study/case-study_kubernetes": [
+    "/case-studies/kubernetes-operations-healthtech",
+    301
+  ],
+  "/case-study/case-study_sap_cement-industry": [
+    "/case-studies/sap-disaster-recovery-cement",
+    301
+  ],
+  "/casestudy/healthcare": [
+    "/case-studies",
+    301
+  ],
+  "/casestudy/manufacturing-cement": [
+    "/case-studies",
+    301
+  ],
+  "/case-studies-backup": [
+    "/case-studies",
+    301
+  ],
+  "/clients-old": [
+    "/case-studies",
+    301
+  ],
+  "/success-stories": [
+    "/case-studies",
+    301
+  ],
+  "/furniture-similarity": [
+    "/services/ai-services/computer-vision",
+    301
+  ],
+  "/sap-advanced-available-to-promise-solution-implementation": [
+    "/services/digital-transformation/sap",
+    301
+  ],
+  "/sap-finance-group-consolidation": [
+    "/services/digital-transformation/sap",
+    301
+  ],
+  "/sap-finance-supply-chain-management": [
+    "/services/digital-transformation/sap",
+    301
+  ],
+  "/sap-fiori-based-mobility-application-for-supply-chain-and-logistics": [
+    "/services/digital-transformation/sap",
+    301
+  ],
+  "/transforming-higher-education-with-aws-cloud": [
+    "/services/cloud-services",
+    301
+  ],
+  "/resilient-backup-recovery-with-aws": [
+    "/services/cloud-services/managed-cloud",
+    301
+  ],
+  "/cloud-services": [
+    "/services/cloud-services",
+    301
+  ],
+  "/cloud-migration-modernisation": [
+    "/services/cloud-services/cloud-migration",
+    301
+  ],
+  "/managed-cloud-optimization": [
+    "/services/cloud-services/managed-cloud",
+    301
+  ],
+  "/aws-managed-services": [
+    "/services/cloud-services/managed-cloud",
+    301
+  ],
+  "/security-governance": [
+    "/services/cloud-services/cloud-security-finops",
+    301
+  ],
+  "/cybersecurity": [
+    "/services/cloud-services/cloud-security-finops",
+    301
+  ],
+  "/devops-automation": [
+    "/services/cloud-services/cloud-transformation",
+    301
+  ],
+  "/application-modernization": [
+    "/services/cloud-services/cloud-migration",
+    301
+  ],
+  "/data-analytics": [
+    "/services/digital-transformation/data-analytics",
+    301
+  ],
+  "/ai-ml-services": [
+    "/services/ai-services/ai-ml",
+    301
+  ],
+  "/intelligent-automation": [
+    "/services/ai-services/ai-ml",
+    301
+  ],
+  "/education-services": [
+    "/services/digital-transformation/edtech-openedx",
+    301
+  ],
+  "/aws-for-ec2-hosting": [
+    "/services/cloud-services",
+    301
+  ],
+  "/aws-for-reducing-tech-debt": [
+    "/services/cloud-services/cloud-migration",
+    301
+  ],
+  "/aws-for-operational-insights": [
+    "/services/cloud-services/managed-cloud",
+    301
+  ],
+  "/aws-for-generative-ai": [
+    "/services/ai-services/generative-ai",
+    301
+  ],
+  "/aws-for-automated-workflows": [
+    "/services/ai-services/agentic-ai",
+    301
+  ],
+  "/ai-value": [
+    "/services/ai-services",
+    301
+  ],
+  "/outgrowing-your-accounting-software": [
+    "/services/digital-transformation/sap",
+    301
+  ],
+  "/sap-ecc-end-of-life": [
+    "/services/digital-transformation/sap",
+    301
+  ],
+  "/services-backup": [
+    "/services",
+    301
+  ],
+  "/home-old": [
+    "/",
+    301
+  ],
+  "/home-old-1": [
+    "/",
+    301
+  ],
+  "/home-new": [
+    "/",
+    301
+  ],
+  "/home-6": [
+    "/",
+    301
+  ],
+  "/home-version1-2-2": [
+    "/",
+    301
+  ],
+  "/home-version2": [
+    "/",
+    301
+  ],
+  "/test-page": [
+    "/",
+    301
+  ],
+  "/smart-slider-page": [
+    "/",
+    301
+  ],
+  "/elementor-hf/home-v2-header": [
+    "/",
+    301
+  ],
+  "/elementor-hf/home-footer": [
+    "/",
+    301
+  ],
+  "/elementor-hf/home-v1-header": [
+    "/",
+    301
+  ],
+  "/about-us-backup": [
+    "/about",
+    301
+  ],
+  "/company": [
+    "/about",
+    301
+  ],
+  "/overview": [
+    "/about",
+    301
+  ],
+  "/how-we-do": [
+    "/about",
+    301
+  ],
+  "/how-we-do-single": [
+    "/about",
+    301
+  ],
+  "/our-field-details": [
+    "/services",
+    301
+  ],
+  "/features": [
+    "/services",
+    301
+  ],
+  "/portfolio": [
+    "/case-studies",
+    301
+  ],
+  "/portfolio-detail": [
+    "/case-studies",
+    301
+  ],
+  "/our-pricing": [
+    "/contact",
+    301
+  ],
+  "/faq": [
+    "/contact",
+    301
+  ],
+  "/events": [
+    "/insights/events",
+    301
+  ],
+  "/event-single": [
+    "/insights/events",
+    301
+  ],
+  "/house-of-lords": [
+    "/insights/events/house-of-lords-2026",
+    301
+  ],
+  "/blog": [
+    "/insights/blog",
+    301
+  ],
+  "/blogs": [
+    "/insights/blog",
+    301
+  ],
+  "/blog-with-sidebar": [
+    "/insights/blog",
+    301
+  ],
+  "/new-releases": [
+    "/insights/blog",
+    301
+  ],
+  "/consulted-admitting-is-power-acuteness": [
+    "/insights/blog",
+    301
+  ],
+  "/consulted-admitting-is-power-acuteness-2": [
+    "/insights/blog",
+    301
+  ],
+  "/consulted-admitting-is-power-acuteness-3": [
+    "/insights/blog",
+    301
+  ],
+  "/atc-blog": [
+    "/insights/blog",
+    301
+  ],
+  "/atc-blog/the-transformative-power-of-ai-in-2024-key-trends-and-innovations": [
+    "/insights/blog",
+    301
+  ],
+  "/atc-blog/the-transformative-power-of-ai-in-2024-key-trends-and-innovations-2": [
+    "/insights/blog",
+    301
+  ],
+  "/atc-blog/openai-launches-new-alignment-division-to-tackle-risks-of-superintelligent-ai": [
+    "/insights/blog",
+    301
+  ],
+  "/atcblog/analytics-including-sac": [
+    "/insights/blog",
+    301
+  ],
+  "/atcblog/machine-learning": [
+    "/insights/blog",
+    301
+  ],
+  "/atcblog/web-development": [
+    "/insights/blog",
+    301
+  ],
+  "/category/uncategorized": [
+    "/insights/blog",
+    301
+  ],
+  "/tag/development": [
+    "/insights/blog",
+    301
+  ],
+  "/tag/saas": [
+    "/insights/blog",
+    301
+  ],
+  "/author/atc-usercontrol": [
+    "/insights/blog",
+    301
+  ]
+}
