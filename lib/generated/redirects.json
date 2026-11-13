@@ -36,7 +36,7 @@
     301
   ],
   "/cloud-transformation": [
-    "/services/cloud-services/cloud-transformation",
+    "/services/cloud-services/devops-secops",
     301
   ],
   "/master-data-governance": [
@@ -48,7 +48,7 @@
     301
   ],
   "/oracle-netsuite-solutions": [
-    "/services/cloud-services/oracle-netsuite",
+    "/services/cloud-services/cloud-automation",
     301
   ],
   "/e-invoicing-uae": [
@@ -56,11 +56,51 @@
     301
   ],
   "/sap-treasury-investment-and-cash-management-implementation": [
-    "/solutions/cash-forecasting",
+    "/solutions/asset-tracking",
     301
   ],
   "/clients": [
     "/case-studies",
+    301
+  ],
+  "/solutions/ai-product-a": [
+    "/solutions/a-eye",
+    301
+  ],
+  "/solutions/ai-product-b": [
+    "/solutions/air-mind",
+    301
+  ],
+  "/solutions/smart-parking": [
+    "/solutions/industrial-analytics",
+    301
+  ],
+  "/solutions/cash-forecasting": [
+    "/solutions/asset-tracking",
+    301
+  ],
+  "/services/cloud-services/cloud-migration": [
+    "/services/cloud-services/migration-modernization",
+    301
+  ],
+  "/services/cloud-services/cloud-transformation": [
+    "/services/cloud-services/devops-secops",
+    301
+  ],
+  "/services/cloud-services/managed-cloud": [
+    "/services/cloud-services/managed-services",
+    301
+  ],
+  "/services/cloud-services/sap-on-cloud": [
+    "/services/cloud-services/ai-ml-ops",
+    301
+  ],
+  "/services/cloud-services/oracle-netsuite": [
+    "/services/cloud-services/cloud-automation",
+    301
+  ],
+  "/services/cloud-services/cloud-security-finops": [
+    "/services/cloud-services/cloud-advisory-consultation",
     301
   ],
   "/invoiceai-automated-invoice-processing-reconciliation": [
@@ -196,7 +236,7 @@
     301
   ],
   "/resilient-backup-recovery-with-aws": [
-    "/services/cloud-services/managed-cloud",
+    "/services/cloud-services/managed-services",
     301
   ],
   "/cloud-services": [
@@ -204,31 +244,31 @@
     301
   ],
   "/cloud-migration-modernisation": [
-    "/services/cloud-services/cloud-migration",
+    "/services/cloud-services/migration-modernization",
     301
   ],
   "/managed-cloud-optimization": [
-    "/services/cloud-services/managed-cloud",
+    "/services/cloud-services/managed-services",
     301
   ],
   "/aws-managed-services": [
-    "/services/cloud-services/managed-cloud",
+    "/services/cloud-services/managed-services",
     301
   ],
   "/security-governance": [
-    "/services/cloud-services/cloud-security-finops",
+    "/services/cloud-services/cloud-advisory-consultation",
     301
   ],
   "/cybersecurity": [
-    "/services/cloud-services/cloud-security-finops",
+    "/services/cloud-services/cloud-advisory-consultation",
     301
   ],
   "/devops-automation": [
-    "/services/cloud-services/cloud-transformation",
+    "/services/cloud-services/devops-secops",
     301
   ],
   "/application-modernization": [
-    "/services/cloud-services/cloud-migration",
+    "/services/cloud-services/migration-modernization",
     301
   ],
   "/data-analytics": [
@@ -252,11 +292,11 @@
     301
   ],
   "/aws-for-reducing-tech-debt": [
-    "/services/cloud-services/cloud-migration",
+    "/services/cloud-services/migration-modernization",
     301
   ],
   "/aws-for-operational-insights": [
-    "/services/cloud-services/managed-cloud",
+    "/services/cloud-services/managed-services",
     301
   ],
   "/aws-for-generative-ai": [

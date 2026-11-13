@@ -11,6 +11,47 @@ import type { CertificationSeed, LogoSeed, StatSeed } from "./types";
 const STAT_NOTE = "Unverified (Q5.8): does not render until the client confirms it.";
 
 export const stats: StatSeed[] = [
+  // Claims in the approved Figma design (brief section 7): built as designed, stored as DRAFT until the client confirms.
+  {
+    key: "hero-satisfied-100",
+    value: "100%",
+    numeric: 100,
+    suffix: "%",
+    label: "Satisfied",
+    verified: false,
+    sourceNote: "Figma hero trust row. Unverified claim.",
+    placements: ["hero-trust"],
+    status: "DRAFT",
+    sortOrder: 0,
+    needsReview: true,
+    editorNote: "UNVERIFIED (Figma hero): confirm or replace \"100% Satisfied\".",
+  },
+  {
+    key: "hero-zero-risk",
+    value: "Zero Risk",
+    label: "",
+    verified: false,
+    sourceNote: "Figma hero trust row. Unverified claim.",
+    placements: ["hero-trust"],
+    status: "DRAFT",
+    sortOrder: 1,
+    needsReview: true,
+    editorNote: "UNVERIFIED (Figma hero): confirm or replace \"Zero Risk\".",
+  },
+  {
+    key: "cash-forecasting-improvement-30",
+    value: "30%",
+    numeric: 30,
+    suffix: "%",
+    label: "improvement in cash forecasting",
+    verified: false,
+    sourceNote: "Figma Client Outcomes card; matches the SAP Treasury case-study metric (DRAFT, Q5.5).",
+    placements: ["outcome"],
+    status: "DRAFT",
+    sortOrder: 2,
+    needsReview: true,
+    editorNote: "UNVERIFIED (Figma Client Outcomes): the 30% figure needs client clearance with the SAP Treasury case study.",
+  },
   {
     key: "response-time-5-mins",
     value: "5 Mins",
@@ -164,6 +205,11 @@ const ALL = ["IN", "UK", "AE"] as LogoSeed["regions"];
 
 /** The 12 partner and certification logos ("PARTNERS & CERTIFICATIONS", visible on /in/ and /uk/, hidden on /ae/). */
 const partnerLogos: LogoSeed[] = [
+  // Partner logos as shown in the approved Figma design (13 Nov 2026). Cloudera and the Google Developers Agency Program are not on the live site: DRAFT until confirmed.
+  { kind: "PARTNER", name: "AWS Partner Network", logo: "images/partners/aws-partner-network.webp", needsReview: true, editorNote: "Figma partner strip. Tier to confirm (Q5.3)." },
+  { kind: "PARTNER", name: "Cloudera", logo: "images/partners/cloudera.webp", status: "DRAFT", needsReview: true, editorNote: "In the Figma partner strip but not on the live site: confirm the partnership before publishing." },
+  { kind: "PARTNER", name: "SAP Partner Open Ecosystem", logo: "images/partners/sap-partner-open-ecosystem.webp", needsReview: true, editorNote: "Figma partner strip. Programme to confirm (Q5.3)." },
+  { kind: "PARTNER", name: "Google Developers Agency Program", logo: "images/partners/google-developers-agency.webp", status: "DRAFT", needsReview: true, editorNote: "In the Figma partner strip but not on the live site: confirm before publishing." },
   { kind: "PARTNER", name: "AWS", logo: "images/partners/aws.webp" },
   { kind: "PARTNER", name: "SAP", logo: "images/partners/sap.webp" },
   { kind: "PARTNER", name: "Oracle NetSuite", logo: "images/partners/oracle-netsuite.webp" },

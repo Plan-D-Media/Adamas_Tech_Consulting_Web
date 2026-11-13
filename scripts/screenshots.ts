@@ -30,16 +30,6 @@ async function main() {
       await page.goto(base + p, { waitUntil: "networkidle", timeout: 90_000 });
       await page.waitForTimeout(1500);
       await page.screenshot({ path: path.join(dir, `${width}-fold.png`) });
-      // Mid-page frame: the pinned "What we do" explorer with motion on.
-      const pinned = await page.$("[aria-label='Service pillars']");
-      if (pinned && width >= 1024) {
-        await page.evaluate(() => {
-          const s = document.querySelector("[aria-label='Service pillars']")?.closest("section");
-          if (s) window.scrollTo(0, s.getBoundingClientRect().top + window.scrollY + window.innerHeight * 1.2);
-        });
-        await page.waitForTimeout(1200);
-        await page.screenshot({ path: path.join(dir, `${width}-explorer.png`) });
-      }
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       // Full page in a reduced-motion context: static states, no pinning (a pinned section can't be captured full-page).
       const still = await browser.newContext({ viewport: { width, height }, reducedMotion: "reduce" });

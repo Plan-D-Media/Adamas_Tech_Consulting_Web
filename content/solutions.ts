@@ -11,6 +11,7 @@ export const solutions: SolutionSeed[] = [
     slug: "arivoo",
     kind: "PRODUCT",
     name: "Arivoo",
+    image: "images/solutions/arivoo-card.webp",
     tagline: "Shaping the Future of Education.",
     summary: "[Placeholder] Short overview of the Arivoo education suite: UMS, SMS and LMS.",
     externalUrl: "https://arivoo.in",
@@ -69,26 +70,28 @@ export const solutions: SolutionSeed[] = [
 
   // ── AI products (names to come) ────────────────────────────────────
   {
-    slug: "ai-product-a",
+    slug: "a-eye",
     kind: "PRODUCT",
-    name: "[AI Product A]",
+    name: "A-EYE",
+    image: "images/solutions/a-eye-card.webp",
     tagline: "[Placeholder] One-line product tagline.",
     summary: "[Placeholder] Product overview.",
-    status: "DRAFT",
+    status: "PUBLISHED",
     sortOrder: 4,
     needsReview: true,
-    editorNote: "MISSING (Q7.2): product name, page copy, features and screenshots. Not on the live site.",
+    editorNote: "Name A-EYE from the brief and sitemap (13 Nov 2026); published so the menu and page exist. MISSING (Q7.2): tagline, page copy, features and screenshots; Not on the live site.",
   },
   {
-    slug: "ai-product-b",
+    slug: "air-mind",
     kind: "PRODUCT",
-    name: "[AI Product B]",
+    name: "AIR-MIND",
+    image: "images/solutions/air-mind-card.webp",
     tagline: "[Placeholder] One-line product tagline.",
     summary: "[Placeholder] Product overview.",
-    status: "DRAFT",
+    status: "PUBLISHED",
     sortOrder: 5,
     needsReview: true,
-    editorNote: "MISSING (Q7.2): product name, page copy, features and screenshots. Not on the live site.",
+    editorNote: "Name AIR-MIND from the brief and sitemap (13 Nov 2026); published so the menu and page exist. MISSING (Q7.2): tagline, page copy, features and screenshots; Not on the live site.",
   },
 
   // ── AI solutions (case-study backed) ───────────────────────────────
@@ -100,7 +103,7 @@ export const solutions: SolutionSeed[] = [
     summary:
       "Exploring innovative face recognition technology to improve security measures, increase accuracy, and streamline identification processes in various applications.",
     body: "Develop a real-time facial recognition system capable of accurately detecting and identifying human faces in a live-video feed against a pre-existing image database, providing instant recognition of individuals present within the camera’s field of view.",
-    image: "images/solutions/face-recognition.webp",
+    image: "images/solutions/face-recognition-card.webp",
     features: [
       {
         title: "Secure Identification",
@@ -125,14 +128,14 @@ export const solutions: SolutionSeed[] = [
       'Copy from /face-recognition/ (intro, challenge as body, "BUSINESS BENEFITS" as features); tagline = homepage card. MISSING: product screenshots. Full list of 6 AI solutions: Q5.3.',
   },
   {
-    slug: "smart-parking",
+    slug: "industrial-analytics",
     kind: "AI_SOLUTION",
-    name: "Smart Parking",
+    name: "Industrial Analytics",
     tagline: "Effortless Parking with AI Intelligence",
     summary:
       "Implementing smart solutions to enhance parking efficiency, improve space utilization, and streamline vehicle management in busy parking lots.",
     body: "Created an intelligent car parking solution to efficiently detect and allocate available parking spaces, minimizing congestion, enhancing the overall parking experience and saving driver’s valuable time by providing real-time information on available parking spots",
-    image: "images/solutions/smart-parking.webp",
+    image: "images/solutions/industrial-analytics-card.webp",
     features: [
       {
         title: "Parking Excellence",
@@ -157,9 +160,9 @@ export const solutions: SolutionSeed[] = [
       'Copy from /car-parking-lot/ (intro, challenge as body, "BUSINESS BENEFITS" as features); tagline = homepage card. MISSING: product screenshots. Full list of 6 AI solutions: Q5.3.',
   },
   {
-    slug: "cash-forecasting",
+    slug: "asset-tracking",
     kind: "AI_SOLUTION",
-    name: "Cash Forecasting (SAP Treasury)",
+    name: "Asset Tracking",
     tagline: "Boosting Cash Forecasting by 30%",
     summary:
       "Accelerate your treasury, investment, and cash management processes with streamlined implementation for optimized financial operations and enhanced efficiency.",

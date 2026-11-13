@@ -15,6 +15,7 @@ export const pillars: PillarSeed[] = [
   {
     slug: "cloud-services",
     name: "Cloud Services",
+    image: "images/services/cloud-services.webp",
     tagline: "Resilient | Reliable | Cost optimized | Intelligent",
     summary:
       "Adamas Tech Consulting helps enterprises, institutions, and public-sector organizations design modern cloud foundations, optimize operations, and apply AI on AWS for measurable business outcomes.",
@@ -28,8 +29,8 @@ export const pillars: PillarSeed[] = [
       'Summary and challenge from /aws-solutions/ (intro and "Positioning"); tagline and outcome line from /cloud-transformation/. AWS-only wording on a pillar named "Cloud Services": confirm. The "AWS Advanced Tier Partner" and competency claims on /aws-solutions/ are not migrated until the partner tier is confirmed. Sub-service names to confirm (Q5.3).',
     services: [
       {
-        slug: "cloud-migration",
-        name: "Cloud Migration",
+        slug: "migration-modernization",
+        name: "Migration & Modernization",
         descriptor:
           "Migrate workloads, modernize architecture, and move from legacy systems to scalable AWS-native environments.",
         summary:
@@ -50,8 +51,8 @@ export const pillars: PillarSeed[] = [
           "Not in the 301 map; copy from the unlinked page /cloud-migration-modernisation/ (descriptor from the /aws-solutions/ hub card). That page also carries wireframe text and a template testimonial (\"Katya Tognazzini\"), not migrated. Name to confirm (Q5.3).",
       },
       {
-        slug: "cloud-transformation",
-        name: "Cloud Transformation",
+        slug: "devops-secops",
+        name: "DevOps & SecOps",
         descriptor: "Cloud that Scales your Organisation",
         summary:
           "Adamas Tech is one of the preferred partners of AWS, enabling businesses to migrate, optimize & scale on cloud with speed & security. Whether you are a fast-scaling startup or a complex enterprise, we deliver a tailored cloud journey backed by certified AWS architects & industry expertise with proven methodologies.",
@@ -77,8 +78,8 @@ export const pillars: PillarSeed[] = [
           'From /cloud-transformation/. Typos fixed in the overview ("a one of preferred partner of AWS , enabling business" → "is one of the preferred partners of AWS, enabling businesses"; "fast scaling startup" → "a fast-scaling startup"; "tailored cloud journey" → "a tailored cloud journey"). "Preferred partner of AWS" and "certified AWS architects": confirm. Steps are the "Our Engagement Model" items; whatWeDo is "Engagement Benefits to Customer". The "Industry wise Solution" block (Retail / BFSI / Manufacturing / Healthcare) has no field and is not migrated. Name to confirm (Q5.3).',
       },
       {
-        slug: "managed-cloud",
-        name: "Managed Cloud & Cloud Reselling (CSP)",
+        slug: "managed-services",
+        name: "Managed Services",
         descriptor:
           "Improve reliability, security, performance, and cost efficiency with ongoing AWS operations and governance.",
         summary:
@@ -99,8 +100,8 @@ export const pillars: PillarSeed[] = [
           "Not in the 301 map; copy from the unlinked page /managed-cloud-optimization/ (\"Managed Cloud & Optimization\"). MISSING: any copy on cloud reselling / CSP (sitemap row 11). Related unlinked page: /aws-managed-services/. Name to confirm (Q5.3).",
       },
       {
-        slug: "sap-on-cloud",
-        name: "SAP on Cloud",
+        slug: "ai-ml-ops",
+        name: "AI/ML Ops",
         descriptor: "[Placeholder] One line on running SAP on the cloud.",
         summary: "[Placeholder] Short introduction to SAP on Cloud services.",
         status: "PUBLISHED",
@@ -110,8 +111,8 @@ export const pillars: PillarSeed[] = [
           'MISSING: no old page. Case-study-backed facts available: "Strengthening SAP Resilience and Disaster Recovery on AWS" (SAP HANA System Replication, AWS Backup, CloudWatch). Copy needed. Name to confirm (Q5.3).',
       },
       {
-        slug: "oracle-netsuite",
-        name: "Oracle NetSuite / Cloud ERP",
+        slug: "cloud-automation",
+        name: "Cloud Automation",
         descriptor: "Unified Cloud ERP for Modern Construction",
         summary:
           "Adamas Tech Consulting helps Construction, Engineering, EPC, and Contracting companies transform their operations with Oracle NetSuite — the world’s #1 true cloud ERP. Built for end-to-end project visibility and designed to eliminate fragmentation, NetSuite delivers real-time financial, operational, and project control for GCC companies.",
@@ -161,8 +162,8 @@ export const pillars: PillarSeed[] = [
           'From /oracle-netsuite-solutions/, which is written for Construction & Engineering in the GCC: confirm that focus for a global page. Descriptor is the /in/ homepage card line. Unverified claims: "the world’s #1 true cloud ERP", "USD 3.4M" saving (from "our comparison matrix"), "NetSuite-certified consultants". The "Why NetSuite Outperforms SAP for Construction" comparison is not migrated (sensitive next to the SAP practice): confirm. Placement and name to confirm (Q2.3, Q5.3).',
       },
       {
-        slug: "cloud-security-finops",
-        name: "Cloud Security & FinOps",
+        slug: "cloud-advisory-consultation",
+        name: "Cloud Advisory & Consultation",
         descriptor:
           "Strengthen cloud security, access control, compliance posture, and operational governance across AWS estates.",
         summary:
@@ -189,6 +190,7 @@ export const pillars: PillarSeed[] = [
   {
     slug: "digital-transformation",
     name: "Digital Transformation",
+    image: "images/services/digital-transformation.webp",
     tagline: "Transformative Technology Expertise",
     summary:
       "Embrace the future with our comprehensive technology transformation services that will help businesses upgrade their tech stack, align with industry standards, and integrate emerging technologies for enhanced digital capabilities and success.",
@@ -495,7 +497,8 @@ export const pillars: PillarSeed[] = [
   // ────────────────────────────────────────────────────────────────────
   {
     slug: "ai-services",
-    name: "AI Services",
+    name: "Data & AI Services",
+    image: "images/services/ai-services.webp",
     tagline: "Empowering businesses to thrive in the digital era through innovative AI and scalable analytics solutions",
     summary:
       "At Adamas Tech Consulting, we empower businesses with AI and data analytics, specializing in computer vision technologies. We provide tailored solutions to optimize decision-making, streamline operations, and enhance customer experiences. Our focus is on helping clients achieve sustainable growth and maintain a competitive edge in the digital era.",
@@ -505,7 +508,7 @@ export const pillars: PillarSeed[] = [
     sortOrder: 2,
     needsReview: true,
     editorNote:
-      "Tagline, summary and outcome line from /ai-data-analytics/. MISSING: challenge copy and pillar FAQs. Sub-service list proposed (Q5.2).",
+      "Pillar named Data & AI Services as in the sitemap (row 21; Figma says AI Services). Tagline, summary and outcome line from /ai-data-analytics/. MISSING: challenge copy and pillar FAQs. Sub-service list proposed (Q5.2) plus the five sitemap additions.",
     services: [
       {
         slug: "ai-ml",
@@ -607,6 +610,56 @@ export const pillars: PillarSeed[] = [
         sortOrder: 3,
         needsReview: true,
         editorNote: `No page in the 301 map. Copy from the unlinked page /aws-for-generative-ai/ ("Data Foundations for Generative AI"); descriptor from the /ai-ml-services/ delivery areas. It covers data foundations only: copy on applied/generative AI use cases (e.g. the InvoiceAI and RAG chatbot case studies) needed. ${UNVERIFIED_STATS} Proposed sub-service (Q5.2).`,
+      },
+      {
+        slug: "data-engineering",
+        name: "Data Engineering",
+        descriptor: "[Placeholder] One line on data engineering.",
+        summary: "[Placeholder] Short introduction to AdamasTech's data engineering services.",
+        status: "PUBLISHED",
+        sortOrder: 4,
+        needsReview: true,
+        editorNote: "Added from the sitemap (13 Nov 2026, \"create URL\"): no old page. MISSING: descriptor, summary, what-we-do list and FAQs.",
+      },
+      {
+        slug: "advanced-analytics",
+        name: "Advanced Analytics",
+        descriptor: "[Placeholder] One line on advanced analytics.",
+        summary: "[Placeholder] Short introduction to AdamasTech's advanced analytics services.",
+        status: "PUBLISHED",
+        sortOrder: 5,
+        needsReview: true,
+        editorNote: "Added from the sitemap (13 Nov 2026, \"create URL\"): no old page. MISSING: descriptor, summary, what-we-do list and FAQs.",
+      },
+      {
+        slug: "sovereign-ai",
+        name: "Sovereign AI",
+        descriptor: "[Placeholder] One line on sovereign AI.",
+        summary: "[Placeholder] Short introduction to AdamasTech's sovereign AI services.",
+        status: "PUBLISHED",
+        sortOrder: 6,
+        needsReview: true,
+        editorNote: "Added from the sitemap (13 Nov 2026, \"create URL\"): no old page. MISSING: descriptor, summary, what-we-do list and FAQs.",
+      },
+      {
+        slug: "responsible-ai",
+        name: "Responsible AI",
+        descriptor: "[Placeholder] One line on responsible AI.",
+        summary: "[Placeholder] Short introduction to AdamasTech's responsible AI services.",
+        status: "PUBLISHED",
+        sortOrder: 7,
+        needsReview: true,
+        editorNote: "Added from the sitemap (13 Nov 2026, \"create URL\"): no old page. MISSING: descriptor, summary, what-we-do list and FAQs.",
+      },
+      {
+        slug: "ai-security-governance",
+        name: "AI Security & Governance",
+        descriptor: "[Placeholder] One line on AI security and governance.",
+        summary: "[Placeholder] Short introduction to AdamasTech's AI security and governance services.",
+        status: "PUBLISHED",
+        sortOrder: 8,
+        needsReview: true,
+        editorNote: "Added from the sitemap (13 Nov 2026, \"create URL\"): no old page. MISSING: descriptor, summary, what-we-do list and FAQs.",
       },
     ],
   },

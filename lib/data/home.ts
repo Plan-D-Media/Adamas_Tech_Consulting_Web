@@ -107,6 +107,15 @@ export interface AnnouncementData {
   href: string | null;
 }
 
+/** A figure from the approved design that the client has not verified yet (hero trust row, Client Outcomes metric). */
+export interface ClaimData {
+  key: string;
+  value: string;
+  label: string;
+  placement: string;
+  draft: boolean;
+}
+
 export interface HomeData {
   region: RegionCode;
   seoTitle: string | null;
@@ -126,6 +135,8 @@ export interface HomeData {
   solutions: SolutionCardData[];
   industries: IndustryData[];
   caseStudies: CaseCardData[];
+  /** Unverified figures shown as designed; DRAFT rows only appear when drafts are previewed, and carry the draft badge. */
+  claims: ClaimData[];
 }
 
 export function solutionHref(s: { slug: string; externalUrl: string | null }) {
@@ -153,7 +164,7 @@ export async function getHome(region: RegionCode): Promise<HomeData | null> {
   if (!home) return null;
 
   const now = new Date();
-  const [logos, stats, pillars, solutions, industries, caseStudies, announcements] = await Promise.all([
+  const [logos, stats, pillars, solutions, industries, caseStudies, announcements, claims] = await Promise.all([
     db.logoItem.findMany({ where: { ...visible, regions: { has: region } }, include: { logo: mediaSelect }, orderBy: { sortOrder: "asc" } }),
     db.stat.findMany({
       where: { status: "PUBLISHED", verified: true, regions: { has: region }, placements: { has: "trust-strip" } },
@@ -182,6 +193,10 @@ export async function getHome(region: RegionCode): Promise<HomeData | null> {
         regions: { has: region },
         AND: [{ OR: [{ startsAt: null }, { startsAt: { lte: now } }] }, { OR: [{ endsAt: null }, { endsAt: { gte: now } }] }],
       },
+      orderBy: { sortOrder: "asc" },
+    }),
+    db.stat.findMany({
+      where: { ...visible, regions: { has: region }, placements: { hasSome: ["hero-trust", "outcome"] } },
       orderBy: { sortOrder: "asc" },
     }),
   ]);
@@ -264,6 +279,13 @@ export async function getHome(region: RegionCode): Promise<HomeData | null> {
       summary: c.summary,
       image: toMedia(c.image),
       draft: badge(c.status),
+    })),
+    claims: claims.map((s) => ({
+      key: s.key,
+      value: s.value,
+      label: s.label,
+      placement: s.placements.find((p) => p === "hero-trust" || p === "outcome") ?? s.placements[0] ?? "",
+      draft: badge(s.status),
     })),
   };
 }

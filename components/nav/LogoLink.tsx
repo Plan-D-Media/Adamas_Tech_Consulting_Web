@@ -1,38 +1,34 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { cx } from "@/lib/cx";
+import type { RegionInfo } from "@/lib/data/site";
 import { mediaUrl } from "@/lib/media";
-import { regionFromPath, useRegionCookie } from "./regionClient";
+import type { RegionSlug } from "@/lib/region";
+import { useCurrentRegion } from "@/components/nav/useCurrentRegion";
+
+interface Props {
+  regions: RegionInfo[];
+  region: RegionSlug | null;
+  fallbackRegion: RegionSlug;
+  /** Rendered size: header 205x60, footer 178x52 (Figma). */
+  width?: number;
+  height?: number;
+  priority?: boolean;
+}
 
 /**
- * Logo → the visitor's regional homepage (current homepage, else region cookie, else "/" which
- * proxy.ts resolves). Over dark surfaces the logo is shown reversed (white).
+ * Logo linking to the visitor's regional homepage. Server-rendered href is "/" on global pages (proxy.ts then
+ * redirects by cookie, so it works without JavaScript); once hydrated it points straight at the cookie's region.
  */
-export function LogoLink({ tone = "light", className }: { tone?: "light" | "dark"; className?: string }) {
-  const pathname = usePathname();
-  const cookie = useRegionCookie();
-  const region = regionFromPath(pathname) ?? cookie;
-  const href = region ? `/${region}/` : "/";
-
+export function LogoLink({ regions, region, fallbackRegion, width = 205, height = 60, priority }: Props) {
+  const current = useCurrentRegion(regions, region, fallbackRegion);
+  const href = region ? `/${region}/` : typeof document === "undefined" ? "/" : `/${current.slug}/`;
   return (
-    // prefetch={true}: per-link prefetch of the (static) homepage, so going home from any page renders straight away.
-    <Link href={href} prefetch={true} className={cx("relative block shrink-0", className)}>
-      <Image
-        src={mediaUrl("brand/logo.webp")}
-        alt="AdamasTech Consulting"
-        width={236}
-        height={69}
-        loading="eager"
-        fetchPriority="high"
-        className={cx(
-          "h-10 w-auto transition-[filter] duration-(--duration-base) lg:h-[3.25rem]",
-          // TODO(content): replace with the official reversed SVG logo when supplied (CONTENT_TODO: Brand).
-          tone === "dark" && "brightness-0 invert",
-        )}
-      />
+    <Link href={href} prefetch={true} className="inline-flex shrink-0 items-center" aria-label={`AdamasTech Consulting, ${current.label} homepage`}>
+      <picture>
+        <source type="image/avif" srcSet={mediaUrl("brand/logo.avif")} />
+        <img src={mediaUrl("brand/logo.webp")} width={width} height={height} alt="" className="block h-auto" style={{ width }} fetchPriority={priority ? "high" : undefined} decoding="async" />
+      </picture>
     </Link>
   );
 }

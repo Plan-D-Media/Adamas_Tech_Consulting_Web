@@ -58,6 +58,45 @@ const slideSap: HeroSlideSeed = {
   editorNote: POSTER_NOTE,
 };
 
+/**
+ * Approved design (Figma hero, 13 Nov 2026): the hero carries one headline (ContentBlock "home.hero") and a card
+ * carousel of three stories. The cards reuse HeroSlide: navLabel = card category, eyebrow = date line, headline = card
+ * title, ctaHref = link, poster = card image. The earlier video slides are kept below for reference and archived.
+ */
+const FIGMA_CARD = "Card copy from the approved Figma hero (13 Nov 2026).";
+const heroCardEvent: HeroSlideSeed = {
+  navLabel: "Event",
+  eyebrow: "Event, 26 November 2026",
+  headline: "Join us at the House of Lords, London",
+  ctaLabel: "View event",
+  ctaHref: "/insights/events/house-of-lords-2026",
+  poster: "images/home/hero-card-event.webp",
+  status: "PUBLISHED",
+  needsReview: true,
+  editorNote: FIGMA_CARD + " Event details are DRAFT (Q6.1-Q6.6).",
+};
+const heroCardArivoo: HeroSlideSeed = {
+  navLabel: "Solutions",
+  headline: "Arivoo runs universities, schools and learning programmes",
+  ctaLabel: "Explore Arivoo",
+  ctaHref: "https://arivoo.in",
+  poster: "images/home/hero-card-arivoo.webp",
+  status: "PUBLISHED",
+  needsReview: true,
+  editorNote: FIGMA_CARD + " Typo fixed: Figma says \"Arivoo\" as \"Arivoo runs universities, schools and learning programmes\".",
+};
+const heroCardTreasury: HeroSlideSeed = {
+  navLabel: "Case study",
+  headline: "How SAP Treasury improved cash forecasting by 30%",
+  ctaLabel: "Read the case study",
+  ctaHref: "/case-studies/sap-treasury-cash-forecasting",
+  poster: "images/home/hero-card-treasury.webp",
+  status: "PUBLISHED",
+  needsReview: true,
+  editorNote: FIGMA_CARD + " The 30% figure is unverified (case study DRAFT, Q5.5).",
+};
+const heroCards = [heroCardEvent, heroCardArivoo, heroCardTreasury];
+
 const withOrder = (slides: HeroSlideSeed[]): HeroSlideSeed[] =>
   slides.map((s, i) => ({ ...s, sortOrder: i }));
 
@@ -87,7 +126,7 @@ const inServiceCards: HomeSeed["serviceCards"] = [
   {
     title: "Oracle NetSuite Services",
     body: "Unified Cloud ERP for Modern Construction",
-    href: "/services/cloud-services/oracle-netsuite",
+    href: "/services/cloud-services/cloud-automation",
     status: "PUBLISHED",
     sortOrder: 3,
     needsReview: true,
@@ -122,7 +161,7 @@ export const homes: HomeSeed[] = [
     eventProminence: "STANDARD",
     showTrustStrip: true,
     showWhyUs: true,
-    heroSlides: withOrder([slideDigitalTransformation, slideAws, slideOracle, slideSap]),
+    heroSlides: withOrder([...heroCards, ...[slideDigitalTransformation, slideAws, slideOracle, slideSap].map((x) => ({ ...x, status: "ARCHIVED" as const }))]),
     // Retired: the 3-pillar explorer replaces this grid on /in/ and /uk/ (it duplicated the pillars). ARCHIVED, not
     // DRAFT, so PREVIEW_DRAFTS never shows it; the rows stay in the DB so an editor can restore them.
     serviceCards: inServiceCards?.map((c) => ({ ...c, status: "ARCHIVED" as const })),
@@ -137,7 +176,7 @@ export const homes: HomeSeed[] = [
     eventProminence: "FEATURED",
     showTrustStrip: true,
     showWhyUs: true,
-    heroSlides: withOrder([slideDigitalTransformation, slideAws, slideOracle, slideSap]),
+    heroSlides: withOrder([...heroCards, ...[slideDigitalTransformation, slideAws, slideOracle, slideSap].map((x) => ({ ...x, status: "ARCHIVED" as const }))]),
     // Retired: the 3-pillar explorer replaces this grid on /in/ and /uk/ (it duplicated the pillars). ARCHIVED, not
     // DRAFT, so PREVIEW_DRAFTS never shows it; the rows stay in the DB so an editor can restore them.
     serviceCards: inServiceCards?.map((c) => ({ ...c, status: "ARCHIVED" as const })),
@@ -166,7 +205,7 @@ export const homes: HomeSeed[] = [
       ctaHref: "https://adamastech.ae/assessment/",
       external: true,
     },
-    heroSlides: withOrder([slideDigitalTransformation, slideOracle, slideSap]),
+    heroSlides: withOrder([...heroCards, ...[slideDigitalTransformation, slideOracle, slideSap].map((x) => ({ ...x, status: "ARCHIVED" as const }))]),
     serviceCards: [
       {
         title: "SAP Services",
@@ -178,7 +217,7 @@ export const homes: HomeSeed[] = [
       {
         title: "Oracle NetSuite Services",
         body: "Cloud ERP solutions for UAE businesses focused on agility, financial visibility, and scalable growth.",
-        href: "/services/cloud-services/oracle-netsuite",
+        href: "/services/cloud-services/cloud-automation",
         status: "PUBLISHED",
         sortOrder: 1,
       },

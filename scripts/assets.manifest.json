@@ -1,0 +1,388 @@
+{
+  "$comment": "Source -> public/media output map for scripts/process-assets.mjs. width/height = rendered size in the 1920 Figma frame (1x). Documented in docs/asset-manifest.md.",
+  "assets": [
+    {
+      "id": "logo",
+      "kind": "raster",
+      "src": "design-ref/fills/c995b7a775247aa6431f6e2209070382a889eefe.png",
+      "out": "brand/logo",
+      "width": 205,
+      "height": 60,
+      "fit": "inside",
+      "scales": [
+        1
+      ],
+      "webpQuality": 90,
+      "avifQuality": 70
+    },
+    {
+      "id": "flag-in",
+      "kind": "raster",
+      "src": "design-ref/exports/flag-in.png",
+      "out": "flags/in",
+      "width": 24,
+      "height": 14,
+      "scales": [
+        1,
+        2,
+        3
+      ],
+      "webpQuality": 90
+    },
+    {
+      "id": "flag-uk",
+      "kind": "raster",
+      "src": "design-ref/exports/flag-uk.png",
+      "out": "flags/uk",
+      "width": 24,
+      "height": 14,
+      "scales": [
+        1,
+        2,
+        3
+      ],
+      "webpQuality": 90
+    },
+    {
+      "id": "flag-gcc",
+      "kind": "raster",
+      "src": "design-ref/exports/flag-gcc.png",
+      "out": "flags/gcc",
+      "width": 24,
+      "height": 14,
+      "scales": [
+        1,
+        2,
+        3
+      ],
+      "webpQuality": 90
+    },
+    {
+      "id": "hero-bg",
+      "kind": "raster",
+      "src": "design-ref/fills/ffe571bf73baafb0c1f8164d7d7381be83430c5d.png",
+      "out": "images/home/hero-bg",
+      "width": 1920,
+      "height": 960,
+      "scales": [
+        1
+      ],
+      "avifQuality": 50,
+      "webpQuality": 72,
+      "blur": true
+    },
+    {
+      "id": "menu-feature-sap-treasury",
+      "kind": "raster",
+      "src": "design-ref/fills/5a2952d6c92e556960ecef83e255b7320099f973.jpg",
+      "out": "images/menu/sap-treasury",
+      "width": 280,
+      "height": 553,
+      "scales": [
+        1
+      ]
+    },
+    {
+      "id": "hero-card-event",
+      "kind": "raster",
+      "src": "design-src/Rectangle 3793.svg",
+      "out": "images/home/hero-card-event",
+      "width": 401,
+      "height": 217
+    },
+    {
+      "id": "hero-card-arivoo",
+      "kind": "raster",
+      "src": "design-src/Rectangle 3794.svg",
+      "out": "images/home/hero-card-arivoo",
+      "width": 381,
+      "height": 217
+    },
+    {
+      "id": "hero-card-treasury",
+      "kind": "raster",
+      "src": "design-src/Rectangle 3798.svg",
+      "out": "images/home/hero-card-treasury",
+      "width": 401,
+      "height": 217
+    },
+    {
+      "id": "story-building",
+      "kind": "raster",
+      "src": "design-src/TOP STORIES.svg",
+      "out": "images/home/story-adamas-building",
+      "width": 561,
+      "height": 363
+    },
+    {
+      "id": "story-wave",
+      "kind": "raster",
+      "src": "design-src/TOP STORIES BG.svg",
+      "out": "images/home/story-wave",
+      "width": 1217,
+      "height": 365,
+      "avifQuality": 45,
+      "webpQuality": 70
+    },
+    {
+      "id": "about-team",
+      "kind": "raster",
+      "src": "design-src/ABOUT ADAMAS IMG.svg",
+      "out": "images/home/about-team",
+      "width": 551,
+      "height": 490
+    },
+    {
+      "id": "pillar-cloud",
+      "kind": "raster",
+      "src": "design-src/Cloud Services IMG.svg",
+      "out": "images/services/cloud-services",
+      "width": 551,
+      "height": 556
+    },
+    {
+      "id": "pillar-dt",
+      "kind": "raster",
+      "src": "design-src/Digital Transformation.svg",
+      "out": "images/services/digital-transformation",
+      "width": 556,
+      "height": 556
+    },
+    {
+      "id": "pillar-ai",
+      "kind": "raster",
+      "src": "design-src/AI Services.svg",
+      "out": "images/services/ai-services",
+      "width": 556,
+      "height": 556
+    },
+    {
+      "id": "sol-arivoo",
+      "kind": "raster",
+      "src": "design-src/P1.svg",
+      "out": "images/solutions/arivoo-card",
+      "width": 424,
+      "height": 523
+    },
+    {
+      "id": "sol-a-eye",
+      "kind": "raster",
+      "src": "design-src/P2.svg",
+      "out": "images/solutions/a-eye-card",
+      "width": 424,
+      "height": 523
+    },
+    {
+      "id": "sol-air-mind",
+      "kind": "raster",
+      "src": "design-src/AI Product B.svg",
+      "out": "images/solutions/air-mind-card",
+      "width": 424,
+      "height": 523
+    },
+    {
+      "id": "sol-face",
+      "kind": "raster",
+      "src": "design-src/Face.svg",
+      "out": "images/solutions/face-recognition-card",
+      "width": 424,
+      "height": 523
+    },
+    {
+      "id": "sol-industrial",
+      "kind": "raster",
+      "src": "design-src/Parking.svg",
+      "out": "images/solutions/industrial-analytics-card",
+      "width": 424,
+      "height": 523
+    },
+    {
+      "id": "outcome-sap",
+      "kind": "raster",
+      "src": "design-ref/fills/8bf972414847e7bb1c87c7547801bd7cb1690227.png",
+      "out": "images/home/outcome-sap-treasury",
+      "width": 1043,
+      "height": 550,
+      "avifQuality": 50,
+      "webpQuality": 72
+    },
+    {
+      "id": "industries-bg",
+      "kind": "raster",
+      "src": "design-ref/fills/fdd7cbc5efb15f777d8680eee26b8ac1b70852f8.png",
+      "out": "images/home/industries-bg",
+      "width": 1920,
+      "height": 968,
+      "scales": [
+        1
+      ],
+      "avifQuality": 50,
+      "webpQuality": 70
+    },
+    {
+      "id": "industry-healthcare",
+      "kind": "raster",
+      "src": "design-ref/fills/545bddf123d9fcd130905fbe9c344079f941b4b8.png",
+      "out": "images/industries/healthcare-card",
+      "width": 206,
+      "height": 140
+    },
+    {
+      "id": "industry-healthcare-phone",
+      "kind": "raster",
+      "src": "design-ref/fills/abbb40ba1717c39c9c7c70389761ad1e96c17c3d.png",
+      "out": "images/industries/healthcare-phone",
+      "width": 50,
+      "height": 105
+    },
+    {
+      "id": "difference-centre",
+      "kind": "raster",
+      "src": "design-src/Group 21304.svg",
+      "out": "images/home/difference-centre",
+      "width": 353,
+      "height": 353
+    },
+    {
+      "id": "difference-network",
+      "kind": "raster",
+      "src": "design-src/Frame 12455.svg",
+      "out": "images/home/difference-network",
+      "width": 193,
+      "height": 193
+    },
+    {
+      "id": "event-house-of-lords",
+      "kind": "raster",
+      "src": "design-src/Article.svg",
+      "out": "images/events/house-of-lords-keynote",
+      "width": 967,
+      "height": 571,
+      "avifQuality": 50,
+      "webpQuality": 72
+    },
+    {
+      "id": "persp-data",
+      "kind": "raster",
+      "src": "design-src/Image (Technology leaders reviewing enterprise data and analytics).svg",
+      "out": "images/home/perspective-data",
+      "width": 715,
+      "height": 401
+    },
+    {
+      "id": "persp-resilience",
+      "kind": "raster",
+      "src": "design-src/Image (Secure enterprise infrastructure in a modern data centre).svg",
+      "out": "images/home/perspective-resilience",
+      "width": 246,
+      "height": 268
+    },
+    {
+      "id": "persp-ai-bg",
+      "kind": "raster",
+      "src": "design-src/Article-1.svg",
+      "out": "images/home/perspective-ai",
+      "width": 580,
+      "height": 285
+    },
+    {
+      "id": "tech-gear-1",
+      "kind": "raster",
+      "src": "design-src/Target, Puzzle, and Checkmark Gear 1.svg",
+      "out": "images/home/tech-gear-1",
+      "width": 174,
+      "height": 116,
+      "fit": "inside"
+    },
+    {
+      "id": "tech-gear-2",
+      "kind": "raster",
+      "src": "design-src/Target, Puzzle, and Checkmark Gear 2.svg",
+      "out": "images/home/tech-gear-2",
+      "width": 174,
+      "height": 116,
+      "fit": "inside"
+    },
+    {
+      "id": "tech-gear-3",
+      "kind": "raster",
+      "src": "design-src/Target, Puzzle, and Checkmark Gear 3.svg",
+      "out": "images/home/tech-gear-3",
+      "width": 174,
+      "height": 116,
+      "fit": "inside"
+    },
+    {
+      "id": "tech-gear-4",
+      "kind": "raster",
+      "src": "design-src/Target, Puzzle, and Checkmark Gear 4.svg",
+      "out": "images/home/tech-gear-4",
+      "width": 174,
+      "height": 116,
+      "fit": "inside"
+    },
+    {
+      "id": "presence-map",
+      "kind": "raster",
+      "src": "design-ref/fills/2ff9d3817214254addde512c43022f7af3c2d608.png",
+      "out": "images/home/presence-map",
+      "width": 1717,
+      "height": 916,
+      "scales": [
+        1
+      ],
+      "avifQuality": 50,
+      "webpQuality": 72,
+      "blur": true
+    },
+    {
+      "id": "contact-photo",
+      "kind": "raster",
+      "src": "design-ref/fills/0a71171e8e017483a14f3d9f52c5b9ebeaab7f39.png",
+      "out": "images/home/contact-photo",
+      "width": 785,
+      "height": 621,
+      "position": "attention"
+    },
+    {
+      "id": "partner-aws-network",
+      "kind": "raster",
+      "src": "design-ref/fills/8d93170c9260217104cb30c973250521bb6e5b49.png",
+      "out": "images/partners/aws-partner-network",
+      "width": 200,
+      "height": 105,
+      "fit": "inside",
+      "webpQuality": 90
+    },
+    {
+      "id": "partner-cloudera",
+      "kind": "raster",
+      "src": "design-ref/fills/8ff0248d1f129bc04c456c4521aa44c3ff97edae.png",
+      "out": "images/partners/cloudera",
+      "width": 200,
+      "height": 105,
+      "fit": "inside",
+      "webpQuality": 90
+    },
+    {
+      "id": "partner-sap-open-ecosystem",
+      "kind": "raster",
+      "src": "design-ref/fills/4198ce0cddf74200759f96aa60b1ebb35431d702.png",
+      "out": "images/partners/sap-partner-open-ecosystem",
+      "width": 200,
+      "height": 105,
+      "fit": "inside",
+      "webpQuality": 90
+    },
+    {
+      "id": "partner-google-developers",
+      "kind": "raster",
+      "src": "design-ref/fills/b3b696b7c0fe489cf86e65547ba8d80651c0ea84.png",
+      "out": "images/partners/google-developers-agency",
+      "width": 200,
+      "height": 105,
+      "fit": "inside",
+      "webpQuality": 90
+    }
+  ]
+}

@@ -11,13 +11,14 @@ function readCookie(): RegionSlug | null {
   return isRegionSlug(v) ? v : null;
 }
 
+/** Remembers the visitor's region for a year (read by proxy.ts on the bare "/" and by the header). */
 export function setRegionCookie(slug: RegionSlug) {
   const secure = location.protocol === "https:" ? "; Secure" : "";
   document.cookie = `${REGION_COOKIE}=${slug}; Path=/; Max-Age=${REGION_COOKIE_MAX_AGE}; SameSite=Lax${secure}`;
   listeners.forEach((l) => l());
 }
 
-/** The visitor's saved region (cookie), or null. Null during SSR. */
+/** The visitor's saved region (cookie), or null. Always null during SSR and hydration, so static HTML stays valid. */
 export function useRegionCookie(): RegionSlug | null {
   return useSyncExternalStore(
     (cb) => {
@@ -27,10 +28,4 @@ export function useRegionCookie(): RegionSlug | null {
     readCookie,
     () => null,
   );
-}
-
-/** Region slug from a homepage path ("/in/" → "in"), else null. */
-export function regionFromPath(pathname: string): RegionSlug | null {
-  const seg = pathname.split("/")[1];
-  return pathname.replace(/\/+$/, "").split("/").length === 2 && isRegionSlug(seg) ? seg : null;
 }

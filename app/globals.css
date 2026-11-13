@@ -1,107 +1,127 @@
 @import "tailwindcss";
 
-/* ─────────────────────────────────────────────────────────────────────────
-   AdamasTech design tokens
-   Palette sampled from logo.webp (see docs/PLAN.md §2). Orange is the CTA
-   accent only; on orange, text is navy (5.65:1), never white (3.03:1).
-   ───────────────────────────────────────────────────────────────────────── */
+/* ---------------------------------------------------------------------------
+   AdamasTech design tokens: the single source for colour, type, spacing, radius,
+   shadow and motion. Every value is read from the approved Figma file
+   (vpITDkp55Gla7w1HEP6zaL, page "v2 uPDATED") and documented in docs/design-tokens.md.
+   Components use these tokens only, never raw hex values or magic pixel sizes.
+   --------------------------------------------------------------------------- */
 
 @theme {
-  /* Brand */
-  --color-brand-50: #eef6fc;
-  --color-brand-100: #d6eaf7;
-  --color-brand-200: #a9d2ee;
-  --color-brand-500: #1a85cc;
-  --color-brand-600: #0070bc;
-  --color-brand-700: #005c9c;
-  --color-sky-300: #8fd3ef;
-  --color-sky-400: #4fb6e2;
-  --color-indigo-800: #263f76;
+  /* Colour: blues (primary) */
+  --color-blue-500: #1c85ff; /* text links, menu links, contact heading */
+  --color-blue-600: #1167d8; /* primary: eyebrows, buttons, active states */
+  --color-blue-650: #1266df; /* industries accents */
+  --color-blue-700: #0e5ca7; /* outline display words ("IMPACT") */
+  --color-blue-800: #0c4a8b; /* outline display words ("ADAMAS") */
 
-  /* Navy (dark surfaces) */
-  --color-navy-700: #1e3e66;
-  --color-navy-800: #12345c;
-  --color-navy-900: #0b2747;
-  --color-navy-950: #071c36;
-  --color-on-navy: #ffffff;
-  --color-on-navy-muted: #b7c8dc;
+  /* Colour: navy (dark surfaces and headings) */
+  --color-navy-950: #000c33; /* hero and header band */
+  --color-navy-900: #071c36; /* footer, dark cards, mega-menu feature card */
+  --color-navy-800: #0a1930; /* headings */
+  --color-navy-700: #1e3e66; /* footer rules */
+  --color-ink: #14142b; /* nav links */
+  --color-ink-soft: #10263d; /* secondary button text */
 
-  /* CTA */
-  --color-orange-500: #dc7c12;
-  --color-orange-600: #c86d0c;
-  --color-orange-700: #b4600a;
+  /* Colour: greys */
+  --color-grey-700: #3a4b63; /* descriptor text on light */
+  --color-grey-600: #5f6c7d; /* body text on light */
+  --color-grey-500: #5b6b80; /* menu descriptors, labels */
+  --color-grey-300: #b7c8dc; /* muted text on dark */
+  --color-grey-200: #d5e0eb; /* rules on light */
+  --color-grey-150: #dce2e8; /* secondary button stroke */
+  --color-grey-100: #cccdcf; /* mega-menu panel (as designed) */
+  --color-tint-100: #eef6fc; /* active menu item */
+  --color-tint-50: #f3f8fd; /* light section background */
+  --color-tint-25: #f9f9fb; /* card background */
 
-  /* Neutrals (cool) */
-  --color-grey-25: #f7fafc;
-  --color-mist: #edf3f8; /* light cool grey-blue section tone */
-  --color-grey-50: #eef4f9;
-  --color-grey-100: #e2eaf2;
-  --color-grey-200: #d5e0eb;
-  --color-grey-300: #b9c7d6;
-  --color-grey-500: #7a8aa0;
-  --color-grey-600: #5b6b80;
-  --color-grey-700: #3a4b63;
-  --color-grey-900: #071c36;
+  /* Colour: accents */
+  --color-sky-400: #4fb6e2; /* footer column headings, dark-card eyebrows */
+  --color-sky-300: #70c7f0; /* dark-card eyebrows */
+  --color-sky-200: #8fd3ef;
+  --color-sky-100: #cce2ff;
+  --color-orange-500: #ee8d1b; /* hero eyebrow, carousel progress */
+  --color-orange-600: #dc7c12; /* mega-menu feature link */
+  --color-white: #ffffff;
 
-  /* Type */
-  --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
-  --font-body: var(--font-figtree), "Segoe UI", Roboto, Arial, sans-serif;
+  /* Type families (loaded in app/layout.tsx with next/font/google) */
+  --font-heading: var(--font-manrope), "Segoe UI", Arial, sans-serif;
+  --font-ui: var(--font-roboto), "Segoe UI", Arial, sans-serif;
+  --font-body: var(--font-figtree), "Segoe UI", Arial, sans-serif;
   --font-sans: var(--font-body);
 
-  /* Fluid type scale: clamp between 360px and 1440px viewports */
-  --text-display-xl: clamp(2.125rem, 1rem + 5vw, 5.5rem); /* 34 → 88 */
-  --text-display-xl--line-height: 1.02;
-  --text-display-xl--letter-spacing: -0.03em;
-  --text-display: clamp(2.25rem, 1.75rem + 2.222vw, 4rem); /* 36 → 64 */
-  --text-display--line-height: 1.04;
-  --text-display--letter-spacing: -0.02em;
-  --text-h2: clamp(1.875rem, 1.5rem + 1.667vw, 3rem); /* 30 → 48 */
-  --text-h2--line-height: 1.08;
-  --text-h2--letter-spacing: -0.02em;
-  --text-h3: clamp(1.5rem, 1.333rem + 0.741vw, 2rem); /* 24 → 32 */
-  --text-h3--line-height: 1.16;
-  --text-h3--letter-spacing: -0.015em;
-  --text-h4: clamp(1.1875rem, 1.125rem + 0.278vw, 1.375rem); /* 19 → 22 */
+  /* Type scale (desktop values from Figma; smaller sizes are set per component with clamp) */
+  --text-display: 3.875rem; /* 62: hero H1 (Roboto 700) */
+  --text-display--line-height: 1.17;
+  --text-h2: 2.6875rem; /* 43: section H2 (Manrope 700) */
+  --text-h2--line-height: 1.14;
+  --text-h2--letter-spacing: -0.035em;
+  --text-h3: 1.75rem; /* 28: feature titles (Manrope 700) */
+  --text-h3--line-height: 1.21;
+  --text-h4: 1.375rem; /* 22: card titles (Roboto 700) */
   --text-h4--line-height: 1.3;
-  --text-metric: clamp(3rem, 2.5rem + 2.222vw, 4.5rem); /* 48 → 72 */
-  --text-metric--line-height: 0.95;
-  --text-metric--letter-spacing: -0.03em;
-  --text-lead: clamp(1.125rem, 1.083rem + 0.185vw, 1.25rem); /* 18 → 20 */
-  --text-lead--line-height: 1.6;
-  --text-body: clamp(1rem, 0.979rem + 0.093vw, 1.0625rem); /* 16 → 17 */
-  --text-body--line-height: 1.65;
-  --text-small: 0.875rem;
-  --text-small--line-height: 1.5;
-  --text-eyebrow: 0.75rem;
-  --text-eyebrow--line-height: 1.2;
-  --text-eyebrow--letter-spacing: 0.14em;
+  --text-h4--letter-spacing: -0.02em;
+  --text-menu: 1.125rem; /* 18: mega-menu categories (Roboto 700) */
+  --text-menu--line-height: 1.56;
+  --text-menu-link: 1.0625rem; /* 17: mega-menu links (Roboto 600) */
+  --text-menu-link--line-height: 1.65;
+  --text-lead: 1.25rem; /* 20: section intros (Manrope 400) */
+  --text-lead--line-height: 1.45;
+  --text-body: 1rem; /* 16 */
+  --text-body--line-height: 1.56;
+  --text-nav: 1rem; /* 16: nav links (Roboto 400) */
+  --text-nav--line-height: 1.17;
+  --text-small: 0.9375rem; /* 15: footer links, descriptors (Figtree) */
+  --text-small--line-height: 1.65;
+  --text-caption: 0.875rem; /* 14: addresses, meta (Figtree) */
+  --text-caption--line-height: 1.5;
+  --text-eyebrow: 1.75rem; /* 28: section eyebrows (Manrope 800, caps, +1.3px) */
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.046em;
+  --text-label: 0.75rem; /* 12: small caps labels (Figtree 700, +1.68px) */
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.14em;
+  --text-button: 0.8125rem; /* 13: buttons (700) */
+  --text-button--line-height: 1.5;
 
-  /* Shape & depth */
-  --radius-btn: 2px;
-  --radius-card: 12px;
-  --shadow-float: 0 24px 60px -12px rgb(7 28 54 / 0.18), 0 2px 6px rgb(7 28 54 / 0.06);
-  --shadow-lift: 0 28px 56px -20px rgb(7 28 54 / 0.28), 0 4px 12px -4px rgb(7 28 54 / 0.08);
-  --shadow-card: 0 1px 2px rgb(7 28 54 / 0.06);
+  /* Radius */
+  --radius-xs: 2px; /* mega-menu link hover, flags */
+  --radius-sm: 5px; /* header button */
+  --radius-md: 10px; /* header bar, hero buttons */
+  --radius-lg: 12px; /* menu items, feature cards */
+  --radius-xl: 15px; /* hero carousel cards */
+  --radius-2xl: 24px; /* section cards */
+  --radius-pill: 30px;
 
-  /* Motion: one curve and one duration set for the whole site (mirrored in lib/motion.ts for GSAP). */
-  --ease-out-expo: cubic-bezier(0.2, 0.7, 0.2, 1);
-  --ease-in-out-smooth: cubic-bezier(0.6, 0, 0.4, 1);
-  --duration-fast: 160ms;
-  --duration-base: 280ms;
-  --duration-slow: 600ms;
-  --duration-reveal: 900ms;
-  --duration-zoom: 1200ms;
+  /* Shadows */
+  --shadow-card: 0 2px 6px -1px rgb(0 0 0 / 0.12);
+  --shadow-float: 0 12px 30px -2px rgb(0 0 0 / 0.06);
+  --shadow-lift: 0 10px 40px rgb(0 0 0 / 0.16);
+  --shadow-hero-cards: 0 24px 6px rgb(0 0 0 / 0.25);
+  --shadow-glow: 0 4px 16px rgb(255 255 255 / 0.16);
+  --shadow-header: 0 8px 24px -8px rgb(0 12 51 / 0.35);
 
   /* Layout */
-  --container-site: 82rem; /* 1312px = 1280 content + 2×16 */
-  --breakpoint-xs: 26rem; /* 416px */
+  --container-site: 82.5rem; /* 1320: page sections (x 300-1620 at 1920) */
+  --container-chrome: 82rem; /* 1312: header, mega menu, footer outer box (x 304-1616) */
+  --container-chrome-inner: 76rem; /* 1216: their content width (48px inset) */
+  --breakpoint-xs: 26rem; /* 416 */
+  --breakpoint-nav: 75rem; /* 1200: desktop nav with mega menus; below it the drawer */
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.6, 0, 0.4, 1);
+  --duration-fast: 160ms;
+  --duration-base: 240ms;
+  --duration-slow: 600ms;
 }
 
-/* ───────────────────────────── Base ───────────────────────────── */
+/* ------------------------------ Base ------------------------------ */
 
 @layer base {
   :root {
-    --header-h: 3.75rem;
+    --topbar-h: 2.1875rem; /* 35: top bar (phone, email, social) */
+    --header-h: 7.375rem; /* 118: top bar + header bar + spacing, as in Figma */
     --gutter: 1rem;
     color-scheme: light;
   }
@@ -123,8 +143,9 @@
   }
 
   body {
-    background: #fff;
-    color: var(--color-grey-900);
+    margin: 0;
+    background: var(--color-white);
+    color: var(--color-navy-800);
     font-family: var(--font-body);
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
@@ -135,13 +156,11 @@
 
   h1,
   h2,
-  h3,
-  h4 {
-    font-family: var(--font-display);
-    font-stretch: 104%;
+  h3 {
+    font-family: var(--font-heading);
     font-weight: 700;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
+    /* "pretty" avoids orphaned last words without forcing the even line split that "balance" would (Figma wraps naturally). */
+    text-wrap: pretty;
   }
 
   p {
@@ -149,14 +168,9 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-orange-500);
+    outline: 2px solid var(--color-blue-600);
     outline-offset: 3px;
-    border-radius: 2px;
-  }
-
-  ::selection {
-    background: var(--color-sky-300);
-    color: var(--color-navy-950);
+    border-radius: var(--radius-xs);
   }
 
   [hidden] {
@@ -164,86 +178,42 @@
   }
 }
 
-/* ─────────────────────────── Utilities ─────────────────────────── */
+/* ---------------------------- Utilities ---------------------------- */
 
+/* Page sections: 1320 content, centred, side gutters below the design width. */
 @utility container-site {
   width: 100%;
-  max-width: var(--container-site);
+  max-width: calc(var(--container-site) + 2 * var(--gutter));
   margin-inline: auto;
   padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px)) max(var(--gutter), env(safe-area-inset-right, 0px));
 }
 
-/* 12-column editorial grid */
-@utility grid-12 {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  column-gap: 1rem;
-  @media (min-width: 48rem) {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: 1.5rem;
-  }
+/* Header, mega menu and footer: 1216 content inside a 1312 box. */
+@utility container-chrome {
+  width: 100%;
+  max-width: var(--container-chrome);
+  margin-inline: auto;
+  padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px)) max(var(--gutter), env(safe-area-inset-right, 0px));
   @media (min-width: 80rem) {
-    column-gap: 2rem;
+    padding-inline: 3rem;
   }
-}
-
-/* Rails: first card aligns with the container edge, last card can bleed to the viewport edge. */
-@utility rail-inset {
-  --rail-inset: max(var(--gutter), calc((100% - var(--container-site)) / 2 + var(--gutter)));
-  padding-inline: var(--rail-inset);
-  scroll-padding-inline: var(--rail-inset);
-}
-
-/* One vertical rhythm for every section: 72px on phones, 96px on tablets, 120px on desktop. */
-@utility section-y {
-  padding-block: 4.5rem;
-  @media (min-width: 48rem) {
-    padding-block: 6rem;
-  }
-  @media (min-width: 80rem) {
-    padding-block: 7.5rem;
-  }
-}
-
-/* Section tones: white → mist → navy. Two navy sections never sit next to each other (see docs/design-notes.md). */
-@utility tone-white {
-  background-color: #fff;
-  color: var(--color-navy-950);
-}
-@utility tone-mist {
-  background-color: var(--color-mist);
-  color: var(--color-navy-950);
-}
-@utility tone-navy {
-  background-color: var(--color-navy-950);
-  color: #fff;
-}
-
-/* Animated underline for text links: grows from the left on hover and focus. */
-@utility link-underline {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 0% 1.5px;
-  padding-bottom: 2px;
-  transition: background-size var(--duration-slow) var(--ease-out-expo);
-  &:hover,
-  &:focus-visible,
-  :where(.group\/al:hover, .group:hover) & {
-    background-size: 100% 1.5px;
-  }
-}
-
-@utility font-display-wide {
-  font-family: var(--font-display);
-  font-stretch: 108%;
 }
 
 @utility eyebrow {
-  font-family: var(--font-body);
+  font-family: var(--font-heading);
   font-size: var(--text-eyebrow);
   line-height: var(--text-eyebrow--line-height);
   letter-spacing: var(--text-eyebrow--letter-spacing);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-blue-600);
+}
+
+@utility label-caps {
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  line-height: var(--text-label--line-height);
+  letter-spacing: var(--text-label--letter-spacing);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -269,275 +239,136 @@
   }
 }
 
+/* ---------------------------- Components ---------------------------- */
+
 @layer components {
-  /* Stand-in for imagery the client has not supplied yet (see CONTENT_TODO). */
-  .media-placeholder {
-    background-color: var(--color-navy-900);
-    background-image:
-      radial-gradient(circle at 78% 18%, rgb(79 182 226 / 0.28), transparent 45%),
-      radial-gradient(circle at 12% 92%, rgb(38 63 118 / 0.9), transparent 55%),
-      radial-gradient(rgb(79 182 226 / 0.22) 1px, transparent 1.4px);
-    background-size:
-      100% 100%,
-      100% 100%,
-      14px 14px;
+  /* The header band is navy on ordinary pages. A page that opens with a dark hero marks it with
+     data-dark-hero: the band turns transparent and the hero pulls up underneath it (Figma: the header floats
+     over the hero image). Once scrolled, the header is solid again (see components/nav/HeaderClient.tsx). */
+  .site-header {
+    background: var(--color-navy-950);
   }
-
-  /* Hero copy: words rise line by line; supporting copy fades after the headline. */
-  .hero-copy [data-w] {
-    transition: transform 900ms var(--ease-out-expo);
-    transition-delay: calc(var(--line, 0) * 110ms);
+  body:has(main > [data-dark-hero]:first-child) .site-header:not(.is-scrolled) {
+    background: transparent;
   }
-  .hero-copy [data-fade] {
-    transition:
-      opacity 700ms var(--ease-out-expo),
-      transform 700ms var(--ease-out-expo);
+  [data-dark-hero] {
+    margin-top: calc(-1 * var(--header-h));
+    padding-top: var(--header-h);
   }
-  /* First story: CSS-only entrance from first paint (no hydration wait, so LCP is not delayed). */
-  .hero-intro [data-w] {
-    animation: hero-rise 900ms var(--ease-out-expo) both;
-    animation-delay: calc(var(--line, 0) * 110ms);
-  }
-  .hero-intro [data-fade] {
-    animation: hero-fade 700ms var(--ease-out-expo) 120ms both;
-  }
-  /* Pre-reveal states only when scripts can run: `scripting` is known before first paint (no class to wait for), and
-     with JavaScript off, or in a browser without the query, the copy simply stays visible (replaces the old `.js` gate). */
-  @media (scripting: enabled) {
-    .hero-copy:not(.is-in) [data-w] {
-      transform: translate3d(0, 105%, 0);
-    }
-    .hero-copy:not(.is-in) [data-fade] {
-      opacity: 0;
-      transform: translate3d(0, 12px, 0);
-    }
-  }
-
-  /* Cards: hover lift with a soft shadow; images inside `.card-media` zoom slowly. */
-  .card-lift {
-    transition:
-      transform var(--duration-slow) var(--ease-out-expo),
-      box-shadow var(--duration-slow) var(--ease-out-expo),
-      border-color var(--duration-base) var(--ease-out-expo);
-  }
-  .card-media img {
-    transition: transform var(--duration-zoom) var(--ease-out-expo);
-  }
-  @media (hover: hover) {
-    .card-lift:hover {
-      transform: translate3d(0, -4px, 0);
-      box-shadow: var(--shadow-lift);
-    }
-    .card-lift:hover .card-media img {
-      transform: scale(1.05);
-    }
-  }
-
-  /* Dark cards: a soft light follows the cursor (position set by components/motion/Interactions.tsx). */
-  [data-spotlight] {
-    position: relative;
-    isolation: isolate;
-  }
-  [data-spotlight]::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    border-radius: inherit;
-    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, -30%), rgb(143 211 239 / 0.16), transparent 60%);
+  /* Scrolled: the top bar folds away and the glass bar sits on the solid navy band. */
+  .site-header.is-scrolled .topbar {
+    height: 0;
+    padding-top: 0;
     opacity: 0;
-    transition: opacity var(--duration-slow) var(--ease-out-expo);
   }
-  @media (hover: hover) {
-    [data-spotlight]:hover::after {
-      opacity: 1;
+  .site-header.is-scrolled .headerbar {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* <details>-based menus (region switcher, mobile drawer): no disclosure marker, chevrons drawn by the components. */
+  .region-switcher > summary,
+  .nav-drawer > summary,
+  .nav-drawer details > summary {
+    list-style: none;
+  }
+  .region-switcher > summary::-webkit-details-marker,
+  .nav-drawer summary::-webkit-details-marker {
+    display: none;
+  }
+  .region-switcher:not([open]) > ul {
+    display: none;
+  }
+  .nav-drawer-close-icon,
+  .nav-drawer[open] .nav-drawer-open-icon {
+    display: none;
+  }
+  .nav-drawer[open] .nav-drawer-close-icon {
+    display: block;
+  }
+
+  /* Scroll reveals (components/motion/RevealScope.tsx). The pre-reveal state applies only where scripts can run,
+     from first paint (no class to wait for); with JavaScript off everything stays visible. */
+  @media (scripting: enabled) {
+    [data-reveal]:not([data-revealed]) {
+      opacity: 0;
+    }
+    /* Tab panels rendered for no-JavaScript visitors (components/home/ServicesTabs.tsx). */
+    [data-tabs] [data-nojs-panel] {
+      display: none;
     }
   }
 
-  /* Buttons: colours change fast; magnetic CTAs lean towards the cursor (offset set by Interactions.tsx). */
-  .btn,
-  [data-magnetic] {
-    transition:
-      transform var(--duration-slow) var(--ease-out-expo),
-      background-color var(--duration-fast) var(--ease-out-expo),
-      border-color var(--duration-fast) var(--ease-out-expo),
-      color var(--duration-fast) var(--ease-out-expo),
-      box-shadow var(--duration-base) var(--ease-out-expo);
-  }
-  [data-magnetic] {
-    transform: translate3d(var(--tx, 0px), var(--ty, 0px), 0);
-  }
-
-  /* Split-line headings: SplitText wraps each rendered line (.split-line) in a clipping mask (.split-line-mask).
-     The mask gets a little room below so descenders are not cut. */
-  .split-line-mask {
-    display: block;
-    padding-bottom: 0.08em;
-    margin-bottom: -0.08em;
-  }
-
-  /* Long-form copy (components/ui/Prose.tsx): 68ch measure, generous rhythm. */
-  .prose-site {
-    max-width: 68ch;
-    color: var(--color-grey-700);
-    font-size: var(--text-body);
-    line-height: 1.75;
-  }
-  .prose-site > * + * {
-    margin-top: 1.25em;
-  }
-  .prose-site h2 {
-    margin-top: 2.25em;
-    font-size: var(--text-h3);
-    line-height: var(--text-h3--line-height);
-    color: var(--color-navy-950);
-  }
-  .prose-site h3 {
-    margin-top: 1.75em;
-    font-size: var(--text-h4);
-    line-height: var(--text-h4--line-height);
-    color: var(--color-navy-950);
-  }
-  .prose-site ul {
-    display: grid;
-    gap: 0.6em;
-    padding-left: 0;
-  }
-  .prose-site li {
-    position: relative;
-    padding-left: 1.5em;
-  }
-  .prose-site li::before {
-    content: "";
-    position: absolute;
-    left: 0.2em;
-    top: 0.75em;
-    width: 0.5em;
-    height: 1.5px;
-    background: var(--color-brand-600);
-  }
-  .prose-site a {
-    color: var(--color-brand-600);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .prose-site-dark {
-    color: var(--color-on-navy-muted);
-  }
-  .prose-site-dark h2,
-  .prose-site-dark h3 {
-    color: #fff;
-  }
-
-  /* Announcement ticker (hero) */
-  .ticker-track {
-    animation: marquee var(--ticker-duration, 60s) linear infinite;
-  }
-  .ticker:hover .ticker-track,
-  .ticker:focus-within .ticker-track,
-  .ticker[data-paused="true"] .ticker-track {
-    animation-play-state: paused;
-  }
-
-  /* Partners marquee */
+  /* Partners marquee (components/home/Marquee.tsx) */
   .marquee-track {
     animation: marquee var(--marquee-duration, 48s) linear infinite;
   }
   .marquee:hover .marquee-track,
   .marquee:focus-within .marquee-track,
-  .marquee[data-paused="true"] .marquee-track {
+  .marquee[data-paused] .marquee-track {
     animation-play-state: paused;
   }
-}
 
-/* Pinned rails (components/ui/Rail.tsx): the section fills the viewport while scroll drives the track.
-   Unlayered on purpose, so they beat the rail's own utility classes (overflow-x-auto, section-y). */
-.rail[data-pinned] {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-block: calc(var(--header-h) + 1.25rem) 2rem;
-}
-.rail[data-pinned] .rail-track {
-  overflow: visible;
-  scroll-snap-type: none;
-  cursor: default;
-  margin-top: 2rem;
-}
-.rail[data-pinned] .rail-track > li {
-  transform-origin: 50% 60%;
-}
-
-/* Pinned company journey (components/company/JourneyPin.tsx): same frame as a pinned rail. The static timeline's
-   grid becomes one horizontal track on the rail inset, under a progress line with year markers. */
-.journey[data-pinned] {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 0;
-  padding-block: calc(var(--header-h) + 1.25rem) 2rem;
-  background: var(--color-white, #fff);
-}
-.journey[data-pinned] .journey-count {
-  display: block;
-}
-.journey[data-pinned] .journey-progress {
-  display: block;
-  margin-top: 2.25rem;
-}
-.journey[data-pinned] .journey-track {
-  display: flex;
-  gap: clamp(2.5rem, 4vw, 4rem);
-  max-width: none;
-  margin-top: 2.5rem;
-  padding-inline: max(var(--gutter), calc((100% - var(--container-site)) / 2 + var(--gutter)));
-  will-change: transform;
-}
-.journey[data-pinned] .journey-item {
-  flex: 0 0 clamp(20rem, 30vw, 27rem);
-  border-top: 0;
-  padding-top: 0;
-  transform-origin: 0% 40%;
-}
-.journey[data-pinned] .journey-accent,
-.journey[data-pinned] .journey-line {
-  display: none;
-}
-.journey [data-journey-marker][data-lit] .journey-dot {
-  background: var(--color-brand-600);
-  border-color: var(--color-brand-600);
-}
-.journey [data-journey-marker][aria-current] .journey-dot {
-  transform: scale(1.3);
-  box-shadow: 0 0 0 5px var(--color-brand-100);
-}
-.journey [data-journey-marker][data-lit] .journey-mark {
-  color: var(--color-navy-950);
-}
-.journey [data-journey-marker]:hover .journey-dot {
-  border-color: var(--color-brand-600);
-}
-
-@keyframes hero-rise {
-  from {
-    transform: translate3d(0, 105%, 0);
+  /* "Why Organisations Choose Adamas" diagram: a gentle pulse on the centre and the outer ring. */
+  .difference-pulse {
+    animation: difference-pulse 4s ease-in-out infinite;
   }
-  to {
-    transform: none;
+  .difference-ring {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: difference-ring 4s ease-in-out infinite;
   }
-}
 
-@keyframes hero-fade {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 12px, 0);
+  /* Interim placeholder routes (removed as each page is rebuilt to Figma). */
+  .placeholder {
+    max-width: 48rem;
+    padding: 2.5rem 0 5rem;
   }
-  to {
-    opacity: 1;
-    transform: none;
+  .placeholder h1 {
+    font-size: var(--text-h2);
+    line-height: var(--text-h2--line-height);
+    letter-spacing: var(--text-h2--letter-spacing);
+  }
+  .placeholder-eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: var(--text-label);
+    letter-spacing: var(--text-label--letter-spacing);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-blue-600);
+  }
+  .placeholder-intro {
+    margin-top: 1rem;
+    font-size: var(--text-lead);
+    line-height: var(--text-lead--line-height);
+    color: var(--color-grey-600);
+  }
+  .placeholder-note {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--color-blue-600);
+    background: var(--color-tint-50);
+    font-size: var(--text-small);
+    color: var(--color-grey-700);
+  }
+  .placeholder nav h2 {
+    margin-top: 2rem;
+    font-size: var(--text-label);
+    letter-spacing: var(--text-label--letter-spacing);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-grey-500);
+  }
+  .placeholder nav ul {
+    margin-top: 0.75rem;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.375rem;
+  }
+  .placeholder nav a {
+    color: var(--color-blue-500);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 }
 
@@ -547,32 +378,25 @@
   }
 }
 
-@keyframes hero-progress {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes kenburns {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.08);
-  }
-}
-
-@keyframes pulse-ring {
-  0% {
-    transform: scale(0.6);
-    opacity: 0.9;
-  }
+@keyframes difference-pulse {
+  0%,
   100% {
-    transform: scale(2.4);
-    opacity: 0;
+    box-shadow: 0 0 60px rgb(17 103 216 / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 110px rgb(17 103 216 / 0.5);
+  }
+}
+
+@keyframes difference-ring {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.7;
   }
 }
 
@@ -585,7 +409,12 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .marquee-track {
+  .marquee-track,
+  .difference-pulse,
+  .difference-ring {
     animation: none;
+  }
+  .marquee-track {
+    transform: none;
   }
 }

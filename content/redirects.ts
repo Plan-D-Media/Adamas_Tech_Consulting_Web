@@ -5,6 +5,7 @@ import type { RedirectSeed } from "./types";
  * Part 1 is the approved map (docs/sitemap.pdf, "301 REDIRECT MAP"); part 2 covers every other URL in
  * docs/source-content/_summary.md §9 so that no old URL ends in a 404 (Q2.6, Q9.4).
  *
+ * Every WordPress URL points straight at the final new URL (no chains through renamed slugs; section 1b lists the renames).
  * Old URLs whose path is unchanged are NOT listed, because a redirect to the same normalised path would loop:
  * /contact/, /services/, /privacy-policy/, /terms-of-use/, /in/, /uk/, /ae/, /case-studies/, /solutions/ (and / itself).
  *
@@ -35,19 +36,31 @@ export const redirects: RedirectSeed[] = [
   r("/aws-solutions-old/", "/services/cloud-services", "Q2.6", "Old page still linked in the current footer."),
   r("/technology-transformation/", "/services/digital-transformation", "Q2.5"),
   r("/application-development/", "/services/digital-transformation/application-development", "Q2.5"),
-  r("/cloud-transformation/", "/services/cloud-services/cloud-transformation", "Q2.5"),
+  r("/cloud-transformation/", "/services/cloud-services/devops-secops", "Q2.5"),
   r("/master-data-governance/", "/services/digital-transformation/master-data-governance", "Q2.5"),
   r("/data-science-analytics/", "/services/digital-transformation/data-analytics", "Q2.5"),
-  r("/oracle-netsuite-solutions/", "/services/cloud-services/oracle-netsuite", "Q2.3, Q2.5"),
+  r("/oracle-netsuite-solutions/", "/services/cloud-services/cloud-automation", "Q2.3, Q2.5"),
   r(
     "/e-invoicing-uae/",
     "/ae",
     "Q2.4",
     "DECISION Q2.4: /services/digital-transformation/e-invoicing-uae if the page is kept, /ae/ if retired. Set to /ae/ for now (the new page is a draft).",
   ),
-  r("/sap-treasury-investment-and-cash-management-implementation/", "/solutions/cash-forecasting", "Q2.5"),
+  r("/sap-treasury-investment-and-cash-management-implementation/", "/solutions/asset-tracking", "Q2.5"),
   r("/clients/", "/case-studies", "Q2.6"),
 
+  // ── 1b. Slugs renamed to the sitemap names (Swayang, 13 Nov 2026) ──
+  // Old slugs from the prototype round and the first Figma round; the WordPress map above already points at the new URLs.
+  r("/solutions/ai-product-a", "/solutions/a-eye", "Sitemap 13 Nov 2026", "Slug renamed with the solution (A-EYE)."),
+  r("/solutions/ai-product-b", "/solutions/air-mind", "Sitemap 13 Nov 2026", "Slug renamed with the solution (AIR-MIND)."),
+  r("/solutions/smart-parking", "/solutions/industrial-analytics", "Sitemap 13 Nov 2026", "Slug renamed with the solution (Industrial Analytics)."),
+  r("/solutions/cash-forecasting", "/solutions/asset-tracking", "Sitemap 13 Nov 2026", "Slug renamed with the solution (Asset Tracking)."),
+  r("/services/cloud-services/cloud-migration", "/services/cloud-services/migration-modernization", "Sitemap 13 Nov 2026", "Slug renamed with the sub-service (Migration & Modernization)."),
+  r("/services/cloud-services/cloud-transformation", "/services/cloud-services/devops-secops", "Sitemap 13 Nov 2026", "Slug renamed with the sub-service (DevOps & SecOps)."),
+  r("/services/cloud-services/managed-cloud", "/services/cloud-services/managed-services", "Sitemap 13 Nov 2026", "Slug renamed with the sub-service (Managed Services)."),
+  r("/services/cloud-services/sap-on-cloud", "/services/cloud-services/ai-ml-ops", "Sitemap 13 Nov 2026", "Slug renamed with the sub-service (AI/ML Ops)."),
+  r("/services/cloud-services/oracle-netsuite", "/services/cloud-services/cloud-automation", "Sitemap 13 Nov 2026", "Slug renamed with the sub-service (Cloud Automation)."),
+  r("/services/cloud-services/cloud-security-finops", "/services/cloud-services/cloud-advisory-consultation", "Sitemap 13 Nov 2026", "Slug renamed with the sub-service (Cloud Advisory & Consultation)."),
   // ── 2a. Case studies → /case-studies/<new slug> ────────────────────
   r("/invoiceai-automated-invoice-processing-reconciliation/", "/case-studies/invoiceai-invoice-processing", "Q2.6", CS_NOTE),
   r("/information-retriever-chatbot-enterprise-knowledge-assistant/", "/case-studies/rag-knowledge-assistant", "Q2.6", CS_NOTE),
@@ -104,24 +117,24 @@ export const redirects: RedirectSeed[] = [
   r("/sap-finance-supply-chain-management/", "/services/digital-transformation/sap", "Q2.6", "Case study not on the listing; not migrated."),
   r("/sap-fiori-based-mobility-application-for-supply-chain-and-logistics/", "/services/digital-transformation/sap", "Q2.6", "Case study not on the listing; not migrated."),
   r("/transforming-higher-education-with-aws-cloud/", "/services/cloud-services", "Q2.6", "AWS case study not on the listing; not migrated."),
-  r("/resilient-backup-recovery-with-aws/", "/services/cloud-services/managed-cloud", "Q2.6", "AWS case study not on the listing; not migrated."),
+  r("/resilient-backup-recovery-with-aws/", "/services/cloud-services/managed-services", "Q2.6", "AWS case study not on the listing; not migrated."),
 
   // ── 2b. Unlinked service / landing pages → nearest service ─────────
   r("/cloud-services/", "/services/cloud-services", "Q2.6"),
-  r("/cloud-migration-modernisation/", "/services/cloud-services/cloud-migration", "Q2.6", "Copy migrated to Cloud Migration."),
-  r("/managed-cloud-optimization/", "/services/cloud-services/managed-cloud", "Q2.6", "Copy migrated to Managed Cloud."),
-  r("/aws-managed-services/", "/services/cloud-services/managed-cloud", "Q2.6"),
-  r("/security-governance/", "/services/cloud-services/cloud-security-finops", "Q2.6", "Copy migrated to Cloud Security & FinOps."),
-  r("/cybersecurity/", "/services/cloud-services/cloud-security-finops", "Q2.6", "Nearest page; the old page's copy was not migrated."),
-  r("/devops-automation/", "/services/cloud-services/cloud-transformation", "Q2.6", "Nearest page (DevOps automation is part of the Modernisation step)."),
-  r("/application-modernization/", "/services/cloud-services/cloud-migration", "Q2.6", "Nearest page (replatforming)."),
+  r("/cloud-migration-modernisation/", "/services/cloud-services/migration-modernization", "Q2.6", "Copy migrated to Cloud Migration."),
+  r("/managed-cloud-optimization/", "/services/cloud-services/managed-services", "Q2.6", "Copy migrated to Managed Cloud."),
+  r("/aws-managed-services/", "/services/cloud-services/managed-services", "Q2.6"),
+  r("/security-governance/", "/services/cloud-services/cloud-advisory-consultation", "Q2.6", "Copy migrated to Cloud Security & FinOps."),
+  r("/cybersecurity/", "/services/cloud-services/cloud-advisory-consultation", "Q2.6", "Nearest page; the old page's copy was not migrated."),
+  r("/devops-automation/", "/services/cloud-services/devops-secops", "Q2.6", "Nearest page (DevOps automation is part of the Modernisation step)."),
+  r("/application-modernization/", "/services/cloud-services/migration-modernization", "Q2.6", "Nearest page (replatforming)."),
   r("/data-analytics/", "/services/digital-transformation/data-analytics", "Q2.6"),
   r("/ai-ml-services/", "/services/ai-services/ai-ml", "Q2.6"),
   r("/intelligent-automation/", "/services/ai-services/ai-ml", "Q2.6", "Old service page (\"Automate. Optimize. Excel\"); copy not migrated. Nearest page."),
   r("/education-services/", "/services/digital-transformation/edtech-openedx", "Q2.6", "Nearest page (AWS for education)."),
   r("/aws-for-ec2-hosting/", "/services/cloud-services", "Q2.6"),
-  r("/aws-for-reducing-tech-debt/", "/services/cloud-services/cloud-migration", "Q2.6", "Nearest page (Amazon Q Developer modernisation)."),
-  r("/aws-for-operational-insights/", "/services/cloud-services/managed-cloud", "Q2.6", "Nearest page (Amazon DevOps Guru operations)."),
+  r("/aws-for-reducing-tech-debt/", "/services/cloud-services/migration-modernization", "Q2.6", "Nearest page (Amazon Q Developer modernisation)."),
+  r("/aws-for-operational-insights/", "/services/cloud-services/managed-services", "Q2.6", "Nearest page (Amazon DevOps Guru operations)."),
   r("/aws-for-generative-ai/", "/services/ai-services/generative-ai", "Q2.6", "Copy migrated to Generative & Applied AI."),
   r("/aws-for-automated-workflows/", "/services/ai-services/agentic-ai", "Q2.6", "Copy migrated to Agentic AI Solutions."),
   r("/ai-value/", "/services/ai-services", "Q2.6", "Insight article; nearest page until the blog launches."),

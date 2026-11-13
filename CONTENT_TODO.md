@@ -201,10 +201,10 @@ Legend (as in `CONTENT_TODO.md`): **CONFLICT** = the live site contradicts itsel
 | /solutions/arivoo | Product screenshots | Section hidden (module images used instead) | Arivoo screenshots |
 | /solutions, /solutions/arivoo | Arivoo landing URL `https://arivoo.in` and module URLs (`/arivoo-ums`, `/arivoo-sms`, `/arivoo-lms`; header uses `/sms`, `/lms`) | Links out in a new tab | Confirm URLs; confirm UMS is live (header says "Coming soon") |
 | /solutions | **DECISION** Arivoo card/menu target. `externalUrl` is set, so the overview links Arivoo to arivoo.in; `/solutions/arivoo` exists but is reached only directly | Per DB | Clear `externalUrl` on the Arivoo row if menus/cards should open the page instead |
-| /solutions, /solutions/ai-product-a, /solutions/ai-product-b | AI Product A/B: name, tagline, overview, challenge, capabilities, screenshots (Q7.2) | "Name to be confirmed" / "Title to be confirmed" tags, "Details to be confirmed", pending Overview/Challenge panels, three "Capability to be confirmed" panels, branded artwork; pages are `noindex` | All product copy and imagery |
+| /solutions, /solutions/a-eye, /solutions/air-mind | AI Product A/B: name, tagline, overview, challenge, capabilities, screenshots (Q7.2) | "Name to be confirmed" / "Title to be confirmed" tags, "Details to be confirmed", pending Overview/Challenge panels, three "Capability to be confirmed" panels, branded artwork; pages are `noindex` | All product copy and imagery |
 | /solutions, /solutions/ai-solution-4…6 | AI solutions 4–6 (Q5.3; candidates: PPE Detection, Steel Plate Inspection, InvoiceAI, RAG assistant) | As above | Which solutions, plus copy and imagery |
-| /solutions/face-recognition, /smart-parking, /cash-forecasting | Product screenshots | Section hidden | Screenshots (optional) |
-| /solutions/cash-forecasting | Challenge/body copy (none on the source page) | Overview shows the summary only | Optional challenge copy; also confirm it belongs under AI solutions (editorNote) |
+| /solutions/face-recognition, /industrial-analytics, /asset-tracking | Product screenshots | Section hidden | Screenshots (optional) |
+| /solutions/asset-tracking | Challenge/body copy (none on the source page) | Overview shows the summary only | Optional challenge copy; also confirm it belongs under AI solutions (editorNote) |
 | /solutions/testguard | TestGUARD is DRAFT (Q7.3) but visible in preview; links out to arivoo.in/testguard | Product tile + page | Confirm placement |
 | /solutions/* | FAQs | Section hidden (none in DB) | Optional FAQs per solution |
 | /case-studies/* | All 20 case studies are DRAFT (Q5.5, Q5.6) and visible only with PREVIEW_DRAFTS | Normal | Clearance per story |
@@ -332,3 +332,41 @@ Legend (as in `CONTENT_TODO.md`): **CONFLICT** = the live site contradicts itsel
 
 #### 404
 - Same copy as before. It now uses the inner-page hero, plus a site search box and four section links.
+
+
+## Design round 5: approved Figma build (started 2026-11-13)
+
+The prototype's visual layer was removed on 13 Nov 2026; the site is rebuilt to the approved Figma file (`docs/AdamasTech_Master_Build_Prompt_v2.md`). Naming follows `docs/sitemap-latest.csv` where it differs from Figma (table in `docs/design-notes.md`). Items below were added or changed in this round; every one is also flagged in its seed record.
+
+### Navigation and footer (`content/navigation.ts`, built in Milestone A)
+- **RENAMED (sitemap comment):** Cloud sub-services are now Migration & Modernization, DevOps & SecOps, Managed Services, AI/ML Ops, Cloud Automation, Cloud Advisory & Consultation. Slugs renamed to match (Swayang, 13 Nov 2026): `/services/cloud-services/migration-modernization`, `devops-secops`, `managed-services`, `ai-ml-ops`, `cloud-automation`, `cloud-advisory-consultation`. The old slugs and the WordPress URLs 301 straight to the new ones (`content/redirects.ts`, section 1b).
+- **MISSING:** descriptors and page copy for AI/ML Ops (`ai-ml-ops`) and Cloud Automation (`cloud-automation`): the old SAP-on-Cloud and NetSuite copy no longer matches the names, so both carry a `[Placeholder]` descriptor. Cloud Advisory & Consultation keeps the old "Cloud Security & FinOps" descriptor for review.
+- **RENAMED (sitemap row 21):** the AI pillar is "Data & AI Services" (Figma says "AI Services"). Shown in the nav, services tab and footer.
+- **ADDED (sitemap "create URL"):** Data Engineering, Advanced Analytics, Sovereign AI, Responsible AI and AI Security & Governance under `/services/ai-services/`, published with `[Placeholder]` descriptor and summary so the menu and routes exist. **MISSING:** all copy.
+- **RENAMED (brief, sitemap):** AI Product A is **A-EYE**, AI Product B is **AIR-MIND**. Both `Solution` rows and nav items are now PUBLISHED so the menu and `/solutions/a-eye`, `/solutions/air-mind` exist (old slugs 301). **MISSING (Q7.2):** tagline, page copy, features, screenshots.
+- **RENAMED (sitemap):** Smart Parking is **Industrial Analytics**, Cash Forecasting (SAP Treasury) is **Asset Tracking**, in the menu, footer and `Solution` rows. Slugs renamed to `/solutions/industrial-analytics` and `/solutions/asset-tracking` (Swayang, 13 Nov 2026); the old slugs and the WordPress SAP Treasury URL 301 to the new ones. The page copy still describes parking detection and SAP Treasury: **MISSING** copy for the renamed solutions.
+- **CHANGED (brief):** the Arivoo menu and footer items open `https://arivoo.in` in a new tab (Q7.1). The `/solutions/arivoo` overview page still exists and is listed on `/solutions`.
+- **CHANGED (brief):** the About Us menu lists Company, Team and Careers (coming soon). Credentials moved out of that menu (still in the footer and legal row).
+- **PLACEHOLDER (Figma):** the top-bar phone `+91 000 500 0000` is replaced by each region's number from the database. Twitter and YouTube icons in the Figma top bar have no verified URLs, so only Facebook and LinkedIn render.
+- **DESIGN:** Figma fills the mega-menu panel with grey `#CCCDCF`; built as designed, probably a placeholder (`docs/design-notes.md` item 5).
+- **INTERIM:** mega-menu "Explore {category}" links, the About Us / Solutions / Insights panel layouts, the mobile drawer and the sticky-header state are built without Figma frames (`docs/design-notes.md`).
+
+### Unverified claims in the approved design (to build in Milestone B as DRAFT)
+- "100% Satisfied" and "Zero Risk" (hero trust row), "30% improvement in cash forecasting" (Client Outcomes). They will be stored as DRAFT stats so the draft badge shows with `SHOW_DRAFT_BADGES=true`. **Client:** confirm or replace.
+- The Top Stories, Events & Insights and Latest Perspectives cards in Figma are editorial filler ("Adamas accelerates enterprise transformation with AI-driven solutions", "Building data sovereignty into your cloud strategy", "DATE PENDING"). **MISSING:** real stories.
+- The Services and Industries paragraphs are repeated twice in Figma; each renders once. **MISSING:** final copy for the second paragraph.
+- "Explore Industry" buttons: the sitemap has no industry pages; they will link to `/contact`. **Client:** confirm.
+- Partner logos in Figma: AWS Partner Network, Cloudera, SAP Partner Open Ecosystem, Google Developers Agency Program. Cloudera and the Google programme are not on the live site. **Client:** confirm the partner list and tiers before they are published.
+- Hero copy in Figma mixes an India eyebrow with Gulf-focused text ("across the Middle East"). Each region's own copy from the database will be used; "Middle East" is never shown.
+
+### Homepage sections (Milestone B, 2026-11-13)
+- **INTERIM:** hero eyebrow and body per region (`home.hero` rows): Figma copy with the region word changed; UK and GCC eyebrows written to the India pattern. Client to supply final hero copy for each region.
+- **UNVERIFIED (DRAFT stats):** "100% Satisfied" and "Zero Risk" (`hero-satisfied-100`, `hero-zero-risk`) and "30% improvement in cash forecasting" (`cash-forecasting-improvement-30`). Shown only while drafts are previewed, with the draft badge.
+- **FILLER (from Figma):** Top Stories story 1 ("Adamas accelerates enterprise transformation with AI-driven solutions", 29 Oct 2026), the three Events & Insights rows and the three Latest Perspectives cards (`home.topStories`, `home.events`, `home.perspectives`). Replace with real stories before launch. Dates render in British English ("29 October 2026"; Figma shows "October 29, 2026").
+- **COPY:** the Cloud paragraph is repeated twice in the Figma Services panel; rendered once. Second paragraph needed. Only the Cloud tab is designed: Digital Transformation and Data & AI Services reuse their live-site summaries and new Figma-style images.
+- **COPY:** the About paragraph says "supporting Indian enterprises and institutions": confirm wording for the UK and GCC homepages (a region override of `home.about` can replace it).
+- **INDUSTRIES:** the twelve Figma industries replace the live site's seven tabs (Hospitality dropped). Copy exists for Healthcare and Financial Services (Figma) and Retail, Education, Manufacturing, Government (live site); Technology, Energy, Legal (Law Firms), Software Development, Marketing Agencies and Startups are placeholders. The Figma Industries paragraph is repeated twice; rendered once. "Explore Industry" links to /contact (no industry pages in the sitemap).
+- **EVENT:** the hero card and Events section use the DRAFT House of Lords event (title still a placeholder: "AdamasTech at the House of Lords"); Figma's editorial card title is "Join us at the House of Lords, London.". The event image is a stock keynote photo from the design (placeholder).
+- **PARTNERS:** the Figma strip shows AWS Partner Network, Cloudera, SAP Partner Open Ecosystem and Google Developers Agency Program. Cloudera and Google are DRAFT (not on the live site); AWS/SAP programme tiers to confirm.
+- **DESIGN:** Tech Excellence body text darkened from #B7C8DC to grey-600 for contrast. The presence map is a flat raster with pins baked in (cannot highlight London/Dubai per region).
+- **FORM:** the homepage contact form adds a consent checkbox (not in Figma; required by the contact action and GDPR). Confirm the wording "I agree to the Privacy Policy and Terms of Use."

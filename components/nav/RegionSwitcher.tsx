@@ -1,136 +1,88 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
-import { AnimatePresence, m } from "motion/react";
+import { useEffect, useRef } from "react";
+import type { RegionInfo } from "@/lib/data/site";
+import { isRegionSlug, type RegionSlug } from "@/lib/region";
 import { cx } from "@/lib/cx";
-import { isRegionSlug } from "@/lib/region";
 import { Icon } from "@/components/ui/Icon";
-import { regionFromPath, setRegionCookie, useRegionCookie } from "./regionClient";
+import { Flag } from "@/components/nav/Flag";
+import { setRegionCookie } from "@/components/nav/regionClient";
+import { useCurrentRegion } from "@/components/nav/useCurrentRegion";
 
-export interface RegionOption {
-  slug: string;
-  label: string;
-  phone: string | null;
-  phoneHref: string | null;
+interface Props {
+  regions: RegionInfo[];
+  region: RegionSlug | null;
+  fallbackRegion: RegionSlug;
+  /** "header": flag + label + chevron on the glass bar. "footer": bordered button with a globe, menu opens upwards. */
+  variant?: "header" | "footer";
 }
 
 /**
- * India · UK & Ireland · GCC. Swaps the homepage only and remembers the choice in the `region` cookie.
- * `inline` renders a plain radio-style list (mobile drawer, footer).
+ * Region switcher: swaps the homepage only (India, UK & Ireland, GCC) and sets the region cookie.
+ * Built on <details> so it opens without JavaScript; with JavaScript it also closes on Esc, outside clicks and selection.
+ * Options are <Link prefetch>, so switching is served from the static cache.
  */
-export function RegionSwitcher({
-  regions,
-  tone = "light",
-  inline = false,
-  className,
-}: {
-  regions: RegionOption[];
-  tone?: "light" | "dark";
-  inline?: boolean;
-  className?: string;
-}) {
-  const pathname = usePathname();
-  const cookie = useRegionCookie();
-  const current = regionFromPath(pathname) ?? cookie;
-  const currentLabel = regions.find((r) => r.slug === current)?.label;
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const btnRef = useRef<HTMLButtonElement>(null);
-  const listId = useId();
+export function RegionSwitcher({ regions, region, fallbackRegion, variant = "header" }: Props) {
+  const current = useCurrentRegion(regions, region, fallbackRegion);
+  const ref = useRef<HTMLDetailsElement>(null);
 
   useEffect(() => {
-    if (!open) return;
+    const el = ref.current;
+    if (!el) return;
+    const close = () => el.removeAttribute("open");
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setOpen(false);
-        btnRef.current?.focus();
+      if (e.key === "Escape" && el.open) {
+        close();
+        el.querySelector("summary")?.focus();
       }
     };
-    const onDown = (e: PointerEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    const onPointer = (e: PointerEvent) => {
+      if (el.open && !el.contains(e.target as Node)) close();
     };
     document.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("pointerdown", onPointer);
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("pointerdown", onPointer);
     };
-  }, [open]);
+  }, []);
 
-  // Link does the navigation; this only remembers the choice. Each option is prefetched per link (prefetch={true})
-  // as soon as it is shown, so the destination homepage is already in the router cache when it is clicked.
-  const choose = (slug: string) => () => {
-    if (!isRegionSlug(slug)) return;
-    setRegionCookie(slug);
-    setOpen(false);
-  };
-
-  const options = regions.map((r) => {
-    const active = r.slug === current;
-    return (
-      <li key={r.slug}>
-        <Link
-          href={`/${r.slug}/`}
-          prefetch={true}
-          onClick={choose(r.slug)}
-          aria-current={active ? "true" : undefined}
-          className={cx(
-            "flex min-h-11 items-center justify-between gap-6 rounded-btn px-3 text-[0.9375rem] font-medium",
-            inline
-              ? cx("border", active ? "border-brand-600 bg-brand-50 text-brand-700" : "border-grey-200")
-              : cx("hover:bg-grey-50", active ? "text-brand-600 font-semibold" : "text-navy-950"),
-          )}
-        >
-          {r.label}
-          {active && <Icon name="check" size={18} />}
-        </Link>
-      </li>
-    );
-  });
-
-  if (inline) {
-    return (
-      <nav aria-label="Choose your region" className={className}>
-        <ul className="grid gap-2">{options}</ul>
-      </nav>
-    );
-  }
-
+  const footer = variant === "footer";
   return (
-    <div ref={ref} className={cx("relative", className)}>
-      <button
-        ref={btnRef}
-        type="button"
-        aria-expanded={open}
-        aria-controls={listId}
-        onClick={() => setOpen((o) => !o)}
+    <details ref={ref} className={cx("region-switcher relative", footer ? "" : "shrink-0")}>
+      <summary
         className={cx(
-          "flex min-h-11 items-center gap-2 rounded-btn border px-3 text-sm font-semibold transition-colors",
-          tone === "dark" ? "border-white/35 hover:border-white" : "border-grey-200 hover:border-brand-600",
+          "flex cursor-pointer select-none items-center gap-3 whitespace-nowrap font-ui transition-colors duration-(--duration-fast)",
+          footer
+            ? "h-11 rounded-xs border border-navy-700 px-3 text-[0.875rem] font-semibold text-white hover:border-grey-300"
+            : "h-10 rounded-sm px-3 text-[0.875rem] text-black hover:bg-white/60",
         )}
+        aria-label={`Region: ${current.label}. Change region`}
       >
-        <Icon name="globe" size={18} />
-        <span className="sr-only">Region: </span>
-        <span>{currentLabel ?? "Region"}</span>
-        <Icon name="chevronDown" size={14} className={cx("transition-transform", open && "rotate-180")} />
-      </button>
-      <AnimatePresence>
-        {open && (
-          <m.div
-            id={listId}
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.2, ease: [0.2, 0.7, 0.2, 1] }}
-            className="absolute right-0 top-[calc(100%+0.5rem)] z-10 w-60 rounded-card border border-grey-200 bg-white p-1.5 text-navy-950 shadow-float"
-          >
-            <p className="px-3 pb-1 pt-2 text-xs font-semibold uppercase tracking-wider text-grey-600">Choose your region</p>
-            <ul>{options}</ul>
-          </m.div>
-        )}
-      </AnimatePresence>
-    </div>
+        {footer ? <Icon name="globe" size={16} className="text-grey-300" /> : <Flag slug={current.slug} />}
+        <span>{current.label}</span>
+        <Icon name="chevron-down" size={11} className={cx("transition-transform duration-(--duration-fast)", footer ? "text-grey-300" : "text-blue-500")} />
+      </summary>
+      <ul className={cx("absolute right-0 z-20 min-w-52 rounded-lg bg-white p-2 shadow-lift ring-1 ring-grey-200", footer ? "bottom-full mb-2" : "top-full mt-2")} role="list">
+        {regions.map((r) => (
+          <li key={r.code}>
+            <Link
+              href={`/${r.slug}/`}
+              prefetch={true}
+              onClick={() => {
+                if (isRegionSlug(r.slug)) setRegionCookie(r.slug);
+                ref.current?.removeAttribute("open");
+              }}
+              aria-current={r.slug === current.slug ? "true" : undefined}
+              className={cx("flex min-h-11 items-center gap-3 rounded-sm px-3 font-ui text-[0.9375rem] text-ink hover:bg-tint-100", r.slug === current.slug && "font-semibold text-blue-600")}
+            >
+              <Flag slug={r.slug} />
+              {r.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </details>
   );
 }

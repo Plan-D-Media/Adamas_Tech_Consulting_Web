@@ -1,42 +1,33 @@
-import Image from "next/image";
+import Image, { type ImageProps } from "next/image";
 import type { Media } from "@/lib/media";
-import { cx } from "@/lib/cx";
+import { mediaUrl } from "@/lib/media";
+
+type Props = Omit<ImageProps, "src" | "alt" | "width" | "height"> & {
+  /** A MediaAsset from the database, or a key under MEDIA_BASE_URL (e.g. "brand/logo.webp"). */
+  src: Media | string;
+  alt?: string;
+  width?: number;
+  height?: number;
+};
 
 /**
- * next/image wrapper for DB media. `fill` mode by default (parent sets the aspect ratio);
- * renders a neutral placeholder frame when the media row is missing.
+ * next/image over MEDIA_BASE_URL: local files in public/media, CloudFront in production (next.config.ts allows the host).
+ * SVGs are served as-is (no optimisation pass).
  */
-export function Img({
-  media,
-  sizes,
-  className,
-  priority = false,
-  fill = true,
-  alt,
-}: {
-  media: Media | null;
-  sizes: string;
-  className?: string;
-  priority?: boolean;
-  fill?: boolean;
-  alt?: string;
-}) {
-  if (!media) {
-    return <div aria-hidden="true" className={cx("media-placeholder absolute inset-0", className)} />;
-  }
-  const common = {
-    src: media.url,
-    alt: alt ?? media.alt,
-    sizes,
-    // Next 16: `priority` is deprecated; above-the-fold images preload and fetch first.
-    preload: priority,
-    fetchPriority: priority ? ("high" as const) : undefined,
-    placeholder: media.blurDataUrl ? ("blur" as const) : ("empty" as const),
-    blurDataURL: media.blurDataUrl ?? undefined,
-    unoptimized: media.url.endsWith(".svg"),
-  };
-  if (fill || !media.width || !media.height) {
-    return <Image {...common} alt={common.alt} fill className={cx("object-cover", className)} />;
-  }
-  return <Image {...common} alt={common.alt} width={media.width} height={media.height} className={className} />;
+export function Img({ src, alt, width, height, ...rest }: Props) {
+  const media = typeof src === "string" ? null : src;
+  const url = media ? media.url : mediaUrl(src as string);
+  const isSvg = url.endsWith(".svg");
+  return (
+    <Image
+      src={url}
+      alt={alt ?? media?.alt ?? ""}
+      width={width ?? media?.width ?? undefined}
+      height={height ?? media?.height ?? undefined}
+      placeholder={media?.blurDataUrl ? "blur" : undefined}
+      blurDataURL={media?.blurDataUrl ?? undefined}
+      unoptimized={isSvg || rest.unoptimized}
+      {...rest}
+    />
+  );
 }

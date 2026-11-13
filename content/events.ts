@@ -14,6 +14,7 @@ export const events: EventSeed[] = [
     startsAt: "2026-11-26T18:00:00+00:00",
     timezone: "Europe/London",
     venueName: "House of Lords, Palace of Westminster",
+    image: "images/events/house-of-lords-keynote.webp",
     venueAddress: "London SW1A 0PW",
     registrationOpen: true,
     agenda: [

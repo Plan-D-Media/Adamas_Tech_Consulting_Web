@@ -3,6 +3,7 @@ import type { NavigationSeed, NavItemSeed } from "./types";
 /**
  * Header mega-menus, footer columns, legal and social links.
  * Topbar order (client change, 2 Nov 2026): About Us · Services · Solutions · Case Studies · Insights.
+ * Names follow docs/sitemap-latest.csv ("Adamas tech comment" column, 13 Nov 2026) where it renames something.
  * (Previously confirmed 15 Oct: Services · Solutions · Case Studies · Insights · About Us.)
  * Footer columns follow the same order: Company (About) · Services · Solutions · Insights.
  * Descriptors come from the pillar/service intros in content/services.ts and the live Arivoo menu blurbs.
@@ -36,38 +37,40 @@ const servicesMenu: NavItemSeed = {
       descriptor: "Cloud that Scales your Organisation",
       children: [
         {
-          label: "Cloud Migration",
-          href: "/services/cloud-services/cloud-migration",
+          label: "Migration & Modernization",
+          href: "/services/cloud-services/migration-modernization",
           descriptor: "Migrate workloads, modernize architecture, and move from legacy systems to scalable AWS-native environments.",
         },
         {
-          label: "Cloud Transformation",
-          href: "/services/cloud-services/cloud-transformation",
+          label: "DevOps & SecOps",
+          href: "/services/cloud-services/devops-secops",
           descriptor: "Resilient | Reliable | Cost optimized | Intelligent",
         },
         {
-          label: "Managed Cloud & Cloud Reselling (CSP)",
-          href: "/services/cloud-services/managed-cloud",
+          label: "Managed Services",
+          href: "/services/cloud-services/managed-services",
           descriptor: "Improve reliability, security, performance, and cost efficiency with ongoing AWS operations and governance.",
         },
         {
-          label: "SAP on Cloud",
-          href: "/services/cloud-services/sap-on-cloud",
-          descriptor: "[Placeholder] One line on running SAP on the cloud.",
+          label: "AI/ML Ops",
+          href: "/services/cloud-services/ai-ml-ops",
+          descriptor: "[Placeholder] One line on AI/ML Ops.",
           needsReview: true,
-          editorNote: "MISSING: no old page for SAP on Cloud. Descriptor needed.",
+          editorNote: "Renamed from SAP on Cloud (sitemap comment, 13 Nov 2026); slug renamed, old slug 301s here. MISSING: descriptor and page copy for AI/ML Ops.",
         },
         {
-          label: "Oracle NetSuite / Cloud ERP",
-          href: "/services/cloud-services/oracle-netsuite",
-          descriptor: "Unified Cloud ERP for Modern Construction",
+          label: "Cloud Automation",
+          href: "/services/cloud-services/cloud-automation",
+          descriptor: "[Placeholder] One line on cloud automation.",
           needsReview: true,
-          editorNote: "Descriptor is the construction-specific /in/ homepage card line. Confirm.",
+          editorNote: "Renamed from Oracle NetSuite / Cloud ERP (sitemap comment, 13 Nov 2026); slug renamed, old slug 301s here. MISSING: descriptor and page copy for Cloud Automation.",
         },
         {
-          label: "Cloud Security & FinOps",
-          href: "/services/cloud-services/cloud-security-finops",
+          label: "Cloud Advisory & Consultation",
+          href: "/services/cloud-services/cloud-advisory-consultation",
           descriptor: "Strengthen cloud security, access control, compliance posture, and operational governance across AWS estates.",
+          needsReview: true,
+          editorNote: "Renamed from Cloud Security & FinOps (sitemap comment, 13 Nov 2026); slug renamed (old slug 301s here), descriptor kept. Confirm the descriptor still fits.",
         },
       ],
     },
@@ -114,7 +117,7 @@ const servicesMenu: NavItemSeed = {
     },
     {
       key: "services.ai-services",
-      label: "AI Services",
+      label: "Data & AI Services",
       href: "/services/ai-services",
       descriptor: "Empowering businesses to thrive in the digital era through innovative AI and scalable analytics solutions",
       children: [
@@ -138,6 +141,41 @@ const servicesMenu: NavItemSeed = {
           href: "/services/ai-services/generative-ai",
           descriptor: "Generative AI strategy and implementation",
         },
+        {
+          label: "Data Engineering",
+          href: "/services/ai-services/data-engineering",
+          descriptor: "[Placeholder] One line on data engineering.",
+          needsReview: true,
+          editorNote: "Added from the sitemap (13 Nov 2026, create URL). MISSING: descriptor and page copy.",
+        },
+        {
+          label: "Advanced Analytics",
+          href: "/services/ai-services/advanced-analytics",
+          descriptor: "[Placeholder] One line on advanced analytics.",
+          needsReview: true,
+          editorNote: "Added from the sitemap (13 Nov 2026, create URL). MISSING: descriptor and page copy.",
+        },
+        {
+          label: "Sovereign AI",
+          href: "/services/ai-services/sovereign-ai",
+          descriptor: "[Placeholder] One line on sovereign AI.",
+          needsReview: true,
+          editorNote: "Added from the sitemap (13 Nov 2026, create URL). MISSING: descriptor and page copy.",
+        },
+        {
+          label: "Responsible AI",
+          href: "/services/ai-services/responsible-ai",
+          descriptor: "[Placeholder] One line on responsible AI.",
+          needsReview: true,
+          editorNote: "Added from the sitemap (13 Nov 2026, create URL). MISSING: descriptor and page copy.",
+        },
+        {
+          label: "AI Security & Governance",
+          href: "/services/ai-services/ai-security-governance",
+          descriptor: "[Placeholder] One line on AI security and governance.",
+          needsReview: true,
+          editorNote: "Added from the sitemap (13 Nov 2026, create URL). MISSING: descriptor and page copy.",
+        },
       ],
     },
     { key: "services.overview", label: "Services overview", href: "/services" },
@@ -156,10 +194,11 @@ const solutionsMenu: NavItemSeed = {
     {
       key: "solutions.arivoo",
       label: "Arivoo",
-      href: "/solutions/arivoo",
+      href: "https://arivoo.in",
+      external: true,
       descriptor: "Shaping the Future of Education.",
       needsReview: true,
-      editorNote: "DECISION Q7.1: /solutions/arivoo page vs a direct link to arivoo.in. Built as a page.",
+      editorNote: "Brief (13 Nov 2026): the menu item opens arivoo.in in a new tab (Q7.1). The /solutions/arivoo overview page still exists and is listed on /solutions.",
       children: [
         {
           key: "solutions.arivoo-ums",
@@ -185,27 +224,24 @@ const solutionsMenu: NavItemSeed = {
       ],
     },
     {
-      key: "solutions.ai-product-a",
-      label: "[AI Product A]",
-      href: "/solutions/ai-product-a",
+      key: "solutions.a-eye",
+      label: "A-EYE",
+      href: "/solutions/a-eye",
       descriptor: "[Placeholder] One-line product descriptor.",
-      status: D,
       needsReview: true,
-      editorNote: "MISSING (Q7.2): product name and page. Hidden until published.",
+      editorNote: "Name A-EYE from the brief and sitemap (13 Nov 2026). MISSING (Q7.2): descriptor and page copy; slug a-eye (old slug 301s here).",
     },
     {
-      key: "solutions.ai-product-b",
-      label: "[AI Product B]",
-      href: "/solutions/ai-product-b",
+      key: "solutions.air-mind",
+      label: "AIR-MIND",
+      href: "/solutions/air-mind",
       descriptor: "[Placeholder] One-line product descriptor.",
-      status: D,
       needsReview: true,
-      editorNote: "MISSING (Q7.2): product name and page. Hidden until published.",
+      editorNote: "Name AIR-MIND from the brief and sitemap (13 Nov 2026). MISSING (Q7.2): descriptor and page copy; slug air-mind (old slug 301s here).",
     },
     {
       key: "solutions.ai-solutions",
       label: "AI Solutions",
-      href: "/solutions",
       children: [
         {
           key: "solutions.face-recognition",
@@ -214,15 +250,15 @@ const solutionsMenu: NavItemSeed = {
           descriptor: "Effortless Security through AI Recognition",
         },
         {
-          key: "solutions.smart-parking",
-          label: "Smart Parking",
-          href: "/solutions/smart-parking",
+          key: "solutions.industrial-analytics",
+          label: "Industrial Analytics",
+          href: "/solutions/industrial-analytics",
           descriptor: "Effortless Parking with AI Intelligence",
         },
         {
-          key: "solutions.cash-forecasting",
-          label: "Cash Forecasting (SAP Treasury)",
-          href: "/solutions/cash-forecasting",
+          key: "solutions.asset-tracking",
+          label: "Asset Tracking",
+          href: "/solutions/asset-tracking",
           descriptor: "Boosting Cash Forecasting by 30%",
         },
         {
@@ -289,7 +325,6 @@ const aboutMenu: NavItemSeed = {
       needsReview: true,
       editorNote: "Phase 2 (Q2.9, Q13.1).",
     },
-    { key: "about.credentials", label: "Credentials", href: "/credentials" },
   ],
 };
 
@@ -312,7 +347,7 @@ const footer: NavItemSeed[] = [
     children: [
       { label: "Cloud Services", href: "/services/cloud-services" },
       { label: "Digital Transformation", href: "/services/digital-transformation" },
-      { label: "AI Services", href: "/services/ai-services" },
+      { label: "Data & AI Services", href: "/services/ai-services" },
       { label: "Services overview", href: "/services" },
     ],
   },
@@ -320,10 +355,10 @@ const footer: NavItemSeed[] = [
     key: "footer.solutions",
     label: "Solutions",
     children: [
-      { label: "Arivoo", href: "/solutions/arivoo" },
+      { label: "Arivoo", href: "https://arivoo.in", external: true },
       { label: "Face Recognition Security", href: "/solutions/face-recognition" },
-      { label: "Smart Parking", href: "/solutions/smart-parking" },
-      { label: "Cash Forecasting (SAP Treasury)", href: "/solutions/cash-forecasting" },
+      { label: "Industrial Analytics", href: "/solutions/industrial-analytics" },
+      { label: "Asset Tracking", href: "/solutions/asset-tracking" },
       {
         key: "footer.testguard",
         label: "TestGUARD",
