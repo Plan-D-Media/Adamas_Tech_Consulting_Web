@@ -6,6 +6,7 @@ import { dateParts } from "@/lib/dates";
 import { optionalCopy, plain } from "@/lib/placeholder";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Img } from "@/components/media/Img";
 
 /**
  * Events & Insights (Figma Events frame 236:2419): tint-50 band with a faint ring top-right, header, the featured
@@ -22,11 +23,11 @@ export function Events({ block, event }: { block: Block; event: EventCardData | 
     <section aria-labelledby="events-heading" data-compare="events" className="relative overflow-hidden bg-tint-50 pb-16 pt-16 lg:pb-[110px] lg:pt-24">
       <div className="pointer-events-none absolute right-[-150px] top-[-170px] hidden h-[460px] w-[460px] rounded-full border border-[#94BADA]/[0.26] shadow-[0_0_0_126px_rgb(157_187_208/0.13)] lg:block" aria-hidden="true" />
       <div className="container-site relative">
-        <SectionHeader id="events-heading" eyebrow={plain(block.eyebrow)} heading={plain(block.heading)} />
+        <SectionHeader id="events-heading" eyebrow={plain(block.eyebrow)} heading={plain(block.heading)} eyebrowClassName="lg:h-[22px]" />
         <div className="mt-10 grid gap-6 lg:mt-12 xl:grid-cols-[775px_minmax(0,1fr)] xl:gap-0">
           {event && (
             <article className="relative min-h-[26rem] overflow-hidden rounded-2xl bg-navy-900 text-white lg:min-h-[30rem] xl:h-[571px] xl:w-[967px]" data-reveal>
-              {event.image && <img src={event.image.url} alt={event.image.alt} width={967} height={571} className="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />}
+              {event.image && <Img src={event.image} fill sizes="(min-width: 1280px) 967px, 100vw" className="object-cover" />}
               <div className="absolute inset-0 bg-[linear-gradient(0deg,rgb(6_21_46/0.96)_0%,rgb(6_21_46/0.55)_40%,rgb(6_21_46/0)_100%)]" aria-hidden="true" />
               {date && (
                 <div className="absolute left-0 top-7 flex items-center gap-[9px] bg-blue-600 px-[17px] py-[15px] shadow-[12px_14px_35px_rgb(0_28_58/0.29)]">

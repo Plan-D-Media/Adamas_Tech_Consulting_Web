@@ -190,7 +190,7 @@ export const stats: StatSeed[] = [
     verified: false,
     sourceNote: '/ae/ only, inside a block hidden on all devices ("INNOVATION … 3+ Years Experience / Meet Our Experts"). Never visible.',
     placements: ["about"],
-    regions: ["AE"],
+    regions: ["GCC"],
     status: "PUBLISHED",
     sortOrder: 9,
     needsReview: true,
@@ -201,9 +201,9 @@ export const stats: StatSeed[] = [
 // ── Logos ───────────────────────────────────────────────────────────────
 
 const IN_UK = ["IN", "UK"] as LogoSeed["regions"];
-const ALL = ["IN", "UK", "AE"] as LogoSeed["regions"];
+const ALL = ["IN", "UK", "GCC"] as LogoSeed["regions"];
 
-/** The 12 partner and certification logos ("PARTNERS & CERTIFICATIONS", visible on /in/ and /uk/, hidden on /ae/). */
+/** The partner and certification logos ("PARTNERS & CERTIFICATIONS"). The live /ae/ hid the strip; the approved design shows it on every region, so GCC is included since 13 Nov 2026. */
 const partnerLogos: LogoSeed[] = [
   // Partner logos as shown in the approved Figma design (13 Nov 2026). Cloudera and the Google Developers Agency Program are not on the live site: DRAFT until confirmed.
   { kind: "PARTNER", name: "AWS Partner Network", logo: "images/partners/aws-partner-network.webp", needsReview: true, editorNote: "Figma partner strip. Tier to confirm (Q5.3)." },
@@ -224,7 +224,7 @@ const partnerLogos: LogoSeed[] = [
   { kind: "CERTIFICATION", name: "CMMI ML3 Appraised", logo: "images/certifications/cmmi-level-3.webp" },
 ].map((l, i) => ({
   ...(l as LogoSeed),
-  regions: IN_UK,
+  regions: ALL,
   status: "PUBLISHED" as const,
   sortOrder: i,
   needsReview: true,
@@ -279,16 +279,16 @@ const clientLogos: LogoSeed[] = (
     kind: "CLIENT",
     name: "Emirates (bottled drinking water)",
     logo: "images/clients/emirates-drinking-water.webp",
-    regions: ["AE"],
+    regions: ["GCC"],
     editorNote: 'Name read from the logo ("Emirates", "Since 1979", drinking water). Confirm the company name.',
   },
-  { kind: "CLIENT", name: "Rain Stella Technologies", logo: "images/clients/rain-stella-technologies.webp", regions: ["AE"] },
-  { kind: "CLIENT", name: "KOA", logo: "images/clients/koa.webp", regions: ["AE"] },
+  { kind: "CLIENT", name: "Rain Stella Technologies", logo: "images/clients/rain-stella-technologies.webp", regions: ["GCC"] },
+  { kind: "CLIENT", name: "KOA", logo: "images/clients/koa.webp", regions: ["GCC"] },
   {
     kind: "CLIENT",
     name: "Avenue Professional Document Clearing LLC",
     logo: "images/clients/avenue-professional-document-clearing.webp",
-    regions: ["AE"],
+    regions: ["GCC"],
   },
   ] as LogoSeed[]
 ).map((l, i) => ({

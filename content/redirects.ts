@@ -42,9 +42,9 @@ export const redirects: RedirectSeed[] = [
   r("/oracle-netsuite-solutions/", "/services/cloud-services/cloud-automation", "Q2.3, Q2.5"),
   r(
     "/e-invoicing-uae/",
-    "/ae",
+    "/gcc/",
     "Q2.4",
-    "DECISION Q2.4: /services/digital-transformation/e-invoicing-uae if the page is kept, /ae/ if retired. Set to /ae/ for now (the new page is a draft).",
+    "DECISION Q2.4: /services/digital-transformation/e-invoicing-uae if the page is kept, /ae/ if retired. Set to /gcc/ for now (the new page is a draft).",
   ),
   r("/sap-treasury-investment-and-cash-management-implementation/", "/solutions/asset-tracking", "Q2.5"),
   r("/clients/", "/case-studies", "Q2.6"),

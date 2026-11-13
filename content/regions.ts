@@ -34,8 +34,8 @@ export const regions: RegionSeed[] = [
     sortOrder: 1,
   },
   {
-    code: "AE",
-    slug: "ae",
+    code: "GCC",
+    slug: "gcc",
     label: "GCC",
     locale: "en-AE",
     hreflang: ["en-AE", "en-SA", "en-QA", "en-KW", "en-BH", "en-OM"],
@@ -54,7 +54,7 @@ export const regions: RegionSeed[] = [
 export const regionNotes: Record<RegionSeed["code"], string> = {
   IN: "Email marketing@adamastech.in is shared by all regions: confirm one inbox per region. WhatsApp missing. Featured office Bengaluru, or Kolkata? Confirm.",
   UK: "Email marketing@adamastech.in is shared by all regions: confirm one inbox per region. WhatsApp missing. Phone is the London mobile (no UK landline on the site).",
-  AE: "Email marketing@adamastech.in is shared by all regions: confirm one inbox per region (adamastech.ae domain also in use). WhatsApp missing.",
+  GCC: "Email marketing@adamastech.in is shared by all regions: confirm one inbox per region (adamastech.ae domain also in use). WhatsApp missing.",
 };
 
 const PIN = "Map pin is approximate (geocoded from the address, city/street level). Confirm.";
@@ -98,7 +98,7 @@ export const offices: OfficeSeed[] = [
     city: "Dubai",
     label: "Dubai",
     country: "United Arab Emirates",
-    region: "AE",
+    region: "GCC",
     addressLines: ["B-2101, 1601 & 801 Latifa Tower", "near Trade Centre, Sheikh Zayed Road", "Dubai, UAE"],
     phone: "+971 4 705 6001",
     phoneHref: "tel:+97147056001",
@@ -162,7 +162,7 @@ export const offices: OfficeSeed[] = [
     city: "Riyadh",
     label: "Riyadh",
     country: "Saudi Arabia",
-    region: "AE",
+    region: "GCC",
     addressLines: ["Riyadh", "Saudi Arabia"],
     lat: 24.7136,
     lng: 46.6753,

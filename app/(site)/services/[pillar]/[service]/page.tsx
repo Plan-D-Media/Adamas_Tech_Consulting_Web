@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getService, getServiceParams } from "@/lib/data/services";
+import { getBlocks } from "@/lib/data/site";
 import { plain } from "@/lib/placeholder";
-import { Placeholder } from "@/components/Placeholder";
+import { ServicePage } from "@/components/services/ServicePage";
 
 export async function generateStaticParams() {
   return getServiceParams();
@@ -17,27 +18,20 @@ export async function generateMetadata({ params }: PageProps<"/services/[pillar]
     description: s.seoDescription ?? (plain(s.descriptor) || undefined),
     alternates: { canonical: `/services/${pillar}/${service}` },
     robots: s.noindex ? { index: false } : undefined,
+    openGraph: s.image ? { images: [{ url: s.image.url }] } : undefined,
   };
 }
 
 /** Navigations may block (instant = false): params are read outside <Suspense>, so the page is complete without JavaScript. */
 export const instant = false;
 
-export default function ServicePage({ params }: PageProps<"/services/[pillar]/[service]">) {
+export default function ServiceRoute({ params }: PageProps<"/services/[pillar]/[service]">) {
   return <Service params={params} />;
 }
 
 async function Service({ params }: { params: PageProps<"/services/[pillar]/[service]">["params"] }) {
   const { pillar, service } = await params;
-  const s = await getService(pillar, service);
+  const [s, blocks] = await Promise.all([getService(pillar, service), getBlocks(null)]);
   if (!s) notFound();
-  return (
-    <Placeholder
-      eyebrow={plain(s.pillar.name)}
-      title={plain(s.name)}
-      intro={plain(s.descriptor) || plain(s.summary) || null}
-      links={[{ label: plain(s.pillar.name), href: s.pillar.href }, ...s.siblings.map((x) => ({ label: plain(x.name), href: x.href }))]}
-      linksLabel="Related services"
-    />
-  );
+  return <ServicePage service={s} blocks={blocks} />;
 }

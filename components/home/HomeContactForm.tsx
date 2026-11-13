@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useActionState, useId, useState } from "react";
 import { submitContact } from "@/app/(site)/contact/actions";
 import type { ContactField, ContactState } from "@/lib/contact-schema";
-import { fieldError } from "@/lib/contact-schema";
+import { fieldError } from "@/lib/contact-validate";
 import { HONEYPOT_FIELD } from "@/lib/honeypot";
 import { cx } from "@/lib/cx";
 import { Icon } from "@/components/ui/Icon";
@@ -34,10 +34,41 @@ const COUNTRIES = [
 const FLAG_FOR: Record<string, string> = { in: "in", uk: "uk", gcc: "gcc" };
 const initial: ContactState = { status: "idle" };
 
+const LEGAL_LINKS: Record<string, string> = { "Privacy Policy": "/privacy-policy", "Terms of Use": "/terms-of-use" };
+const linkCls = "text-blue-600 underline underline-offset-2";
+
+/** Turns "Privacy Policy" and "Terms of Use" inside the consent copy into links; appends both when the copy names neither. */
+function consentWithLinks(label: string) {
+  const parts = label.split(/(Privacy Policy|Terms of Use)/);
+  if (parts.length === 1) {
+    return (
+      <>
+        {label}{" "}
+        <Link href={LEGAL_LINKS["Privacy Policy"]} className={linkCls}>
+          Privacy Policy
+        </Link>
+        {" / "}
+        <Link href={LEGAL_LINKS["Terms of Use"]} className={linkCls}>
+          Terms of Use
+        </Link>
+      </>
+    );
+  }
+  return parts.map((part, i) =>
+    LEGAL_LINKS[part] ? (
+      <Link key={i} href={LEGAL_LINKS[part]} className={linkCls}>
+        {part}
+      </Link>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  );
+}
+
 export function HomeContactForm({ placeholders, submitLabel, consentLabel, regionSlug }: Props) {
   const [state, action, pending] = useActionState(submitContact, initial);
   const uid = useId();
-  const defaultCountry = regionSlug === "uk" ? "United Kingdom" : regionSlug === "ae" || regionSlug === "gcc" ? "United Arab Emirates" : "India";
+  const defaultCountry = regionSlug === "uk" ? "United Kingdom" : regionSlug === "gcc" ? "United Arab Emirates" : "India";
   const [country, setCountry] = useState(state.values?.country || defaultCountry);
   const [live, setLive] = useState<Partial<Record<ContactField, string | undefined>>>({});
   const errors = { ...state.fieldErrors, ...live };
@@ -131,25 +162,14 @@ export function HomeContactForm({ placeholders, submitLabel, consentLabel, regio
         {err("message")}
       </div>
 
-      <div>
-        <label className="flex items-start gap-2 font-body text-[0.8125rem] leading-snug text-grey-600">
+      {/* The consent line is not in the Figma form (the contact action requires it); it sits inside the design's 35px gap above the button. */}
+      <div className="-mt-2.5">
+        <label className="flex items-start gap-2 font-body text-[0.75rem] leading-[1.5] text-grey-600">
           <input type="checkbox" name="consent" value="on" required defaultChecked={false} className="mt-0.5 h-4 w-4 accent-blue-600" aria-describedby={errors.consent ? `${uid}-consent-error` : undefined} />
-          <span>
-            {consentLabel}{" "}
-            <Link href="/privacy-policy" className="text-blue-500 underline underline-offset-2">
-              Privacy Policy
-            </Link>
-            {" / "}
-            <Link href="/terms-of-use" className="text-blue-500 underline underline-offset-2">
-              Terms of Use
-            </Link>
-          </span>
+          <span>{consentWithLinks(consentLabel)}</span>
         </label>
         {err("consent")}
-      </div>
-
-      <div className="pt-[15px]">
-        <button type="submit" disabled={pending} className="inline-flex h-[43px] min-w-[168px] items-center justify-center rounded-pill bg-[linear-gradient(90deg,#4285F7_0%,#3476F6_100%)] px-6 font-ui text-[0.875rem] font-medium text-white transition-[filter] duration-(--duration-fast) hover:brightness-110 disabled:opacity-60">
+        <button type="submit" disabled={pending} className="mt-[7px] inline-flex h-[43px] min-w-[168px] items-center justify-center rounded-pill bg-[linear-gradient(90deg,#4285F7_0%,#3476F6_100%)] px-6 font-ui text-[0.875rem] font-medium text-white transition-[filter] duration-(--duration-fast) hover:brightness-110 disabled:opacity-60">
           {pending ? "Sending..." : submitLabel}
         </button>
       </div>

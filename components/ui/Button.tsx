@@ -59,9 +59,9 @@ export function Button({ variant = "primary", size = "sm", arrow = true, classNa
   );
 }
 
-/** Text link with the arrow glyph (mega menu "Services overview", "Explore Cloud Services"). */
-export function ArrowLink({ className, children, external, ...rest }: Omit<ComponentProps<typeof Link>, "className"> & { className?: string; external?: boolean; children: ReactNode }) {
-  const cls = cx("inline-flex items-center gap-2 font-body font-semibold text-blue-500 hover:text-blue-600 transition-colors duration-(--duration-fast)", className);
+/** Text link with the arrow glyph (mega menu "Services overview", "Explore Cloud Services"). The tone prop carries the text colours (a plain className cannot reliably override the default). */
+export function ArrowLink({ className, tone = "text-blue-500 hover:text-blue-600", children, external, ...rest }: Omit<ComponentProps<typeof Link>, "className"> & { className?: string; tone?: string; external?: boolean; children: ReactNode }) {
+  const cls = cx("inline-flex items-center gap-2 font-body font-semibold transition-colors duration-(--duration-fast)", tone, className);
   if (external) {
     return (
       <a className={cls} target="_blank" rel="noopener noreferrer" href={String(rest.href)}>

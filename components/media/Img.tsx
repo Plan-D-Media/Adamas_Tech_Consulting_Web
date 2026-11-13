@@ -22,8 +22,8 @@ export function Img({ src, alt, width, height, ...rest }: Props) {
     <Image
       src={url}
       alt={alt ?? media?.alt ?? ""}
-      width={width ?? media?.width ?? undefined}
-      height={height ?? media?.height ?? undefined}
+      width={rest.fill ? undefined : (width ?? media?.width ?? undefined)}
+      height={rest.fill ? undefined : (height ?? media?.height ?? undefined)}
       placeholder={media?.blurDataUrl ? "blur" : undefined}
       blurDataURL={media?.blurDataUrl ?? undefined}
       unoptimized={isSvg || rest.unoptimized}

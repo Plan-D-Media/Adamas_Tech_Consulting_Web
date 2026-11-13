@@ -1,6 +1,6 @@
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
-import { db, visible } from "@/lib/db";
+import { badge, db, visible } from "@/lib/db";
 import { mediaSelect, toMedia, type Media } from "@/lib/media";
 import type { CaseCardData } from "./home";
 import { caseCardInclude, titleBodies, toCaseCard, type FaqData, type SeoData, type TitleBody } from "./mappers";
@@ -10,6 +10,8 @@ export interface ServiceLink {
   name: string;
   descriptor: string | null;
   href: string;
+  /** The first "what we do" titles, for the capabilities panel on the pillar page. */
+  bullets?: string[];
 }
 
 export interface PillarSummary {
@@ -92,8 +94,8 @@ export async function getPillar(slug: string): Promise<PillarPageData | null> {
     challenge: p.challenge,
     image: toMedia(p.image),
     href: pillarHref(p.slug),
-    services: p.services.map((s) => ({ slug: s.slug, name: s.name, descriptor: s.descriptor, href: serviceHref(p.slug, s.slug) })),
-    faqs: p.faqs.map((f) => ({ question: f.question, answer: f.answer })),
+    services: p.services.map((s) => ({ slug: s.slug, name: s.name, descriptor: s.descriptor, href: serviceHref(p.slug, s.slug), bullets: titleBodies(s.whatWeDo).slice(0, 3).map((t) => t.title) })),
+    faqs: p.faqs.map((f) => ({ question: f.question, answer: f.answer, draft: badge(f.status) })),
     caseStudies: p.caseStudies.map(toCaseCard),
     seoTitle: p.seoTitle,
     seoDescription: p.seoDescription,
@@ -127,7 +129,7 @@ export async function getService(pillarSlug: string, slug: string): Promise<Serv
     image: toMedia(s.image),
     steps: s.steps.map((st) => ({ title: st.title, body: st.body ?? undefined })),
     technologies: s.technologies.map((t) => t.name),
-    faqs: s.faqs.map((f) => ({ question: f.question, answer: f.answer })),
+    faqs: s.faqs.map((f) => ({ question: f.question, answer: f.answer, draft: badge(f.status) })),
     caseStudies: s.caseStudies.map(toCaseCard),
     pillar: { slug: s.pillar.slug, name: s.pillar.name, href: pillarHref(s.pillar.slug) },
     siblings: s.pillar.services

@@ -69,7 +69,15 @@
       ],
       "avifQuality": 50,
       "webpQuality": 72,
-      "blur": true
+      "blur": true,
+      "crop": [
+        0.0415,
+        0.1473,
+        0.917,
+        0.8144
+      ],
+      "fit": "fill",
+      "enlarge": true
     },
     {
       "id": "menu-feature-sap-treasury",
@@ -204,7 +212,14 @@
       "width": 1043,
       "height": 550,
       "avifQuality": 50,
-      "webpQuality": 72
+      "webpQuality": 72,
+      "crop": [
+        0,
+        0,
+        0.9482,
+        1
+      ],
+      "fit": "fill"
     },
     {
       "id": "industries-bg",
@@ -327,13 +342,20 @@
       "src": "design-ref/fills/2ff9d3817214254addde512c43022f7af3c2d608.png",
       "out": "images/home/presence-map",
       "width": 1717,
-      "height": 916,
+      "height": 838,
       "scales": [
         1
       ],
       "avifQuality": 50,
       "webpQuality": 72,
-      "blur": true
+      "blur": true,
+      "crop": [
+        0,
+        0.0002,
+        1,
+        0.9151
+      ],
+      "fit": "fill"
     },
     {
       "id": "contact-photo",
@@ -342,7 +364,13 @@
       "out": "images/home/contact-photo",
       "width": 785,
       "height": 621,
-      "position": "attention"
+      "crop": [
+        0,
+        0.2246,
+        1,
+        0.5279
+      ],
+      "fit": "fill"
     },
     {
       "id": "partner-aws-network",
@@ -383,6 +411,314 @@
       "height": 105,
       "fit": "inside",
       "webpQuality": 90
+    },
+    {
+      "id": "svc-cloud-hero",
+      "kind": "raster",
+      "src": "design-ref/fills/a237d6e11bd380527bdee2c2605f2d501acfffcd.jpg",
+      "out": "images/services/cloud/hero",
+      "width": 1920,
+      "height": 530,
+      "scales": [
+        1
+      ],
+      "avifQuality": 50,
+      "webpQuality": 72,
+      "blur": true,
+      "enlarge": true,
+      "crop": [
+        0,
+        0.342268,
+        1,
+        0.490741
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-cloud-intro",
+      "kind": "raster",
+      "src": "design-ref/fills/d39f8fb21e54de44239b9f6e05a85d1ec158f2c4.jpg",
+      "out": "images/services/cloud/intro",
+      "width": 660,
+      "height": 536
+    },
+    {
+      "id": "svc-stat-gear-1",
+      "kind": "raster",
+      "src": "design-ref/fills/c01c475caf0c1baf56646559a437b439c4f8f054.png",
+      "out": "images/services/stat-gear-1",
+      "width": 174,
+      "height": 116,
+      "crop": [
+        -0.007373,
+        0.212651,
+        0.287349,
+        0.574698
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-stat-gear-2",
+      "kind": "raster",
+      "src": "design-ref/fills/c01c475caf0c1baf56646559a437b439c4f8f054.png",
+      "out": "images/services/stat-gear-2",
+      "width": 174,
+      "height": 116,
+      "crop": [
+        0.229243,
+        0.212651,
+        0.287349,
+        0.574698
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-stat-gear-3",
+      "kind": "raster",
+      "src": "design-ref/fills/c01c475caf0c1baf56646559a437b439c4f8f054.png",
+      "out": "images/services/stat-gear-3",
+      "width": 174,
+      "height": 116,
+      "crop": [
+        0.469501,
+        0.212651,
+        0.287349,
+        0.574698
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-stat-gear-4",
+      "kind": "raster",
+      "src": "design-ref/fills/c01c475caf0c1baf56646559a437b439c4f8f054.png",
+      "out": "images/services/stat-gear-4",
+      "width": 174,
+      "height": 116,
+      "crop": [
+        0.724511,
+        0.212651,
+        0.287349,
+        0.574698
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-expertise-icon-1",
+      "kind": "raster",
+      "src": "design-ref/fills/b773659ecc53d110eec6f6fe6b28844e665a50d4.png",
+      "out": "images/services/expertise-icon-1",
+      "width": 81,
+      "height": 73,
+      "crop": [
+        0.123047,
+        0.075195,
+        0.285807,
+        0.387695
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-expertise-icon-2",
+      "kind": "raster",
+      "src": "design-ref/fills/b773659ecc53d110eec6f6fe6b28844e665a50d4.png",
+      "out": "images/services/expertise-icon-2",
+      "width": 85,
+      "height": 77,
+      "crop": [
+        0.561535,
+        0.063331,
+        0.299575,
+        0.406372
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-expertise-icon-3",
+      "kind": "raster",
+      "src": "design-ref/fills/b773659ecc53d110eec6f6fe6b28844e665a50d4.png",
+      "out": "images/services/expertise-icon-3",
+      "width": 81,
+      "height": 73,
+      "crop": [
+        0.127882,
+        0.53013,
+        0.305808,
+        0.414826
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-expertise-icon-4",
+      "kind": "raster",
+      "src": "design-ref/fills/b773659ecc53d110eec6f6fe6b28844e665a50d4.png",
+      "out": "images/services/expertise-icon-4",
+      "width": 81,
+      "height": 73,
+      "crop": [
+        0.57348,
+        0.533479,
+        0.295112,
+        0.400317
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-platform-icon-1",
+      "kind": "raster",
+      "src": "design-ref/fills/da2bab7dbee566d6ca17302438591dc8077e2f77.png",
+      "out": "images/services/platform-icon-1",
+      "width": 27,
+      "height": 16,
+      "scales": [
+        2,
+        3
+      ],
+      "crop": [
+        0.064198,
+        0.319672,
+        0.196721,
+        0.360656
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-platform-icon-2",
+      "kind": "raster",
+      "src": "design-ref/fills/da2bab7dbee566d6ca17302438591dc8077e2f77.png",
+      "out": "images/services/platform-icon-2",
+      "width": 27,
+      "height": 19,
+      "scales": [
+        2,
+        3
+      ],
+      "crop": [
+        0.285807,
+        0.27459,
+        0.196721,
+        0.428279
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-platform-icon-3",
+      "kind": "raster",
+      "src": "design-ref/fills/da2bab7dbee566d6ca17302438591dc8077e2f77.png",
+      "out": "images/services/platform-icon-3",
+      "width": 27,
+      "height": 19,
+      "scales": [
+        2,
+        3
+      ],
+      "crop": [
+        0.515227,
+        0.27459,
+        0.196721,
+        0.428279
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-platform-icon-4",
+      "kind": "raster",
+      "src": "design-ref/fills/da2bab7dbee566d6ca17302438591dc8077e2f77.png",
+      "out": "images/services/platform-icon-4",
+      "width": 27,
+      "height": 21,
+      "scales": [
+        2,
+        3
+      ],
+      "crop": [
+        0.745913,
+        0.266137,
+        0.196721,
+        0.473361
+      ],
+      "fit": "fill"
+    },
+    {
+      "id": "svc-industry-retail",
+      "kind": "raster",
+      "src": "design-ref/fills/ee0bac747a25a59e3ef5cc9c729e5e76affc7d97.jpg",
+      "out": "images/services/industry-retail",
+      "width": 489,
+      "height": 644
+    },
+    {
+      "id": "svc-industry-bfsi",
+      "kind": "raster",
+      "src": "design-ref/fills/accc5736019aea91d25d9fa807c3a1a134c32f31.jpg",
+      "out": "images/services/industry-bfsi",
+      "width": 755,
+      "height": 310
+    },
+    {
+      "id": "svc-industry-manufacturing",
+      "kind": "raster",
+      "src": "design-ref/fills/435cc373befba1282c335a01d258583eb0f585b7.jpg",
+      "out": "images/services/industry-manufacturing",
+      "width": 339,
+      "height": 310
+    },
+    {
+      "id": "svc-industry-healthcare",
+      "kind": "raster",
+      "src": "design-ref/fills/59a2075bcb1b97c9a2489b3430a4235722ee1420.jpg",
+      "out": "images/services/industry-healthcare",
+      "width": 395,
+      "height": 310
+    },
+    {
+      "id": "svc-quality-badge-1",
+      "kind": "raster",
+      "src": "design-ref/fills/8a1697458d27b10c3c1dcee8b41dfddaa90f917c.png",
+      "out": "images/services/quality-badge-1",
+      "width": 40,
+      "height": 40,
+      "scales": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "svc-quality-badge-2",
+      "kind": "raster",
+      "src": "design-ref/fills/5fe2760a556d5180a4d6e66caddb5e1f39e24c4d.png",
+      "out": "images/services/quality-badge-2",
+      "width": 40,
+      "height": 40,
+      "scales": [
+        1
+      ],
+      "crop": [
+        0.189772,
+        0.114107,
+        0.620456,
+        0.771786
+      ],
+      "fit": "fill",
+      "enlarge": true
+    },
+    {
+      "id": "svc-quality-badge-3",
+      "kind": "raster",
+      "src": "design-ref/fills/9a78e42718ee007462bcde519777b3cf8499b13a.png",
+      "out": "images/services/quality-badge-3",
+      "width": 40,
+      "height": 40,
+      "scales": [
+        1
+      ],
+      "crop": [
+        0.18468,
+        0.096719,
+        0.630754,
+        0.731101
+      ],
+      "fit": "fill",
+      "enlarge": true
     }
   ]
 }

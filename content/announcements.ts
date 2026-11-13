@@ -11,7 +11,7 @@ export const announcements: AnnouncementSeed[] = [
     text: "[Placeholder] AdamasTech at the House of Lords, 26 November 2026",
     href: "/insights/events/house-of-lords-2026",
     endsAt: "2026-11-26T23:00:00+00:00",
-    regions: ["IN", "UK", "AE"],
+    regions: ["IN", "UK", "GCC"],
     status: "DRAFT",
     sortOrder: 0,
     needsReview: true,
@@ -21,7 +21,7 @@ export const announcements: AnnouncementSeed[] = [
   {
     label: "News",
     text: "[Placeholder] Company news headline",
-    regions: ["IN", "UK", "AE"],
+    regions: ["IN", "UK", "GCC"],
     status: "DRAFT",
     sortOrder: 1,
     needsReview: true,
@@ -30,7 +30,7 @@ export const announcements: AnnouncementSeed[] = [
   {
     label: "Partnership",
     text: "[Placeholder] Partnership announcement",
-    regions: ["IN", "UK", "AE"],
+    regions: ["IN", "UK", "GCC"],
     status: "DRAFT",
     sortOrder: 2,
     needsReview: true,

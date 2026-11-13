@@ -129,7 +129,7 @@ export async function getEvent(slug: string): Promise<EventPageData | null> {
 export async function getEventForRegistration(slug: string) {
   const ev = await db.event.findFirst({
     where: { slug, ...visible },
-    select: { id: true, slug: true, title: true, startsAt: true, endsAt: true, timezone: true, venueName: true, venueAddress: true, registrationOpen: true },
+    select: { id: true, slug: true, title: true, summary: true, startsAt: true, endsAt: true, timezone: true, venueName: true, venueAddress: true, registrationOpen: true, updatedAt: true },
   });
   if (!ev) return null;
   const open = ev.registrationOpen && eventEnd(ev).getTime() > Date.now();

@@ -1,10 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 import legacyRedirects from "@/lib/generated/redirects.json";
-import { REGION_COOKIE, REGION_SLUGS, defaultRegion, isRegionSlug, regionForCountry } from "@/lib/region";
+import { LEGACY_REGION_SLUGS, REGION_COOKIE, REGION_SLUGS, defaultRegion, isRegionSlug, regionForCountry } from "@/lib/region";
 
 /**
- * 1. "/" only: region cookie → that homepage; otherwise IP country → /in/, /uk/ or /ae/. Inner pages are never geo-redirected.
- * 2. Homepages are canonical with a trailing slash (/in → /in/).
+ * 1. "/" only: region cookie → that homepage; otherwise IP country → /in/, /uk/ or /gcc/. Inner pages are never geo-redirected.
+ * 2. Homepages are canonical with a trailing slash (/in → /in/). The old Gulf homepage /ae/ (and anything under it) is a 301 to /gcc/.
  * 3. Legacy WordPress URLs → new URLs (Redirect table, compiled to lib/generated/redirects.json by the seed).
  * 4. Any other single-segment path that isn't a top-level page is a 404 (app/[region] only serves in/uk/ae).
  * 5. Any other trailing slash is removed.
@@ -20,6 +20,7 @@ const redirects = legacyRedirects as unknown as Record<string, [string, number]>
 const TOP_LEVEL_ROUTES = new Set([
   "about", "case-studies", "contact", "cookie-policy", "credentials", "insights", "privacy-policy",
   "search", "services", "solutions", "terms-of-use", "thank-you",
+  "figma-fixture", // design-comparison fixture, served only with FIGMA_FIXTURE=1 (app/figma-fixture)
 ]);
 
 const COUNTRY_HEADERS = ["cloudfront-viewer-country", "x-vercel-ip-country", "cf-ipcountry", "x-country-code"];
@@ -28,7 +29,8 @@ export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
   if (pathname === "/") {
-    const cookie = request.cookies.get(REGION_COOKIE)?.value;
+    const raw = request.cookies.get(REGION_COOKIE)?.value;
+    const cookie = raw && LEGACY_REGION_SLUGS[raw] ? LEGACY_REGION_SLUGS[raw] : raw;
     let region = isRegionSlug(cookie) ? cookie : null;
     if (!region) {
       const country = COUNTRY_HEADERS.map((h) => request.headers.get(h)).find(Boolean);
@@ -41,6 +43,11 @@ export function proxy(request: NextRequest) {
   }
 
   const bare = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+
+  // The Gulf homepage moved from /ae/ to /gcc/ (sitemap, 13 Nov 2026): one hop, whatever followed /ae/.
+  if (bare === "/ae" || bare.startsWith("/ae/")) {
+    return NextResponse.redirect(new URL(`/gcc/${search}`, request.url), 301);
+  }
 
   if (REGION_SLUGS.some((r) => bare === `/${r}`)) {
     return pathname.endsWith("/") ? NextResponse.next() : NextResponse.redirect(new URL(`${bare}/${search}`, request.url), 308);

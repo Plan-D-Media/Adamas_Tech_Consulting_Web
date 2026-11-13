@@ -1,9 +1,9 @@
 import type { Block } from "@/lib/data/site";
 import { blockExtra } from "@/lib/data/home-blocks";
-import { mediaUrl } from "@/lib/media";
 import { plain } from "@/lib/placeholder";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Img } from "@/components/media/Img";
 
 /**
  * Why Organisations Choose Adamas (Figma SectionTitle 236:2883 + the infographic 236:2418). Figma holds the diagram
@@ -35,7 +35,7 @@ export function Difference({ block }: { block: Block }) {
   return (
     <section aria-labelledby="difference-heading" data-compare="difference" className="bg-white pb-10 pt-16 lg:pb-0 lg:pt-[75px]">
       <div className="container-site">
-        <SectionHeader id="difference-heading" eyebrow={plain(block.eyebrow)} heading={plain(block.heading)} align="center" />
+        <SectionHeader id="difference-heading" eyebrow={plain(block.eyebrow)} heading={plain(block.heading)} align="center" innerClassName="max-w-[45rem]" eyebrowClassName="lg:h-[20px]" />
       </div>
       <div className="relative mx-auto mt-10 w-full max-w-[1582px] lg:mt-3 lg:aspect-[1582/838]" data-reveal>
         {/* Rings and connectors (desktop) */}
@@ -63,9 +63,9 @@ export function Difference({ block }: { block: Block }) {
         {/* Centre */}
         <div className="relative mx-auto aspect-square w-[300px] lg:absolute lg:left-[39.1%] lg:top-[20.5%] lg:w-[22.3%]">
           <div className="difference-pulse absolute inset-0 rounded-full bg-[radial-gradient(circle,#1167D8_0%,#328BFF_100%)] shadow-[0_0_80px_rgb(17_103_216/0.35)]" aria-hidden="true" />
-          <img src={mediaUrl("images/home/difference-centre.webp")} alt="" width={353} height={353} className="absolute inset-0 h-full w-full rounded-full object-cover opacity-30" aria-hidden="true" loading="lazy" decoding="async" />
+          <Img src="images/home/difference-centre.webp" alt="" fill sizes="353px" className="rounded-full object-cover opacity-30" aria-hidden="true" />
           <div className="absolute inset-0 flex flex-col items-center justify-start gap-[17px] px-6 pt-[13%]">
-            <img src={mediaUrl("images/home/difference-network.webp")} alt="" width={193} height={193} className="w-[55%]" aria-hidden="true" loading="lazy" decoding="async" />
+            <Img src="images/home/difference-network.webp" alt="" width={193} height={193} sizes="193px" className="h-auto w-[55%]" aria-hidden="true" />
             <p className="text-center font-heading text-[clamp(1rem,0.8rem+0.4vw,1.25rem)] font-semibold leading-[1.22] text-white">{centre}</p>
           </div>
         </div>

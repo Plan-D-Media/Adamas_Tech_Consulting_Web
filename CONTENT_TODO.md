@@ -370,3 +370,46 @@ The prototype's visual layer was removed on 13 Nov 2026; the site is rebuilt to 
 - **PARTNERS:** the Figma strip shows AWS Partner Network, Cloudera, SAP Partner Open Ecosystem and Google Developers Agency Program. Cloudera and Google are DRAFT (not on the live site); AWS/SAP programme tiers to confirm.
 - **DESIGN:** Tech Excellence body text darkened from #B7C8DC to grey-600 for contrast. The presence map is a flat raster with pins baked in (cannot highlight London/Dubai per region).
 - **FORM:** the homepage contact form adds a consent checkbox (not in Figma; required by the contact action and GDPR). Confirm the wording "I agree to the Privacy Policy and Terms of Use."
+
+## Design round 6 (2026-11-13): fixture comparison, industries, GCC
+
+### Industries (`content/industries.ts`)
+- **Copy sources, for the record:** Healthcare and Financial Services use the approved Figma copy. Retail and Education reuse the live site's tab copy and image under the same name (PUBLISHED, needs review). Nothing else was written for the client.
+- **DRAFT (reused under a new name):** Manufacturing and Government carry the live site's "Supply chain" and "Public sector" tab copy and images. They are DRAFT until the client confirms the reuse or supplies new copy. **Client:** confirm or replace.
+- **DRAFT (no copy exists):** Technology, Energy, Legal (Law Firms), Software Development, Marketing Agencies and Startups. Figma lists them in the "All Industries" menu but designs no copy, and the live site has none. Their body is a "[Placeholder]" that renders as "Details to be confirmed"; the rows are DRAFT, so they appear only in the preview (`PREVIEW_DRAFTS=true`, badged with `SHOW_DRAFT_BADGES=true`) and never on the public site. **Client:** two short paragraphs and an image for each.
+- **Case studies:** the industry references follow the Figma names (finance to Financial Services, supply-chain to Manufacturing, public-sector to Government). "Cinema Hall Person Count" was Hospitality, which is not one of the twelve industries; it now has no industry tab. **Client:** which industry, if any?
+
+### Homepage comparison with the Figma placeholder content (`/figma-fixture`, local only)
+- The fixture keeps the Figma typos on purpose ("Whats's Next", "Al-driven") so the text wraps as designed; the live rows have the corrected copy. "Middle East" in the Figma hero body is never shown (fixture says "GCC").
+- **Dates:** Figma writes "October 29, 2026"; the site uses the British order "29 October 2026" everywhere. **Client:** confirm the date format.
+- **Consent line:** the contact form's consent checkbox now sits inside the design's gap above the button, and "Privacy Policy" / "Terms of Use" inside the consent copy become the links. If the copy is changed and names neither page, both links are appended after it.
+- The remaining differences on `/in/` are content, not layout: the database phone, email and "About Us" label, the rebuilt hero cards over clean photos (Figma bakes text into one image), the real event title, the Draft badges, the Cloud sub-service names from the sitemap.
+
+### Regions (Milestone C)
+- **CHANGED (sitemap):** the Gulf homepage is `/gcc/`; `/ae/` and everything under it are 301s to `/gcc/`. The WordPress `/ae` redirect now targets `/gcc/`. Region rows, offices, logos, stats, case studies and content blocks use the key `GCC`.
+- **Neon:** the preview database needs migration `20261113120000_region_gcc` and a reseed at the next deploy (`docs/deploy.md`). Until then the preview still serves `/ae/`.
+- **COPY:** no region-specific copy was written. The About paragraph ("supporting Indian enterprises and institutions") still shows on `/uk/` and `/gcc/`; `home.about` can take a region override once the client supplies it. The hero eyebrow and body per region remain INTERIM (round 5).
+
+## Design round 7 (2026-11-13): QA milestone, event page, Cloud Services template
+
+### Regions
+- **CHANGED:** Tech Excellence and the Partners & Certifications strip now show on `/gcc/` (the approved design has them on every homepage; the live /ae/ hid them). **Client:** confirm the GCC partner list is the same as India and UK.
+
+### House of Lords event (`content/events.ts`, `/insights/events/house-of-lords-2026`)
+- The page and registration are live on the template; the content is still the round-1 placeholder set: title ("AdamasTech at the House of Lords", shown with a "title to be confirmed" tag), eyebrow, summary and body (hidden while placeholders), 18:00 start, no end time, three DRAFT agenda items (preview only), no speakers, venue "House of Lords, Palace of Westminster, London SW1A 0PW". **Client, before 26 November:** final title, one-paragraph summary, description, start and end time, room, agenda, speakers (name, role, photo), capacity, dress code or entry requirements, host wording, and whether registration should close at a given date or number.
+- Registration emails: the attendee gets a confirmation with the calendar entry attached from `MAIL_FROM`; the enquiries inbox gets the details. Mail only sends once `MAILER=smtp` and the SMTP variables are set on Vercel (`docs/deploy.md`). **Client:** which mailbox sends (marketing@adamastech.in via Google Workspace?) and who receives registrations.
+- The consent wording on the registration form ("I agree to AdamasTech Consulting processing my details to manage this event...") is interim. **Client:** confirm.
+
+### Cloud Services page (`content/blocks.ts` keys `services.cloud-services.*`, `content/services.ts` FAQs)
+- **Figma copy, needs review:** intro, "What Makes CloudSMART Different" (the name "CloudSMART" and the partnership sentence), expertise cards, platform list (Azure and Google Cloud capability claims are not on the live site), industry cards, quality principles and the "Important" note, FAQ headings. All PUBLISHED with `needsReview`, like the homepage.
+- **PLACEHOLDER (hero):** the designed title "The AI Impact Imperatives, 2026" is a placeholder; the page shows the pillar's live outcome line "Cloud that Scales your Organisation". **Client:** hero headline and line.
+- **DRAFT (preview only):** the four "500+" stat cards (no real figures) and the technology-ecosystem tiles (eleven vendor names from the design; no logos drawn in). **Client:** real figures; confirm the vendor list and supply logo files the company may use.
+- **FAQ:** ten questions from the design; only the first answer exists in the file. Questions 2 to 10 are DRAFT with placeholder answers. **Client:** nine answers.
+- **Replaced:** the design's three "concept showcase" cards and the sentence "Conceptual showcases demonstrating..." are replaced by the pillar's real case studies (two today); "See All Case Studies" links to the listing. The "Learn more" button under CloudSMART has no target in the design and scrolls to the services list.
+- **Links chosen:** industry cards and "Discuss This Service" go to /contact; "Meet Our Cloud Team" to /about/team; "Request Credential Information" to /contact.
+- **Sub-service pages:** same template fed from each Service row; section labels ("What we do", "How we deliver", "Technologies", "More in Cloud Services", "<name>, step by step") are INTERIM UI labels.
+- **Other pillars:** Digital Transformation and Data & AI Services render the template with their database rows but have no `services.<slug>.*` blocks yet (no intro, differentiator, platform, industry, ecosystem or quality sections). **Client/designer:** copy for those sections per pillar, or confirm the Cloud sections are reused.
+
+### Accessibility deviations from the design (AA)
+- Perspectives card labels sky-300 on white and the "Your nearest office" label blue-600 on navy fail 4.5:1 in the design; built in blue-600 and sky-300. Small numbers in the service page (#8D98A5, #6E7F95) are built in grey-550.
+- The mega-menu panel is frosted glass per the designer's decision; its links are blue-700 (not blue-600) so they pass over the hero.

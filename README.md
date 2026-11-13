@@ -19,6 +19,8 @@ route is a placeholder that loads its data and shows its title until its round. 
 
    For local Postgres instead, run `docker compose up -d` and use the commented localhost URLs.
 3. `npm run db:setup` applies the migrations and seeds the content.
+   Local development uses the PostgreSQL database in `.env`; the Neon preview database is migrated and seeded only at deploy time (`docs/deploy.md`).
+   QA scripts (`scripts/compare-figma.mts`, `measure-figma.mts`, `home-qa.mts`, `axe-check.mts`, `glass-contrast.mts`, `menu-shots.mts`, `event-smoke.mts`) run with `PLAYWRIGHT_BROWSERS_PATH=E:/ms-playwright MSYS_NO_PATHCONV=1 npx tsx scripts/<name>.mts`; Lighthouse via `npx lighthouse` with `CHROME_PATH` set.
 4. `npm run dev`, then open http://localhost:3000. `/` redirects to your region's homepage.
 
 `FIGMA_TOKEN` in `.env.local` (never committed) lets the build scripts read the design file.
@@ -57,7 +59,7 @@ See `.env.example`. Key flags:
 
 ## Regions & routing
 
-- `/in/`, `/uk/`, `/ae/` are regional homepages (one template, content from `RegionHome`). The Gulf region is labelled **GCC** in the UI; its URL moves to `/gcc/` in Milestone C.
+- `/in/`, `/uk/`, `/gcc/` are regional homepages (one template, content from `RegionHome`). The Gulf region is labelled **GCC** in the UI; its old URL `/ae/` (and anything under it) is a 301 to `/gcc/`, and a saved `region=ae` cookie still counts as GCC.
 - `proxy.ts` handles four things:
   - `/` only: region cookie → that homepage, otherwise IP country (CloudFront header) → region.
   - Homepages get a trailing slash.

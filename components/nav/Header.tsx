@@ -31,13 +31,13 @@ export function Header({ nav, social, regions, region, fallbackRegion }: Props) 
         <div className="topbar flex h-(--topbar-h) items-center justify-between gap-6 overflow-hidden pt-[17px] transition-[height,padding,opacity] duration-(--duration-base) ease-(--ease-out)">
           <TopBarContacts regions={regions} region={region} fallbackRegion={fallbackRegion} />
           {social.length > 0 && (
-            <ul className="flex items-center gap-2.5" aria-label="Social media" role="list">
+            <ul className="-mr-1 flex items-center gap-0.5" aria-label="Social media" role="list">
               {social.map((s) => {
                 const icon = SOCIAL_ICONS[s.label.toLowerCase()];
                 if (!icon || !s.href) return null;
                 return (
                   <li key={s.key ?? s.label}>
-                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="flex h-8 w-8 items-center justify-center text-white/90 hover:text-white" aria-label={`${s.label} (opens in a new tab)`}>
+                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="flex h-6 w-6 items-center justify-center text-white/90 hover:text-white" aria-label={`${s.label} (opens in a new tab)`}>
                       <Icon name={icon} size={16} />
                     </a>
                   </li>
@@ -52,12 +52,13 @@ export function Header({ nav, social, regions, region, fallbackRegion }: Props) 
         <div className="headerbar relative isolate mt-[13px] flex h-[70px] items-center gap-4 rounded-md border border-white px-[11px] before:absolute before:inset-0 before:-z-10 before:rounded-[9px] before:bg-white/80 before:shadow-[0_1px_0_rgb(255_255_255/0.6)_inset] before:backdrop-blur-md">
           <LogoLink regions={regions} region={region} fallbackRegion={fallbackRegion} priority />
           <MegaMenu items={nav} />
-          <div className="ml-auto flex items-center gap-3">
+          {/* Figma: the nav ends 42px before the switcher's flag (the summary has 12px of padding and so 30px of gap); switcher and CTA are 18px apart. */}
+          <div className="ml-auto flex shrink-0 items-center gap-3 nav:ml-6">
             <div className="hidden nav:block">
               <RegionSwitcher regions={regions} region={region} fallbackRegion={fallbackRegion} />
             </div>
             <div className="hidden sm:block">
-              <ButtonLink href="/contact" size="sm">
+              <ButtonLink href="/contact" size="sm" className="min-w-[174px]">
                 Talk to an expert
               </ButtonLink>
             </div>

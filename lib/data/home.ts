@@ -70,6 +70,8 @@ export interface IndustryData {
   title: string;
   body: string;
   image: Media | null;
+  /** DRAFT row previewed with PREVIEW_DRAFTS (badged with SHOW_DRAFT_BADGES): copy not yet confirmed by the client. */
+  draft: boolean;
 }
 
 export interface CaseCardData {
@@ -268,7 +270,7 @@ export async function getHome(region: RegionCode): Promise<HomeData | null> {
       draft: badge(s.status),
       children: s.children.map((c) => ({ name: c.name, href: solutionHref(c), external: !!c.externalUrl })),
     })),
-    industries: industries.map((i) => ({ slug: i.slug, tabLabel: i.tabLabel, title: i.title, body: i.body, image: toMedia(i.image) })),
+    industries: industries.map((i) => ({ slug: i.slug, tabLabel: i.tabLabel, title: i.title, body: i.body, image: toMedia(i.image), draft: badge(i.status) })),
     caseStudies: caseStudies.map((c) => ({
       slug: c.slug,
       label: c.label,

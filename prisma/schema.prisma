@@ -28,7 +28,8 @@ enum Status {
 enum RegionCode {
   IN
   UK
-  AE
+  /// The Gulf region (URL /gcc/, label "GCC"); was AE until 13 Nov 2026 (migration 20261113120000_region_gcc).
+  GCC
 }
 
 enum MediaKind {
@@ -111,7 +112,7 @@ model MediaAsset {
 
 model Region {
   code             RegionCode @id
-  /// URL segment: "in" | "uk" | "ae"
+  /// URL segment: "in" | "uk" | "gcc"
   slug             String     @unique
   /// UI label: "India" | "UK & Ireland" | "GCC"
   label            String

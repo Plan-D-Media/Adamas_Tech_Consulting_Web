@@ -14,7 +14,8 @@ export function Services({ block, pillars }: { block: Block; pillars: PillarData
   return (
     <section aria-labelledby="services-heading" data-compare="services" className="bg-tint-50 py-16 lg:py-[104px]">
       <div className="container-site">
-        <SectionHeader id="services-heading" eyebrow={plain(block.eyebrow)} heading={plain(block.heading)} body={plain(block.body)} headingClassName="max-w-[45rem]" />
+        {/* Figma: this SectionTitle has a 22px eyebrow box, a 719px heading and a 16px/24.5 intro. */}
+        <SectionHeader id="services-heading" eyebrow={plain(block.eyebrow)} heading={plain(block.heading)} body={plain(block.body)} innerClassName="max-w-[45rem]" eyebrowClassName="lg:h-[22px]" bodyClassName="lg:text-[1rem] lg:leading-[1.53]" />
         <ServicesTabs
           pillars={pillars.map((p, i) => ({
             slug: p.slug,

@@ -25,11 +25,11 @@ function Leaf({ link, className }: { link: NavLink; className?: string }) {
   const inner = (
     <>
       <span>{link.label}</span>
-      {link.comingSoon && <span className="font-body text-[0.75rem] text-grey-300">(coming soon)</span>}
-      {link.external && <Icon name="external" size={12} className="text-grey-300" />}
+      {link.comingSoon && <span className="font-body text-[0.75rem] text-grey-700">(coming soon)</span>}
+      {link.external && <Icon name="external" size={12} className="text-grey-700" />}
     </>
   );
-  if (link.comingSoon || !link.href) return <span className={cx(className, "text-white/70")}>{inner}</span>;
+  if (link.comingSoon || !link.href) return <span className={cx(className, "text-navy-900/70")}>{inner}</span>;
   if (link.external)
     return (
       <a href={link.href} target="_blank" rel="noopener noreferrer" className={className}>
@@ -103,21 +103,21 @@ export function MobileNav({ items, regions, region, fallbackRegion }: Props) {
         <Icon name="menu" size={24} className="nav-drawer-open-icon" />
         <Icon name="close" size={24} className="nav-drawer-close-icon" />
       </summary>
-      <div data-drawer className="fixed inset-x-0 bottom-0 top-(--header-h) z-40 overflow-y-auto bg-navy-950 text-white">
+      <div data-drawer className="glass-panel fixed inset-x-0 bottom-0 top-(--header-h) z-40 overflow-y-auto rounded-none border-x-0 border-b-0 text-navy-900">
         <nav aria-label="Main" className="container-chrome py-6">
-          <ul className="divide-y divide-white/10" role="list">
+          <ul className="divide-y divide-navy-900/10" role="list">
             {items.map((item) =>
               item.children.length > 0 ? (
                 <li key={item.key ?? item.label}>
                   <details className="group">
                     <summary className="flex min-h-14 cursor-pointer items-center justify-between font-ui text-[1.125rem] font-semibold">
                       {item.label}
-                      <Icon name="chevron-down" size={12} className="text-sky-400 transition-transform duration-(--duration-fast) group-open:rotate-180" />
+                      <Icon name="chevron-down" size={12} className="text-blue-700 transition-transform duration-(--duration-fast) group-open:rotate-180" />
                     </summary>
                     <ul className="pb-3" role="list">
                       {item.href && (
                         <li>
-                          <Link href={item.href} className="flex min-h-11 items-center font-body text-small font-semibold text-sky-400">
+                          <Link href={item.href} className="flex min-h-11 items-center font-body text-small font-semibold text-blue-700">
                             {item.label} overview
                           </Link>
                         </li>
@@ -128,10 +128,10 @@ export function MobileNav({ items, regions, region, fallbackRegion }: Props) {
                           <li key={c.key ?? c.label} className="pt-1">
                             <Leaf link={c} className="flex min-h-11 items-center gap-2 font-ui text-[1rem] font-semibold" />
                             {c.children.length > 0 && (
-                              <ul className="mb-2 border-l border-white/15 pl-4" role="list">
+                              <ul className="mb-2 border-l border-navy-900/15 pl-4" role="list">
                                 {c.children.map((s) => (
                                   <li key={s.key ?? s.label}>
-                                    <Leaf link={s} className="flex min-h-10 items-center gap-2 font-body text-small text-grey-300" />
+                                    <Leaf link={s} className="flex min-h-10 items-center gap-2 font-body text-small text-grey-700" />
                                   </li>
                                 ))}
                               </ul>
@@ -150,7 +150,7 @@ export function MobileNav({ items, regions, region, fallbackRegion }: Props) {
           </ul>
 
           <div className="mt-8">
-            <p className="label-caps text-sky-400">Region</p>
+            <p className="label-caps text-blue-700">Region</p>
             <ul className="mt-3 grid gap-1" role="list">
               {regions.map((r) => (
                 <li key={r.code}>
@@ -161,7 +161,7 @@ export function MobileNav({ items, regions, region, fallbackRegion }: Props) {
                       if (isRegionSlug(r.slug)) setRegionCookie(r.slug);
                     }}
                     aria-current={r.slug === current.slug ? "true" : undefined}
-                    className={cx("flex min-h-11 items-center gap-3 font-ui text-[1rem]", r.slug === current.slug ? "font-semibold text-white" : "text-grey-300")}
+                    className={cx("flex min-h-11 items-center gap-3 font-ui text-[1rem]", r.slug === current.slug ? "font-semibold text-navy-900" : "text-grey-700")}
                   >
                     <Flag slug={r.slug} />
                     {r.label}

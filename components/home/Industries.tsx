@@ -30,6 +30,7 @@ export function Industries({ block, industries }: { block: Block; industries: In
               title: plain(i.title),
               paragraphs: body && !body.pending ? body.text.split(/\n\s*\n/).filter(Boolean) : [],
               pending: !body || body.pending,
+              draft: i.draft,
               image: i.image ? { url: i.image.url, alt: i.image.alt } : null,
               phone: i.slug === "healthcare" ? mediaUrl("images/industries/healthcare-phone.webp") : null,
             };

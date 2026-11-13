@@ -2,8 +2,9 @@ import type { ReactNode } from "react";
 import { cx } from "@/lib/cx";
 
 /**
- * Section header from the Figma "SectionTitle" frames: eyebrow (Manrope 800 28, caps, blue-600), H2 12px below
- * (Manrope 700 43/49, -1.5px), optional intro 17px below (Manrope 400 20, grey-600). Scales down below 1024px.
+ * Section header from the Figma "SectionTitle" frames: eyebrow (Manrope 800 28, caps, blue-600, on a 15px line box
+ * exactly as the design file sets it), H2 12px below (Manrope 700 43/49, -1.5px, 690px column), optional intro 17px
+ * below (Manrope 400 20, grey-600, 650px). Scales down below 1024px.
  */
 export function Eyebrow({ children, className, as: Tag = "p" }: { children: ReactNode; className?: string; as?: "p" | "span" }) {
   return <Tag className={cx("eyebrow text-[clamp(1rem,0.7rem+0.9vw,1.75rem)]", className)}>{children}</Tag>;
@@ -25,22 +26,26 @@ interface Props {
   align?: "left" | "center";
   className?: string;
   headingClassName?: string;
+  /** Overrides for the Figma frames that deviate from the shared SectionTitle (Top Stories 18px eyebrow, Services 16px intro, Presence 1130px heading). */
+  innerClassName?: string;
+  eyebrowClassName?: string;
+  bodyClassName?: string;
   /** Rendered to the right of the header on wide screens (slider controls, links). */
   aside?: ReactNode;
   dark?: boolean;
 }
 
-export function SectionHeader({ id, eyebrow, heading, body, align = "left", className, headingClassName, aside, dark }: Props) {
+export function SectionHeader({ id, eyebrow, heading, body, align = "left", className, headingClassName, innerClassName, eyebrowClassName, bodyClassName, aside, dark }: Props) {
   return (
     <div className={cx("flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between", className)} data-reveal>
-      <div className={cx("max-w-[46rem]", align === "center" && "mx-auto text-center")}>
-        {eyebrow && <Eyebrow className={cx(dark && "text-sky-300")}>{eyebrow}</Eyebrow>}
+      <div className={cx("max-w-[43.125rem]", align === "center" && "mx-auto text-center", innerClassName)}>
+        {eyebrow && <Eyebrow className={cx("lg:leading-[15px]", dark && "text-sky-300", eyebrowClassName)}>{eyebrow}</Eyebrow>}
         {heading && (
           <Heading2 id={id} className={cx("mt-3", dark && "text-white", headingClassName)}>
             {heading}
           </Heading2>
         )}
-        {body && <p className={cx("mt-4 max-w-[40.625rem] font-heading text-[clamp(1rem,0.9rem+0.3vw,1.25rem)] leading-[1.45]", dark ? "text-grey-300" : "text-grey-600")}>{body}</p>}
+        {body && <p className={cx("mt-[17px] max-w-[40.625rem] font-heading text-[clamp(1rem,0.9rem+0.3vw,1.25rem)] leading-[1.45]", dark ? "text-grey-300" : "text-grey-600", bodyClassName)}>{body}</p>}
       </div>
       {aside && <div className="shrink-0">{aside}</div>}
     </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { FeaturedCard, NavLink } from "@/lib/data/site";
 import { cx } from "@/lib/cx";
@@ -79,10 +78,10 @@ function Panel({ item, panelId, labelId }: { item: NavLink; panelId: string; lab
   const cols = rich ? (featured ? "nav:grid-cols-[280px_minmax(0,1fr)_280px]" : "nav:grid-cols-[280px_minmax(0,1fr)]") : featured ? "nav:grid-cols-[280px_280px]" : "nav:grid-cols-[280px]";
 
   return (
-    <div id={panelId} role="group" aria-labelledby={labelId} className={cx("grid gap-8 bg-grey-100 px-12 py-10", cols)}>
+    <div id={panelId} role="group" aria-labelledby={labelId} className={cx("glass-panel grid gap-8 rounded-lg px-12 py-10", cols)}>
       {/* Left: categories */}
-      <div className={cx(rich && "border-r border-grey-200 pr-6")}>
-        <p className="label-caps text-grey-500">{item.label}</p>
+      <div className={cx(rich && "border-r border-navy-900/10 pr-6")}>
+        <p className="label-caps text-grey-700">{item.label}</p>
         <ul className="mt-4 grid gap-1" role="list">
           {categories.map((c) => {
             const isActive = rich && c.key === active?.key;
@@ -94,19 +93,19 @@ function Panel({ item, panelId, labelId }: { item: NavLink; panelId: string; lab
                   onFocus={rich ? () => setActiveKey(c.key) : undefined}
                   className={cx(
                     "flex min-h-[3.25rem] items-center justify-between gap-3 px-3 font-ui text-menu font-bold transition-colors duration-(--duration-fast)",
-                    isActive ? "rounded-lg bg-tint-100 text-blue-600" : "rounded-xs text-navy-900 hover:bg-white/60",
-                    c.comingSoon && "text-navy-900/60",
+                    isActive ? "rounded-lg bg-white/80 text-blue-700" : "rounded-xs text-navy-900 hover:bg-white/70",
+                    c.comingSoon && "text-navy-900/70",
                   )}
                 >
                   <span>
                     {c.label}
-                    {c.comingSoon && <span className="ml-2 font-body text-[0.75rem] font-normal text-grey-500">(coming soon)</span>}
+                    {c.comingSoon && <span className="ml-2 font-body text-[0.75rem] font-normal text-grey-700">(coming soon)</span>}
                     {c.draft && <DraftBadge />}
                   </span>
                   {c.external ? (
-                    <Icon name="external" size={14} className="shrink-0 text-grey-500" />
+                    <Icon name="external" size={14} className="shrink-0 text-grey-700" />
                   ) : rich ? (
-                    <Icon name="chevron-right" size={18} className={cx("shrink-0", isActive ? "text-blue-600" : "text-navy-900/40")} />
+                    <Icon name="chevron-right" size={18} className={cx("shrink-0", isActive ? "text-blue-700" : "text-navy-900/60")} />
                   ) : null}
                 </NavAnchor>
               </li>
@@ -114,10 +113,10 @@ function Panel({ item, panelId, labelId }: { item: NavLink; panelId: string; lab
           })}
         </ul>
         {overview.length > 0 && (
-          <ul className="mt-6 border-t border-grey-200 pt-5" role="list">
+          <ul className="mt-6 border-t border-navy-900/10 pt-5" role="list">
             {overview.map((o) => (
               <li key={o.key ?? o.label}>
-                <ArrowLink href={o.href ?? "#"} className="min-h-10 px-3 text-small">
+                <ArrowLink href={o.href ?? "#"} tone="text-blue-700 hover:text-blue-600" className="min-h-10 px-3 text-small">
                   {o.label}
                 </ArrowLink>
               </li>
@@ -134,14 +133,14 @@ function Panel({ item, panelId, labelId }: { item: NavLink; panelId: string; lab
             <ul className="mt-5 grid gap-x-8 gap-y-1 sm:grid-cols-2" role="list">
               {active.children.map((s) => (
                 <li key={s.key ?? s.label}>
-                  <NavAnchor link={s} className={cx("block rounded-xs p-3 transition-colors duration-(--duration-fast)", s.comingSoon ? "" : "hover:bg-white/70")}>
+                  <NavAnchor link={s} className={cx("block rounded-xs p-3 transition-colors duration-(--duration-fast)", s.comingSoon ? "" : "hover:bg-white/80")}>
                     <span className="flex items-center gap-2 font-ui text-menu-link font-semibold text-navy-900">
                       {s.label}
-                      {s.external && <Icon name="external" size={12} className="text-grey-500" />}
-                      {s.comingSoon && <span className="font-body text-[0.75rem] font-normal text-grey-500">(coming soon)</span>}
+                      {s.external && <Icon name="external" size={12} className="text-grey-700" />}
+                      {s.comingSoon && <span className="font-body text-[0.75rem] font-normal text-grey-700">(coming soon)</span>}
                       {s.draft && <DraftBadge />}
                     </span>
-                    {s.descriptor && <span className="mt-1 block font-body text-caption text-grey-500">{s.descriptor}</span>}
+                    {s.descriptor && <span className="mt-1 block font-body text-caption text-grey-700">{s.descriptor}</span>}
                   </NavAnchor>
                 </li>
               ))}
@@ -149,7 +148,7 @@ function Panel({ item, panelId, labelId }: { item: NavLink; panelId: string; lab
           ) : null}
           {active.href && !active.comingSoon && (
             <div className="mt-6 px-3">
-              <ArrowLink href={active.href} external={active.external} className="text-menu-link">
+              <ArrowLink href={active.href} external={active.external} tone="text-blue-700 hover:text-blue-600" className="text-menu-link">
                 Explore {active.label}
               </ArrowLink>
             </div>
@@ -169,13 +168,12 @@ function DraftBadge() {
 /**
  * Desktop navigation with mega menus (About Us, Services, Solutions, Insights; Case Studies is a direct link).
  * Hover intent (140ms open / 200ms close), click or tap toggles, Enter/Space opens, Esc closes and returns focus,
- * the panel closes when focus leaves it. Panels fade and slide under 250ms (Motion), none with reduced motion.
+ * the panel closes when focus leaves it. Panels fade and slide in over 200ms (CSS keyframes), none with reduced motion.
  */
 export function MegaMenu({ items }: { items: NavLink[] }) {
   const [openKey, setOpenKey] = useState<string | null>(null);
   const timer = useRef<number | null>(null);
   const navRef = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
   const uid = useId();
 
   const clear = () => {
@@ -215,8 +213,8 @@ export function MegaMenu({ items }: { items: NavLink[] }) {
   const open = items.find((i) => i.key === openKey && i.children.length > 0);
 
   return (
-    <nav ref={navRef} aria-label="Main" className="static hidden h-full flex-1 items-center justify-center nav:flex" onBlur={onBlur}>
-      <ul className="flex items-center gap-10" role="list">
+    <nav ref={navRef} aria-label="Main" className="static hidden h-full flex-1 items-center justify-end nav:flex" onBlur={onBlur}>
+      <ul className="flex items-center gap-[37px]" role="list">
         {items.map((item) => {
           const hasMenu = item.children.length > 0;
           const key = item.key ?? item.label;
@@ -255,20 +253,11 @@ export function MegaMenu({ items }: { items: NavLink[] }) {
 
       {/* The hover zone starts at the bar's bottom edge: the 45px gap in Figma is transparent padding, so the pointer can cross it. */}
       <div className="absolute left-0 right-0 top-full pt-[45px]" onPointerEnter={clear} onPointerLeave={scheduleClose}>
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              key={open.key ?? open.label}
-              initial={reduce ? false : { opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6 }}
-              transition={{ duration: reduce ? 0 : 0.2, ease: [0.2, 0.7, 0.2, 1] }}
-              className="shadow-lift"
-            >
-              <Panel item={open} panelId={`${uid}-${(open.key ?? open.label).replace(/\W+/g, "-")}`} labelId={`${uid}-${(open.key ?? open.label).replace(/\W+/g, "-")}-label`} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {open && (
+          <div key={open.key ?? open.label} className="anim-panel-in rounded-lg">
+            <Panel item={open} panelId={`${uid}-${(open.key ?? open.label).replace(/\W+/g, "-")}`} labelId={`${uid}-${(open.key ?? open.label).replace(/\W+/g, "-")}-label`} />
+          </div>
+        )}
       </div>
     </nav>
   );

@@ -1,8 +1,8 @@
 import type { SolutionCardData } from "@/lib/data/home";
 import type { Block } from "@/lib/data/site";
-import { mediaUrl } from "@/lib/media";
 import { isPlaceholder, optionalCopy, plain } from "@/lib/placeholder";
 import { SolutionsSlider } from "@/components/home/SolutionsSlider";
+import { Img } from "@/components/media/Img";
 
 /**
  * Products & Solutions (Figma Frame 12457): white band with two faint rings behind, header with "All solutions",
@@ -13,7 +13,7 @@ export function Solutions({ block, solutions }: { block: Block; solutions: Solut
   if (solutions.length === 0) return null;
   return (
     <section aria-labelledby="solutions-heading" data-compare="solutions" className="relative overflow-hidden bg-white py-16 lg:py-[110px]">
-      <img src={mediaUrl("images/home/products-rings.svg")} alt="" width={2659} height={857} className="pointer-events-none absolute left-1/2 top-[10px] hidden w-[2659px] max-w-none -translate-x-1/2 lg:block" aria-hidden="true" loading="lazy" decoding="async" />
+      <Img src="images/home/products-rings.svg" alt="" width={2659} height={857} className="pointer-events-none absolute left-1/2 top-[10px] hidden h-auto w-[2659px] max-w-none -translate-x-1/2 lg:block" aria-hidden="true" />
       <div className="container-site relative">
         <SolutionsSlider
           eyebrow={plain(block.eyebrow)}

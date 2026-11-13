@@ -14,6 +14,12 @@
   --color-blue-650: #1266df; /* industries accents */
   --color-blue-700: #0e5ca7; /* outline display words ("IMPACT") */
   --color-blue-800: #0c4a8b; /* outline display words ("ADAMAS") */
+  --color-blue-link: #0066ff; /* service pages: eyebrows, accent words, pill icons */
+  --color-navy-850: #0d1b2d; /* service pages: headings and body on light */
+  --color-grey-550: #5d6978; /* service pages: body text */
+  --color-grey-450: #68758a; /* service pages: intro paragraphs */
+  --color-grey-400: #73808e; /* service pages: logo tile labels */
+  --color-grey-50: #f0f3f9; /* service pages: light bands */
 
   /* Colour: navy (dark surfaces and headings) */
   --color-navy-950: #000c33; /* hero and header band */
@@ -264,6 +270,70 @@
   .site-header.is-scrolled .headerbar {
     margin-top: 0.75rem;
     margin-bottom: 0.75rem;
+  }
+
+  /* Panel and tab-panel entrances in CSS (round 7: Motion is no longer shipped to the browser): a 200ms fade and
+     rise, none with reduced motion. */
+  @keyframes panel-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade-up-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .anim-panel-in {
+    animation: panel-in 200ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .anim-fade-up {
+    animation: fade-up-in 240ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .anim-panel-in,
+    .anim-fade-up {
+      animation: none;
+    }
+  }
+
+  /* Frosted glass (designer decision, docs/design-notes.md round 7): the mega-menu panels and the mobile drawer are
+     white at 85% over a 20px backdrop blur, with the header glass bar's border and the lift shadow. Text inside uses
+     navy-900 / grey-700 / blue-700 so it keeps 4.5:1 over the darkest backdrop (the hero); icons keep 3:1. Browsers
+     without backdrop-filter, and visitors who prefer reduced transparency, get solid white. */
+  .glass-panel {
+    --glass-alpha: 0.85;
+    background: rgb(255 255 255 / var(--glass-alpha));
+    border: 1px solid rgb(255 255 255 / 0.7);
+    box-shadow: var(--shadow-lift), inset 0 1px 0 rgb(255 255 255 / 0.6);
+  }
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .glass-panel {
+      -webkit-backdrop-filter: blur(20px) saturate(1.3);
+      backdrop-filter: blur(20px) saturate(1.3);
+    }
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass-panel {
+      background: #fff;
+    }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .glass-panel {
+      background: #fff;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
   }
 
   /* <details>-based menus (region switcher, mobile drawer): no disclosure marker, chevrons drawn by the components. */

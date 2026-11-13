@@ -10,7 +10,7 @@
  */
 
 export type Status = "DRAFT" | "PUBLISHED" | "ARCHIVED";
-export type RegionCode = "IN" | "UK" | "AE";
+export type RegionCode = "IN" | "UK" | "GCC";
 export type Prominence = "HIDDEN" | "STANDARD" | "FEATURED";
 
 export interface Meta {
@@ -50,7 +50,7 @@ export interface MediaSeed {
 
 export interface RegionSeed {
   code: RegionCode;
-  slug: "in" | "uk" | "ae";
+  slug: "in" | "uk" | "gcc";
   label: string;
   locale: string;
   hreflang: string[];

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { cx } from "@/lib/cx";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { useSlider } from "@/components/motion/useSlider";
+import { Img } from "@/components/media/Img";
 
 export interface IndustryItem {
   slug: string;
@@ -11,6 +12,7 @@ export interface IndustryItem {
   title: string;
   paragraphs: string[];
   pending: boolean;
+  draft: boolean;
   image: { url: string; alt: string } | null;
   phone: string | null;
 }
@@ -66,7 +68,7 @@ export function IndustriesExplorer({ sideLabel, label, heading, body, cardCta, c
       {/* Panel */}
       <div className={cx("min-w-0 rounded-[17px] p-px", GRADIENT_BORDER)} data-reveal>
         <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl bg-white p-6">
-          <p className="font-ui text-[clamp(1.125rem,1rem+0.5vw,1.625rem)] leading-none text-[#4285F7]">{label}</p>
+          <p className="font-ui text-[clamp(1.5rem,1rem+0.5vw,1.625rem)] leading-none text-[#4285F7]">{label}</p>
           <h2 id="industries-heading" className="mt-5 font-ui text-[clamp(2rem,1.4rem+2vw,4rem)] font-semibold leading-[1.09] tracking-[0.015em] text-[#030712]">
             {heading}
           </h2>
@@ -76,18 +78,21 @@ export function IndustriesExplorer({ sideLabel, label, heading, body, cardCta, c
             {items.map((it) => (
               <article key={it.slug} id={`industry-${it.slug}`} className={cx("w-[min(600px,100%)] shrink-0 snap-start rounded-[17px] p-px", GRADIENT_BORDER)}>
                 <div className="relative flex h-full min-h-[298px] flex-col rounded-2xl bg-tint-25 p-5">
-                  <h3 className="font-body text-[clamp(1.5rem,1.2rem+0.9vw,2.25rem)] font-semibold leading-[1.16] tracking-[0.03em] text-blue-650">{it.title}</h3>
+                  <h3 className="font-body text-[clamp(1.5rem,1.2rem+0.9vw,2.25rem)] font-semibold leading-[1.16] tracking-[0.03em] text-blue-650">
+                    {it.title}
+                    {it.draft && <span className="ml-3 inline-block rounded-xs bg-orange-500 px-1.5 py-0.5 align-middle font-body text-[0.625rem] font-bold uppercase tracking-wider text-navy-950">Draft</span>}
+                  </h3>
                   <div className="mt-3 max-w-[300px] space-y-4 font-body text-[0.875rem] leading-[1.57] text-[#374151]">
                     {it.pending ? <p className="italic text-grey-500">Details to be confirmed</p> : it.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
                   </div>
-                  <Link href={cardHref} className="mt-auto inline-flex h-10 w-fit items-center rounded-[13px] border border-blue-650 bg-blue-650/10 px-3 pt-px font-ui text-[1rem] font-medium text-blue-650 transition-colors duration-(--duration-fast) hover:bg-blue-650 hover:text-white">
+                  <Link href={cardHref} className="mt-auto inline-flex h-10 w-fit items-center rounded-[13px] border border-blue-650 bg-blue-650/[0.06] px-3 pt-px font-ui text-[1rem] font-medium text-blue-650 transition-colors duration-(--duration-fast) hover:bg-blue-650 hover:text-white">
                     {cardCta}
                     <span className="sr-only">: {it.title}</span>
                   </Link>
                   {it.image && (
                     <div className="pointer-events-none absolute right-5 top-[62px] hidden h-[213px] w-[266px] sm:block" aria-hidden="true">
-                      <img src={it.image.url} alt="" width={206} height={140} className="absolute left-[60px] top-[54px] h-[140px] w-[206px] rounded-lg object-cover shadow-[0_10px_40px_rgb(0_0_0/0.16)]" loading="lazy" decoding="async" />
-                      {it.phone && <img src={it.phone} alt="" width={50} height={105} className="absolute left-[35px] top-[102px] h-[105px] w-[50px] rounded-lg object-cover shadow-[0_5px_20px_rgb(0_0_0/0.2)]" loading="lazy" decoding="async" />}
+                      <Img src={it.image.url} alt="" width={206} height={140} sizes="206px" className="absolute left-[60px] top-[54px] h-[140px] w-[206px] rounded-lg object-cover shadow-[0_10px_40px_rgb(0_0_0/0.16)]" />
+                      {it.phone && <Img src={it.phone} alt="" width={50} height={105} sizes="50px" className="absolute left-[35px] top-[102px] h-[105px] w-[50px] rounded-lg object-cover shadow-[0_5px_20px_rgb(0_0_0/0.2)]" />}
                     </div>
                   )}
                 </div>

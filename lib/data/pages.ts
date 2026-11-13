@@ -128,7 +128,7 @@ export async function getPage<T extends PageTemplate>(path: string, template: T)
     intro: p.intro,
     image: toMedia(p.image),
     blocks: parsed.success ? (parsed.data as PageBlocks<T>) : null,
-    faqs: p.faqs.map((f) => ({ question: f.question, answer: f.answer })),
+    faqs: p.faqs.map((f) => ({ question: f.question, answer: f.answer, draft: badge(f.status) })),
     seoTitle: p.seoTitle,
     seoDescription: p.seoDescription,
     noindex: p.noindex,

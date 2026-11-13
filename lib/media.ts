@@ -25,6 +25,8 @@ const BASE = (process.env.MEDIA_BASE_URL || "/media").replace(/\/+$/, "");
 
 export function mediaUrl(key: string): string {
   if (/^https?:\/\//.test(key)) return key;
+  // Already a served URL (a block extra or fixture path such as "/media/images/home/x.webp"): leave it alone.
+  if (key.startsWith(`${BASE}/`) || key.startsWith("/media/")) return key;
   return `${BASE}/${key.replace(/^\/+/, "")}`;
 }
 

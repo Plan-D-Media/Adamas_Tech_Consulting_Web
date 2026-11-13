@@ -142,7 +142,7 @@ export async function getSolution(slug: string): Promise<SolutionPageData | null
     integrations: s.integrations.map((t) => t.name),
     caseStudies: s.caseStudies.map(safeCaseCard),
     practiceResults: s.caseStudies[0] ? clearedResults(s.caseStudies[0].slug, s.caseStudies[0].results).map((r) => ({ value: r.value, label: r.label })) : [],
-    faqs: s.faqs.map((f) => ({ question: f.question, answer: f.answer })),
+    faqs: s.faqs.map((f) => ({ question: f.question, answer: f.answer, draft: badge(f.status) })),
     // Same kind first, then the rest, so the "more" grid stays relevant.
     more: all
       .filter((x) => x.slug !== s.slug)

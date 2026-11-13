@@ -11,7 +11,7 @@ export function TopStories({ block }: { block: Block }) {
   const { items } = blockExtra(block, "stories");
   if (items.length === 0) return null;
   return (
-    <section aria-labelledby="stories-heading" data-compare="stories" className="bg-tint-50 py-16 lg:pb-[100px] lg:pt-[100px]">
+    <section aria-labelledby="stories-heading" data-compare="stories" className="bg-tint-50 py-16 lg:pb-[132px] lg:pt-[100px]">
       <StoriesSlider
         eyebrow={plain(block.eyebrow)}
         heading={plain(block.heading)}

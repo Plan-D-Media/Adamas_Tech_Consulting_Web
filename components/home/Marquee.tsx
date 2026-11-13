@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Img } from "@/components/media/Img";
 
 interface Item {
   name: string;
@@ -38,11 +39,11 @@ export function Marquee({ items }: { items: Item[] }) {
           )}
         </button>
       </div>
-      <div className="marquee scrollbar-none mt-[25px] overflow-x-auto" data-paused={paused || undefined} aria-label="Partners and certifications">
+      <div className="marquee scrollbar-none mt-[25px] overflow-x-auto focus-visible:outline-offset-4" data-paused={paused || undefined} role="region" aria-label="Partners and certifications" tabIndex={0}>
         <ul className="marquee-track flex w-max items-center gap-[131px]" style={{ "--marquee-duration": `${Math.max(24, items.length * 6)}s` } as React.CSSProperties} role="list">
           {loop.map((l, i) => (
             <li key={`${l.name}-${i}`} className="shrink-0" aria-hidden={i >= items.length || undefined}>
-              <img src={l.src} alt={i < items.length ? l.name : ""} width={200} height={105} className="h-[105px] w-[200px] object-contain grayscale transition-[filter] duration-(--duration-base) hover:grayscale-0" loading="lazy" decoding="async" />
+              <Img src={l.src} alt={i < items.length ? l.name : ""} width={200} height={105} sizes="200px" className="h-[105px] w-[200px] object-contain grayscale transition-[filter] duration-(--duration-base) hover:grayscale-0" />
             </li>
           ))}
         </ul>

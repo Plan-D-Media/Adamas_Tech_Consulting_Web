@@ -7,6 +7,7 @@ import { ArrowLink } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SliderControls } from "@/components/ui/SliderControls";
 import { useSlider } from "@/components/motion/useSlider";
+import { Img } from "@/components/media/Img";
 
 export interface SolutionItem {
   slug: string;
@@ -26,7 +27,7 @@ function Card({ s }: { s: SolutionItem }) {
   const Title = s.external ? "a" : Link;
   return (
     <article className="relative flex h-[523px] w-[min(424px,85vw)] shrink-0 snap-start flex-col overflow-hidden rounded-lg bg-navy-900 text-white" data-reveal>
-      {s.image && <img src={s.image.url} alt={s.image.alt} width={424} height={523} className="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />}
+      {s.image && <Img src={s.image.url} alt={s.image.alt} fill sizes="(min-width: 1024px) 424px, 85vw" className="object-cover" />}
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(0_0_0/0)_0%,rgb(0_0_0/0.25)_45%,rgb(0_0_0/0.92)_100%)]" aria-hidden="true" />
       <div className="relative p-5">
         <span className="inline-flex items-center rounded-pill bg-navy-900/55 px-3 py-1 font-body text-[0.75rem] font-semibold text-white ring-1 ring-white/20 backdrop-blur">
@@ -90,10 +91,11 @@ export function SolutionsSlider({ eyebrow, heading, body, ctaLabel, ctaHref, ite
         eyebrow={eyebrow}
         heading={heading}
         body={body}
-        headingClassName="max-w-[45rem]"
+        innerClassName="max-w-[45rem]"
+        eyebrowClassName="lg:h-[20px]"
         aside={
           <div className="flex flex-wrap items-center gap-6">
-            <ArrowLink href={ctaHref} className="text-[1.0625rem] text-[#0070BC]">
+            <ArrowLink href={ctaHref} tone="text-[#0070BC] hover:text-blue-600" className="text-[1.0625rem]">
               {ctaLabel}
             </ArrowLink>
             {items.length > 1 && <SliderControls variant="outline" index={index} total={items.length} onPrev={prev} onNext={next} label="solutions" />}

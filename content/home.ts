@@ -185,7 +185,7 @@ export const homes: HomeSeed[] = [
       "Live /uk/ is a copy of /in/. UK content starts from the India homepage; the only UK emphasis is the London office, the +44 phone and the featured House of Lords event. Any UK-specific headline or copy? (Q3.1, Q3.8)",
   },
   {
-    region: "AE",
+    region: "GCC",
     // SEO: tagline from the live <title> + the live services intro sentence (no meta description exists on the live site).
     seoTitle: "IT consultancy and solutions | AdamasTech Consulting GCC",
     seoDescription: "Tailored tech solutions driving growth, efficiency, and reliability with expert, customer-focused, scalable services.",
@@ -193,7 +193,8 @@ export const homes: HomeSeed[] = [
     featuredEvent: "house-of-lords-2026",
     eventProminence: "STANDARD",
     showTrustStrip: true,
-    showWhyUs: false,
+    // The approved Figma homepage shows Tech Excellence on every region (the live /ae/ hid it); shown on GCC since 13 Nov 2026.
+    showWhyUs: true,
     needsReview: true,
     editorNote:
       'Live /ae/: 3 slides (no AWS), Tech Excellence hidden (so showWhyUs = false), Partners hidden: the trust strip shows the GCC client logos instead (confirm). Live AE posters are local uploads (/2026/05/Img-1.png, Img_2.png, Img_3.png); the shared Vimeo posters are used here. The promo banner\'s second button "Learn More" → /e-invoicing-uae is not migrated (PromoBanner has one CTA, and the e-invoicing page is draft, Q2.4). The banner\'s three badges (Built for UAE / VAT compliance, Works with any / ERP system, Secure & / Enterprise-ready) have no field.',

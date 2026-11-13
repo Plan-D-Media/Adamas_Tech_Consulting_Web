@@ -8,6 +8,10 @@
  * Entry kinds:
  *   raster  : a PNG/JPEG/WebP source (or an SVG that wraps a base64 raster) -> AVIF + WebP at 1x and 2x of `width`
  *   vector  : a true SVG -> optimised with SVGO, written as .svg (icons that are used as <img>, e.g. flags)
+ * Optional on rasters: "crop": [left, top, width, height] as fractions of the source (Figma STRETCH fills: the
+ * imageTransform [[a,0,tx],[0,d,ty]] maps to [tx, ty, a, d]), applied before the resize; "fit" (sharp fit, default
+ * "cover"; use "fill" with a crop so the cropped region stretches exactly like Figma's box); "enlarge": true lets a
+ * source smaller than the target scale up (Figma stretches the hero backdrop beyond its pixel size).
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -30,17 +34,30 @@ function rasterFrom(file) {
 }
 
 async function processRaster(entry) {
-  const src = rasterFrom(path.join(root, entry.src));
-  const meta = await sharp(src).metadata();
+  let src = rasterFrom(path.join(root, entry.src));
+  let meta = await sharp(src).metadata();
+  if (entry.crop) {
+    const [l, t, w, h] = entry.crop;
+    const region = {
+      left: Math.max(0, Math.round(l * meta.width)),
+      top: Math.max(0, Math.round(t * meta.height)),
+      width: Math.min(meta.width, Math.round(w * meta.width)),
+      height: Math.min(meta.height, Math.round(h * meta.height)),
+    };
+    region.width = Math.min(region.width, meta.width - region.left);
+    region.height = Math.min(region.height, meta.height - region.top);
+    src = await sharp(src).extract(region).png().toBuffer();
+    meta = await sharp(src).metadata();
+  }
   const results = [];
   for (const scale of entry.scales ?? [1, 2]) {
     const width = Math.round(entry.width * scale);
-    if (width > meta.width * 1.05) {
+    if (!entry.enlarge && width > meta.width * 1.05) {
       results.push(`skip ${scale}x (source ${meta.width}px < ${width}px)`);
       continue;
     }
     const height = entry.height ? Math.round(entry.height * scale) : undefined;
-    const base = sharp(src).resize({ width, height, fit: entry.fit ?? "cover", position: entry.position ?? "centre", withoutEnlargement: true });
+    const base = sharp(src).resize({ width, height, fit: entry.fit ?? "cover", position: entry.position ?? "centre", withoutEnlargement: !entry.enlarge });
     const suffix = scale === 1 ? "" : `@${scale}x`;
     const outBase = path.join(outRoot, `${entry.out}${suffix}`);
     fs.mkdirSync(path.dirname(outBase), { recursive: true });

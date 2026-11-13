@@ -1,10 +1,10 @@
 import type { Block } from "@/lib/data/site";
 import { blockExtra } from "@/lib/data/home-blocks";
-import { mediaUrl } from "@/lib/media";
 import { plain } from "@/lib/placeholder";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { ArrowLink } from "@/components/ui/Button";
 import { Eyebrow, Heading2 } from "@/components/ui/SectionHeader";
+import { Img } from "@/components/media/Img";
 
 /**
  * About Adamas (Figma Container 236:2254 + Group 21306): copy on the left (two paragraphs, "Discover Adamas" link,
@@ -19,9 +19,8 @@ export function About({ block }: { block: Block }) {
       <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[53%] bg-tint-50 [clip-path:polygon(34%_0,100%_0,100%_100%,0_100%)] lg:block" aria-hidden="true" />
       <div className="container-site relative grid gap-12 lg:grid-cols-[1fr_1fr] lg:justify-between lg:gap-8 xl:grid-cols-[635px_626px]">
         <div className="relative lg:pt-[51px]" data-reveal>
-          <p className="pointer-events-none absolute -bottom-6 left-[34px] select-none font-heading text-[clamp(5rem,8.2vw,9.875rem)] font-extrabold leading-none tracking-[-0.07em] text-blue-800/[0.03]" aria-hidden="true">
-            ADAMAS
-          </p>
+          {/* Decorative outline word drawn as CSS content so assistive tech and contrast checks ignore it. */}
+        <div data-word="ADAMAS" className="pointer-events-none absolute -bottom-6 left-[34px] select-none font-heading text-[clamp(5rem,8.2vw,9.875rem)] font-extrabold leading-none tracking-[-0.07em] text-blue-800/[0.03] before:content-[attr(data-word)]" aria-hidden="true" />
           {block.eyebrow && <Eyebrow>{plain(block.eyebrow)}</Eyebrow>}
           <Heading2 id="about-heading" className="mt-3 max-w-[31rem]">
             {plain(block.heading)}
@@ -32,7 +31,7 @@ export function About({ block }: { block: Block }) {
             ))}
           </div>
           {block.ctaLabel && block.ctaHref && (
-            <ArrowLink href={block.ctaHref} className="mt-[25px] font-heading text-[1.125rem] font-bold text-blue-600 hover:text-blue-500">
+            <ArrowLink href={block.ctaHref} tone="text-blue-600 hover:text-blue-500" className="mt-[25px] font-heading text-[1.125rem] font-bold">
               {block.ctaLabel}
             </ArrowLink>
           )}
@@ -50,9 +49,9 @@ export function About({ block }: { block: Block }) {
 
         {extra.image && (
           <div className="relative mx-auto w-full max-w-[626px] lg:ml-auto lg:mr-0" data-reveal>
-            <img src={mediaUrl("images/home/about-graphic.svg")} alt="" width={227} height={227} className="pointer-events-none absolute -left-2 -top-2 z-10 w-[36%] max-w-[227px]" aria-hidden="true" loading="lazy" decoding="async" />
+            <Img src="images/home/about-graphic.svg" alt="" width={227} height={227} className="pointer-events-none absolute -left-2 -top-2 z-10 h-auto w-[36%] max-w-[227px]" aria-hidden="true" />
             <div className="relative ml-[12%] mt-[14%] overflow-hidden rounded-2xl">
-              <img src={extra.image} alt={extra.imageAlt} width={551} height={490} className="block h-auto w-full object-cover" loading="lazy" decoding="async" />
+              <Img src={extra.image} alt={extra.imageAlt} width={551} height={490} sizes="(min-width: 1280px) 551px, (min-width: 1024px) 45vw, 100vw" className="block h-auto w-full object-cover" />
             </div>
             {extra.approach && (
               <div className="absolute bottom-[14px] right-0 w-[235px] bg-[rgb(7_29_58/0.91)] p-6 text-white backdrop-blur-[28px]">

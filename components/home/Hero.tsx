@@ -1,7 +1,6 @@
 import type { ClaimData, HeroSlideData } from "@/lib/data/home";
 import type { Block } from "@/lib/data/site";
 import { blockExtra } from "@/lib/data/home-blocks";
-import { mediaUrl } from "@/lib/media";
 import { plain } from "@/lib/placeholder";
 import { ButtonLink } from "@/components/ui/Button";
 import { Img } from "@/components/media/Img";
@@ -11,6 +10,8 @@ interface Props {
   block: Block;
   cards: HeroSlideData[];
   claims: ClaimData[];
+  /** Replaces the card carousel (the Figma fixture page passes the designer's baked cards). */
+  carousel?: React.ReactNode;
 }
 
 /**
@@ -18,7 +19,7 @@ interface Props {
  * with a black gradient from the left, centred copy (eyebrow pill, H1 62px, supporting line, two buttons), the card
  * carousel and the trust row with slider controls. Copy and cards come from the database per region.
  */
-export function Hero({ block, cards, claims }: Props) {
+export function Hero({ block, cards, claims, carousel }: Props) {
   const extra = blockExtra(block, "hero");
   const heading = plain(block.heading) || "AdamasTech Consulting";
   return (
@@ -38,21 +39,23 @@ export function Hero({ block, cards, claims }: Props) {
           <h1 id="hero-heading" className="font-ui text-[clamp(2.25rem,1.3rem+3vw,3.875rem)] font-bold leading-[1.17] text-white">
             {heading}
           </h1>
-          {block.body && <p className="max-w-[55rem] font-body text-[clamp(1rem,0.95rem+0.2vw,1.125rem)] font-medium leading-[1.45] text-white">{plain(block.body)}</p>}
+          {/* Figma reserves a 77px (three-line) box for the supporting line, so the buttons sit at y 538 even with two lines. */}
+          {block.body && <p className="max-w-[55rem] font-body text-[clamp(1rem,0.95rem+0.2vw,1.125rem)] font-medium leading-[1.45] text-white lg:min-h-[77px]">{plain(block.body)}</p>}
           <div className="flex flex-wrap items-center justify-center gap-3">
             {block.ctaLabel && block.ctaHref && (
-              <ButtonLink href={block.ctaHref} size="md">
+              <ButtonLink href={block.ctaHref} size="md" className="min-w-[174px]">
                 {block.ctaLabel}
               </ButtonLink>
             )}
             {extra.secondaryLabel && extra.secondaryHref && (
-              <ButtonLink href={extra.secondaryHref} size="md" variant="secondary">
+              <ButtonLink href={extra.secondaryHref} size="md" variant="secondary" className="min-w-[174px]">
                 {extra.secondaryLabel}
               </ButtonLink>
             )}
           </div>
         </div>
 
+        {carousel ?? (
         <HeroCarousel
           cards={cards.map((c) => ({
             id: c.id,
@@ -64,8 +67,8 @@ export function Hero({ block, cards, claims }: Props) {
             image: c.poster ? { url: c.poster.url, alt: c.poster.alt } : null,
           }))}
           claims={claims.filter((c) => c.placement === "hero-trust")}
-          fallbackImage={mediaUrl("images/home/hero-bg.webp")}
         />
+        )}
       </div>
     </section>
   );

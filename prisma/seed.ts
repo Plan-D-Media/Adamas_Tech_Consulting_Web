@@ -314,14 +314,14 @@ async function seedTrust() {
         verified: s.verified,
         sourceNote: s.sourceNote ?? null,
         placements: s.placements,
-        regions: s.regions ?? ["IN", "UK", "AE"],
+        regions: s.regions ?? ["IN", "UK", "GCC"],
         ...meta(s, i),
       },
     });
   }
   for (const [i, l] of content.logos.entries()) {
     await prisma.logoItem.create({
-      data: { kind: l.kind, name: l.name, logoId: mediaId(l.logo)!, url: l.url ?? null, regions: l.regions ?? ["IN", "UK", "AE"], ...meta(l, i) },
+      data: { kind: l.kind, name: l.name, logoId: mediaId(l.logo)!, url: l.url ?? null, regions: l.regions ?? ["IN", "UK", "GCC"], ...meta(l, i) },
     });
   }
   for (const [i, c] of content.certifications.entries()) {

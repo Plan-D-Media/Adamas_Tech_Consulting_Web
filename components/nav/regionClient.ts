@@ -1,13 +1,14 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { REGION_COOKIE, REGION_COOKIE_MAX_AGE, isRegionSlug, type RegionSlug } from "@/lib/region";
+import { LEGACY_REGION_SLUGS, REGION_COOKIE, REGION_COOKIE_MAX_AGE, isRegionSlug, type RegionSlug } from "@/lib/region";
 
 const listeners = new Set<() => void>();
 
 function readCookie(): RegionSlug | null {
   const m = document.cookie.match(new RegExp(`(?:^|; )${REGION_COOKIE}=([^;]*)`));
-  const v = m ? decodeURIComponent(m[1]) : null;
+  const raw = m ? decodeURIComponent(m[1]) : null;
+  const v = raw && LEGACY_REGION_SLUGS[raw] ? LEGACY_REGION_SLUGS[raw] : raw;
   return isRegionSlug(v) ? v : null;
 }
 

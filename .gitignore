@@ -48,3 +48,6 @@ next-env.d.ts
 # designer exports and Figma reference data (large, not part of the build)
 /design-src
 /design-ref
+
+# Figma fixture crops for the design comparison (scripts/figma-fixture.mjs)
+/public/media/figma-fixture

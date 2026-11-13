@@ -17,6 +17,21 @@ export function useHydrated() {
   );
 }
 
+const motionQuery = () => window.matchMedia("(prefers-reduced-motion: reduce)");
+
+/** The visitor's reduced-motion preference; false on the server and while hydrating. */
+export function useReducedMotion() {
+  return useSyncExternalStore(
+    (cb) => {
+      const m = motionQuery();
+      m.addEventListener("change", cb);
+      return () => m.removeEventListener("change", cb);
+    },
+    () => motionQuery().matches,
+    () => false,
+  );
+}
+
 /** `location.search` (e.g. "?q=sap"); "" on the server. */
 export function useLocationSearch() {
   return useSyncExternalStore(

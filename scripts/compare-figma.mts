@@ -6,7 +6,8 @@
  *    box with the matching band of design-ref/renders/home.png (Figma y-ranges below), both resized to the same
  *    size, using pixelmatch. Reports the mismatch percentage per section and writes side-by-side + diff images to
  *    screenshots/<label>/compare/.
- * 2. Compares the header band and the open Services mega menu with design-ref/renders/mega-menu.png.
+ * 2. Compares the header band with the top of design-ref/renders/home.png (the Mega Menu frame 236:4658 carries no
+ *    header group, only the backdrop and the panel) and the open Services panel with design-ref/renders/mega-menu.png.
  */
 import { chromium, type Page } from "playwright";
 import fs from "node:fs";
@@ -71,7 +72,9 @@ async function compare(name: string, ours: Buffer, figma: Buffer, maxWidth = 960
 }
 
 async function settle(page: Page) {
-  await page.addStyleTag({ content: "[data-reveal]{opacity:1!important;transform:none!important} .marquee-track{animation:none!important} *{transition:none!important;animation:none!important}" });
+  await page.addStyleTag({ content: "[data-reveal]{opacity:1!important;transform:none!important} .marquee-track{animation:none!important} *{transition:none!important;animation:none!important} nextjs-portal{display:none!important}" });
+  // Wait for hydration first: setting the attributes earlier makes React report a test-only mismatch (dev overlay).
+  await page.waitForTimeout(1500);
   await page.evaluate(() => document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => el.setAttribute("data-revealed", "")));
   await page.waitForTimeout(400);
 }
@@ -115,7 +118,9 @@ try {
     results.push(`${s.name}: ${(100 - r.pct).toFixed(1)}% match (height ${r.heightOurs}px vs Figma ${r.heightFigma}px)`);
   }
 
-  // Header + open Services mega menu vs the Mega Menu frame (1920x961).
+  // Header band (Group 21303, y 17-118) vs the top of the Home Page render; the menu panel vs the Mega Menu frame.
+  const header = await compare("Header band", await sharp(full).extract({ left: 0, top: 0, width: 1920, height: 130 }).png().toBuffer(), await sharp(figma).extract({ left: 0, top: 0, width: 1920, height: 130 }).png().toBuffer(), 1200);
+  results.push(`Header: ${(100 - header.pct).toFixed(1)}% match`);
   const m = await ctx.newPage();
   await m.setViewportSize({ width: 1920, height: 961 });
   await m.goto(`${base}${route}`, { waitUntil: "load" });
@@ -125,8 +130,6 @@ try {
   const menuShot = await m.screenshot();
   fs.writeFileSync(path.join(outDir, "mega-menu-ours.png"), menuShot);
   const menuFigma = fs.readFileSync("design-ref/renders/mega-menu.png");
-  const header = await compare("Header band", await sharp(menuShot).extract({ left: 0, top: 0, width: 1920, height: 130 }).png().toBuffer(), await sharp(menuFigma).extract({ left: 0, top: 0, width: 1920, height: 130 }).png().toBuffer(), 1200);
-  results.push(`Header: ${(100 - header.pct).toFixed(1)}% match`);
   const panel = await compare("Mega menu (Services)", await sharp(menuShot).extract({ left: 300, top: 160, width: 1320, height: 650 }).png().toBuffer(), await sharp(menuFigma).extract({ left: 300, top: 160, width: 1320, height: 650 }).png().toBuffer(), 1200);
   results.push(`Mega menu (Services): ${(100 - panel.pct).toFixed(1)}% match`);
   await ctx.close();

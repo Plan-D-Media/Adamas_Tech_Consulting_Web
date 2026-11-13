@@ -41,6 +41,8 @@ export function titleBodies(v: Prisma.JsonValue | null | undefined): TitleBody[]
 export interface FaqData {
   question: string;
   answer: string;
+  /** DRAFT row previewed with PREVIEW_DRAFTS (badged with SHOW_DRAFT_BADGES). */
+  draft: boolean;
 }
 
 export interface SeoData {

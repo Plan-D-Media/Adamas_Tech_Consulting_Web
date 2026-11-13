@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useReducedMotion } from "motion/react";
+import { useReducedMotion } from "@/lib/use-client-snapshot";
 import { useEffect, useRef, useState } from "react";
 import type { ClaimData } from "@/lib/data/home";
 import { cx } from "@/lib/cx";
@@ -9,6 +9,7 @@ import { useHydrated } from "@/lib/use-client-snapshot";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { SliderControls } from "@/components/ui/SliderControls";
 import { useSlider } from "@/components/motion/useSlider";
+import { Img } from "@/components/media/Img";
 
 export interface HeroCard {
   id: string;
@@ -18,17 +19,22 @@ export interface HeroCard {
   href: string;
   external: boolean;
   image: { url: string; alt: string } | null;
+  /** The image already carries the whole card design (designer-baked artwork, used by the Figma fixture). */
+  artwork?: boolean;
 }
 
 const AUTO_MS = 7000;
 const CATEGORY_ICON: Record<string, IconName> = { event: "calendar", solutions: "layers", solution: "layers", "case study": "chart", "case-study": "chart" };
 const CLAIM_ICON: IconName[] = ["thumbs-up", "shield"];
 
-function Card({ card }: { card: HeroCard }) {
+function Card({ card, priority }: { card: HeroCard; priority: boolean }) {
   const icon = CATEGORY_ICON[card.category.toLowerCase()] ?? "layers";
-  const inner = (
+  const inner = card.artwork ? (
+    card.image && <Img src={card.image.url} alt={card.title} fill sizes="(min-width: 1440px) 401px, (min-width: 1024px) 33vw, 82vw" priority={priority} className="object-cover" />
+  ) : (
     <>
-      {card.image && <img src={card.image.url} alt={card.image.alt} width={401} height={217} className="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />}
+      {/* The first card is the page's LCP element on phones: loaded eagerly with high priority (Lighthouse round 7). */}
+      {card.image && <Img src={card.image.url} alt={card.image.alt} fill sizes="(min-width: 1440px) 401px, (min-width: 1024px) 33vw, 82vw" priority={priority} className="object-cover" />}
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(0_12_51/0.82)_0%,rgb(0_12_51/0.45)_55%,rgb(0_12_51/0.1)_100%)]" aria-hidden="true" />
       <div className="relative flex h-full flex-col p-4">
         <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-blue-600/85 text-white">
@@ -45,8 +51,9 @@ function Card({ card }: { card: HeroCard }) {
   // Three cards fill the 1240px track at desktop (Figma: 401 + 381 + 401 with 24px gaps); narrower screens show one or two.
   const cls = "group relative block h-[217px] w-full overflow-hidden rounded-xl ring-[1.5px] ring-white/50 transition-transform duration-(--duration-slow) ease-(--ease-out) hover:-translate-y-1 focus-visible:outline-offset-4";
   return card.external ? (
-    <a href={card.href} target="_blank" rel="noopener noreferrer" className={cls} aria-label={`${card.title} (opens in a new tab)`}>
+    <a href={card.href} target="_blank" rel="noopener noreferrer" className={cls}>
       {inner}
+      <span className="sr-only"> (opens in a new tab)</span>
     </a>
   ) : (
     <Link href={card.href} className={cls}>
@@ -60,7 +67,7 @@ function Card({ card }: { card: HeroCard }) {
  * a pause control and keyboard arrows. Auto-advances every 7s (not with reduced motion; paused on hover, focus or
  * the pause button). The track is a plain scroll-snap container, so it works without JavaScript.
  */
-export function HeroCarousel({ cards, claims, fallbackImage }: { cards: HeroCard[]; claims: ClaimData[]; fallbackImage: string }) {
+export function HeroCarousel({ cards, claims }: { cards: HeroCard[]; claims: ClaimData[] }) {
   const { trackRef, index, wrapPrev, wrapNext } = useSlider(cards.length);
   const [paused, setPaused] = useState(false);
   const [hovering, setHovering] = useState(false);
@@ -113,10 +120,9 @@ export function HeroCarousel({ cards, claims, fallbackImage }: { cards: HeroCard
         className="scrollbar-none mx-auto flex max-w-[77.5rem] snap-x snap-mandatory gap-6 overflow-x-auto px-[5px] py-[5px] [scroll-padding-inline:5px] focus-visible:outline-offset-4"
         style={{ filter: "drop-shadow(0 24px 6px rgb(0 0 0 / 0.25))" }}
       >
-        {cards.length === 0 && <img src={fallbackImage} alt="" className="hidden" />}
         {cards.map((c, i) => (
-          <div key={c.id} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${cards.length}`} className="w-[min(401px,82vw)] shrink-0 snap-start lg:w-[calc((100%-58px)/3)]">
-            <Card card={c} />
+          <div key={c.id} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${cards.length}`} className={cx("w-[min(401px,82vw)] shrink-0 snap-start lg:w-[calc((100%-58px)/3)]", i % 3 === 1 ? "min-[1440px]:w-[381px]" : "min-[1440px]:w-[401px]")}>
+            <Card card={c} priority={i < 3} />
           </div>
         ))}
       </div>
@@ -125,7 +131,7 @@ export function HeroCarousel({ cards, claims, fallbackImage }: { cards: HeroCard
         {claims.length > 0 && (
           <ul className="flex flex-wrap items-center gap-x-24 gap-y-3" role="list" aria-label="Commitments">
             {claims.map((c, i) => (
-              <li key={c.key} className="inline-flex items-center gap-2.5 font-ui text-[clamp(1rem,0.9rem+0.4vw,1.5rem)] font-bold uppercase leading-none text-white">
+              <li key={c.key} className="inline-flex items-center gap-2.5 font-ui text-[clamp(1rem,0.9rem+0.4vw,1.5rem)] font-bold uppercase leading-[1.17] text-white xl:text-[1.5rem]">
                 <Icon name={CLAIM_ICON[i % CLAIM_ICON.length]} size={20} className="shrink-0" />
                 <span>
                   {c.value}

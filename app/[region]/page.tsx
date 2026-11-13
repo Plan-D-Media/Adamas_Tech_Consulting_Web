@@ -50,7 +50,7 @@ export default function RegionHomePage({ params }: PageProps<"/[region]">) {
 }
 
 /**
- * One layout serves /in/, /uk/ and /ae/ (soon /gcc/). Sections follow the approved Figma order; every piece of copy,
+ * One layout serves /in/, /uk/ and /gcc/. Sections follow the approved Figma order; every piece of copy,
  * image, card and office comes from the database for the region (ContentBlock region rows override the global ones).
  */
 async function RegionHome({ params }: { params: PageProps<"/[region]">["params"] }) {

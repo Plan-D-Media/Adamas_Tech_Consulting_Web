@@ -35,7 +35,7 @@ export function SliderControls({ index, total, onPrev, onNext, variant = "light"
       <button type="button" className={cx(circle, styles.prev)} onClick={onPrev} aria-label={`Previous ${label}`}>
         <Icon name="arrow" size={16} className="rotate-180" />
       </button>
-      <p className={cx("font-heading text-[1rem] leading-6 tabular-nums", styles.text)} aria-live="polite">
+      <p className={cx("text-center font-heading text-[1rem] leading-6", variant === "outline" ? "tabular-nums" : "w-12", styles.text)} aria-live="polite">
         {variant === "outline" ? (
           <>
             <span className="font-body text-[0.875rem] font-bold text-navy-900">{pad(index + 1)}</span>
