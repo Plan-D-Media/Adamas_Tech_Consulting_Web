@@ -1,0 +1,93 @@
+Sitemap & Pages — Confirmed Information Architecture,,,,,,,,,,
+"Topbar (confirmed by AdamasTech, 15 Oct): Logo · Services · Solutions · Case Studies · Insights · About Us · Region switcher (India / Middle East / UK & Ireland) · CTA 'Talk to an expert'",,,,,,,,,,
+"Regions: only the three homepages are regional (/in/, /uk/, /ae/). Every inner page is one global page in British English. IP redirect applies only on the bare domain. 'Q' refs = question in tab 7.",,,,,,,,,,
+#,Section,Page,URL path,Mega-menu parent,Region,Phase,In CMS portal (P2),Notes,Status / decision ref,Adamas tech comment
+1,Global,Top bar + mega-menus,(all pages),Mega-menus: Services · Solutions · Insights · About Us; Case Studies is a direct link,All,P1,Yes,"Sticky. Region switcher swaps the homepage only, not the navigation; sets a cookie. CTA 'Talk to an expert' → /contact. At launch Insights shows Events (Blog hidden or 'coming soon', Q2.9).","Confirmed 15 Oct; final version from Adwitiya (Q2.1, Q2.10)",
+2,Global,Footer,(all pages),—,All,P1,Yes,"Services, Solutions, Company, offices by region, phone/WhatsApp per region, legal links, social links, newsletter","Q3.6, Q10.4",
+3,Home,Root redirect,/,—,All,P1,No,"No content. Visitor with a region cookie → that homepage; otherwise IP country → /in/, /uk/ or /ae/. Used as x-default for search engines.",Default for other countries: Q3.3,
+4,Home,Homepage — India,/in/,Logo,India,P1,Yes,"Regional homepage, Indian English; hreflang en-IN","Content differences: Q3.1, Q3.2",
+5,Home,Homepage — Middle East,/gcc/,Logo,GCC,P1,Yes,Regional homepage; Dubai office emphasis; hreflang en-AE (+ other Gulf codes if confirmed),"Q3.1, Q3.4, Q3.5",Changed to GCC
+6,Home,Homepage — UK & Ireland,/uk/,Logo,UK & Ireland,P1,Yes,"Regional homepage, British English; London office emphasis; hreflang en-GB + en-IE","Q3.1, Q3.8",
+7,Services,Services overview,/services,Services,All,P1,Yes,3 pillars + cross-cutting capabilities,Confirmed,
+8,Services,Cloud Services (pillar),/services/cloud-services,Services,All,P1,Yes,Pillar hub + 6 sub-service pages,Confirmed,
+9,Services,— Cloud Migration,/services/cloud-services/cloud-migration,Services,All,P1,Yes,Cloud sub-service 1,Name to confirm (Q5.3),"Migration & Modernization
+"
+10,Services,— Cloud Transformation,/services/cloud-services/cloud-transformation,Services,All,P1,Yes,Cloud sub-service 2,Name to confirm (Q5.3),"DevOps & SecOps
+"
+11,Services,— Managed Cloud & Cloud Reselling (CSP),/services/cloud-services/managed-cloud,Services,All,P1,Yes,Cloud sub-service 3 — incl. cloud reselling,Name to confirm (Q5.3),"Managed Services
+"
+12,Services,— SAP on Cloud,/services/cloud-services/sap-on-cloud,Services,All,P1,Yes,Cloud sub-service 4,Name to confirm (Q5.3),AI/ML Ops
+13,Services,— Oracle NetSuite / Cloud ERP,/services/cloud-services/oracle-netsuite,Services,All,P1,Yes,Cloud sub-service 5,"Placement + name to confirm (Q2.3, Q5.3)",Cloud Automation
+14,Services,— Cloud Security & FinOps,/services/cloud-services/cloud-security-finops,Services,All,P1,Yes,Cloud sub-service 6,Name to confirm (Q5.3),Cloud Advisory & Consultation
+15,Services,Digital Transformation (pillar),/services/digital-transformation,Services,All,P1,Yes,Pillar hub + sub-service pages,Sub-service list: Q5.2,
+16,Services,— SAP Solutions & Consulting,/services/digital-transformation/sap,Services,All,P1,Yes,DT sub-service (proposed),Proposed — list Q5.2,
+17,Services,— Application Development,/services/digital-transformation/application-development,Services,All,P1,Yes,DT sub-service (proposed),Proposed — list Q5.2,
+18,Services,— Oracle NetSuite,/services/digital-transformation/oracle-netnuite,Services,All,P1,Yes,DT sub-service (proposed),Proposed — list Q5.2,
+19,Services,— Master Data Governance,/services/digital-transformation/master-data-governance,Services,All,P1,Yes,DT sub-service (proposed),Proposed — list Q5.2,
+20,Services,— Open edX / EdTech Platform,/services/digital-transformation/edtech-openedx,Services,All,P1,Yes,DT sub-service (proposed),Placement to confirm (Q2.3); list Q5.2,
+21,Services,Data & AI Services (pillar),/services/ai-services,Services,All,P1,Yes,Pillar hub + sub-service pages,Sub-service list: Q5.2,
+22,Services,— AI / ML Solutions,,Services,All,P1,Yes,AI sub-service ,Proposed — list Q5.2,create URL
+,Services,— Data Engineering,,,All,P1,Yes,AI sub-service ,,create URL
+,Services,— Advanced Analytics,,,All,P1,Yes,AI sub-service ,,create URL
+23,Services,— Agentic AI Solutions,/services/ai-services/agentic-ai,Services,All,P1,Yes,AI sub-service ,Proposed — list Q5.2,
+24,Services,— Computer Vision,/services/ai-services/computer-vision,Services,All,P1,Yes,AI sub-service ,Proposed — list Q5.2,
+25,Services,— Generative AI,/services/ai-services/generative-ai,Services,All,P1,Yes,AI sub-service ,Proposed — list Q5.2,
+,Services,— Sovereign AI,,Services,All,P1,Yes,AI sub-service ,,create URL
+,Services,— Responsible AI,,Services,All,P1,Yes,AI sub-service ,,create URL
+,Services,— AI Security & Governance,,Services,All,P1,Yes,AI sub-service ,,create URL
+26,Solutions,E-invoicing ,/solutions/e-invoicing ,Services,Middle East?,P1,Yes,Keep or retire; show to Middle East visitors only?,Decision: Q2.4,Solutions under others category
+27,Solutions,Solutions overview,/solutions,Solutions,All,P1,Yes,"Arivoo, AI products and AI solutions on one page; one Solution template serves every solution, so the final count does not change the build",Confirmed,
+28,Solutions,Arivoo,/solutions/arivoo  or  arivoo.in,Solutions,All,P1,Yes,"Short overview of Arivoo UMS, SMS, LMS linking to their pages on arivoo.in — or the menu item links straight to arivoo.in","Decision: Q7.1, Q7.4",
+29,Solutions,— Arivoo UMS,https://arivoo.in/arivoo-ums,Solutions › Arivoo,All,P1,Yes,External link (as on the current site); product pages stay on arivoo.in,Confirmed; arivoo.in out of scope (Q7.6),"placeholder with coming soon, no page"
+30,Solutions,— Arivoo SMS,https://arivoo.in/sms,Solutions › Arivoo,All,P1,Yes,External link (as on the current site); product pages stay on arivoo.in,Confirmed; arivoo.in out of scope (Q7.6),
+31,Solutions,— Arivoo LMS,https://arivoo.in/lms,Solutions › Arivoo,All,P1,Yes,External link (as on the current site); product pages stay on arivoo.in,Confirmed; arivoo.in out of scope (Q7.6),
+32,Solutions,— TestGUARD,https://arivoo.in/testguard,TBC (Q7.3),All,TBC,Yes,Secure online exams; currently on arivoo.in. Not in the new Solutions menu,Decision: Q7.3,
+33,Solutions,A-EYE,/solutions/[ai-product-a],Solutions,All,P1,Yes,In topbar; own page if confirmed,Name + page: Q7.2,add URL
+34,Solutions,AIR-MIND,/solutions/[ai-product-b],Solutions,All,P1,Yes,In topbar; own page if confirmed,Name + page: Q7.2,add URL
+35,Solutions,AI solution — Face Recognition Security,/solutions/face-recognition,Solutions (overview page),All,P1,Yes,Listed on /solutions; case-study backed,Full list of 6: Q5.3,
+36,Solutions,Industrial Analytics,/solutions/smart-parking,Solutions (overview page),All,P1,Yes,Listed on /solutions; case-study backed,Full list of 6: Q5.3,update URL
+37,Solutions,Asset Tracking,/solutions/cash-forecasting,Solutions (overview page),All,P1,Yes,Listed on /solutions; case-study backed; replaces the current SAP Treasury page,Full list of 6: Q5.3,update URL
+38,Solutions,AI solution — [AI solution 4–6],/solutions/[slug],Solutions (overview page),All,P1,Yes,Listed on /solutions; remaining AI solutions,Full list of 6: Q5.3,
+39,Case Studies,Case Studies listing,/case-studies,Case Studies,All,P1,Yes,Filter by service / industry / region,Confirmed,
+40,Case Studies,Case study detail,/case-studies/[slug],Case Studies,All,P1,Yes,One template; minimum 4 at launch,"Count + client clearance: Q5.5, Q5.6",
+41,Insights,Events listing,/insights/events,Insights › Events,All,P1,Yes,Upcoming + past,Past events: Q6.7,
+42,Insights,House of Lords event detail + registration,/insights/events/house-of-lords-2026,Insights › Events,All,P1,Yes,"TIME-CRITICAL — the 26 Nov event itself. Registration form, confirmation email, add-to-calendar, Event schema",Details: Q6.1–Q6.6,
+43,Insights,Blog listing,/insights/blog,Insights › Blog,All,P2,Yes,Phase 2 — hidden or 'coming soon' at launch,Q2.9; content Q13.2,
+44,Insights,Blog post,/insights/blog/[slug],Insights › Blog,All,P2,Yes,Phase 2 — Article schema,Q13.2,
+45,About,Company,/about,About Us › Company,All,P1,Yes,"Mission, RICE Adamas Group, global presence, certifications",Confirmed,
+46,About,Team,/about/team,About Us › Team,All,P1,Yes,Leadership profiles stored in the database,Who is listed: Q5.7,
+47,About,Careers,/about/careers,About Us › Careers,All,P2,Yes,Phase 2 — page + CMS + application form,"Q2.9, Q13.1",
+48,Trust,Credentials & Certifications,/credentials,Footer (+ link from About),All,P1,Yes,"5 badge pages + downloadable certificates: ISO 9001, ISO 27001, CMMI L3, AWS partner (tier to confirm), SAP/Oracle partner","Names + validity: Q5.3, Q5.9",
+49,Trust,Delivery Validations,(strip + /credentials),—,All,P1,Yes,Stats strip: only verified figures go live (current site shows conflicting figures),Figures: Q5.8,
+50,Contact,Contact,/contact,CTA 'Talk to an expert',All,P1,Yes,"Enquiry form + offices (London, Dubai, Bengaluru, Kolkata; US office to confirm), phone/WhatsApp per region","Q8.1–Q8.3, Q3.6",
+51,Legal,Privacy Policy,/privacy-policy,Footer,All,P1,Yes,Migrate/refresh,Text source: Q10.2,
+52,Legal,Cookie Policy,/cookie-policy,Footer,All,P1,Yes,New — needed with the UK/EU cookie consent banner,"Q10.2, Q10.3",
+53,Legal,Terms of Use,/terms-of-use,Footer,All,P1,Yes,Migrate/refresh,Q10.2,
+54,Utility,Thank-you / confirmation,/thank-you,(after form),All,P1,No,Enquiry + event registration confirmation,Confirmed,
+55,Utility,404 / error,(any unknown URL),—,All,P1,No,Branded error page,Confirmed,
+56,Utility,Search results,/search,Header,All,P1,No,"Site search across pages, solutions and case studies; not in the confirmed topbar, so placement to confirm",Placement: Q2.1,
+57,Phase 2,CMS portal (separate login site),admin.adamastechconsulting.com (TBC),—,—,P2,—,AdamasTech's team logs in to edit all content and images above; not linked from the website,Q12.1–Q12.6,
+,,,,,,,,,,
+"301 REDIRECT MAP — current WordPress URLs → new URLs (applies if the new addresses are approved, Q2.5; full list checked against the WordPress sitemap, Q9.4)",,,,,,,,,,
+#,Current URL,,New URL,,,,,Notes,Status / decision ref,
+1,/about-us/,,/about,,,,,,Confirmed,
+2,/contact/,,/contact,,,,,,Confirmed,
+3,/services/,,/services,,,,,Same path,Confirmed,
+4,/consulting/,,/services  or  /services/digital-transformation,,,,,Consulting is not in the new topbar,Decision: Q2.2,
+5,/sap-solution-consulting/,,/services/digital-transformation/sap,,,,,,Q2.5,
+6,/ai-data-analytics/,,/services/ai-services/ai-ml,,,,,,Q2.5,
+7,/openedx/,,/services/digital-transformation/edtech-openedx,,,,,,"Q2.3, Q2.5",
+8,/aws-solutions/,,/services/cloud-services,,,,,,Q2.5,
+9,/aws-solutions-old/,,/services/cloud-services,,,,,Old page still linked in the current footer,Q2.6,
+10,/technology-transformation/,,/services/digital-transformation,,,,,,Q2.5,
+11,/application-development/,,/services/digital-transformation/application-development,,,,,,Q2.5,
+12,/cloud-transformation/,,/services/cloud-services/cloud-transformation,,,,,,Q2.5,
+13,/master-data-governance/,,/services/digital-transformation/master-data-governance,,,,,,Q2.5,
+14,/data-science-analytics/,,/services/digital-transformation/data-analytics,,,,,,Q2.5,
+15,/oracle-netsuite-solutions/,,/services/cloud-services/oracle-netsuite,,,,,,"Q2.3, Q2.5",
+16,/e-invoicing-uae/,,/services/e-invoicing-uae  or  /ae/,,,,,Depends on keep/retire,Decision: Q2.4,
+17,/sap-treasury-investment-and-cash-management-implementation/,,/solutions/cash-forecasting,,,,,,Q2.5,
+18,/clients/,,/case-studies,,,,,,Q2.6,
+19,"/privacy-policy/, /terms-of-use/",,"/privacy-policy, /terms-of-use",,,,,Same paths,Confirmed,
+20,"/in, /uk, /ae",,"/in/, /uk/, /ae/",,,,,Same regional homepages,Confirmed,
+21,"Existing case-study, blog and other URLs",,Nearest new page,,,,,From the WordPress sitemap; no old URL may end in a 404,"Q2.6, Q9.4",
