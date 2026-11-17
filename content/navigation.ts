@@ -135,8 +135,13 @@ const servicesMenu: NavItemSeed = {
         },
         {
           label: "Computer Vision",
+          // DRAFT: the service row is DRAFT (placeholder summary), so a PUBLISHED menu row pointed the header
+          // at a URL that only answers the unpublished fallback (QA BUG-038, 17 Nov 2026).
+          status: "DRAFT",
           href: "/services/ai-services/computer-vision",
           descriptor: "Computer vision and intelligent monitoring solutions",
+          needsReview: true,
+          editorNote: "Publish together with the computer-vision service page once its summary copy is confirmed.",
         },
         {
           label: "Generative & Applied AI",

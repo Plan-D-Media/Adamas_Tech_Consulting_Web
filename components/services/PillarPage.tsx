@@ -2,6 +2,9 @@ import type { PillarPageData } from "@/lib/data/services";
 import type { Block } from "@/lib/data/site";
 import { pillarBlock, serviceBlockExtra } from "@/lib/data/service-blocks";
 import { copy, optionalCopy, plain } from "@/lib/placeholder";
+import { breadcrumbJsonLd, serviceJsonLd, type Crumb } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { RevealScope } from "@/components/motion/RevealScope";
 import { ServiceHero } from "@/components/services/ServiceHero";
 import { ServiceIntro } from "@/components/services/ServiceIntro";
@@ -53,9 +56,18 @@ export function PillarPage({ pillar, blocks }: { pillar: PillarPageData; blocks:
   const qualityExtra = serviceBlockExtra(quality, "quality");
   const faq = b("faq");
 
+  const crumbs: Crumb[] = [
+    { name: "Services", path: "/services" },
+    { name: plain(pillar.name), path: pillar.href },
+  ];
   return (
     <RevealScope>
+      <JsonLd data={breadcrumbJsonLd(crumbs)} />
+      <JsonLd data={serviceJsonLd({ name: plain(pillar.name), description: plain(pillar.summary) || plain(pillar.tagline) || null, path: pillar.href, image: pillar.image?.url ?? null })} />
       <ServiceHero pill={plain(hero?.eyebrow) || plain(pillar.name)} title={title} body={hero?.body ? plain(hero.body) : null} image={heroExtra.image ?? pillar.image} imageAlt={heroExtra.imageAlt} pending={!!heroTitle?.pending} />
+      <div className="container-site pt-6">
+        <Breadcrumb crumbs={crumbs} />
+      </div>
       {intro && (
         <ServiceIntro
           eyebrow={plain(intro.eyebrow)}

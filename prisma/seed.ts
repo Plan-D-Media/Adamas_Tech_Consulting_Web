@@ -547,6 +547,40 @@ export async function writeRedirectsFile() {
   console.log(`  wrote ${rows.length} redirects → lib/generated/redirects.json`);
 }
 
+/**
+ * Compile the detail URLs whose row exists but is not PUBLISHED, each with the listing a visitor should land on.
+ *
+ * `lib/data/unpublished.ts` already redirects these inside the route, but `redirect()` in a prerendered (streaming)
+ * route only emits a client-side meta refresh: the HTTP response is a 307 with no `Location` header and a full HTML
+ * body (`next/dist/docs/01-app/03-api-reference/04-functions/redirect.md`, "When used in a streaming context"). A
+ * crawler following one of the legacy WordPress URLs to a DRAFT case study therefore reached a dead end (QA BUG-039).
+ * The docs' own remedy is to redirect before the render, so proxy.ts reads this file and answers a real 307.
+ *
+ * It is a snapshot, like redirects.json: regenerate it (`npm run redirects:build`, or any seed) whenever a row is
+ * published or hidden. `lib/data/unpublished.ts` stays in place as the backstop for a row that changed since.
+ */
+export async function writeUnpublishedFile() {
+  const [cases, events, pillars, services] = await Promise.all([
+    prisma.caseStudy.findMany({ where: { status: { not: "PUBLISHED" } }, select: { slug: true } }),
+    prisma.event.findMany({ where: { status: { not: "PUBLISHED" } }, select: { slug: true } }),
+    prisma.servicePillar.findMany({ select: { slug: true, status: true } }),
+    prisma.service.findMany({ select: { slug: true, status: true, pillar: { select: { slug: true, status: true } } } }),
+  ]);
+  const map: Record<string, string> = {};
+  for (const c of cases) map[`/case-studies/${c.slug}`] = "/case-studies";
+  for (const e of events) map[`/insights/events/${e.slug}`] = "/insights/events";
+  for (const p of pillars) if (p.status !== "PUBLISHED") map[`/services/${p.slug}`] = "/services";
+  for (const s of services) {
+    const pillarVisible = s.pillar.status === "PUBLISHED";
+    if (s.status === "PUBLISHED" && pillarVisible) continue;
+    map[`/services/${s.pillar.slug}/${s.slug}`] = pillarVisible ? `/services/${s.pillar.slug}` : "/services";
+  }
+  const out = path.join(ROOT, "lib", "generated", "unpublished.json");
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, JSON.stringify(map, null, 2) + "\n");
+  console.log(`  wrote ${Object.keys(map).length} unpublished fallbacks → lib/generated/unpublished.json`);
+}
+
 /** If the site is running, ask it to drop cached content so the new seed shows immediately. */
 async function revalidateRunningSite() {
   const site = process.env.NEXT_PUBLIC_SITE_URL;
@@ -581,6 +615,7 @@ async function main() {
   await step("navigation", seedNav);
   await step("pages", seedPages);
   await step("redirects", seedRedirects);
+  await step("unpublished fallbacks", writeUnpublishedFile);
   console.log(`Seed complete in ${((Date.now() - t) / 1000).toFixed(1)}s`);
   await revalidateRunningSite();
 }

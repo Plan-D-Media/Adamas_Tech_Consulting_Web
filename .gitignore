@@ -15,6 +15,10 @@
 
 # next.js
 /.next/
+# alternate build outputs used by the QA chain (NEXT_DIST_DIR)
+/.next-drafts/
+/.next-public/
+/.next-gtm/
 /out/
 
 # production

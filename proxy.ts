@@ -1,8 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 import legacyRedirects from "@/lib/generated/redirects.json";
+import unpublishedFallbacks from "@/lib/generated/unpublished.json";
 import { LEGACY_REGION_SLUGS, REGION_COOKIE, REGION_SLUGS, defaultRegion, isRegionSlug, regionForCountry } from "@/lib/region";
 import { SOLUTIONS_ANCHOR } from "@/lib/anchors";
 import { securityHeaders } from "@/lib/security-headers";
+import { previewingDrafts } from "@/lib/preview";
 
 /**
  * 0. Preview protection: when PREVIEW_USERNAME and PREVIEW_PASSWORD are both set (staging), every request, including
@@ -13,12 +15,17 @@ import { securityHeaders } from "@/lib/security-headers";
  * 2b. /solutions (and anything under it) is a 301 to the Products & Solutions section of the region homepage:
  *    solutions have no pages here since 17 Nov 2026, they link out to their own websites.
  * 3. Legacy WordPress URLs → new URLs (Redirect table, compiled to lib/generated/redirects.json by the seed).
+ * 3b. A detail URL whose row exists but is not published → its listing, as a real 307 with a Location header
+ *    (lib/generated/unpublished.json). In the route itself redirect() would only emit a client-side meta
+ *    refresh, because the route is prerendered and streams (QA BUG-039). Skipped while drafts are previewed.
  * 4. Any other single-segment path that isn't a top-level page is a 404 (app/[region] only serves in/uk/gcc).
  * 5. Any other trailing slash is removed.
  * Every response the proxy creates itself carries the security headers (lib/security-headers.ts); next.config.ts
  * adds them to everything else.
  */
 const redirects = legacyRedirects as unknown as Record<string, [string, number]>;
+/** Detail path → the listing to send a visitor to while the row is unpublished; empty in a drafts build. */
+const unpublished = previewingDrafts ? {} : (unpublishedFallbacks as unknown as Record<string, string>);
 
 /**
  * Top-level folders in app/ besides [region]. app/[region] reads its param inside <Suspense> (instant navigation), so
@@ -126,6 +133,15 @@ export function proxy(request: NextRequest) {
   if (legacy) {
     const [to, status] = legacy;
     return withSecurityHeaders(NextResponse.redirect(new URL(to.startsWith("http") ? to : `${to}${search}`, request.url), status === 302 ? 302 : 301));
+  }
+
+  // The row exists but is not published yet: a temporary redirect to its listing, never cached, so the page
+  // starts answering 200 again the moment the row is published (QA BUG-002, BUG-039).
+  const hidden = unpublished[bare.toLowerCase()];
+  if (hidden) {
+    const res = NextResponse.redirect(new URL(`${hidden}${search}`, request.url), 307);
+    res.headers.set("Cache-Control", "no-store");
+    return withSecurityHeaders(res);
   }
 
   const segments = bare.split("/").filter(Boolean);

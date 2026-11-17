@@ -76,3 +76,37 @@ export function organizationJsonLd(opts: { sameAs: string[]; phones: { phone: st
       : {}),
   };
 }
+
+/**
+ * schema.org Service for a pillar or sub-service page (INNER_PAGES.md section 3). `provider` is the Organization
+ * the chrome already emits; `areaServed` carries the three delivery regions the site sells into.
+ */
+export function serviceJsonLd(opts: { name: string; description?: string | null; path: string; image?: string | null; category?: string | null }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: opts.name,
+    url: absoluteUrl(opts.path),
+    ...(opts.description ? { description: opts.description } : {}),
+    ...(opts.image ? { image: absoluteUrl(opts.image) } : {}),
+    ...(opts.category ? { serviceType: opts.category } : {}),
+    provider: { "@type": "Organization", name: SITE_NAME, url: `${siteUrl}/` },
+    areaServed: ["IN", "GB", "IE", "AE", "SA", "QA", "KW", "BH", "OM"],
+  };
+}
+
+/** schema.org Article for a case-study detail page (INNER_PAGES.md section 3). */
+export function articleJsonLd(opts: { headline: string; description?: string | null; path: string; image?: string | null; published?: string | null; modified?: string | null }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: opts.headline,
+    mainEntityOfPage: absoluteUrl(opts.path),
+    ...(opts.description ? { description: opts.description } : {}),
+    ...(opts.image ? { image: absoluteUrl(opts.image) } : {}),
+    ...(opts.published ? { datePublished: opts.published } : {}),
+    ...(opts.modified ? { dateModified: opts.modified } : {}),
+    author: { "@type": "Organization", name: SITE_NAME, url: `${siteUrl}/` },
+    publisher: { "@type": "Organization", name: SITE_NAME, url: `${siteUrl}/` },
+  };
+}

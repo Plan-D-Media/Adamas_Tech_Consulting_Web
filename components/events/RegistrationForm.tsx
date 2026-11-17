@@ -54,7 +54,7 @@ export function RegistrationForm({ slug, title, open, calendarHref }: Props) {
   });
   const err = (name: RegistrationField) =>
     errors[name] ? (
-      <p id={`${uid}-${name}-error`} className="mt-1 font-body text-[0.8125rem] text-[#B4600A]">
+      <p id={`${uid}-${name}-error`} className="mt-1 font-body text-[0.8125rem] text-[#9A5208]">
         {errors[name]}
       </p>
     ) : null;
@@ -71,7 +71,7 @@ export function RegistrationForm({ slug, title, open, calendarHref }: Props) {
         </p>
       )}
       {state.status !== "idle" && state.message && (
-        <p role={state.status === "error" ? "alert" : "status"} className={cx("mt-3 rounded-sm px-4 py-3 font-body text-[0.9375rem]", state.status === "error" || state.status === "limited" ? "bg-orange-500/10 text-[#B4600A]" : "bg-tint-100 text-navy-800")}>
+        <p role={state.status === "error" ? "alert" : "status"} className={cx("mt-3 rounded-sm px-4 py-3 font-body text-[0.9375rem]", state.status === "error" || state.status === "limited" ? "bg-orange-500/10 text-[#9A5208]" : "bg-tint-100 text-navy-800")}>
           {state.message}
         </p>
       )}

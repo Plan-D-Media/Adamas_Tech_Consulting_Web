@@ -2,6 +2,7 @@ import "server-only";
 import { createHash } from "node:crypto";
 import { headers } from "next/headers";
 import nodemailer from "nodemailer";
+import type { Transporter } from "nodemailer";
 import { db } from "@/lib/db";
 
 /**
@@ -47,7 +48,7 @@ export interface MailMessage {
   attachments?: MailAttachment[];
 }
 
-let transport: nodemailer.Transporter | null = null;
+let transport: Transporter | null = null;
 
 function smtpTransport() {
   if (transport) return transport;

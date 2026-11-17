@@ -719,6 +719,59 @@
       ],
       "fit": "fill",
       "enlarge": true
+    },
+    {
+      "id": "about-hero-bg",
+      "kind": "raster",
+      "src": "design-ref/fills/d657ab7b8b3695b0d06b54cb3812d1ba0a2c9645.png",
+      "out": "images/about/hero-bg",
+      "width": 1920,
+      "height": 530,
+      "scales": [
+        1
+      ],
+      "avifQuality": 50,
+      "webpQuality": 72,
+      "blur": true,
+      "crop": [
+        0,
+        0,
+        1,
+        0.5521
+      ],
+      "fit": "fill",
+      "enlarge": true
+    },
+    {
+      "id": "about-approach-bg",
+      "kind": "raster",
+      "src": "design-ref/fills/c4653bdb5a28e771be3fcc3dcbfe592983b6578e.png",
+      "out": "images/about/approach-bg",
+      "width": 1920,
+      "height": 490,
+      "scales": [
+        1
+      ],
+      "avifQuality": 50,
+      "webpQuality": 70,
+      "fit": "cover",
+      "enlarge": true
+    },
+    {
+      "id": "about-commitment",
+      "kind": "raster",
+      "src": "design-ref/fills/17cc7ddec649fc6efaab222c41a90649d2922946.png",
+      "out": "images/about/commitment",
+      "width": 1194,
+      "height": 524,
+      "scales": [
+        1
+      ],
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "blur": true,
+      "fit": "cover",
+      "enlarge": true
     }
   ]
 }

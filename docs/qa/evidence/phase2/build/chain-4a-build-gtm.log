@@ -1,0 +1,72 @@
+# step 4a - GTM dummy-container build
+# npx next build
+
+▲ Next.js 16.4.6 (Turbopack)
+- Environments: .env.local, .env
+✓ Running next.config.ts took 243ms
+- Cache Components enabled
+- Partial Prefetching enabled
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 5.9s
+  Running TypeScript ...
+  Finished TypeScript in 13.8s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/51) ...
+  Generating static pages using 7 workers (12/51) 
+  Generating static pages using 7 workers (25/51) 
+  Generating static pages using 7 workers (38/51) 
+✓ Generating static pages using 7 workers (51/51) in 9.6s
+  Finalizing page optimization ...
+
+Route (app)                                      Revalidate  Expire
+┌ ○ /_not-found                                          1h      1d
+├   /[region]                                            1h      1d
+│ ├ ◐ /[region]                                          1h      1d
+│ ├ ○ /in                                                1h      1d
+│ ├ ○ /uk                                                1h      1d
+│ └ ○ /gcc                                               1h      1d
+├ ○ /about                                               1h      1d
+├ ○ /about/careers                                       1h      1d
+├ ○ /about/team                                          1h      1d
+├ ƒ /api/revalidate
+├ ƒ /case-studies                                        1h      1d
+├   /case-studies/[slug]                                 1h      1d
+│ ├ ◐ /case-studies/[slug]                               1h      1d
+│ └ ○ /case-studies/no-published-content                 1h      1d
+├ ○ /contact                                             1h      1d
+├ ○ /cookie-policy                                       1h      1d
+├ ○ /credentials                                         1h      1d
+├ ○ /figma-fixture                                       1h      1d
+├ ○ /insights                                            1h      1d
+├ ○ /insights/blog                                       1h      1d
+├ ○ /insights/events                                     1h      1d
+├   /insights/events/[slug]                              1h      1d
+│ ├ ◐ /insights/events/[slug]                            1h      1d
+│ └ ○ /insights/events/no-published-content              1h      1d
+├ ƒ /insights/events/[slug]/calendar
+├ ○ /privacy-policy                                      1h      1d
+├ ○ /robots.txt
+├ ○ /search                                              1h      1d
+├ ○ /services                                            1h      1d
+├   /services/[pillar]                                   1h      1d
+│ ├ ◐ /services/[pillar]                                 1h      1d
+│ ├ ○ /services/cloud-services                           1h      1d
+│ ├ ○ /services/digital-transformation                   1h      1d
+│ └ ○ /services/ai-services                              1h      1d
+├   /services/[pillar]/[service]                         1h      1d
+│ ├ ◐ /services/[pillar]/[service]                       1h      1d
+│ ├ ◐ /services/cloud-services/[service]                 1h      1d
+│ ├ ○ /services/cloud-services/cloud-automation          1h      1d
+│ └ ◐ [+14 more paths]
+├ ○ /sitemap.xml                                         1h      1d
+├ ○ /terms-of-use                                        1h      1d
+└ ○ /thank-you                                           1h      1d
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)             prerendered as static content
+◐  (Partial Prerender)  prerendered as static HTML with dynamic server-streamed content
+ƒ  (Dynamic)            server-rendered on demand
+

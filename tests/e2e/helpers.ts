@@ -66,6 +66,16 @@ export const SOLUTIONS_TARGET = /^\/(in|uk|gcc)\/(\?[^#]*)?#products-solutions$/
  */
 export async function linkOk(request: import("@playwright/test").APIRequestContext, href: string): Promise<string | null> {
   const res = await request.get(href, { maxRedirects: 0 });
+  // "/" is the geo decision point, not a page: the logo and the "Home" breadcrumb on every region-less page point at
+  // it on purpose (components/nav/LogoLink.tsx, proxy.ts rule 1), and it answers a 307 to the visitor's regional
+  // homepage. The redirect is the documented behaviour; what matters is that it lands on a 200 in one hop.
+  if (href === "/") {
+    if (res.status() !== 307) return `/ -> ${res.status()} (expected the geo 307)`;
+    const target = (res.headers()["location"] ?? "").replace(/^https?:\/\/[^/]+/, "");
+    if (!/^\/(in|uk|gcc)\/$/.test(target)) return `/ -> 307 ${target} (expected a region homepage)`;
+    const home = await request.get(target, { maxRedirects: 0 });
+    return home.status() === 200 ? null : `/ -> ${target} -> ${home.status()}`;
+  }
   if (!REDIRECTING_PATHS.test(href)) return res.status() === 200 ? null : `${href} -> ${res.status()}`;
   if (res.status() !== 301) return `${href} -> ${res.status()} (expected a 301 to the homepage section)`;
   const loc = res.headers()["location"] ?? "";

@@ -239,6 +239,23 @@ The approved design also shows Cloudera and the Google Developers Agency Program
 appears on your current website. Please confirm whether they belong there, and send the logo files you are licensed
 to use.
 
+### Sections on the new About page that have no content yet (added 17 November 2026)
+
+The approved About design has six further bands. Each is built and ready, but the words in the design file are the
+template's own filler, so nothing is published. Any of them can go live the day the copy arrives; a band with no
+copy is simply left out, and the page reads normally without it.
+
+| Band in the design | What the design shows | What we need from you |
+|---|---|---|
+| Our Commitment | "The World: Scalable digital transformation", "Individually: Connected enterprise capabilities", "Team: Scalable digital transformation", with a video still and a "Start a Project" button | Three short commitments in your words, and the video (or a photograph) |
+| Our Strategic Direction | "Building What's Next, Together." and five pillars (deeper Cloud/SAP capability, reach across India, the UK, Ireland and the Middle East, working closely with clients, security and governance, continuous improvement) | Confirm this copy is yours and may be published. Note: it says "the Middle East"; the rest of the site says "GCC", so we would change it unless you prefer otherwise |
+| Progress in Numbers | $14.8B revenue, 230K+ people, 60 countries, 167 nationalities, 205 global delivery centres, 70+ labs, 18K+ clients, 2,200+ patents | These are another company's figures, carried in from the reference layout. Send your own, or we leave the band out |
+| "12 Years' Experience In It" | A large figure beside the company paragraphs | One confirmed number (see the founding-year item above). Until then the figure is not drawn |
+| Testimonials | Eight identical quotes from "Miyah Myles" | Two to four real client quotes, each with a name, a role and the client's permission to publish |
+| Life at Adamas | A photo collage with "Constructive Feedback", "Inclusive & Open-Culture", "Learning & Development", and a "Watch Video" button | Six to nine culture statements, the photographs, and the video |
+| "150+ Satisfied Clients. 1M+ ROI Increased" | A line across the clients and partners band | Source or approve both figures, or we drop the line |
+| Second statistics band | 1790 happy clients, 491 finished projects, 245 skilled experts, 1090 media posts | Template filler. Confirm your own numbers or we leave the band out |
+
 ---
 
 ## 6. Industries
@@ -284,6 +301,11 @@ Finally, the "Did you know?" figures on several service pages are third-party cl
 the Oracle NetSuite page carries "#1 true cloud ERP" and a "USD 3.4M" saving. All of these are hidden until sourced.
 Two figures on the data science page are shown as "-86%" and "-23%"; please confirm whether the minus signs are
 intended.
+
+**Case-study results (added 17 November 2026).** The new case-study page has a "Results and business impact" band
+and a summary card that both show one line per result. Where we hold a figure your sources agree on, it is shown.
+Where they disagree, the card reads "Client-validated result to be added" in your preview and shows nothing at all
+on the public site. Confirming the figures in section 1 fills these in.
 
 ---
 

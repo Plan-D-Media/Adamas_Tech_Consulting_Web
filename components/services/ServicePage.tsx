@@ -3,6 +3,9 @@ import type { ServicePageData } from "@/lib/data/services";
 import type { Block } from "@/lib/data/site";
 import { pillarBlock, serviceBlockExtra } from "@/lib/data/service-blocks";
 import { optionalCopy, plain } from "@/lib/placeholder";
+import { breadcrumbJsonLd, serviceJsonLd, type Crumb } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { RevealScope } from "@/components/motion/RevealScope";
 import { Icon } from "@/components/ui/Icon";
 import { ServiceHero } from "@/components/services/ServiceHero";
@@ -36,9 +39,20 @@ export function ServicePage({ service, blocks }: { service: ServicePageData; blo
   // Placeholder "what we do" items are already left out of `service.whatWeDo` outside the drafts preview (lib/data/services.ts).
   const whatWeDo = service.whatWeDo.map((t) => ({ title: plain(t.title), body: t.body ? plain(t.body) : null }));
   const intro = paragraphs(service.summary, service.whoFor);
+  const path = `/services/${service.pillar.slug}/${service.slug}`;
+  const crumbs: Crumb[] = [
+    { name: "Services", path: "/services" },
+    { name: plain(service.pillar.name), path: service.pillar.href },
+    { name: plain(service.name), path },
+  ];
   return (
     <RevealScope>
+      <JsonLd data={breadcrumbJsonLd(crumbs)} />
+      <JsonLd data={serviceJsonLd({ name: plain(service.name), description: plain(service.descriptor) || null, path, image: service.image?.url ?? null, category: plain(service.pillar.name) })} />
       <ServiceHero pill={plain(service.pillar.name)} title={plain(service.name)} body={service.descriptor ? plain(service.descriptor) : null} image={heroExtra.image ?? service.image} imageAlt={heroExtra.imageAlt} />
+      <div className="container-site pt-6">
+        <Breadcrumb crumbs={crumbs} />
+      </div>
       {(intro.length > 0 || whatWeDo.length > 0) && (
         <ServiceIntro eyebrow={plain(service.pillar.name)} heading={`About ${plain(service.name)}`} paragraphs={intro} ctaLabel="Talk to an expert" ctaHref="/contact" image={service.image} imageAlt={service.image?.alt} pills={whatWeDo.slice(0, 4).map((t) => t.title)} />
       )}

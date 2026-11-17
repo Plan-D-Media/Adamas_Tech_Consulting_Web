@@ -12,6 +12,9 @@ Processed output lives under `public/media/` and is served through `MEDIA_BASE_U
 | `flags/gcc[@2x,@3x].{avif,webp}` | Figma node export at 4x | 262:1603 "GCC" | 24x14 | Region switcher, drawer |
 | `images/home/hero-bg.{avif,webp}` + `.blur.txt` | Figma fill `ffe571bf...` (1920x1080) | 236:1403 "Rectangle 3120" | 1920x960 at 60% opacity | Homepage hero (Milestone B) |
 | `images/menu/sap-treasury.{avif,webp}` | Figma fill `5a2952d6...` (384x167, low-res) | 236:4647 | 280x553 | Not used: the mega-menu feature card takes the case study's own image from the database |
+| `images/about/hero-bg.{avif,webp}` + `.blur.txt` | Figma fill `d657ab7b...` (2216x1108, STRETCH crop `[0,0,1,0.5521]`) | 274:1626, About us hero | 1920x530 | About hero (LCP image, `priority`) |
+| `images/about/approach-bg.{avif,webp}` | Figma fill `c4653bdb...` (1894x663) | 274:1667 "Image 243" | 1920x490 under a navy wash | "Our approach" band on About |
+| `images/about/commitment.{avif,webp}` + `.blur.txt` | Figma fill `17cc7dde...` (740x460, enlarged) | 274:1736 | 1194x524 | "Our Commitment" band - held until the client sends that copy |
 
 Live-site images migrated in the prototype round (`public/media/images/**`: partners, certifications, clients, industries, case studies, solutions, people, hero posters) are unchanged and still referenced by the seed.
 

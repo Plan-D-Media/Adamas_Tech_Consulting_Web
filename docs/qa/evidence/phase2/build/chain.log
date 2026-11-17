@@ -12,3 +12,137 @@
 [2026-11-17 11:19:42] preflight: free memory -> 2459 MB (floor 4096 MB)
 [2026-11-17 11:19:42] preflight: port 3000 -> free, port 3100 -> free
 [2026-11-17 11:19:42] preflight FAILED with 2 problem(s):
+[2026-11-17 12:27:41] ==============================================================================
+[2026-11-17 12:27:41] Phase 2 chain starting (from step 0)
+[2026-11-17 12:27:41] --dry: plan only
+[2026-11-17 12:27:41]   step 0 - check:config
+[2026-11-17 12:27:41]   step 1 - drafts build
+[2026-11-17 12:27:41]   step 2 - public build
+[2026-11-17 12:27:41]   step 3 - final regression (e2e, public build)
+[2026-11-17 12:27:41]   step 4a - GTM dummy-container build
+[2026-11-17 12:27:41]   step 4b - GTM dummy-container check (consent suite)
+[2026-11-17 12:27:41]   step 6 - review server: next start -p 3000 against .next-drafts (left running)
+[2026-11-17 12:27:41] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-17 12:27:41] preflight: free memory -> 5193 MB (floor 4096 MB)
+[2026-11-17 12:27:41] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-17 12:27:41] preflight OK
+[2026-11-17 12:27:55] ==============================================================================
+[2026-11-17 12:27:55] Phase 2 chain starting (from step 0)
+[2026-11-17 12:27:55] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-17 12:27:55] preflight: free memory -> 5287 MB (floor 4096 MB)
+[2026-11-17 12:27:55] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-17 12:27:55] preflight OK
+[2026-11-17 12:27:55] START step 0 - check:config: npm run check:config --silent
+[2026-11-17 12:27:57] PASS  step 0 - check:config (2s) -> chain-0-check-config.log
+[2026-11-17 12:27:57] START step 1 - drafts build: npx next build
+[2026-11-17 12:28:42] PASS  step 1 - drafts build (45s) -> chain-1-build-drafts.log
+[2026-11-17 12:28:42] START step 2 - public build: npx next build
+[2026-11-17 12:29:34] PASS  step 2 - public build (52s) -> chain-2-build-public.log
+[2026-11-17 12:29:34] START step 3 - final regression: npm run test:e2e
+[2026-11-17 12:31:54] FAIL  step 3 - final regression (exit 1, 140s) -> chain-3-e2e-public.log
+[2026-11-17 12:31:54] CHAIN STOPPED at step 3 - final regression (e2e, public build). Later steps not run.
+[2026-11-17 12:31:54] Resume with: node scripts/qa/phase2-chain.mjs --from 3
+[2026-11-17 12:43:21] ==============================================================================
+[2026-11-17 12:43:21] Phase 2 chain starting (from step 0)
+[2026-11-17 12:43:21] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-17 12:43:21] preflight: free memory -> 6139 MB (floor 4096 MB)
+[2026-11-17 12:43:21] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-17 12:43:21] preflight OK
+[2026-11-17 12:43:21] START step 0 - check:config: npm run check:config --silent
+[2026-11-17 12:43:24] PASS  step 0 - check:config (3s) -> chain-0-check-config.log
+[2026-11-17 12:43:24] START step 1 - drafts build: npx next build
+[2026-11-17 12:44:59] PASS  step 1 - drafts build (95s) -> chain-1-build-drafts.log
+[2026-11-17 12:44:59] START step 2 - public build: npx next build
+[2026-11-17 12:46:29] PASS  step 2 - public build (90s) -> chain-2-build-public.log
+[2026-11-17 12:46:29] START step 3 - final regression: npm run test:e2e
+[2026-11-17 12:51:09] FAIL  step 3 - final regression (exit 1, 280s) -> chain-3-e2e-public.log
+[2026-11-17 12:51:09] CHAIN STOPPED at step 3 - final regression (e2e, public build). Later steps not run.
+[2026-11-17 12:51:09] Resume with: node scripts/qa/phase2-chain.mjs --from 3
+[2026-11-17 14:20:42] ==============================================================================
+[2026-11-17 14:20:42] Phase 2 chain starting (from step 0)
+[2026-11-17 14:20:42] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-17 14:20:42] preflight: free memory -> 5683 MB (floor 4096 MB)
+[2026-11-17 14:20:42] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-17 14:20:42] preflight OK
+[2026-11-17 14:20:42] START step 0 - check:config: npm run check:config --silent
+[2026-11-17 14:20:43] PASS  step 0 - check:config (1s) -> chain-0-check-config.log
+[2026-11-17 14:20:43] START step 1 - drafts build: npx next build
+[2026-11-17 14:21:05] PASS  step 1 - drafts build (23s) -> chain-1-build-drafts.log
+[2026-11-17 14:21:05] START step 2 - public build: npx next build
+[2026-11-17 14:21:31] PASS  step 2 - public build (26s) -> chain-2-build-public.log
+[2026-11-17 14:21:31] START step 3 - final regression: npm run test:e2e
+[2026-11-17 14:23:17] FAIL  step 3 - final regression (exit 1, 106s) -> chain-3-e2e-public.log
+[2026-11-17 14:23:17] CHAIN STOPPED at step 3 - final regression (e2e, public build). Later steps not run.
+[2026-11-17 14:23:17] Resume with: node scripts/qa/phase2-chain.mjs --from 3
+[2026-11-17 14:24:14] ==============================================================================
+[2026-11-17 14:24:14] Phase 2 chain starting (from step 0)
+[2026-11-17 14:24:14] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-17 14:24:14] preflight: free memory -> 5642 MB (floor 4096 MB)
+[2026-11-17 14:24:14] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-17 14:24:14] preflight OK
+[2026-11-17 14:24:14] START step 0 - check:config: npm run check:config --silent
+[2026-11-17 14:24:15] PASS  step 0 - check:config (1s) -> chain-0-check-config.log
+[2026-11-17 14:24:15] START step 1 - drafts build: npx next build
+[2026-11-17 14:24:38] PASS  step 1 - drafts build (23s) -> chain-1-build-drafts.log
+[2026-11-17 14:24:38] START step 2 - public build: npx next build
+[2026-11-17 14:24:59] PASS  step 2 - public build (21s) -> chain-2-build-public.log
+[2026-11-17 14:24:59] START step 3 - final regression: npm run test:e2e
+[2026-11-17 14:26:32] PASS  step 3 - final regression (93s) -> chain-3-e2e-public.log
+[2026-11-17 14:26:32] START step 4a - GTM dummy-container build: npx next build
+[2026-11-17 14:27:11] PASS  step 4a - GTM dummy-container build (39s) -> chain-4a-build-gtm.log
+[2026-11-17 14:27:11] START step 4b - GTM dummy-container check: npx playwright test tests/e2e/consent.spec.ts
+[2026-11-17 14:28:26] FAIL  step 4b - GTM dummy-container check (exit 1, 76s) -> chain-4b-consent-gtm.log
+[2026-11-17 14:28:26] CHAIN STOPPED at step 4b - GTM dummy-container check (consent suite). Later steps not run.
+[2026-11-17 14:28:26] Resume with: node scripts/qa/phase2-chain.mjs --from 5
+[2026-11-17 14:31:40] ==============================================================================
+[2026-11-17 14:31:40] Phase 2 chain starting (from step 0)
+[2026-11-17 14:31:40] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-17 14:31:40] preflight: free memory -> 6222 MB (floor 4096 MB)
+[2026-11-17 14:31:40] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-17 14:31:40] preflight OK
+[2026-11-17 14:31:40] START step 0 - check:config: npm run check:config --silent
+[2026-11-17 14:31:40] PASS  step 0 - check:config (0s) -> chain-0-check-config.log
+[2026-11-17 14:31:40] START step 1 - drafts build: npx next build
+[2026-11-17 14:32:10] PASS  step 1 - drafts build (30s) -> chain-1-build-drafts.log
+[2026-11-17 14:32:10] START step 2 - public build: npx next build
+[2026-11-17 14:32:40] PASS  step 2 - public build (30s) -> chain-2-build-public.log
+[2026-11-17 14:32:40] START step 3 - final regression: npm run test:e2e
+[2026-11-17 14:34:28] PASS  step 3 - final regression (107s) -> chain-3-e2e-public.log
+[2026-11-17 14:34:28] START step 4a - GTM dummy-container build: npx next build
+[2026-11-17 14:34:47] PASS  step 4a - GTM dummy-container build (19s) -> chain-4a-build-gtm.log
+[2026-11-17 14:34:47] START step 4b - GTM dummy-container check: npx playwright test tests/e2e/consent.spec.ts
+[2026-11-17 14:35:05] PASS  step 4b - GTM dummy-container check (18s) -> chain-4b-consent-gtm.log
+[2026-11-17 14:35:05] step 6 - starting the review server on 3000 against the DRAFTS build (.next-drafts)
+[2026-11-17 14:35:07] PASS  step 6 - review server up: http://localhost:3000/in/  (pid 15568, drafts build)
+[2026-11-17 14:35:07] CHAIN COMPLETE. The review server is left running on purpose; stop it when the review is done:
+[2026-11-17 14:35:07]   Stop-Process -Id 15568
+[2026-11-17 14:35:07] ==============================================================================
+[2026-11-17 14:38:32] ==============================================================================
+[2026-11-17 14:38:32] Phase 2 chain starting (from step 0)
+[2026-11-17 14:38:32] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-17 14:38:32] preflight: free memory -> 4919 MB (floor 4096 MB)
+[2026-11-17 14:38:32] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-17 14:38:32] preflight OK
+[2026-11-17 14:38:32] START step 0 - check:config: npm run check:config --silent
+[2026-11-17 14:38:33] PASS  step 0 - check:config (0s) -> chain-0-check-config.log
+[2026-11-17 14:38:33] START step 1 - drafts build: npx next build
+[2026-11-17 14:39:10] PASS  step 1 - drafts build (37s) -> chain-1-build-drafts.log
+[2026-11-17 14:39:10] START step 2 - public build: npx next build
+[2026-11-17 14:39:43] PASS  step 2 - public build (34s) -> chain-2-build-public.log
+[2026-11-17 14:39:43] START step 3 - final regression: npm run test:e2e
+[2026-11-17 14:41:48] PASS  step 3 - final regression (125s) -> chain-3-e2e-public.log
+[2026-11-17 14:41:48] START step 4a - GTM dummy-container build: npx next build
+[2026-11-17 14:42:25] PASS  step 4a - GTM dummy-container build (37s) -> chain-4a-build-gtm.log
+[2026-11-17 14:42:25] START step 4b - GTM dummy-container check: npx playwright test tests/e2e/consent.spec.ts
+[2026-11-17 14:42:47] PASS  step 4b - GTM dummy-container check (21s) -> chain-4b-consent-gtm.log
+[2026-11-17 14:42:47] step 6 - starting the review server on 3000 against the DRAFTS build (.next-drafts)
+[2026-11-17 14:42:49] PASS  step 6 - review server up: http://localhost:3000/in/  (pid 18320, drafts build)
+[2026-11-17 14:42:49] CHAIN COMPLETE. The review server is left running on purpose; stop it when the review is done:
+[2026-11-17 14:42:49]   Stop-Process -Id 18320
+[2026-11-17 14:42:49] ==============================================================================
+[2026-11-17 14:48:28] ==============================================================================
+[2026-11-17 14:48:28] Phase 2 chain starting (from step 0)
+[2026-11-17 14:48:28] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-17 14:48:28] preflight: free memory -> 4031 MB (floor 4096 MB)
+[2026-11-17 14:48:28] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-17 14:48:28] preflight FAILED with 1 problem(s):

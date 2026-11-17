@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useId, useState } from "react";
+import { useActionState, useCallback, useEffect, useId, useRef, useState } from "react";
 import { submitContact } from "@/app/(site)/contact/actions";
 import type { ContactField, ContactState } from "@/lib/contact-schema";
 import { fieldError } from "@/lib/contact-validate";
@@ -88,19 +88,62 @@ export function HomeContactForm({ placeholders, submitLabel, consentLabel, regio
   const errors = { ...state.fieldErrors, ...live };
   const flag = FLAG_FOR[COUNTRIES.find((c) => c.label === country)?.code ?? ""] ?? null;
 
+  // Work queued by a blur that happened while a pointer was down, run once the click it belongs to has been
+  // dispatched (see the onBlur note below). pointerup is listened for on the document, so a drag that ends outside
+  // the form still releases the queue.
+  const pointerDown = useRef(false);
+  const queued = useRef<Array<() => void>>([]);
+  useEffect(() => {
+    const down = () => {
+      pointerDown.current = true;
+    };
+    const up = () => {
+      pointerDown.current = false;
+      const run = queued.current;
+      queued.current = [];
+      if (run.length) setTimeout(() => run.forEach((fn) => fn()), 0);
+    };
+    document.addEventListener("pointerdown", down, true);
+    document.addEventListener("pointerup", up, true);
+    document.addEventListener("pointercancel", up, true);
+    return () => {
+      document.removeEventListener("pointerdown", down, true);
+      document.removeEventListener("pointerup", up, true);
+      document.removeEventListener("pointercancel", up, true);
+    };
+  }, []);
+  const afterPointer = useCallback((fn: () => void) => {
+    if (pointerDown.current) queued.current.push(fn);
+    else fn();
+  }, []);
+
   const field = (name: Exclude<ContactField, "consent" | "country">) => ({
     id: `${uid}-${name}`,
     name,
     defaultValue: state.values?.[name] ?? "",
     "aria-invalid": errors[name] ? true : undefined,
     "aria-describedby": errors[name] ? `${uid}-${name}-error` : undefined,
-    onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => setLive((l) => ({ ...l, [name]: fieldError(name, e.target.value) })),
+    // Checking on blur is what the visitor expects, but blur also fires on the mousedown that begins the *next*
+    // click. Adding or removing a message there changes the height of everything below the field between mousedown
+    // and mouseup, so the consent box or the submit button slides out from under the pointer and the click never
+    // lands (QA BUG-036). The check is therefore deferred until the pointer is up again; a keyboard Tab is
+    // unaffected and still reports immediately.
+    onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const value = e.target.value;
+      afterPointer(() => setLive((l) => ({ ...l, [name]: fieldError(name, value) })));
+    },
+    // A message already on screen clears as soon as the value becomes valid, so the correction is acknowledged
+    // while the visitor types rather than when they click away. Typing never introduces a new message.
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      if (!errors[name] || fieldError(name, e.target.value)) return;
+      setLive((l) => ({ ...l, [name]: undefined }));
+    },
   });
   // Keyboard focus keeps the global 2px blue ring (focus-visible); the 1px border change alone was too thin (QA BUG-016).
   const inputCls = "h-[52px] w-full rounded-sm border border-[#EDF5F8] bg-white pr-4 font-ui text-[1.125rem] text-[#333E63] placeholder:text-[#333E63]/50 focus:border-blue-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-600";
   const err = (name: ContactField) =>
     errors[name] ? (
-      <p id={`${uid}-${name}-error`} className="mt-1 font-body text-[0.8125rem] text-[#B4600A]">
+      <p id={`${uid}-${name}-error`} className="mt-1 font-body text-[0.8125rem] text-[#9A5208]">
         {errors[name]}
       </p>
     ) : null;
@@ -108,7 +151,7 @@ export function HomeContactForm({ placeholders, submitLabel, consentLabel, regio
   return (
     <form action={action} noValidate className="mt-[26px] grid max-w-[421px] gap-5">
       {state.status !== "idle" && state.message && (
-        <p role="status" className={cx("rounded-sm px-4 py-3 font-body text-[0.9375rem]", state.status === "error" || state.status === "limited" ? "bg-orange-500/10 text-[#B4600A]" : "bg-tint-100 text-navy-800")}>
+        <p role="status" className={cx("rounded-sm px-4 py-3 font-body text-[0.9375rem]", state.status === "error" || state.status === "limited" ? "bg-orange-500/10 text-[#9A5208]" : "bg-tint-100 text-navy-800")}>
           {state.message}
         </p>
       )}

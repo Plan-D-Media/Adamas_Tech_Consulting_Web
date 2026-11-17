@@ -1,0 +1,12 @@
+# step 0 - check:config
+# npm run check:config --silent
+
+Config-time import graph (3 files):
+  next.config.ts
+    -> lib/security-headers.ts
+      -> lib/consent.ts
+
+PASS (static): every specifier in the graph is relative or a bare package.
+
+Loading next.config.ts through Next's own loader...
+PASS (load): config loaded. headers() -> 1 rule(s), 6 header(s); images.remotePatterns -> 0.

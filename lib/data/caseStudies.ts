@@ -47,12 +47,15 @@ export interface Facet {
 export interface CaseListItem extends CaseCardData {
   industry: string | null;
   pillars: string[];
+  regions: RegionCode[];
 }
 
 export interface CaseListing {
   items: CaseListItem[];
   industries: Facet[];
   pillars: Facet[];
+  /** Delivery regions present on the visible rows, in site order (in, uk, gcc). */
+  regions: Facet[];
 }
 
 export interface CaseStudyPageData extends SeoData {
@@ -76,6 +79,9 @@ export interface CaseStudyPageData extends SeoData {
   technologies: string[];
   services: { name: string; href: string }[];
   pillars: { name: string; href: string }[];
+  /** ISO dates for the Article structured data; publishedAt is null until the row is published. */
+  publishedAt: string | null;
+  updatedAt: string;
   /** Linked solutions, each on its own website (they have no pages here since 17 Nov 2026). */
   solutions: { name: string; href: string }[];
   related: CaseCardData[];
@@ -102,12 +108,18 @@ export async function getCaseListing(): Promise<CaseListing> {
     const ind = r.industry && visible.status.in.includes(r.industry.status) ? r.industry : null;
     if (ind) industries.set(ind.slug, { label: ind.tabLabel, order: ind.sortOrder });
     for (const p of r.pillars) pillars.set(p.slug, { label: p.name, order: p.sortOrder });
-    return { ...safeCaseCard(r), industry: ind?.slug ?? null, pillars: r.pillars.map((p) => p.slug) };
+    return { ...safeCaseCard(r), industry: ind?.slug ?? null, pillars: r.pillars.map((p) => p.slug), regions: r.regions };
   });
   const facets = (m: Map<string, { label: string; order: number }>) =>
     [...m.entries()].sort((a, b) => a[1].order - b[1].order).map(([value, v]) => ({ value, label: v.label }));
 
-  return { items, industries: facets(industries), pillars: facets(pillars) };
+  const REGION_LABEL: Record<string, string> = { IN: "India", UK: "UK & Ireland", GCC: "GCC" };
+  const regionOrder = ["IN", "UK", "GCC"];
+  const regions = regionOrder
+    .filter((code) => items.some((i) => (i.regions as string[]).includes(code)))
+    .map((code) => ({ value: code.toLowerCase(), label: REGION_LABEL[code] ?? code }));
+
+  return { items, industries: facets(industries), pillars: facets(pillars), regions };
 }
 
 export async function getCaseStudy(slug: string): Promise<CaseStudyPageData | null> {
@@ -175,6 +187,8 @@ export async function getCaseStudy(slug: string): Promise<CaseStudyPageData | nu
       return href ? [{ name: s.name, href }] : [];
     }),
     related,
+    publishedAt: c.publishedAt?.toISOString() ?? null,
+    updatedAt: c.updatedAt.toISOString(),
     seoTitle: c.seoTitle,
     seoDescription: c.seoDescription,
     noindex: c.noindex,

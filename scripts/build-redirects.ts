@@ -1,4 +1,7 @@
-/** Recompile lib/generated/redirects.json from the Redirect table (run after editing redirects in the DB). */
-import { prisma, writeRedirectsFile } from "../prisma/seed";
+/** Recompile lib/generated/redirects.json and lib/generated/unpublished.json from the database.
+ *  Run after editing redirects, or after publishing or hiding a case study, event or service. */
+import { prisma, writeRedirectsFile, writeUnpublishedFile } from "../prisma/seed";
 
-writeRedirectsFile().finally(() => prisma.$disconnect());
+writeRedirectsFile()
+  .then(writeUnpublishedFile)
+  .finally(() => prisma.$disconnect());

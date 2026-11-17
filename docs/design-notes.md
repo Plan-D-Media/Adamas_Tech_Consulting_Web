@@ -136,3 +136,43 @@ and **CASE STUDY** (274:8299). Nothing else new was found, which raises the foll
 8. **The HCLTech reference layer** (326:215, "About our Company: HCLTech - Supercharging Progress") is ignored
    entirely, per the brief. Flagging only so it is not assumed missing.
 
+
+## Milestone D: inner pages (17 November 2026)
+
+Built from the new frames: About us (274:1617), the case-study detail (274:8299). Team, Credentials and the
+case-studies listing have no frame and reuse these components and tokens, as agreed in INNER_PAGES.md section 2.
+
+### Deviations from the frames, and why
+
+1. **A breadcrumb on About us.** The frame has none. Every inner page needs the trail and its BreadcrumbList data
+   (brief section 10), so it sits centred under the hero intro, in white at 75% on the photograph. On the
+   case-study detail it sits at the top of the dark hero, above the label. **Mithu: is that placement acceptable,**
+   or would you rather it sat on the light band below the hero?
+2. **The approach band carries a navy wash over the contour artwork.** On the raw image the 20px eyebrow and the
+   18px intro fall below AA for contrast. The wash is a 72-90% navy gradient; the contours still read.
+3. **Four step cards became three columns.** The frame draws "04 Steps". The steps come from the database and the
+   client's own list has six, so the grid is four columns when the count divides by four and three otherwise, and
+   the counter in the corner prints the real number. Six cards in four columns left two orphans on the white band.
+4. **The big "12 Years' Experience" figure only appears when a verified statistic exists.** None is verified today,
+   so the column collapses and the company paragraphs centre on the same measure as the header.
+5. **Sections with no content behind them are not rendered.** "Our Commitment", "Our Strategic Direction",
+   "Progress in Numbers", the testimonials rail, the second statistics band and "Life at Adamas" are drawn in the
+   frame but hold template filler ("Miyah Myles", "1790 happy clients") or HCLTech's figures ($14.8B revenue,
+   230K+ people). They are on the client's list; until that copy arrives the page runs without them.
+6. **Case-study detail: the diagram bands are lists.** "Existing process", "Technology architecture" and the
+   before/after band are drawn as diagrams built from one story's content. The database holds solution steps,
+   results and technologies, so those bands render as cards and chips. **Mithu: if the diagrams matter, we need a
+   component spec that works for a case study with three steps and one with eight.**
+
+### Responsive decisions (no mobile frames, again)
+
+- **About hero:** 530px tall at 1920, min 380px below 1024; the 62px page name scales to 32px and the 46px heading
+  to 28px with `clamp()`; the intro stays on a 820px measure and centres.
+- **Approach cards:** four columns at 1024+, two at 640-1023, one below. The cards keep their -170px overlap into
+  the dark band at 1024+ and -130px below it.
+- **Expertise, journey, people, credentials, case grid:** three columns at 1024+, two at 640-1023, one below.
+- **Case-study summary card:** the results column drops under the summary below 1024px, and the card's padding
+  goes from 56px to 32px.
+- **Case-study filters:** the pills wrap; the group label keeps a 72px column so the rows stay aligned. No
+  horizontal scroller, so nothing is hidden off-screen.
+- No horizontal overflow at 1920, 1440, 1024, 768, 414 or 360 on any of the new pages.
