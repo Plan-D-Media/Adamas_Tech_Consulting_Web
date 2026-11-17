@@ -243,6 +243,103 @@ Still to run, in this order, once free memory is above 4 GB (Chrome was holding 
    before-and-after comparison is the one remaining open item on the LCP work.
 4. Final regression, then the report merge.
 
-### 6.11 How to rerun before a deploy (supersedes 6.7 and 6.9)
+### 6.12 Offices, analytics consent and the LCP fixes, 17 November 2026 (third round)
 
-The suite (`tests/e2e/`): `navigation.spec.ts` (header, four mega menus by mouse and keyboard, drawer focus trap, skip link, homepage links), `region.spec.ts` (eleven country cases, cookie precedence, `/ae/`, canonical slashes, the switcher, every legacy redirect row), `forms.spec.ts` (contact validation, country selector focus, honeypot, double submit, HTML escaping, event registration and duplicate, `.ics`), `nojs.spec.ts` (sections visible, drawer and accordions, both forms, the switcher), `drafts.spec.ts` (sitemap 200s, draft-string leak check when drafts are off, every internal link 200, featured menu cards) and `security.spec.ts` (headers on every response type, CSP console, Basic Auth when configured, probes, secrets in chunks), `solutions.spec.ts` (solutions link out: the homepage anchor section, the `/solutions` 301 per region, old solution URLs, link target and rel, and no card without a link) and `home.spec.ts` for the behaviours fixed in this phase. Form rows the suite creates (`@e2e.invalid` addresses) and the rate-limit windows are deleted at the end of each run.
+#### A. Offices: the approved design decides the address
+
+`confirmed` stays a review flag, not a visibility filter, so the five published offices keep rendering. The
+addresses now have one source of truth, the approved Figma design (Home Page 236:1395 and the footer), and the five
+office records already matched it line for line, including the "Palo Alto" label the live site calls
+"San Francisco". Nothing had to change in the rendered data; what changed is the record of why it is right. Each
+office's `editorNote` now says that the design decides the address, names the live-site variant it overrides, and
+keeps the open question for the client. The same questions stay in `CONTENT_TODO.md` and in
+`docs/qa/evidence/phase2/client-content-request.md`, because most of them also affect the legal pages, which carry
+different addresses and are under legal review.
+
+| Office | Rendered as the design shows | Live-site variant it overrides | Still with the client |
+|---|---|---|---|
+| London | Golden Cross House, 8 Duncannon Street, WC2N 4JF | 39 Roxborough Road, Harrow HA1 1NS | Is Harrow an office or only the UK representative's address? |
+| Palo Alto | Palo Alto, 530 Lytton Avenue, CA 94301 | labelled "San Francisco" | Is the US office still active? |
+| Dubai | Latifa Tower, near Trade Centre, Sheikh Zayed Road, Dubai, UAE | shorter form on /about-us/ and /contact/ | Confirm the full wording |
+| Bengaluru | 27th Main Rd, 1st Sector, HSR Layout, Karnataka 560102 | 560068 with a different street on the legal pages | Which postcode, including in the legal pages? |
+| Kolkata | Haute Street, Topsia Road, West Bengal 700046 | house number 86 A, no postcode | Does the house number belong in the address? |
+
+#### B. Google Tag Manager with a consent banner
+
+One switch, `NEXT_PUBLIC_GTM_ID`, read at build time. Empty means no analytics at all: no Google script, no
+`dataLayer`, no consent cookie, no banner, no footer control, and the Google hosts stay out of the
+Content-Security-Policy, so a Google script could not load even if one were injected. Every QA build so far has run
+in that state.
+
+With a container ID set:
+
+- **Nothing loads until the visitor agrees.** `components/consent/TagManager.tsx` renders nothing at all until the
+  `consent` cookie says at least one category is allowed. There is no "load GTM with denied defaults" step: the
+  container itself is not requested.
+- **Consent Mode v2 in the right order.** On agreement the page creates `dataLayer`, pushes
+  `consent default` with all four signals denied plus `wait_for_update: 500`, pushes `consent update` with the
+  visitor's choice, and only then requests `gtm.js`, `afterInteractive`, so it stays off the critical path. Two
+  categories map onto the four signals: analytics to `analytics_storage`, advertising to `ad_storage`,
+  `ad_user_data` and `ad_personalization`.
+- **The banner** (`components/consent/ConsentBanner.tsx`) offers Accept all, Reject all and Manage cookies, the
+  last opening the two categories with the strictly necessary group shown as always on. It is deliberately not a
+  modal: it does not trap focus or block the page, because a visitor who ignores it gets no tags, which is the safe
+  default. Reopening it from the footer moves focus to its heading.
+- **The choice** is stored in the `consent` cookie, first party, `SameSite=Lax`, six months, holding only the
+  version, the two answers and the date, e.g. `1:a1m0:2026-11-17`. An unreadable or older-version value is treated
+  as no choice, so the banner asks again rather than guessing. Withdrawing consent reloads the page, because a
+  script that is already running cannot be unloaded, and the banner says so.
+- **Reopenable** from "Cookie settings" beside the footer's legal links, on every page. It renders only when a
+  container ID is configured, because with no tags there is nothing to manage.
+- **Cookie Policy** now describes three cookies: `region`, `consent`, and the Google Analytics cookies. The row
+  carries both a "Measurement cookies, only if you agree" section and the "No analytics, advertising or tracking
+  cookies" section, and the page renders whichever matches the build, so the page can never be wrong about what the
+  site does. It stays marked for client legal review: the Google cookie names and retention periods come from
+  Google's documentation, not from a measured container.
+- **Checked without a browser:** the cookie round-trips, a version bump and six malformed values are all rejected,
+  the default signals are all `denied`, and analytics-only grants `analytics_storage` while leaving the three
+  advertising signals denied. `tests/e2e/consent.spec.ts` covers the rest in a browser and adapts to whichever
+  state the build carries: it watches the network and asserts that no Google host is requested before a choice.
+
+#### C. LCP
+
+The baseline is extracted mechanically by the new `scripts/qa/lcp-report.mjs`, from the Phase 1 runs, so the
+before-and-after comparison uses the same numbers from the same place
+(`docs/qa/evidence/phase2/lcp-drafts.md`). It confirms the diagnosis on all five measured URLs: Lighthouse's own
+LCP checklist says `fetchpriority=high` was **not applied** to the above-the-fold hero image anywhere, and render
+delay is almost the whole of LCP.
+
+| URL | LCP | TTFB | Load delay | Load time | Render delay | fetchpriority=high |
+|---|---|---|---|---|---|---|
+| /in/ | 3639 ms | 457 ms | 0 ms | 0 ms | 3183 ms | not applied |
+| /uk/ | 3635 ms | 457 ms | 0 ms | 0 ms | 3179 ms | not applied |
+| /gcc/ | 3645 ms | 457 ms | 0 ms | 0 ms | 3188 ms | not applied |
+| /services/cloud-services | 3164 ms | 457 ms | 0 ms | 0 ms | 1872 ms | not applied |
+| /insights/events/house-of-lords-2026 | 3015 ms | 457 ms | 0 ms | 0 ms | 2474 ms | not applied |
+
+What changed, in the order the browser meets it:
+
+1. **The LCP image is preloaded at high priority.** Only the first hero card carries `priority`, so next/image emits
+   `fetchpriority="high"` with a preload and decodes it synchronously; cards two and three load eagerly without
+   competing for the preload slot. The after-run must show `fetchpriority=high applied`.
+2. **Nothing above the fold waits for JavaScript.** `data-reveal="now"` is opaque at first paint and only rises,
+   as a CSS animation, and `RevealScope` skips those elements. Below the fold, a plain `[data-reveal]` un-hides
+   itself after 1.6 s in CSS, so a blocked bundle can no longer leave content invisible.
+3. **Less to hydrate.** The Products & Solutions cards are now server components passed to the slider as children
+   (`components/home/SolutionCard.tsx`), so only the slider's own controls are client-side. GSAP and Lenis were
+   already dynamic imports fetched on idle or first interaction, in their own chunks, and the build confirms they
+   are not in the first-load chunk; zod is not in the client bundle either, as the field checks are hand-written.
+
+What was ruled out rather than guessed: the pre-paint reveal state was never hiding the LCP element. The element is
+the first hero card image, which carries no `data-reveal`, and the trace shows first paint at about 513 ms with the
+load event at about 396 ms, i.e. the main thread was busy with roughly 1.5 s of script evaluation, not waiting on a
+hidden element.
+
+The remaining lever, if the after-run still misses the target, is the one deliberately not pulled yet: hydrating the
+below-the-fold islands (the stories rail, the industries explorer, the mega menu, the contact form) only on
+visibility or first interaction. That is an architectural change to ten components and it needs its own measurement
+round, so it is proposed rather than done.
+
+### 6.13 How to rerun before a deploy (supersedes 6.7 and 6.9)
+
+The suite (`tests/e2e/`): `navigation.spec.ts` (header, four mega menus by mouse and keyboard, drawer focus trap, skip link, homepage links), `region.spec.ts` (eleven country cases, cookie precedence, `/ae/`, canonical slashes, the switcher, every legacy redirect row), `forms.spec.ts` (contact validation, country selector focus, honeypot, double submit, HTML escaping, event registration and duplicate, `.ics`), `nojs.spec.ts` (sections visible, drawer and accordions, both forms, the switcher), `drafts.spec.ts` (sitemap 200s, draft-string leak check when drafts are off, every internal link 200, featured menu cards) and `security.spec.ts` (headers on every response type, CSP console, Basic Auth when configured, probes, secrets in chunks), `consent.spec.ts` (nothing from Google before a choice, accept, reject, reopen from the footer, and the cookie policy matching the build), `solutions.spec.ts` (solutions link out: the homepage anchor section, the `/solutions` 301 per region, old solution URLs, link target and rel, and no card without a link) and `home.spec.ts` for the behaviours fixed in this phase. Form rows the suite creates (`@e2e.invalid` addresses) and the rate-limit windows are deleted at the end of each run.

@@ -1,6 +1,6 @@
 # Hidden on the public site (phase2)
 
-Generated 2026-11-17T07:41:43.318Z by `scripts/qa/hidden-inventory.mts` against the local database. Re-run it after any reseed or rescope.
+Generated 2026-11-17T08:20:32.701Z by `scripts/qa/hidden-inventory.mts` against the local database. Re-run it after any reseed or rescope.
 
 Everything listed here is built and sitting in the database, but does not render when `PREVIEW_DRAFTS=false` (the public configuration):
 DRAFT rows are awaiting content or client sign-off, ARCHIVED rows are deliberately retired, and a few PUBLISHED rows are held back by their own flags
@@ -380,11 +380,11 @@ _None._
 
 | Office | City | Country | Region | Why it is unconfirmed (editorNote) |
 |---|---|---|---|---|
-| Bengaluru | Bengaluru | India | IN | CONFLICT: legal pages give "2nd Floor, Vallabha Pamadi, 2727, 16th Cross, 27th Main Rd, HSR Layout, Bengaluru, Karnataka 560068". Postcode 560102 vs 560068. No office phone on the live site (the India number is shown at... |
-| Dubai | Dubai | United Arab Emirates | GCC | CONFLICT: homepages show "…Latifa Tower near Trade Centre, Sheikh Zayed Road, Dubai, UAE."; /about-us/ and /contact/ omit "near Trade Centre" and "UAE". Dubai is also missing from the /contact/ Locations list and from A... |
-| Kolkata | Kolkata | India | IN | CONFLICT: /contact/ gives "Haute Street, 86 A, Topsia Road," (house number 86 A, no postcode). No office phone on the site. Map pin is approximate (geocoded from the address, city/street level). Confirm. |
-| London | London | United Kingdom | UK | CONFLICT: /contact/ and the privacy policy give a second London address (39 Roxborough Road, Harrow HA1 1NS). Which is the office? Map pin is approximate (geocoded from the address, city/street level). Confirm. |
-| Palo Alto | Palo Alto | United States | UK | Labelled "San Francisco" on the live site; the address is Palo Alto. Region "UK" is only a technical placeholder: the US office belongs to no current region (the type requires one). Confirm the office is still active (s... |
+| Bengaluru | Bengaluru | India | IN | The approved Figma design (Home Page 236:1395 and the footer) is the source of truth for the address shown (Swayang, 17 Nov 2026), and it matches these lines exactly. The legal pages give a different address and postcod... |
+| Dubai | Dubai | United Arab Emirates | GCC | The approved Figma design (Home Page 236:1395 and the footer) is the source of truth for the address shown (Swayang, 17 Nov 2026), and it matches these lines exactly. The live site is inconsistent: the homepages carry "... |
+| Kolkata | Kolkata | India | IN | The approved Figma design (Home Page 236:1395 and the footer) is the source of truth for the address shown (Swayang, 17 Nov 2026), and it matches these lines exactly. /contact/ on the live site gives a house number and ... |
+| London | London | United Kingdom | UK | The approved Figma design (Home Page 236:1395 and the footer) is the source of truth for the address shown (Swayang, 17 Nov 2026), and it matches these lines exactly. The live site also gives a second London address (39... |
+| Palo Alto | Palo Alto | United States | UK | Labelled "San Francisco" on the live site; the design and this record both say "Palo Alto", which is where the address is (Swayang, 17 Nov 2026). The approved Figma design (Home Page 236:1395 and the footer) is the sour... |
 
 ### Certification rows that are PUBLISHED but verified = false (3)
 

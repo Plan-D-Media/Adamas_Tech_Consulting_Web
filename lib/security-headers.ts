@@ -7,24 +7,37 @@
  * Components), so a per-request nonce cannot be injected, and Next's hydration payload and the js-flag script are
  * inline, hence 'unsafe-inline' for scripts and styles. Everything else is locked to the site's own origin plus the
  * media host; no frames are allowed in or out. Revisit with nonces if the site ever renders fully dynamically.
+ *
+ * Google Tag Manager's hosts are added only when NEXT_PUBLIC_GTM_ID is set (17 Nov 2026), so a build without
+ * analytics keeps the locked-down policy and could not load a Google script even if one were injected. Tag
+ * Manager itself is still gated on the visitor's consent (components/consent/TagManager.tsx).
  */
+
+import { analyticsConfigured } from "@/lib/consent";
 
 const mediaBase = process.env.MEDIA_BASE_URL ?? "/media";
 const mediaOrigin = /^https?:\/\//.test(mediaBase) ? new URL(mediaBase).origin : "";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const isDev = process.env.NODE_ENV === "development";
 
+/** Hosts Google Tag Manager and Google Analytics 4 need, per Google's own CSP guidance. */
+const GTM_SCRIPT = ["https://www.googletagmanager.com"];
+const GTM_CONNECT = ["https://www.googletagmanager.com", "https://www.google-analytics.com", "https://*.google-analytics.com", "https://*.analytics.google.com"];
+const GTM_IMG = ["https://www.googletagmanager.com", "https://www.google-analytics.com", "https://*.google-analytics.com"];
+
 export function contentSecurityPolicy(): string {
   const self = "'self'";
   const media = mediaOrigin ? ` ${mediaOrigin}` : "";
+  const gtm = analyticsConfigured;
+  const list = (hosts: string[]) => (gtm ? ` ${hosts.join(" ")}` : "");
   return [
     `default-src ${self}`,
-    `script-src ${self} 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+    `script-src ${self} 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${list(GTM_SCRIPT)}`,
     `style-src ${self} 'unsafe-inline'`,
-    `img-src ${self} data: blob:${media}`,
+    `img-src ${self} data: blob:${media}${list(GTM_IMG)}`,
     `media-src ${self} blob:${media}`,
     `font-src ${self} data:`,
-    `connect-src ${self}${isDev ? " ws: wss:" : ""}${media}`,
+    `connect-src ${self}${isDev ? " ws: wss:" : ""}${media}${list(GTM_CONNECT)}`,
     `frame-src 'none'`,
     `object-src 'none'`,
     `base-uri ${self}`,

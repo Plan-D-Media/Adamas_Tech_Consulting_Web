@@ -76,7 +76,7 @@ export const offices: OfficeSeed[] = [
     status: "PUBLISHED",
     sortOrder: 0,
     needsReview: true,
-    editorNote: `CONFLICT: /contact/ and the privacy policy give a second London address (39 Roxborough Road, Harrow HA1 1NS). Which is the office? ${PIN}`,
+    editorNote: `The approved Figma design (Home Page 236:1395 and the footer) is the source of truth for the address shown (Swayang, 17 Nov 2026), and it matches these lines exactly. The live site also gives a second London address (39 Roxborough Road, Harrow HA1 1NS) on /contact/ and in the privacy policy; the design shows Golden Cross House, so that is what is rendered. Still to confirm with the client: whether Harrow is an office or only the UK representative's address (it appears in the privacy notice). ${PIN}`,
   },
   {
     slug: "palo-alto",
@@ -91,7 +91,7 @@ export const offices: OfficeSeed[] = [
     status: "PUBLISHED",
     sortOrder: 1,
     needsReview: true,
-    editorNote: `Labelled "San Francisco" on the live site; the address is Palo Alto. Region "UK" is only a technical placeholder: the US office belongs to no current region (the type requires one). Confirm the office is still active (sitemap: "US office to confirm"). No US phone. ${PIN}`,
+    editorNote: `Labelled "San Francisco" on the live site; the design and this record both say "Palo Alto", which is where the address is (Swayang, 17 Nov 2026). The approved Figma design (Home Page 236:1395 and the footer) is the source of truth for the address shown (Swayang, 17 Nov 2026), and it matches these lines exactly. Region "UK" is only a technical placeholder: the US office belongs to no current region (the type requires one). Still to confirm with the client: whether the US office is still active (sitemap: "US office to confirm"). No US phone. ${PIN}`,
   },
   {
     slug: "dubai",
@@ -108,7 +108,7 @@ export const offices: OfficeSeed[] = [
     status: "PUBLISHED",
     sortOrder: 2,
     needsReview: true,
-    editorNote: `CONFLICT: homepages show "…Latifa Tower near Trade Centre, Sheikh Zayed Road, Dubai, UAE."; /about-us/ and /contact/ omit "near Trade Centre" and "UAE". Dubai is also missing from the /contact/ Locations list and from About Us ("four countries"). ${PIN}`,
+    editorNote: `The approved Figma design (Home Page 236:1395 and the footer) is the source of truth for the address shown (Swayang, 17 Nov 2026), and it matches these lines exactly. The live site is inconsistent: the homepages carry "…Latifa Tower near Trade Centre, Sheikh Zayed Road, Dubai, UAE." while /about-us/ and /contact/ drop "near Trade Centre" and "UAE"; the design keeps the longer form, so that is what is rendered. Dubai is also missing from the /contact/ Locations list and from About Us ("four countries"): still to confirm with the client. ${PIN}`,
   },
   {
     slug: "bengaluru",
@@ -123,7 +123,7 @@ export const offices: OfficeSeed[] = [
     status: "PUBLISHED",
     sortOrder: 3,
     needsReview: true,
-    editorNote: `CONFLICT: legal pages give "2nd Floor, Vallabha Pamadi, 2727, 16th Cross, 27th Main Rd, HSR Layout, Bengaluru, Karnataka 560068". Postcode 560102 vs 560068. No office phone on the live site (the India number is shown at region level). ${PIN}`,
+    editorNote: `The approved Figma design (Home Page 236:1395 and the footer) is the source of truth for the address shown (Swayang, 17 Nov 2026), and it matches these lines exactly. The legal pages give a different address and postcode ("2nd Floor, Vallabha Pamadi, 2727, 16th Cross, 27th Main Rd, HSR Layout, Bengaluru, Karnataka 560068"), so 560102 from the design is rendered and the 560102 against 560068 question stays open with the client, for the legal pages as much as for this card. No office phone on the live site (the India number is shown at region level). ${PIN}`,
   },
   {
     slug: "kolkata",
@@ -138,7 +138,7 @@ export const offices: OfficeSeed[] = [
     status: "PUBLISHED",
     sortOrder: 4,
     needsReview: true,
-    editorNote: `CONFLICT: /contact/ gives "Haute Street, 86 A, Topsia Road," (house number 86 A, no postcode). No office phone on the site. ${PIN}`,
+    editorNote: `The approved Figma design (Home Page 236:1395 and the footer) is the source of truth for the address shown (Swayang, 17 Nov 2026), and it matches these lines exactly. /contact/ on the live site gives a house number and no postcode ("Haute Street, 86 A, Topsia Road,"), while the design carries the postcode and no house number; the design is rendered. Still to confirm with the client: whether the house number belongs in the address. No office phone on the site. ${PIN}`,
   },
 
   // ── Offices shown only in the /contact/ second list (draft until the client confirms) ──

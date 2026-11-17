@@ -16,7 +16,13 @@ Legend: **CONFLICT** = the live site contradicts itself · **MISSING** = no sour
 | Team size | "over 100 experts" (/about-us/, visible) | /about | Seeded `verified=false` until confirmed |
 
 ## Offices and contact (Q3.6, Q8.1–Q8.3)
-- CONFLICT: Palo Alto address labelled "San Francisco". The new site will show "Palo Alto". Confirm label, and whether the US office is still active (sitemap: "US office to confirm").
+
+**DECIDED (Swayang, 17 November 2026): the approved Figma design is the source of truth for every office address**,
+and `confirmed: false` stays a review flag rather than a visibility filter, so the five offices render as the design
+shows them. The addresses in the design and in the seed already match line for line. The questions below stay open
+with the client, and stay in `docs/qa/evidence/phase2/client-content-request.md`, because several of them also affect
+the legal pages, which carry different addresses.
+- DECIDED: Palo Alto is labelled "Palo Alto", not the live site's "San Francisco". Still confirm whether the US office is still active (sitemap: "US office to confirm").
 - CONFLICT: London has two addresses: Golden Cross House, 8 Duncannon Street WC2N 4JF vs 39 Roxborough Road, Harrow (contact page + privacy policy). Which is the office?
 - CONFLICT: Bengaluru postcode 560102 (Our Presence) vs 560068, "2nd Floor, Vallabha Pamadi, 2727, 16th Cross" (legal pages).
 - CONFLICT: Dubai address with or without "near Trade Centre … UAE."

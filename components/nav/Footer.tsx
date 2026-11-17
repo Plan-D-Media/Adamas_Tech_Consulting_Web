@@ -5,6 +5,7 @@ import type { RegionSlug } from "@/lib/region";
 import { Icon } from "@/components/ui/Icon";
 import { LogoLink } from "@/components/nav/LogoLink";
 import { RegionSwitcher } from "@/components/nav/RegionSwitcher";
+import { CookieSettingsLink } from "@/components/consent/CookieSettingsLink";
 
 interface Props {
   nav: NavLink[];
@@ -139,6 +140,10 @@ export async function Footer({ nav, legal, social, regions, offices, region, fal
                   <FooterLink link={l} />
                 </li>
               ))}
+              {/* Renders nothing when analytics is not configured: with no tags there is nothing to manage. */}
+              <li>
+                <CookieSettingsLink className="inline-flex min-h-9 items-center font-body text-small text-grey-300 underline-offset-4 transition-colors duration-(--duration-fast) hover:text-white hover:underline" />
+              </li>
             </ul>
           </div>
           <div className="flex flex-wrap items-center gap-4">

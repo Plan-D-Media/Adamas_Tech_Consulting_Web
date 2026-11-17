@@ -7,6 +7,8 @@ import { Header } from "@/components/nav/Header";
 import { Footer } from "@/components/nav/Footer";
 import { SkipLink } from "@/components/nav/SkipLink";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { ConsentBanner } from "@/components/consent/ConsentBanner";
+import { TagManager } from "@/components/consent/TagManager";
 
 interface Props {
   /** The page's region when it is a regional homepage; null on global inner pages (resolved from the cookie in the browser). */
@@ -32,6 +34,9 @@ export async function SiteChrome({ region, children }: Props) {
       </main>
       <Footer nav={nav.footer} legal={nav.legal} social={nav.social} regions={regions} offices={offices} region={region} fallbackRegion={fallback} />
       <SmoothScroll />
+      {/* Both render nothing unless this build has a Tag Manager container ID; the loader also waits for consent. */}
+      <ConsentBanner />
+      <TagManager />
     </>
   );
 }

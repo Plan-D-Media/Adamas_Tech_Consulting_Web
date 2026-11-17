@@ -558,7 +558,7 @@ if (termsPrivacy) termsPrivacy.links = [{ label: "Privacy Policy", href: "/priva
 const cookiePolicy = {
   updated: "17 November 2026",
   intro:
-    "This cookie policy explains how the Adamas Tech Consulting website uses cookies, and how you can control them. It covers this website only, and not any other website you reach from here.\n\nA cookie is a small text file that a website asks your browser to keep on your device. Cookies can be used to make a site work, to remember a preference, or to recognise and track people across websites. This site uses one cookie, and only for the middle reason: to remember which region you chose.",
+    "This cookie policy explains how the Adamas Tech Consulting website uses cookies, and how you can control them. It covers this website only, and not any other website you reach from here.\n\nA cookie is a small text file that a website asks your browser to keep on your device. Cookies can be used to make a site work, to remember a preference, or to recognise and track people across websites.\n\nThe site needs one cookie to work: it remembers which region you chose. Everything beyond that is your choice. When measurement is switched on, the site asks before it sets anything, nothing is loaded until you agree, and you can change or withdraw your answer at any time through the Cookie settings link in the footer.",
   sections: [
     {
       id: "cookies-we-use",
@@ -577,6 +577,12 @@ const cookiePolicy = {
                 "Strictly necessary (functional), first party",
                 "One year from the time it is set or updated",
               ],
+              [
+                "consent",
+                "Remembers your answer to the cookie question, so that you are not asked again on every page and so that nothing you refused is ever loaded. It holds only your answer and the date you gave it.",
+                "Strictly necessary, first party",
+                "Six months, after which we ask again",
+              ],
             ],
           },
         },
@@ -587,6 +593,37 @@ const cookiePolicy = {
       links: [],
     },
     {
+      // Shown only when a Google Tag Manager container is configured for the build
+      // (app/(site)/cookie-policy/page.tsx filters it out otherwise), so the page never
+      // describes cookies the site cannot set.
+      id: "analytics-cookies",
+      title: "Measurement cookies, only if you agree",
+      parts: [
+        {
+          text:
+            "We would like to understand how this site is used, so that we can improve it. We do that with Google Analytics, loaded through Google Tag Manager.\n\nNone of it runs unless you agree. Until you answer the cookie question, no Google script is requested and no Google cookie exists on your device; if you refuse, that stays true. If you agree, Google sets the cookies below. We have also told Google, through its consent settings, to treat every category as refused until you say otherwise.",
+        },
+        {
+          table: {
+            columns: ["Name", "Set by", "Purpose", "Duration"],
+            rows: [
+              ["_ga", "Google Analytics", "Tells one browser apart from another, so that repeat visits are not counted as new people.", "Two years"],
+              ["_ga_<container>", "Google Analytics", "Keeps the state of your visit, so that pages viewed one after another are counted as one visit.", "Two years"],
+              ["_gid", "Google Analytics", "Tells one browser apart from another for a day, used in the daily visitor counts.", "24 hours"],
+              ["_gcl_au", "Google, advertising", "Measures which adverts or campaigns brought people to the site. Set only if you agree to advertising cookies.", "Three months"],
+            ],
+          },
+        },
+        {
+          text:
+            "### What we do with it\n\nWe look at totals: how many people visited, which pages they read, which country or region they came from, and which links brought them here. We do not try to identify you from it, we do not sell it, and we do not combine it with the enquiries you send us.\n\n### If you change your mind\n\nUse the Cookie settings link in the footer of any page. Refusing after having agreed stops anything further being loaded and reloads the page so that nothing already running keeps measuring. The Google cookies themselves can be cleared in your browser, as described below.",
+        },
+      ],
+      links: [{ label: "How Google uses information from sites that use its services", href: "https://policies.google.com/technologies/partner-sites" }],
+    },
+    {
+      // Shown only when NO Google Tag Manager container is configured for the build: the
+      // mirror image of "analytics-cookies" above (app/(site)/cookie-policy/page.tsx).
       id: "no-analytics-advertising-or-tracking-cookies",
       title: "No analytics, advertising or tracking cookies",
       parts: [
@@ -888,11 +925,13 @@ export const pages: PageSeed[] = [
     title: "Cookie Policy",
     blocks: { updated: cookiePolicy.updated, intro: cookiePolicy.intro, sections: cookiePolicy.sections },
     seoTitle: "Cookie Policy",
-    seoDescription: "The one cookie the Adamas Tech Consulting website sets, why it is set, and how to clear or block it.",
+    // The row carries both the "measurement cookies" and the "no analytics" sections; the page renders whichever
+    // matches the build (NEXT_PUBLIC_GTM_ID set or not). See app/(site)/cookie-policy/page.tsx.
+    seoDescription: "The cookies the Adamas Tech Consulting website sets, what you have agreed to, and how to change or withdraw your choice.",
     status: "PUBLISHED",
     sortOrder: 8,
     needsReview: true,
     editorNote:
-      "DRAFTED, NOT CLIENT COPY (Q10.2–Q10.4: no cookie policy on the live site; the privacy notice refers to a 'Cookie Notice'). Written on 17 November 2026 from the cookies this codebase actually sets: only `region` (components/nav/regionClient.ts, lib/region.ts), read by proxy.ts, the header, the footer and the form actions. No analytics, advertising or consent cookie exists in the code today. Needs client legal review before launch, and must be rewritten if GA4/GTM or any third-party embed is added (CONTENT_TODO.md: GA4 / GTM container IDs still missing).",
+      "DRAFTED, NOT CLIENT COPY (Q10.2–Q10.4: no cookie policy on the live site; the privacy notice refers to a 'Cookie Notice'). Written on 17 November 2026 from the cookies this codebase actually sets, and updated the same day when Google Tag Manager and the consent banner were added. Three cookies are described: `region` (components/nav/regionClient.ts, lib/region.ts), `consent` (components/consent/consentClient.ts, lib/consent.ts), and the Google Analytics cookies, which are only ever set after the visitor agrees and only when NEXT_PUBLIC_GTM_ID is configured. The row holds both the 'measurement cookies' section and the 'no analytics' section, and the page renders whichever matches the build, so the page is never wrong about what the site does. STILL NEEDS CLIENT LEGAL REVIEW before launch, in particular the retention periods and the Google cookie names, which come from Google's own documentation rather than from a measured container. Re-check it once a real container ID is in place.",
   },
 ];

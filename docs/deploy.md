@@ -64,11 +64,37 @@ Check these before the push (Settings > Environment Variables, Production and Pr
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | the relay's values (Google Workspace: `smtp.gmail.com`, `587`, the mailbox, an app password; or Amazon SES SMTP credentials) | `MAILER=smtp` (new in round 7) |
 | `MAIL_FROM` | `AdamasTech Consulting <marketing@adamastech.in>` (a sender the relay is allowed to use) | the From header (new in round 7) |
 | `MAIL_TO_ENQUIRIES` | the inbox that receives enquiries and registrations | all forms |
-| `NEXT_PUBLIC_GTM_ID` | empty until analytics is approved | analytics (not wired yet) |
+| `NEXT_PUBLIC_GTM_ID` | the container ID, e.g. `GTM-XXXXXXX`; leave empty to ship no analytics at all | Google Tag Manager and the consent banner (wired 17 Nov 2026) |
 | `PREVIEW_USERNAME`, `PREVIEW_PASSWORD` | set both on the staging preview; leave both unset at launch | Basic Auth challenge on every route in `proxy.ts` (new in the QA fix round, 16 Nov 2026) |
 
 Not set on Vercel: `FIGMA_TOKEN` (build scripts only) and `FIGMA_FIXTURE` (the design-comparison page is for local QA only).
 `AWS_REGION` from `.env.example` is unused now that mail goes through SMTP.
+
+## Analytics and cookie consent (17 Nov 2026)
+
+`NEXT_PUBLIC_GTM_ID` is the only switch. It is read at build time, so changing it needs a rebuild.
+
+**Empty (the default, and what every QA build so far has used).** No Google script, no `dataLayer`, no consent
+cookie, and no banner: there is nothing to consent to, so the site does not ask. The footer's "Cookie settings"
+control is not rendered either, and the Cookie Policy page serves its "No analytics, advertising or tracking
+cookies" section. The Content-Security-Policy stays locked to the site's own origin, so a Google script could not
+load even if one were injected.
+
+**Set to a container ID.** The banner appears on the first visit, offering Accept all, Reject all and Manage
+cookies, and the choice is stored in the `consent` cookie for six months. Until a choice is made, nothing is
+requested from Google. On agreement the page pushes Consent Mode v2 defaults with every signal denied, then an
+update carrying the visitor's choice, and only then loads `gtm.js`, `afterInteractive`, so it stays off the
+critical path. The two categories map onto the four Consent Mode signals: analytics to `analytics_storage`,
+advertising to `ad_storage`, `ad_user_data` and `ad_personalization`. Withdrawing consent reloads the page, because
+a script that is already running cannot be unloaded. The footer's "Cookie settings" control reopens the banner on
+any page, and the Cookie Policy page swaps in its "Measurement cookies, only if you agree" section, which lists the
+Google cookies. `lib/security-headers.ts` adds the Google hosts to `script-src`, `img-src` and `connect-src`, and
+only then.
+
+Before switching it on: have the client's legal adviser read the Cookie Policy (it is drafted, not client copy, and
+the Google cookie names and retention periods come from Google's documentation rather than from a measured
+container), and confirm the consent wording. `tests/e2e/consent.spec.ts` covers both states and adapts to whichever
+the build under test carries, so run the suite again after a build with the ID set.
 
 ## Preview protection and security headers (QA fix round, 16 Nov 2026)
 
