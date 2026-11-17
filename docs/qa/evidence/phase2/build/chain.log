@@ -1,0 +1,14 @@
+[2026-11-17 11:19:42] ==============================================================================
+[2026-11-17 11:19:42] Phase 2 chain starting (from step 0)
+[2026-11-17 11:19:42] --dry: plan only
+[2026-11-17 11:19:42]   step 0 - check:config
+[2026-11-17 11:19:42]   step 1 - drafts build
+[2026-11-17 11:19:42]   step 2 - public build
+[2026-11-17 11:19:42]   step 3 - final regression (e2e, public build)
+[2026-11-17 11:19:42]   step 4a - GTM dummy-container build
+[2026-11-17 11:19:42]   step 4b - GTM dummy-container check (consent suite)
+[2026-11-17 11:19:42]   step 6 - review server: next start -p 3000 against .next-drafts (left running)
+[2026-11-17 11:19:42] preflight: PostgreSQL on 127.0.0.1:5432 -> NOT reachable
+[2026-11-17 11:19:42] preflight: free memory -> 2459 MB (floor 4096 MB)
+[2026-11-17 11:19:42] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-17 11:19:42] preflight FAILED with 2 problem(s):

@@ -96,3 +96,43 @@ Built to the Home Page frame (236:1395) at 1920px; the Playwright/pixelmatch com
 46. **Mail transport.** `MAILER=smtp` sends through nodemailer (SMTP_HOST/PORT/USER/PASS, MAIL_FROM); `console` logs. Mail failure never fails a submission.
 47. **Service page template (Figma Cloud Services 292:24608).** New tokens: blue-link #0066FF (eyebrows, accent words), navy-850 #0D1B2D, grey-550 / grey-450 / grey-400, grey-50 #F0F3F9. Sections, each a component under `components/services/`: hero (530px band, pill, 62px title); intro (425px column, 660x536 photo with the floating pill card 66px past its edge); "What makes ... different" (42px heading, 24px paragraphs, four 310x311 stat cards with the gear artwork); expertise (frosted 2x2 cards 52px past the container, as drawn); platforms (native `<details name>` accordion, first open); industries (499/765/347/405 mosaic); services and capabilities (ARIA tabs, 76px frosted rows with the 3px blue inset, panel with "ADAMAS CLOUD / 01"); case studies (three 428x392 cards, real stories instead of the design's concept showcases); technology ecosystem (DRAFT, names only, no brand marks drawn in); quality and trust (the delivery-principles artwork rebuilt in CSS); FAQ (two `<details>` columns); the homepage contact card. Copy lives in `services.<pillar>.<section>` blocks; the hero title falls back to the pillar's outcome line while the design's title is a placeholder. Sub-service pages reuse hero, intro, capabilities (the "what we do" items), quality rows (delivery steps), ecosystem tiles (technologies), FAQ, case studies and a "More in <pillar>" row; their section labels are interim UI labels.
 48. **Lighthouse (mobile emulation, production build on the development laptop, 13 Nov 2026; median of three runs per page, run alone).** Before: /in/ 65 (LCP 3.9 s, TBT 1,010 ms), /uk/ 75 (5.4 s, 240 ms), /gcc/ 72 (5.9 s, 260 ms); CLS 0 on all. After: /in/ 69 (LCP 3.7 s, TBT 826 ms), /uk/ 72 (3.6 s, 681 ms), /gcc/ 69 (3.7 s, 884 ms); CLS 0.001; accessibility 100, best practices 100. What moved: every homepage image is next/image with responsive sizes (the hero card, the phone LCP element, is no longer lazy and is preloaded), GSAP and Lenis load on the first interaction or idle, Motion (45 KB gzipped) and zod (34 KB) left the client bundle (JavaScript transfer 290 KB to 214 KB), and the three generic "Read More" links carry their article titles for screen readers and crawlers. Still open against the brief targets (90 / LCP 2.5 s / TBT 200 ms): script evaluation is 3.5 s under the 4x CPU throttle (React hydration of a 1,588-node page with eleven client components) and style/layout 2.1 s; LCP is held back by that work, not by the image. The laptop benchmarks below Lighthouse's reference device, so the same build should score higher on PageSpeed Insights against the Vercel deployment; the next steps are measuring there, then trimming client components below the fold (Industries explorer, Perspectives, the stories loop) into server markup with small islands and reducing the DOM. SEO 69 is the staging noindex (BLOCK_INDEXING) and is-crawlable, expected until launch.
+
+---
+
+## Questions for Mithu: the inner pages (17 November 2026)
+
+From the Figma fetch of 17 November (file `Adamas Web`, version 2421258474762007606, unchanged since the
+13 November fetch). Page "v2 uPDATED" holds three new page frames: **About us** (274:1617), **Carrer** (274:2667)
+and **CASE STUDY** (274:8299). Nothing else new was found, which raises the following.
+
+1. **No case-studies listing is designed.** 274:8299 "CASE STUDY" is a case-study *detail* page, and specifically
+   the SAP Treasury story ("PROJECT OBJECTIVES", "Building a More Connected Treasury Function", "KEY SOLUTION
+   CAPABILITIES", "TreasuryHeading"). The sitemap needs `/case-studies` as well: a listing with filters for
+   service, industry and region. Please design the listing, the filter controls, the active-filter state, and the
+   **empty state** - all 20 case studies are DRAFT until the client approves them, so at launch the listing may
+   legitimately have nothing in it. Until it arrives, the listing will be built from the existing design tokens
+   and the Cloud Services card patterns, with a Contact CTA in the empty state.
+2. **No service pillar or sub-service frames beyond Cloud Services.** The sitemap has `/services` (overview), three
+   pillar pages (Cloud Services, Digital Transformation, Data & AI Services) and roughly twenty sub-service pages.
+   Only "Cloud Services" (292:24608) is drawn, and it is already built. Is Cloud Services intended as the template
+   for all three pillars and every sub-service page, or are Digital Transformation and Data & AI Services meant to
+   differ? Also: is `/services` (the overview with three pillars plus cross-cutting capabilities) designed anywhere?
+3. **No `/about/team` or `/credentials` frames.** The About us frame contains a leadership block (four portraits
+   with role and name) and a certifications/partner strip, but the sitemap has Team and Credentials as pages of
+   their own (#46, #48 - five badge pages plus downloadable certificates). Should those be sections of About us
+   only, or separate pages, and if separate, may we extend the About us blocks to fill them?
+4. **No case-study detail states.** 274:8299 is drawn around one story with a dashboard image and a results band.
+   What does the template do for a case study with no image, no quantified results, or no client name (several of
+   the 20 are unclearable)?
+5. **Careers has no job-detail or empty state.** "Carrer" (274:2667, note the spelling) has a job grid
+   ("Repeat Grid 5", 274:7372). There is no single-job page, no "no vacancies" state, and no Apply flow. Careers is
+   Phase 2 and stays DRAFT, so this is not urgent, but the grid with zero jobs needs a state.
+6. **No mobile or tablet frames, again.** As with the homepage, every inner page is drawn at 1920 only. The
+   responsive behaviour from 1920 down to 360 will be decided here and logged in this file for review.
+7. **Placeholder people on About us.** The leadership block carries invented names and roles (Robert Amplilian,
+   Maggie Strickland, Stephen Mearsley, "Chief People Officer", "President & CEO"). These are Figma placeholders,
+   never public: they will be gated at block level and only real people from the database will render. Please
+   confirm the block is meant for four people, as drawn.
+8. **The HCLTech reference layer** (326:215, "About our Company: HCLTech - Supercharging Progress") is ignored
+   entirely, per the brief. Flagging only so it is not assumed missing.
+

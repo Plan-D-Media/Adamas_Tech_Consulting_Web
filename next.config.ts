@@ -12,6 +12,10 @@ if (/^https?:\/\//.test(mediaBase)) {
 }
 
 const nextConfig: NextConfig = {
+  // Default ".next", so Vercel and `next dev` are unchanged. scripts/qa/phase2-chain.mjs sets
+  // NEXT_DIST_DIR=.next-drafts / .next-public so the drafts and public builds can coexist and the
+  // review server can be started against the drafts build without rebuilding it.
+  distDir: process.env.NEXT_DIST_DIR ?? ".next",
   cacheComponents: true,
   partialPrefetching: true,
   // Homepages live at /in/, /uk/, /ae/ (trailing slash) while inner pages have none; proxy.ts owns slash handling.

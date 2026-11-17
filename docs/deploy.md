@@ -1,5 +1,19 @@
 # Deploying code and database together
 
+## Next.js 16.4.6 (security upgrade, 17 November 2026)
+
+`next` and `eslint-config-next` are pinned to exactly `16.4.6`, no caret. The upgrade from 16.4.3 closes
+GHSA-mfr8-8qww-v76h (moderate): information disclosure across root params when a `use cache` function is called
+through `unstable_cache()`, affecting `>=16.3.0 <=16.4.4`. This project sets `cacheComponents: true` and uses
+`use cache`, so the advisory applied directly. The fix first shipped in 16.4.5; 16.4.6 is the latest of that line.
+`@next/env`, `@next/eslint-plugin-next` and `@next/swc-win32-x64-msvc` followed to 16.4.6 transitively. Prisma stays
+pinned at 6.19.3, and nothing else was upgraded.
+
+`npm audit` still reports advisories in `nodemailer` (high), `prisma`/`@prisma/config` (high, pinned on purpose),
+`svgo`, `deepmerge-ts`, `minimatch` and `typescript-eslint`. None was touched in this upgrade; `nodemailer` is the
+one to look at next, because the contact and event-registration forms send through it.
+
+
 Vercel builds the project from GitHub (`main`). The client preview reads the Neon database `neondb` at build time
 (static pages are prerendered from it) and at runtime (forms, revalidation). During development `.env` points at the
 local PostgreSQL database `adamas`; nothing touches Neon until a deploy.
