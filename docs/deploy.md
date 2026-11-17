@@ -10,8 +10,13 @@ builds against the old schema.
 
 1. **Build locally first**, so a broken build never reaches the preview:
    ```powershell
-   npm run typecheck; npm run lint; npm run build
+   npm run typecheck; npm run lint; npm run check:config; npm run build
    ```
+   `check:config` is cheap and must run whenever `next.config.ts` or anything it imports changes. Next loads the
+   config outside the bundler, so tsconfig `paths` aliases (`@/lib/...`) are not resolved there: an alias import in
+   that graph passes `typecheck` and `lint` and then kills every `next build` and `next dev`. The script walks the
+   config's import graph for aliased or absolute specifiers, then loads the config through Next's own loader. See
+   `scripts/check-config-load.mjs`.
 2. **Migrate and seed Neon**, with the Neon connection strings on the command line only (never written into `.env`).
    `migrate deploy` applies pending migrations and is idempotent; `db seed` rewrites the content tables from
    `content/` and regenerates `lib/generated/redirects.json`:

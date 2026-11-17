@@ -1,4 +1,6 @@
 import type { NextConfig } from "next";
+// Relative imports only in this file and everything it pulls in: Next loads the config outside the
+// bundler, so tsconfig `paths` aliases ("@/...") are not resolved here. `npm run check:config` enforces it.
 import { securityHeaders } from "./lib/security-headers";
 
 // Allow next/image to optimise media from CloudFront when MEDIA_BASE_URL is absolute.

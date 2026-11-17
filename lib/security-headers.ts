@@ -13,7 +13,11 @@
  * Manager itself is still gated on the visitor's consent (components/consent/TagManager.tsx).
  */
 
-import { analyticsConfigured } from "@/lib/consent";
+// Relative, not "@/lib/consent", and it must stay relative: next.config.ts imports this module, and
+// Next loads the config outside the bundler (next/dist/build/next-config-ts/transpile-config -> require),
+// where tsconfig `paths` are not resolved -- an alias here resolves to lib/lib/consent and the build dies.
+// tsc and eslint both pass on the alias, so `npm run check:config` is the gate that catches it.
+import { analyticsConfigured } from "./consent";
 
 const mediaBase = process.env.MEDIA_BASE_URL ?? "/media";
 const mediaOrigin = /^https?:\/\//.test(mediaBase) ? new URL(mediaBase).origin : "";
