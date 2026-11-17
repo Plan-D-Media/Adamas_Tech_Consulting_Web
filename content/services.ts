@@ -16,12 +16,12 @@ export const pillars: PillarSeed[] = [
     slug: "cloud-services",
     name: "Cloud Services",
     image: "images/services/cloud-services.webp",
-    tagline: "Resilient | Reliable | Cost optimized | Intelligent",
+    tagline: "Resilient | Reliable | Cost optimised | Intelligent",
     summary:
-      "Adamas Tech Consulting helps enterprises, institutions, and public-sector organizations design modern cloud foundations, optimize operations, and apply AI on AWS for measurable business outcomes.",
+      "Adamas Tech Consulting helps enterprises, institutions, and public-sector organisations design modern cloud foundations, optimise operations, and apply AI on AWS for measurable business outcomes.",
     outcomeLine: "Cloud that Scales your Organisation",
     challenge:
-      "AWS is no longer only a hosting platform; it is the backbone for modernization, intelligent automation, data-led decisions, and industry transformation. Adamas helps clients move from fragmented infrastructure and isolated pilots to secure, scalable, and production-ready AWS environments.",
+      "AWS is no longer only a hosting platform; it is the backbone for modernisation, intelligent automation, data-led decisions, and industry transformation. Adamas helps clients move from fragmented infrastructure and isolated pilots to secure, scalable, and production-ready AWS environments.",
     status: "PUBLISHED",
     sortOrder: 0,
     needsReview: true,
@@ -115,15 +115,15 @@ export const pillars: PillarSeed[] = [
         slug: "migration-modernization",
         name: "Migration & Modernization",
         descriptor:
-          "Migrate workloads, modernize architecture, and move from legacy systems to scalable AWS-native environments.",
+          "Migrate workloads, modernise architecture, and move from legacy systems to scalable AWS-native environments.",
         summary:
           "Move from legacy infrastructure to resilient, scalable AWS environments designed for performance, governance, and long-term growth.",
-        whoFor: "Adamas supports organizations that need to modernize legacy systems without disrupting operations.",
+        whoFor: "Adamas supports organisations that need to modernise legacy systems without disrupting operations.",
         whatWeDo: [
           { title: "Migration planning and cloud readiness assessment" },
           { title: "AWS landing zone and environment design" },
-          { title: "Application rehosting, replatforming, or modernization" },
-          { title: "Performance, security, and cost optimization" },
+          { title: "Application rehosting, replatforming, or modernisation" },
+          { title: "Performance, security, and cost optimisation" },
           { title: "Post-migration operations and improvement" },
         ],
         legacyPath: "/cloud-migration-modernisation/",
@@ -138,7 +138,7 @@ export const pillars: PillarSeed[] = [
         name: "DevOps & SecOps",
         descriptor: "Cloud that Scales your Organisation",
         summary:
-          "Adamas Tech is one of the preferred partners of AWS, enabling businesses to migrate, optimize & scale on cloud with speed & security. Whether you are a fast-scaling startup or a complex enterprise, we deliver a tailored cloud journey backed by certified AWS architects & industry expertise with proven methodologies.",
+          "Adamas Tech is one of the preferred partners of AWS, enabling businesses to migrate, optimise & scale on cloud with speed & security. Whether you are a fast-scaling startup or a complex enterprise, we deliver a tailored cloud journey backed by certified AWS architects & industry expertise with proven methodologies.",
         whatWeDo: [
           { title: "Engagement Models", body: "Flexible options including fixed project and retainer-based" },
           { title: "Co-creation", body: "Customer involved in discovery, design, testing & rollout phase" },
@@ -169,7 +169,7 @@ export const pillars: PillarSeed[] = [
           "Improve reliability, security, performance, and cost efficiency with ongoing AWS operations and governance.",
         whatWeDo: [
           { title: "24/7 environment monitoring and operational support" },
-          { title: "Cost optimization and rightsizing reviews" },
+          { title: "Cost optimisation and rightsizing reviews" },
           { title: "Security posture and governance controls" },
           { title: "Performance tuning and availability improvement" },
           { title: "Ongoing improvement planning and reporting" },
@@ -187,7 +187,8 @@ export const pillars: PillarSeed[] = [
         name: "AI/ML Ops",
         descriptor: "[Placeholder] One line on running SAP on the cloud.",
         summary: "[Placeholder] Short introduction to SAP on Cloud services.",
-        status: "PUBLISHED",
+        // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor and summary (Q5.2)
+        status: "DRAFT",
         sortOrder: 3,
         needsReview: true,
         editorNote:
@@ -200,11 +201,11 @@ export const pillars: PillarSeed[] = [
         summary:
           "Adamas Tech Consulting helps Construction, Engineering, EPC, and Contracting companies transform their operations with Oracle NetSuite — the world’s #1 true cloud ERP. Built for end-to-end project visibility and designed to eliminate fragmentation, NetSuite delivers real-time financial, operational, and project control for GCC companies.",
         whoFor:
-          "NetSuite includes purpose-built capabilities for contractors, EPC firms, MEP providers, and engineering organizations.",
+          "NetSuite includes purpose-built capabilities for contractors, EPC firms, MEP providers, and engineering organisations.",
         whatWeDo: [
           {
             title: "Project Costing & WIP",
-            body: "Real-time cost-to-complete · Automated WIP calculation · Labor, material, subcontractor cost flow · Variance analysis & proactive budget control",
+            body: "Real-time cost-to-complete · Automated WIP calculation · Labour76, material, subcontractor cost flow · Variance analysis & proactive budget control",
           },
           {
             title: "Procurement & Subcontractor Management",
@@ -212,7 +213,7 @@ export const pillars: PillarSeed[] = [
           },
           {
             title: "Inventory & Material Management",
-            body: "Multi-location warehouse & site stores · Materials planning based on BOQs & project timelines · Mobile receiving with photo proof · Equipment tracking & utilization visibility",
+            body: "Multi-location warehouse & site stores · Materials planning based on BOQs & project timelines · Mobile receiving with photo proof · Equipment tracking & utilisation visibility",
           },
           {
             title: "Field Mobility",
@@ -290,7 +291,7 @@ export const pillars: PillarSeed[] = [
         name: "SAP Solutions & Consulting",
         descriptor: "Transforming business for the future",
         summary:
-          "Our end to end SAP comprehensive services and consulting expertise in advance cloud based solutions empowers business for smarter and faster cloud adoption, propels digital transformation journeys and enables readiness for future challenges.\n\nAt Adamas Tech Consulting, we specialize in SAP solutions and consulting services that enable businesses to drive their digital transformation journeys. With our deep expertise in SAP Technologies, we help organizations harness the power of SAP’s robust suite of solutions to optimize operations, enhance productivity, and achieve sustainable growth.",
+          "Our end to end SAP comprehensive services and consulting expertise in advance cloud based solutions empowers business for smarter and faster cloud adoption, propels digital transformation journeys and enables readiness for future challenges.\n\nAt Adamas Tech Consulting, we specialise in SAP solutions and consulting services that enable businesses to drive their digital transformation journeys. With our deep expertise in SAP Technologies, we help organisations harness the power of SAP’s robust suite of solutions to optimise operations, enhance productivity, and achieve sustainable growth.",
         whatWeDo: [
           {
             title: "SAP Implementation & Upgrades",
@@ -298,7 +299,7 @@ export const pillars: PillarSeed[] = [
           },
           {
             title: "SAP Application Development",
-            body: "Automate tasks, eliminate paperwork, and optimize processes, resulting in improved efficiency and cost savings.",
+            body: "Automate tasks, eliminate paperwork, and optimise processes, resulting in improved efficiency and cost savings.",
           },
           {
             title: "SAP Customisation & Integration",
@@ -326,7 +327,7 @@ export const pillars: PillarSeed[] = [
         name: "Application Development",
         descriptor: "Transforming Ideas into Powerful Applications",
         summary:
-          "At Adamas Tech Consulting, we specialize in Application Development Solutions that drive innovation and accelerate business growth. Our team of skilled developers and designers are committed to creating tailored applications that meet your unique requirements and exceed your expectations.",
+          "At Adamas Tech Consulting, we specialise in Application Development Solutions that drive innovation and accelerate business growth. Our team of skilled developers and designers are committed to creating tailored applications that meet your unique requirements and exceed your expectations.",
         whatWeDo: [
           {
             title: "Custom Application Development",
@@ -348,7 +349,7 @@ export const pillars: PillarSeed[] = [
         highlights: [
           { title: "$935B", body: "Global mobile app revenues are projected to hit $935 billion by 2025, highlighting vast business opportunities." },
           { title: "80%", body: "80% percent of customers value company experience as much as products, underscoring the need for well-designed applications." },
-          { title: "$259B", body: "The global enterprise application market will reach $259.51 billion by 2028, highlighting the rising demand for customized business solutions." },
+          { title: "$259B", body: "The global enterprise application market will reach $259.51 billion by 2028, highlighting the rising demand for customised business solutions." },
         ],
         legacyPath: "/application-development/",
         status: "PUBLISHED",
@@ -365,26 +366,26 @@ export const pillars: PillarSeed[] = [
         whatWeDo: [
           {
             title: "Advanced Statistical Modelling & Predictive Analytics",
-            body: "Utilize advanced statistical modeling and predictive analytics to uncover trends, forecast future outcomes, and drive data-informed decisions effectively.",
+            body: "Utilise advanced statistical modelling48 and predictive analytics to uncover trends, forecast future outcomes, and drive data-informed decisions effectively.",
           },
           {
             title: "Natural Language Processing & Text Analytics",
-            body: "Utilize natural language processing and text analytics to extract insights, understand sentiments, and analyze textual data for actionable intelligence.",
+            body: "Utilise natural language processing and text analytics to extract insights, understand sentiments, and analyse textual data for actionable intelligence.",
           },
           {
             title: "Machine Learning Algorithms & Techniques",
-            body: "Apply machine learning algorithms and techniques to uncover patterns, optimize processes, and enhance decision-making with data-driven precision.",
+            body: "Apply machine learning algorithms and techniques to uncover patterns, optimise processes, and enhance decision-making with data-driven precision.",
           },
           {
-            title: "Data Visualization & Storytelling",
-            body: "Transform data into compelling visuals and narratives with data visualization and storytelling to communicate insights and drive impactful decisions.",
+            title: "Data Visualisation & Storytelling",
+            body: "Transform data into compelling visuals and narratives with data visualisation and storytelling to communicate insights and drive impactful decisions.",
           },
         ],
         highlights: [
-          { title: "2.5x", body: "Organizations effectively leveraging data analytics are 2.5 times more likely to make faster decisions and execute them successfully." },
+          { title: "2.5x", body: "Organisations effectively leveraging data analytics are 2.5 times more likely to make faster decisions and execute them successfully." },
           { title: "-86%", body: "Eighty-six percent see data analytics as a competitive edge; 89% plan to compete on it." },
           { title: "+5%", body: "Data-driven companies are 5% more productive and 6% more profitable than their competitors." },
-          { title: "6%", body: "Organizations adopting data-driven decision-making see a 5-6% productivity boost and a 4-5% increase in profitability on average." },
+          { title: "6%", body: "Organisations adopting data-driven decision-making see a 5-6% productivity boost and a 4-5% increase in profitability on average." },
         ],
         legacyPath: "/data-science-analytics/",
         status: "PUBLISHED",
@@ -406,7 +407,7 @@ export const pillars: PillarSeed[] = [
           { title: "Informed Decision Making" },
           {
             title: "Ensure Data Security",
-            body: "Protect sensitive information, maintaining compliance, and safeguarding against unauthorized access and data breaches.",
+            body: "Protect sensitive information, maintaining compliance, and safeguarding against unauthorised access and data breaches.",
           },
           { title: "Agility & Innovation" },
         ],
@@ -429,19 +430,19 @@ export const pillars: PillarSeed[] = [
         whatWeDo: [
           {
             title: "E-Commerce Support",
-            body: "Empower your education business with our Open edX® E-commerce support. Seamlessly integrate and sell courses online, leveraging a robust platform. Elevate your e-learning experience and maximize revenue effortlessly.",
+            body: "Empower your education business with our Open edX® E-commerce support. Seamlessly integrate and sell courses online, leveraging a robust platform. Elevate your e-learning experience and maximise revenue effortlessly.",
           },
           {
             title: "Simplify Course Management",
-            body: "Our integrated edX and LMS solution offers a centralized platform to effortlessly create, update, and organize your courses, streamlining the educational content management process. Experience the convenience of a single hub for all your learning materials.",
+            body: "Our integrated edX and LMS solution offers a centralised platform to effortlessly create, update, and organise your courses, streamlining the educational content management process. Experience the convenience of a single hub for all your learning materials.",
           },
           {
             title: "Content Management",
-            body: "Simplify content organization and enhance educational materials with Open edX® Content Management. Deliver a polished, efficient online learning experience, optimizing a diverse array of content for maximum impact and engagement in your courses.",
+            body: "Simplify content organisation and enhance educational materials with Open edX® Content Management. Deliver a polished, efficient online learning experience, optimising a diverse array of content for maximum impact and engagement in your courses.",
           },
           {
             title: "Exam Management",
-            body: "Streamline exam processes effortlessly with Open edX® Exam Management. Our professional platform ensures efficient administration, creating a seamless and organized experience for online assessments, enhancing the learning journey.",
+            body: "Streamline exam processes effortlessly with Open edX® Exam Management. Our professional platform ensures efficient administration, creating a seamless and organised experience for online assessments, enhancing the learning journey.",
           },
           {
             title: "Interactive Learning Pathways",
@@ -453,7 +454,7 @@ export const pillars: PillarSeed[] = [
           },
           {
             title: "Online Class Integration",
-            body: "Optimize your online meetings and collaborative learning with our integrated meeting platform feature. Seamlessly connect your courses to popular meeting platforms, making it easy for educators and learners to schedule, join, and engage in live sessions.",
+            body: "Optimise your online meetings and collaborative learning with our integrated meeting platform feature. Seamlessly connect your courses to popular meeting platforms, making it easy for educators and learners to schedule, join, and engage in live sessions.",
           },
           {
             title: "Integration with other Business Suites",
@@ -584,8 +585,8 @@ export const pillars: PillarSeed[] = [
     image: "images/services/ai-services.webp",
     tagline: "Empowering businesses to thrive in the digital era through innovative AI and scalable analytics solutions",
     summary:
-      "At Adamas Tech Consulting, we empower businesses with AI and data analytics, specializing in computer vision technologies. We provide tailored solutions to optimize decision-making, streamline operations, and enhance customer experiences. Our focus is on helping clients achieve sustainable growth and maintain a competitive edge in the digital era.",
-    outcomeLine: "Innovate, Optimize, Succeed: Your Journey with AI and Data Begins Here",
+      "At Adamas Tech Consulting, we empower businesses with AI and data analytics, specialising in computer vision technologies. We provide tailored solutions to optimise decision-making, streamline operations, and enhance customer experiences. Our focus is on helping clients achieve sustainable growth and maintain a competitive edge in the digital era.",
+    outcomeLine: "Innovate, Optimise, Succeed: Your Journey with AI and Data Begins Here",
     challenge: "[Placeholder] The business challenge this pillar addresses.",
     status: "PUBLISHED",
     sortOrder: 2,
@@ -604,19 +605,19 @@ export const pillars: PillarSeed[] = [
             body: "Harness the power of AI to anticipate trends, identify opportunities, and make data-driven decisions that propel your business forward.",
           },
           {
-            title: "Enhance Customer Experience through Personalization",
-            body: "Leverage analytics to understand customer behavior and preferences, delivering personalized experiences that foster loyalty and satisfaction.",
+            title: "Enhance Customer Experience through Personalisation",
+            body: "Leverage analytics to understand customer behaviour and preferences, delivering personalised experiences that foster loyalty and satisfaction.",
           },
-          { title: "Optimize Operations and Increase Efficiency" },
+          { title: "Optimise Operations and Increase Efficiency" },
           {
             title: "Innovate with Next-Generation AI Solutions",
-            body: "Utilize state-of-the-art technologies such as Computer Vision and Generative AI to innovate your offerings, positioning your business at the forefront of the market with a distinct competitive advantage.",
+            body: "Utilise state-of-the-art technologies such as Computer Vision and Generative AI to innovate your offerings, positioning your business at the forefront of the market with a distinct competitive advantage.",
           },
         ],
         highlights: [
           { title: "50%", body: "By 2027, 50% of companies will adopt AI vision systems for warehouses, boosting inventory accuracy and cutting costs." },
           { title: "-37%", body: "Companies adopting generative AI can reduce operational costs by up to 37%, boosting profitability and efficiency, reports Forbes." },
-          { title: "+28%", body: "Organizations using advanced data visualization tools gain 28% more actionable insights, leading to faster, more accurate decision-making." },
+          { title: "+28%", body: "Organisations using advanced data visualisation tools gain 28% more actionable insights, leading to faster, more accurate decision-making." },
           { title: "+25%", body: "Businesses using machine learning for predictive analytics boost forecasting accuracy by up to 25%, enhancing strategic planning and resource allocation." },
         ],
         legacyPath: "/ai-data-analytics/",
@@ -664,7 +665,8 @@ export const pillars: PillarSeed[] = [
           { title: "Entry/exit tracking and crowd flow" },
           { title: "Traffic and vehicle monitoring" },
         ],
-        status: "PUBLISHED",
+        // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder summary (Q5.2)
+        status: "DRAFT",
         sortOrder: 2,
         needsReview: true,
         editorNote:
@@ -675,11 +677,11 @@ export const pillars: PillarSeed[] = [
         name: "Generative & Applied AI",
         descriptor: "Generative AI strategy and implementation",
         summary:
-          "Establish a robust data platform to fuel generative AI initiatives. Centralize data, ensure quality and governance, and unlock deeper insights.\n\nIn generative AI, quality data is the foundation for success. We help you build a robust AWS data architecture that ensures data is clean, governed, and AI-ready for impactful insights.",
+          "Establish a robust data platform to fuel generative AI initiatives. Centralise data, ensure quality and governance, and unlock deeper insights.\n\nIn generative AI, quality data is the foundation for success. We help you build a robust AWS data architecture that ensures data is clean, governed, and AI-ready for impactful insights.",
         whatWeDo: [
           { title: "Data Lake Design", body: "Expert architecture for structured and unstructured data readiness." },
           { title: "ETL & Integration", body: "Efficient pipelines using AWS Glue for automated data flow." },
-          { title: "AWS Best Practices", body: "Proven solutions for data security and performance optimization." },
+          { title: "AWS Best Practices", body: "Proven solutions for data security and performance optimisation." },
           { title: "AI Data Preparation", body: "Expertise in data cleaning and feature engineering for accurate AI models." },
         ],
         highlights: [
@@ -699,7 +701,8 @@ export const pillars: PillarSeed[] = [
         name: "Data Engineering",
         descriptor: "[Placeholder] One line on data engineering.",
         summary: "[Placeholder] Short introduction to AdamasTech's data engineering services.",
-        status: "PUBLISHED",
+        // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor and summary (Q5.2)
+        status: "DRAFT",
         sortOrder: 4,
         needsReview: true,
         editorNote: "Added from the sitemap (13 Nov 2026, \"create URL\"): no old page. MISSING: descriptor, summary, what-we-do list and FAQs.",
@@ -709,7 +712,8 @@ export const pillars: PillarSeed[] = [
         name: "Advanced Analytics",
         descriptor: "[Placeholder] One line on advanced analytics.",
         summary: "[Placeholder] Short introduction to AdamasTech's advanced analytics services.",
-        status: "PUBLISHED",
+        // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor and summary (Q5.2)
+        status: "DRAFT",
         sortOrder: 5,
         needsReview: true,
         editorNote: "Added from the sitemap (13 Nov 2026, \"create URL\"): no old page. MISSING: descriptor, summary, what-we-do list and FAQs.",
@@ -719,7 +723,8 @@ export const pillars: PillarSeed[] = [
         name: "Sovereign AI",
         descriptor: "[Placeholder] One line on sovereign AI.",
         summary: "[Placeholder] Short introduction to AdamasTech's sovereign AI services.",
-        status: "PUBLISHED",
+        // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor and summary (Q5.2)
+        status: "DRAFT",
         sortOrder: 6,
         needsReview: true,
         editorNote: "Added from the sitemap (13 Nov 2026, \"create URL\"): no old page. MISSING: descriptor, summary, what-we-do list and FAQs.",
@@ -729,7 +734,8 @@ export const pillars: PillarSeed[] = [
         name: "Responsible AI",
         descriptor: "[Placeholder] One line on responsible AI.",
         summary: "[Placeholder] Short introduction to AdamasTech's responsible AI services.",
-        status: "PUBLISHED",
+        // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor and summary (Q5.2)
+        status: "DRAFT",
         sortOrder: 7,
         needsReview: true,
         editorNote: "Added from the sitemap (13 Nov 2026, \"create URL\"): no old page. MISSING: descriptor, summary, what-we-do list and FAQs.",
@@ -739,7 +745,8 @@ export const pillars: PillarSeed[] = [
         name: "AI Security & Governance",
         descriptor: "[Placeholder] One line on AI security and governance.",
         summary: "[Placeholder] Short introduction to AdamasTech's AI security and governance services.",
-        status: "PUBLISHED",
+        // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor and summary (Q5.2)
+        status: "DRAFT",
         sortOrder: 8,
         needsReview: true,
         editorNote: "Added from the sitemap (13 Nov 2026, \"create URL\"): no old page. MISSING: descriptor, summary, what-we-do list and FAQs.",

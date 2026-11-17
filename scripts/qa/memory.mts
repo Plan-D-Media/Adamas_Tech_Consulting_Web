@@ -15,7 +15,7 @@ const label = process.argv[3] ?? "public";
 const outDir = path.join("docs", "qa", "evidence", label);
 fs.mkdirSync(outDir, { recursive: true });
 
-const ROUTES = ["/in/", "/services/cloud-services", "/uk/", "/services/cloud-services/migration-modernization", "/insights/events/house-of-lords-2026", "/gcc/", "/about", "/services/digital-transformation", "/solutions", "/case-studies", "/in/", "/services/ai-services", "/insights/events", "/uk/", "/services/cloud-services/devops-secops", "/credentials", "/gcc/", "/solutions/arivoo", "/privacy-policy", "/in/", "/services/cloud-services", "/uk/"];
+const ROUTES = ["/in/", "/services/cloud-services", "/uk/", "/services/cloud-services/migration-modernization", "/insights/events/house-of-lords-2026", "/gcc/", "/about", "/services/digital-transformation", "/case-studies", "/in/", "/services/ai-services", "/insights/events", "/uk/", "/services/cloud-services/devops-secops", "/credentials", "/gcc/", "/privacy-policy", "/in/", "/services/cloud-services", "/uk/"];
 
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });

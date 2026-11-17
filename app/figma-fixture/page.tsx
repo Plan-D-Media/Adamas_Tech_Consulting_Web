@@ -26,7 +26,6 @@ export default async function FigmaFixturePage() {
   const [home, blocks, offices, regions, nav] = await Promise.all([getHome("IN"), getBlocks("IN"), getOffices(), getRegions(), getNavigation()]);
   if (!home) notFound();
   const b = (key: string) => blocks[key] ?? emptyBlock;
-  const regionInfo = regions.find((r) => r.code === "IN") ?? null;
 
   return (
     <>
@@ -38,7 +37,7 @@ export default async function FigmaFixturePage() {
             <TopStories block={FIXTURE_STORIES} />
             <Services block={b("home.whatWeDo")} pillars={fixturePillars(home.pillars)} />
             <Outcomes block={b("home.outcomes")} claims={FIXTURE_CLAIMS} />
-            <Presence block={b("home.presence")} offices={offices} featuredSlug={regionInfo?.featuredOfficeSlug ?? null} />
+            <Presence block={b("home.presence")} offices={offices} regions={regions} region="in" fallbackRegion="in" />
             <ContactSection block={b("home.contact")} regionSlug="in" />
           </div>
         </RevealScope>

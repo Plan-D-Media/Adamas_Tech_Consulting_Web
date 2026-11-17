@@ -9,6 +9,10 @@ import { useEffect, useRef, type ReactNode } from "react";
  * everything at once. A focus inside a not-yet-revealed element reveals it immediately, so keyboard users are never
  * stuck on an invisible control.
  *
+ * `data-reveal="now"` is skipped entirely: those elements are above the fold, CSS animates them with no opacity
+ * step, and they must be part of the first paint rather than waiting for this component to hydrate (LCP work,
+ * 17 Nov 2026).
+ *
  * Load cost (Lighthouse round 7): elements already in the first viewport are shown as soon as the page hydrates,
  * and GSAP itself is only fetched on the first scroll or pointer movement, or after the browser has been idle, so
  * its parse and execution stay out of the time-to-interactive window on phones.
@@ -19,7 +23,7 @@ export function RevealScope({ children, className }: { children: ReactNode; clas
   useEffect(() => {
     const root = ref.current;
     if (!root) return;
-    const nodes = Array.from(root.querySelectorAll<HTMLElement>("[data-reveal]"));
+    const nodes = Array.from(root.querySelectorAll<HTMLElement>('[data-reveal]:not([data-reveal="now"])'));
     if (nodes.length === 0) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const show = (el: HTMLElement) => el.setAttribute("data-revealed", "");
@@ -36,7 +40,7 @@ export function RevealScope({ children, className }: { children: ReactNode; clas
     // Once GSAP owns the inline opacity, a focus inside a still-hidden element also clears the tween (QA BUG-026).
     let revealNow: ((el: HTMLElement) => void) | undefined;
     const onFocus = (e: FocusEvent) => {
-      const el = (e.target as HTMLElement | null)?.closest<HTMLElement>("[data-reveal]");
+      const el = (e.target as HTMLElement | null)?.closest<HTMLElement>('[data-reveal]:not([data-reveal="now"])');
       if (!el) return;
       if (!el.hasAttribute("data-revealed")) show(el);
       revealNow?.(el);

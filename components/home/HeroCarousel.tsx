@@ -27,14 +27,20 @@ const AUTO_MS = 7000;
 const CATEGORY_ICON: Record<string, IconName> = { event: "calendar", solutions: "layers", solution: "layers", "case study": "chart", "case-study": "chart" };
 const CLAIM_ICON: IconName[] = ["thumbs-up", "shield"];
 
-function Card({ card, priority }: { card: HeroCard; priority: boolean }) {
+/**
+ * The first card's image is the page's LCP element on phones (Lighthouse, QA Phase 1): it alone is preloaded with
+ * high priority and decoded synchronously, so it is part of the first paint rather than a later frame. Cards two
+ * and three load eagerly (they are visible on desktop) but are not preloaded, so on a phone they no longer compete
+ * with the first card for bandwidth; the rest of the track is lazy.
+ */
+function Card({ card, priority, eager }: { card: HeroCard; priority: boolean; eager: boolean }) {
   const icon = CATEGORY_ICON[card.category.toLowerCase()] ?? "layers";
+  const imgProps = { fill: true, sizes: "(min-width: 1440px) 401px, (min-width: 1024px) 33vw, 82vw", priority, loading: eager && !priority ? ("eager" as const) : undefined, decoding: priority ? ("sync" as const) : undefined, className: "object-cover" };
   const inner = card.artwork ? (
-    card.image && <Img src={card.image.url} alt={card.title} fill sizes="(min-width: 1440px) 401px, (min-width: 1024px) 33vw, 82vw" priority={priority} className="object-cover" />
+    card.image && <Img src={card.image.url} alt={card.title} {...imgProps} />
   ) : (
     <>
-      {/* The first card is the page's LCP element on phones: loaded eagerly with high priority (Lighthouse round 7). */}
-      {card.image && <Img src={card.image.url} alt={card.image.alt} fill sizes="(min-width: 1440px) 401px, (min-width: 1024px) 33vw, 82vw" priority={priority} className="object-cover" />}
+      {card.image && <Img src={card.image.url} alt={card.image.alt} {...imgProps} />}
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(0_12_51/0.82)_0%,rgb(0_12_51/0.45)_55%,rgb(0_12_51/0.1)_100%)]" aria-hidden="true" />
       <div className="relative flex h-full flex-col p-4">
         <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-blue-600/85 text-white">
@@ -104,7 +110,7 @@ export function HeroCarousel({ cards, claims }: { cards: HeroCard[]; claims: Cla
       >
         {cards.map((c, i) => (
           <div key={c.id} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${cards.length}`} className={cx("w-[min(401px,82vw)] shrink-0 snap-start lg:w-[calc((100%-58px)/3)]", i % 3 === 1 ? "min-[1440px]:w-[381px]" : "min-[1440px]:w-[401px]")}>
-            <Card card={c} priority={i < 3} />
+            <Card card={c} priority={i === 0} eager={i < 3} />
           </div>
         ))}
       </div>

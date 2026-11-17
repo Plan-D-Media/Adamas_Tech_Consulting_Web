@@ -404,7 +404,8 @@ model Solution {
   tagline     String?
   summary     String?
   body        String?
-  /// When set, cards and menus link here (new tab) instead of /solutions/[slug]
+  /// The product website. Solutions have no pages on this site (17 Nov 2026): cards and menus link here in a new
+  /// tab, and a row without it cannot be shown at all, so it stays DRAFT until the client supplies the URL.
   externalUrl String?
   parentId    String?
   parent      Solution?    @relation("SolutionTree", fields: [parentId], references: [id])

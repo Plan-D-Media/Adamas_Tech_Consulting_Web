@@ -5,15 +5,19 @@ import { db, visible } from "@/lib/db";
 /**
  * Links from teaser content (hero cards, Top Stories, Client Outcomes, nav featured cards, section CTAs) to the
  * detail pages are gated by the target row's own status. With PREVIEW_DRAFTS off, a card that advertises an
- * unpublished case study, event or solution is dropped and a section CTA falls back to the listing page, so the
- * public site never links to a page that does not exist and never repeats an unverified figure through a teaser
+ * unpublished case study or event is dropped and a section CTA falls back to the listing page, so the public
+ * site never links to a page that does not exist and never repeats an unverified figure through a teaser
  * (QA BUG-002 and BUG-014, 16 Nov 2026). With drafts previewed every link stays as seeded.
+ *
+ * Solutions are not gated here: since the 17 Nov 2026 scope change they have no pages on this site, so a
+ * solution link is an external URL and its own reader decides whether the row can be shown at all
+ * (lib/data/solutions.ts).
  */
 
-type Kind = "case-studies" | "insights/events" | "solutions";
+type Kind = "case-studies" | "insights/events";
 
-const DETAIL = /^\/(case-studies|insights\/events|solutions)\/([^/?#]+)\/?(?:[?#].*)?$/;
-const LISTING: Record<Kind, string> = { "case-studies": "/case-studies", "insights/events": "/insights/events", solutions: "/solutions" };
+const DETAIL = /^\/(case-studies|insights\/events)\/([^/?#]+)\/?(?:[?#].*)?$/;
+const LISTING: Record<Kind, string> = { "case-studies": "/case-studies", "insights/events": "/insights/events" };
 
 export function detailTarget(href: string | null | undefined): { kind: Kind; slug: string } | null {
   const m = href ? DETAIL.exec(href) : null;
@@ -23,16 +27,14 @@ export function detailTarget(href: string | null | undefined): { kind: Kind; slu
 async function visibleSlugs(): Promise<Record<Kind, string[]>> {
   "use cache";
   cacheLife("hours");
-  cacheTag("links", "case-studies", "events", "solutions");
-  const [cases, events, solutions] = await Promise.all([
+  cacheTag("links", "case-studies", "events");
+  const [cases, events] = await Promise.all([
     db.caseStudy.findMany({ where: visible, select: { slug: true } }),
     db.event.findMany({ where: visible, select: { slug: true } }),
-    db.solution.findMany({ where: visible, select: { slug: true } }),
   ]);
   return {
     "case-studies": cases.map((r) => r.slug),
     "insights/events": events.map((r) => r.slug),
-    solutions: solutions.map((r) => r.slug),
   };
 }
 

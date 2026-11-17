@@ -12,7 +12,8 @@ export const milestones: MilestoneSeed[] = Array.from({ length: 6 }, (_, i) => (
   year: null,
   title: "Milestone title to be confirmed",
   description: "A short description of this milestone will be added once the details are confirmed.",
-  status: "PUBLISHED" as const,
+  // DRAFT: BUG-014 sweep, 17 Nov 2026: every milestone is "Milestone title to be confirmed" (CONTENT_TODO: About, journey)
+  status: "DRAFT" as const,
   sortOrder: i,
   needsReview: true,
   editorNote: note,

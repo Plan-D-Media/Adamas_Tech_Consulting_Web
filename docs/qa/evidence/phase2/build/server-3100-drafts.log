@@ -1,0 +1,150 @@
+▲ Next.js 16.4.3
+- Local:         http://localhost:3100
+- Network:       http://192.168.7.5:3100
+✓ Ready in 175ms
+✓ Running next.config.ts took 37ms
+[mail] to=marketing@adamastech.in subject="Website enquiry from QA Valid Person (India)"
+Name: QA Valid Person
+Email: qa-audit-mwjchcuj-valid@example.com
+Phone: +91 98765 43210
+Country: India
+Region: -
+Service: -
+Page: /in/
+
+This is a QA audit test message, please ignore.
+[mail] to=marketing@adamastech.in subject="Website enquiry from QA Double (India)"
+Name: QA Double
+Email: qa-audit-mwjchcuj-double@example.com
+Phone: -
+Country: India
+Region: -
+Service: -
+Page: /in/
+
+Double submit protection test, please ignore.
+[mail] to=marketing@adamastech.in subject="Website enquiry from <img src=x onerror="window.__xss=1"><script>window.__xss=1</script>"'&lt;b&gt; नमस्ते दुनिया مرحبا بالعالم 🚀 Ünïcødé (Other)"
+Name: <img src=x onerror="window.__xss=1"><script>window.__xss=1</script>"'&lt;b&gt; नमस्ते दुनिया مرحبا بالعالم 🚀 Ünïcødé
+Email: qa-audit-mwjchcuj-xss@example.com
+Phone: +971 4 123 4567
+Country: Other
+Region: -
+Service: -
+Page: /in/
+
+<img src=x onerror="window.__xss=1"><script>window.__xss=1</script>"'&lt;b&gt; नमस्ते दुनिया مرحبا بالعالم 🚀 Ünïcødé message body long enough
+[mail] to=marketing@adamastech.in subject="Website enquiry from QA NoJS (United Kingdom)"
+Name: QA NoJS
+Email: qa-audit-mwjchcuj-nojs@example.com
+Phone: -
+Country: United Kingdom
+Region: -
+Service: -
+Page: /uk/
+
+No JavaScript submission test, please ignore.
+[mail] to=marketing@adamastech.in subject="Event registration: AdamasTech at the House of Lords"
+Event: AdamasTech at the House of Lords (house-of-lords-2026)
+When: Thursday, 26 November 2026, 18:00 GMT
+Name: QA Registrant
+Email: qa-audit-mwjchcuj-event-valid@example.com
+Organisation: Plan D QA
+Job title: Tester
+Phone: +44 7700 900000
+Notes: QA audit test registration, please ignore.
+[mail] to=qa-audit-mwjchcuj-event-valid@example.com subject="Your registration: AdamasTech at the House of Lords" attachments=house-of-lords-2026.ics
+Thank you for registering, QA Registrant.
+
+AdamasTech at the House of Lords
+Thursday, 26 November 2026, 18:00 GMT
+House of Lords, Palace of Westminster, London SW1A 0PW
+
+The calendar entry is attached to this email (it is also at http://localhost:3000/insights/events/house-of-lords-2026/calendar).
+We will be in touch by email with the final details before the day.
+
+AdamasTech Consulting
+prisma:error 
+Invalid `prisma.eventRegistration.create()` invocation:
+
+
+Unique constraint failed on the fields: (`eventId`,`email`)
+[mail] to=marketing@adamastech.in subject="Event registration: AdamasTech at the House of Lords"
+Event: AdamasTech at the House of Lords (house-of-lords-2026)
+When: Thursday, 26 November 2026, 18:00 GMT
+Name: QA Double Reg
+Email: qa-audit-mwjchcuj-event-double@example.com
+Organisation: -
+Job title: -
+Phone: -
+Notes: -
+[mail] to=qa-audit-mwjchcuj-event-double@example.com subject="Your registration: AdamasTech at the House of Lords" attachments=house-of-lords-2026.ics
+Thank you for registering, QA Double Reg.
+
+AdamasTech at the House of Lords
+Thursday, 26 November 2026, 18:00 GMT
+House of Lords, Palace of Westminster, London SW1A 0PW
+
+The calendar entry is attached to this email (it is also at http://localhost:3000/insights/events/house-of-lords-2026/calendar).
+We will be in touch by email with the final details before the day.
+
+AdamasTech Consulting
+[mail] to=marketing@adamastech.in subject="Event registration: AdamasTech at the House of Lords"
+Event: AdamasTech at the House of Lords (house-of-lords-2026)
+When: Thursday, 26 November 2026, 18:00 GMT
+Name: <img src=x onerror="window.__xss=1"><script>window.__xss=1</script>"'&lt;b&gt; नमस्ते दुनिया مرحبا بالعالم 🚀 Ünïcødé
+Email: qa-audit-mwjchcuj-event-xss@example.com
+Organisation: <img src=x onerror="window.__xss=1"><script>window.__xss=1</script>"'&lt;b&gt;
+Job title: नमस्ते दुनिया مرحبا بالعالم 🚀 Ünïcødé
+Phone: -
+Notes: नमस्ते दुनिया مرحبا بالعالم 🚀 Ünïcødé
+[mail] to=qa-audit-mwjchcuj-event-xss@example.com subject="Your registration: AdamasTech at the House of Lords" attachments=house-of-lords-2026.ics
+Thank you for registering, <img src=x onerror="window.__xss=1"><script>window.__xss=1</script>"'&lt;b&gt; नमस्ते दुनिया مرحبا بالعالم 🚀 Ünïcødé.
+
+AdamasTech at the House of Lords
+Thursday, 26 November 2026, 18:00 GMT
+House of Lords, Palace of Westminster, London SW1A 0PW
+
+The calendar entry is attached to this email (it is also at http://localhost:3000/insights/events/house-of-lords-2026/calendar).
+We will be in touch by email with the final details before the day.
+
+AdamasTech Consulting
+[mail] to=marketing@adamastech.in subject="Event registration: AdamasTech at the House of Lords"
+Event: AdamasTech at the House of Lords (house-of-lords-2026)
+When: Thursday, 26 November 2026, 18:00 GMT
+Name: QA NoJS Reg
+Email: qa-audit-mwjchcuj-event-nojs@example.com
+Organisation: -
+Job title: -
+Phone: -
+Notes: -
+[mail] to=qa-audit-mwjchcuj-event-nojs@example.com subject="Your registration: AdamasTech at the House of Lords" attachments=house-of-lords-2026.ics
+Thank you for registering, QA NoJS Reg.
+
+AdamasTech at the House of Lords
+Thursday, 26 November 2026, 18:00 GMT
+House of Lords, Palace of Westminster, London SW1A 0PW
+
+The calendar entry is attached to this email (it is also at http://localhost:3000/insights/events/house-of-lords-2026/calendar).
+We will be in touch by email with the final details before the day.
+
+AdamasTech Consulting
+[mail] to=marketing@adamastech.in subject="Website enquiry from QA Rate 0 (India)"
+Name: QA Rate 0
+Email: qa-audit-mwjchcuj-crate-0@example.com
+Phone: -
+Country: India
+Region: -
+Service: -
+Page: /in/
+
+Rate limit test message, please ignore.
+prisma:error Error in PostgreSQL connection: Error { kind: Io, cause: Some(Os { code: 10054, kind: ConnectionReset, message: "An existing connection was forcibly closed by the remote host." }) }
+prisma:error Error in PostgreSQL connection: Error { kind: Io, cause: Some(Os { code: 10054, kind: ConnectionReset, message: "An existing connection was forcibly closed by the remote host." }) }
+prisma:error Error in PostgreSQL connection: Error { kind: Io, cause: Some(Os { code: 10054, kind: ConnectionReset, message: "An existing connection was forcibly closed by the remote host." }) }
+prisma:error Error in PostgreSQL connection: Error { kind: Io, cause: Some(Os { code: 10054, kind: ConnectionReset, message: "An existing connection was forcibly closed by the remote host." }) }
+prisma:error Error in PostgreSQL connection: Error { kind: Io, cause: Some(Os { code: 10054, kind: ConnectionReset, message: "An existing connection was forcibly closed by the remote host." }) }
+prisma:error Error in PostgreSQL connection: Error { kind: Io, cause: Some(Os { code: 10054, kind: ConnectionReset, message: "An existing connection was forcibly closed by the remote host." }) }
+prisma:error Error in PostgreSQL connection: Error { kind: Io, cause: Some(Os { code: 10054, kind: ConnectionReset, message: "An existing connection was forcibly closed by the remote host." }) }
+prisma:error Error in PostgreSQL connection: Error { kind: Io, cause: Some(Os { code: 10054, kind: ConnectionReset, message: "An existing connection was forcibly closed by the remote host." }) }
+prisma:error Error in PostgreSQL connection: Error { kind: Io, cause: Some(Os { code: 10054, kind: ConnectionReset, message: "An existing connection was forcibly closed by the remote host." }) }
+prisma:error Error in PostgreSQL connection: Error { kind: Io, cause: Some(Os { code: 10054, kind: ConnectionReset, message: "An existing connection was forcibly closed by the remote host." }) }

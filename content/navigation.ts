@@ -39,12 +39,12 @@ const servicesMenu: NavItemSeed = {
         {
           label: "Migration & Modernization",
           href: "/services/cloud-services/migration-modernization",
-          descriptor: "Migrate workloads, modernize architecture, and move from legacy systems to scalable AWS-native environments.",
+          descriptor: "Migrate workloads, modernise architecture, and move from legacy systems to scalable AWS-native environments.",
         },
         {
           label: "DevOps & SecOps",
           href: "/services/cloud-services/devops-secops",
-          descriptor: "Resilient | Reliable | Cost optimized | Intelligent",
+          descriptor: "Resilient | Reliable | Cost optimised | Intelligent",
         },
         {
           label: "Managed Services",
@@ -53,6 +53,8 @@ const servicesMenu: NavItemSeed = {
         },
         {
           label: "AI/ML Ops",
+          // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor; the service page itself is DRAFT (placeholder copy)
+          status: "DRAFT",
           href: "/services/cloud-services/ai-ml-ops",
           descriptor: "[Placeholder] One line on AI/ML Ops.",
           needsReview: true,
@@ -143,6 +145,8 @@ const servicesMenu: NavItemSeed = {
         },
         {
           label: "Data Engineering",
+          // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor; the service page itself is DRAFT (placeholder copy)
+          status: "DRAFT",
           href: "/services/ai-services/data-engineering",
           descriptor: "[Placeholder] One line on data engineering.",
           needsReview: true,
@@ -150,6 +154,8 @@ const servicesMenu: NavItemSeed = {
         },
         {
           label: "Advanced Analytics",
+          // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor; the service page itself is DRAFT (placeholder copy)
+          status: "DRAFT",
           href: "/services/ai-services/advanced-analytics",
           descriptor: "[Placeholder] One line on advanced analytics.",
           needsReview: true,
@@ -157,6 +163,8 @@ const servicesMenu: NavItemSeed = {
         },
         {
           label: "Sovereign AI",
+          // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor; the service page itself is DRAFT (placeholder copy)
+          status: "DRAFT",
           href: "/services/ai-services/sovereign-ai",
           descriptor: "[Placeholder] One line on sovereign AI.",
           needsReview: true,
@@ -164,6 +172,8 @@ const servicesMenu: NavItemSeed = {
         },
         {
           label: "Responsible AI",
+          // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor; the service page itself is DRAFT (placeholder copy)
+          status: "DRAFT",
           href: "/services/ai-services/responsible-ai",
           descriptor: "[Placeholder] One line on responsible AI.",
           needsReview: true,
@@ -171,6 +181,8 @@ const servicesMenu: NavItemSeed = {
         },
         {
           label: "AI Security & Governance",
+          // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor; the service page itself is DRAFT (placeholder copy)
+          status: "DRAFT",
           href: "/services/ai-services/ai-security-governance",
           descriptor: "[Placeholder] One line on AI security and governance.",
           needsReview: true,
@@ -198,7 +210,8 @@ const solutionsMenu: NavItemSeed = {
       external: true,
       descriptor: "Shaping the Future of Education.",
       needsReview: true,
-      editorNote: "Brief (13 Nov 2026): the menu item opens arivoo.in in a new tab (Q7.1). The /solutions/arivoo overview page still exists and is listed on /solutions.",
+      editorNote:
+        "Brief (13 Nov 2026) and the 17 Nov 2026 scope change: the menu item opens arivoo.in in a new tab (Q7.1). Solutions have no pages on this site, so there is no /solutions/arivoo overview page any more.",
       children: [
         {
           key: "solutions.arivoo-ums",
@@ -219,25 +232,31 @@ const solutionsMenu: NavItemSeed = {
           label: "Arivoo LMS",
           href: "https://arivoo.in/arivoo-lms",
           external: true,
-          descriptor: "Centralized learning, seamless education, enhanced outcomes.",
+          descriptor: "Centralised learning, seamless education, enhanced outcomes.",
         },
       ],
     },
     {
       key: "solutions.a-eye",
+      // DRAFT until the client supplies the product website URL (17 Nov 2026): solutions link out, so without a
+      // URL there is nothing to link to. No URL was guessed.
+      status: "DRAFT",
       label: "A-EYE",
-      href: "/solutions/a-eye",
+      external: true,
       descriptor: "[Placeholder] One-line product descriptor.",
       needsReview: true,
-      editorNote: "Name A-EYE from the brief and sitemap (13 Nov 2026). MISSING (Q7.2): descriptor and page copy; slug a-eye (old slug 301s here).",
+      editorNote: "Name A-EYE from the brief and sitemap (13 Nov 2026). MISSING (Q7.2): the product website URL (set `href`) and the descriptor.",
     },
     {
       key: "solutions.air-mind",
+      // DRAFT until the client supplies the product website URL (17 Nov 2026): solutions link out, so without a
+      // URL there is nothing to link to. No URL was guessed.
+      status: "DRAFT",
       label: "AIR-MIND",
-      href: "/solutions/air-mind",
+      external: true,
       descriptor: "[Placeholder] One-line product descriptor.",
       needsReview: true,
-      editorNote: "Name AIR-MIND from the brief and sitemap (13 Nov 2026). MISSING (Q7.2): descriptor and page copy; slug air-mind (old slug 301s here).",
+      editorNote: "Name AIR-MIND from the brief and sitemap (13 Nov 2026). MISSING (Q7.2): the product website URL (set `href`) and the descriptor.",
     },
     {
       key: "solutions.ai-solutions",
@@ -245,26 +264,39 @@ const solutionsMenu: NavItemSeed = {
       children: [
         {
           key: "solutions.face-recognition",
+          // DRAFT until the client supplies the product website URL (17 Nov 2026): no page here, no URL yet.
+          status: D,
           label: "Face Recognition Security",
-          href: "/solutions/face-recognition",
+          external: true,
           descriptor: "Effortless Security through AI Recognition",
+          needsReview: true,
+          editorNote: "MISSING (17 Nov 2026): the product website URL (set `href`). The descriptor is live-site copy and is ready.",
         },
         {
           key: "solutions.industrial-analytics",
+          // DRAFT until the client supplies the product website URL (17 Nov 2026): no page here, no URL yet.
+          status: D,
           label: "Industrial Analytics",
-          href: "/solutions/industrial-analytics",
+          external: true,
           descriptor: "Effortless Parking with AI Intelligence",
+          needsReview: true,
+          editorNote: "MISSING (17 Nov 2026): the product website URL (set `href`). The descriptor is live-site copy and is ready.",
         },
         {
           key: "solutions.asset-tracking",
+          // DRAFT: BUG-014 sweep (unverified 30% figure in the descriptor) and no product website URL yet (17 Nov 2026).
+          status: "DRAFT",
           label: "Asset Tracking",
-          href: "/solutions/asset-tracking",
+          external: true,
           descriptor: "Boosting Cash Forecasting by 30%",
+          needsReview: true,
+          editorNote:
+            'MISSING (17 Nov 2026): the product website URL (set `href`). Also verify the "30%" figure in the descriptor (Q5.5).',
         },
         {
           key: "solutions.ai-solution-4",
           label: "[Placeholder] AI solution 4",
-          href: "/solutions/ai-solution-4",
+          external: true,
           status: D,
           needsReview: true,
           editorNote: "MISSING (Q5.3): AI solution 4. Candidates: PPE Detection, Steel Plate Inspection, InvoiceAI, RAG chatbot.",
@@ -272,7 +304,7 @@ const solutionsMenu: NavItemSeed = {
         {
           key: "solutions.ai-solution-5",
           label: "[Placeholder] AI solution 5",
-          href: "/solutions/ai-solution-5",
+          external: true,
           status: D,
           needsReview: true,
           editorNote: "MISSING (Q5.3): AI solution 5.",
@@ -280,13 +312,15 @@ const solutionsMenu: NavItemSeed = {
         {
           key: "solutions.ai-solution-6",
           label: "[Placeholder] AI solution 6",
-          href: "/solutions/ai-solution-6",
+          external: true,
           status: D,
           needsReview: true,
           editorNote: "MISSING (Q5.3): AI solution 6.",
         },
       ],
     },
+    // "/solutions" has no page: proxy.ts sends it to the Products & Solutions section of the visitor's regional
+    // homepage (one 301, region from the cookie), so this link works with JavaScript off and in every region.
     { key: "solutions.all", label: "All solutions", href: "/solutions" },
   ],
 };
@@ -356,9 +390,11 @@ const footer: NavItemSeed[] = [
     label: "Solutions",
     children: [
       { label: "Arivoo", href: "https://arivoo.in", external: true },
-      { label: "Face Recognition Security", href: "/solutions/face-recognition" },
-      { label: "Industrial Analytics", href: "/solutions/industrial-analytics" },
-      { label: "Asset Tracking", href: "/solutions/asset-tracking" },
+      // The three AI solutions are DRAFT until their website URLs arrive (17 Nov 2026); the rows stay here so that
+      // adding a URL and publishing is the only change needed.
+      { key: "footer.face-recognition", label: "Face Recognition Security", external: true, status: D, needsReview: true, editorNote: "MISSING: product website URL." },
+      { key: "footer.industrial-analytics", label: "Industrial Analytics", external: true, status: D, needsReview: true, editorNote: "MISSING: product website URL." },
+      { key: "footer.asset-tracking", label: "Asset Tracking", external: true, status: D, needsReview: true, editorNote: "MISSING: product website URL." },
       {
         key: "footer.testguard",
         label: "TestGUARD",
@@ -396,7 +432,7 @@ export const navigation: NavigationSeed = {
       label: "Cookie Policy",
       href: "/cookie-policy",
       needsReview: true,
-      editorNote: "MISSING (Q10.2, Q10.3): Cookie Policy text. New page; placeholder until supplied.",
+      editorNote: "Cookie Policy text drafted on 17 Nov 2026 from the cookies the site actually sets (Q10.2, Q10.3): client legal review before launch.",
     },
     { key: "legal.terms", label: "Terms of Use", href: "/terms-of-use" },
     { key: "legal.credentials", label: "Credentials", href: "/credentials" },

@@ -21,13 +21,13 @@ export const caseStudies: CaseStudySeed[] = [
     headlineMetric: "99%",
     metricLabel: "accurate real-time facial recognition",
     summary:
-      "Utilize cutting-edge facial feature extraction and matching techniques for accurate, simultaneous identification across multiple faces in live video streams.",
+      "Utilise cutting-edge facial feature extraction and matching techniques for accurate, simultaneous identification across multiple faces in live video streams.",
     overview:
       "Exploring innovative face recognition technology to improve security measures, increase accuracy, and streamline identification processes in various applications.",
     challenge:
       "Develop a real-time facial recognition system capable of accurately detecting and identifying human faces in a live-video feed against a pre-existing image database, providing instant recognition of individuals present within the camera’s field of view.",
     solution: [
-      { title: "Utilize advanced facial feature extraction and encoding techniques to accurately identify individuals in real-time." },
+      { title: "Utilise advanced facial feature extraction and encoding techniques to accurately identify individuals in real-time." },
       { title: "Create state-of-the-art algorithms that enable smooth face encoding and detection in real-time video streams." },
       { title: "Implement highly efficient matching techniques to compare encoded features against a comprehensive database." },
       { title: "Design a scalable, high-performance system capable of identifying multiple faces simultaneously with precision." },
@@ -54,9 +54,9 @@ export const caseStudies: CaseStudySeed[] = [
     summary:
       "Integrate advanced AI to instantly detect available parking spots, offering a user-friendly interface with automatic notifications for seamless parking.",
     overview:
-      "Implementing smart solutions to enhance parking efficiency, improve space utilization, and streamline vehicle management in busy parking lots.",
+      "Implementing smart solutions to enhance parking efficiency, improve space utilisation, and streamline vehicle management in busy parking lots.",
     challenge:
-      "Created an intelligent car parking solution to efficiently detect and allocate available parking spaces, minimizing congestion, enhancing the overall parking experience and saving driver’s valuable time by providing real-time information on available parking spots",
+      "Created an intelligent car parking solution to efficiently detect and allocate available parking spaces, minimising congestion, enhancing the overall parking experience and saving driver’s valuable time by providing real-time information on available parking spots",
     solution: [
       { title: "Integrate a model for real-time detection of available parking spots." },
       { title: "Develop a user-friendly interface to display open and close parking lots" },
@@ -84,10 +84,10 @@ export const caseStudies: CaseStudySeed[] = [
     headlineMetric: "30%",
     metricLabel: "improvement in cash forecasting accuracy",
     summary:
-      "Streamline your treasury operations, enhance cash management, and maximize investment efficiency with our proven ASAP implementation approach.",
+      "Streamline your treasury operations, enhance cash management, and maximise investment efficiency with our proven ASAP implementation approach.",
     clientDescriptor: "An Indian Multinational Conglomerate – amongst the top 10 business houses in India",
     overview:
-      "Accelerate your treasury, investment, and cash management processes with streamlined implementation for optimized financial operations and enhanced efficiency.\n\nProject Process Re-organization – An Indian Multinational Conglomerate – amongst the top 10 business houses in India.\n\nIts footprint stretches over a wide range of industries, spanning automobiles (two wheelers manufacturer and three wheelers manufacturer), home appliances, lighting, iron and steel, insurance, travel and finance. The group’s flagship company is ranked as the world’s fourth largest three and two wheeler manufacturer and the brand is well-known across several countries in Latin America, Africa, GCC, South and South East Asia.\n\nProject was to have a harmonize and centralized Treasury process for entire group. Also, to improve cash collection, debt management reporting, the company chose SAP Business Warehouse powered by SAP HANA.",
+      "Accelerate your treasury, investment, and cash management processes with streamlined implementation for optimised financial operations and enhanced efficiency.\n\nProject Process Re-organisation – An Indian Multinational Conglomerate – amongst the top 10 business houses in India.\n\nIts footprint stretches over a wide range of industries, spanning automobiles (two wheelers manufacturer and three wheelers manufacturer), home appliances, lighting, iron and steel, insurance, travel and finance. The group’s flagship company is ranked as the world’s fourth largest three and two wheeler manufacturer and the brand is well-known across several countries in Latin America, Africa, GCC, South and South East Asia.\n\nProject was to have a harmonize and centralised Treasury process for entire group. Also, to improve cash collection, debt management reporting, the company chose SAP Business Warehouse powered by SAP HANA.",
     solution: [
       { title: "Implementation of SAP-TRM", body: "Loans, investments (Bonds and Debentures), Fixed Deposits, Derivatives and Forward Contracts." },
       { title: "Investment Management", body: "Process for managing investments in Equity Shares, Mutual Fund, Fixed Deposits, Inter-Company Deposits, Bonds and Debentures." },
@@ -124,13 +124,13 @@ export const caseStudies: CaseStudySeed[] = [
       "Empower your team with real-time dashboard reporting, enabling quicker analysis and decision-making for improved efficiency and business outcomes.",
     clientDescriptor: "One of the largest manufacturers of Indian Made Foreign Liquor (IMFL) in India",
     overview:
-      "Implement SAP Analytics Cloud for seamless data integration, real-time insights, and advanced analytics, empowering smarter decision-making across your organization.\n\nCustomer is one of the largest manufacturers of Indian Made Foreign Liquor (IMFL) in India. It has a total production capacity of nearly 200 million litres and operates 25+ bottling units across the country. The Key Business verticals include export supply, domestic, and defence supply. One of the largest providers of IMFL to the Canteen Store Departments of GOI.",
+      "Implement SAP Analytics Cloud for seamless data integration, real-time insights, and advanced analytics, empowering smarter decision-making across your organisation.\n\nCustomer is one of the largest manufacturers of Indian Made Foreign Liquor (IMFL) in India. It has a total production capacity of nearly 200 million litres and operates 25+ bottling units across the country. The Key Business verticals include export supply, domestic, and defence supply. One of the largest providers of IMFL to the Canteen Store Departments of GOI.",
     challenge:
       "Need real time data for measurable results. Reporting, Analysis and Dashboard; Accessibility on Desktop, Mobile, Tablet. Streamline integrated processes involving vast amounts of data.",
     solution: [
       {
         title: "Sales Quantity Plan",
-        body: "Enables businesses to forecast and manage expected sales volumes, ensuring efficient alignment between production, inventory, and market demand. It supports better decision-making and optimized resource allocation.",
+        body: "Enables businesses to forecast and manage expected sales volumes, ensuring efficient alignment between production, inventory, and market demand. It supports better decision-making and optimised resource allocation.",
       },
       { title: "Production Quantity Plan", body: "State-wise Cost Cards Plan to calculate MRP of Cases, Net Contribution using Production Mix Ratio" },
       { title: "Overhead Cost Plan" },
@@ -170,13 +170,13 @@ export const caseStudies: CaseStudySeed[] = [
     summary:
       "Streamline your financial operations by automating data entry and reconciliation, eliminating manual errors and accelerating approval cycles.",
     overview:
-      "Revolutionize your financial operations with AI-powered invoice parsing, automated PO reconciliation, and seamless ERP integration.\n\nManual invoice processing is often a bottleneck in financial operations, characterized by data entry errors, lost documents, and lengthy approval cycles. InvoiceAI addresses these challenges by deploying advanced OCR and NLP technologies to automate the entire lifecycle of invoice management—from ingestion to reconciliation—ensuring accuracy and speed.",
+      "Revolutionize your financial operations with AI-powered invoice parsing, automated PO reconciliation, and seamless ERP integration.\n\nManual invoice processing is often a bottleneck in financial operations, characterised by data entry errors, lost documents, and lengthy approval cycles. InvoiceAI addresses these challenges by deploying advanced OCR and NLP technologies to automate the entire lifecycle of invoice management—from ingestion to reconciliation—ensuring accuracy and speed.",
     challenge:
       "Financial teams were bogged down by manual data entry and validation processes that were not only time-consuming but also highly error-prone. The lack of automation led to significant delays in PO-Invoice reconciliation, often resulting in payment mismatches and stalled approvals. Furthermore, inconsistent data formats across different vendors made seamless integration with existing accounting systems nearly impossible.",
     solution: [
       {
         title: "AI-Powered Invoice Parsing",
-        body: "Utilizes advanced OCR and NLP to automatically extract and structure key data fields (Invoice ID, PO Number, Amount, Tax) from diverse vendor formats.",
+        body: "Utilises advanced OCR and NLP to automatically extract and structure key data fields (Invoice ID, PO Number, Amount, Tax) from diverse vendor formats.",
       },
       {
         title: "Automated Reconciliation",
@@ -221,7 +221,7 @@ export const caseStudies: CaseStudySeed[] = [
         body: "Additionally, its in-app communication and workflow features reduce delays in resolving intercompany discrepancies, improving the visibility and transparency of reconciliation process.",
       },
       { title: "Close Acceleration", body: "ICMR accelerates intercompany reconciliation process from company close to corporate close." },
-      { title: "Workflow Optimization", body: "By setting flexible matching and reconciliation rules, it can achieve high automation and continuous accounting." },
+      { title: "Workflow Optimisation", body: "By setting flexible matching and reconciliation rules, it can achieve high automation and continuous accounting." },
       {
         title: "Real-Time Matching",
         body: "Integrated within SAP S/4HANA, it matches transactions in real time, eliminating the need for ETL (extract, transform, load) processes.",
@@ -252,7 +252,7 @@ export const caseStudies: CaseStudySeed[] = [
     headlineMetric: "70%",
     metricLabel: "improvement in batch-processing time",
     summary:
-      "Optimize your workflow with a 70% improvement in batch processing time, enabling faster operations and increased productivity.",
+      "Optimise your workflow with a 70% improvement in batch processing time, enabling faster operations and increased productivity.",
     clientDescriptor:
       "One of the fastest growing regional full-service real estate firms with iconic developments in the residential, hospitality and commercial sectors",
     overview:
@@ -261,7 +261,7 @@ export const caseStudies: CaseStudySeed[] = [
       "Hybrid (mostly manual) and complex payment processing. Disparate Banking Interfaces. High operation costs. Inefficient workflows with slow processing times for payments, collections, and bank statements. High risk of errors due to manual data entry and lack of automation. Limited visibility into cash flow due to slow and inaccurate bank account information. Difficulty complying with financial regulations due to manual processes and lack of audit trails. Increased risk of fraud due to insecure communication channels and lack of controls. Difficulty in Scaling Operations.",
     solution: [
       { title: "Payment Formatting", body: "Generated Payment Files in Bank Specific Format" },
-      { title: "Payment Authorization", body: "Grouping and approval of Payments in BCM with Digital Signatures." },
+      { title: "Payment Authorisation", body: "Grouping and approval of Payments in BCM with Digital Signatures." },
       { title: "Bank Integration", body: "Integration with Multi-Bank Connectivity for SWIFT integration" },
       { title: "Setting up of EBS", body: "It involved configuring the electronic banking system for seamless transaction processing and reporting" },
     ],
@@ -294,16 +294,16 @@ export const caseStudies: CaseStudySeed[] = [
     summary:
       "Empower employees with immediate, context-aware answers from internal documents, reducing support tickets and boosting productivity.",
     overview:
-      "Empower your workforce with instant, context-aware access to organizational knowledge through a secure, AI-driven conversational interface.\n\nIn a data-rich enterprise environment, finding the right information quickly is often harder than it should be. The Information Retriever Chatbot serves as a centralized intelligence hub, allowing employees to query complex internal documents using natural language and receive accurate, cited answers instantly.",
+      "Empower your workforce with instant, context-aware access to organisational knowledge through a secure, AI-driven conversational interface.\n\nIn a data-rich enterprise environment, finding the right information quickly is often harder than it should be. The Information Retriever Chatbot serves as a centralised intelligence hub, allowing employees to query complex internal documents using natural language and receive accurate, cited answers instantly.",
     challenge:
-      "Employees were struggling with slow, manual information retrieval across fragmented sources like PDFs, Word documents, and intranets. Traditional keyword-based search tools lacked contextual understanding, often returning incomplete or irrelevant results. This inefficiency led to repetitive queries directed at support teams, increasing their workload and significantly reducing overall organizational productivity.",
+      "Employees were struggling with slow, manual information retrieval across fragmented sources like PDFs, Word documents, and intranets. Traditional keyword-based search tools lacked contextual understanding, often returning incomplete or irrelevant results. This inefficiency led to repetitive queries directed at support teams, increasing their workload and significantly reducing overall organisational productivity.",
     solution: [
       {
         title: "Context-Aware Retrieval",
-        body: "Understands the intent behind user queries to deliver accurate, context-rich answers derived directly from organizational documents rather than generic keyword matches.",
+        body: "Understands the intent behind user queries to deliver accurate, context-rich answers derived directly from organisational documents rather than generic keyword matches.",
       },
       {
-        title: "Centralized Knowledge Access",
+        title: "Centralised Knowledge Access",
         body: "Consolidates diverse fragmented data sources (PDFs, Word files, internal wikis) into a unified, searchable platform for all departments.",
       },
       {
@@ -420,7 +420,7 @@ export const caseStudies: CaseStudySeed[] = [
       "Achieve 50% savings in manual efforts by overcoming poor planning, preparation, and lack of actionable insights.",
     clientDescriptor: "Manufacturers in steel, fertilizer, shipping and pharma with global operations",
     overview:
-      "Implement IoT-enabled proactive and predictive machine health monitoring to optimize maintenance, minimize downtime, and improve operational efficiency.\n\nVarious customers in manufacturing businesses like steel, fertilizer, shipping, pharma with global scale of operations seeking advance and autonomous predictive maintenance and monitoring solutions for today’s smart factory.",
+      "Implement IoT-enabled proactive and predictive machine health monitoring to optimise maintenance, minimise downtime, and improve operational efficiency.\n\nVarious customers in manufacturing businesses like steel, fertilizer, shipping, pharma with global scale of operations seeking advance and autonomous predictive maintenance and monitoring solutions for today’s smart factory.",
     challenge:
       "To health-check, identify and fix failures in critical assets used in the manufacturing process (like blowers, pumps, motors, associated gear boxes and bearings, conveyors, assemblies and alignments), at shop floor operation plants. To provide IoT based predictive maintenance solution with advanced analytics that detects faults at an early stage and offers a reliable prediction of the useful life of machineries. To reduce maintenance cost and improve overall operation efficiency.",
     solution: [
@@ -434,7 +434,7 @@ export const caseStudies: CaseStudySeed[] = [
       },
       {
         title: "Predictive Insights",
-        body: "Using machine learning algorithms and predictive models, SAP ALM can analyze historical and current data to predict potential failures or performance degradation. It can detect anomalies, deviations from normal operating conditions, and trigger alerts or notifications for maintenance teams. It recommends maintenance actions based on predicted failure probabilities or degradation trends, optimizing maintenance schedules and minimizing downtime.",
+        body: "Using machine learning algorithms and predictive models, SAP ALM can analyse historical and current data to predict potential failures or performance degradation. It can detect anomalies, deviations from normal operating conditions, and trigger alerts or notifications for maintenance teams. It recommends maintenance actions based on predicted failure probabilities or degradation trends, optimising maintenance schedules and minimising downtime.",
       },
       {
         title: "Predictive Maintenance",
@@ -513,11 +513,11 @@ export const caseStudies: CaseStudySeed[] = [
     summary:
       "Automated inspection system that reduces manual intervention by 80%, ensuring precise detection of cracks, scratches, and dents for timely corrections.",
     overview:
-      "Utilizing groundbreaking technology to enhance the accuracy and efficiency of steel plate inspection and severity detection processes.",
+      "Utilising groundbreaking technology to enhance the accuracy and efficiency of steel plate inspection and severity detection processes.",
     challenge:
-      "Traditional steel plate inspection methods are labor-intensive, error-prone, and lack precision, hampering accurate defect detection and quality control, especially in manufacturing and construction.",
+      "Traditional steel plate inspection methods are labour54-intensive, error-prone, and lack precision, hampering accurate defect detection and quality control, especially in manufacturing and construction.",
     solution: [
-      { title: "Advanced Object Detection", body: "Utilizes cutting-edge techniques for identifying defects on steel plates." },
+      { title: "Advanced Object Detection", body: "Utilises cutting-edge techniques for identifying defects on steel plates." },
       { title: "Computer Vision Algorithms", body: "Employs sophisticated algorithms to detect cracks, scratches, and dents." },
       { title: "Automated Inspection", body: "Streamlines the inspection process, reducing the need for manual intervention." },
       { title: "High Precision", body: "Ensures accurate identification of defects, maintaining high-quality standards." },
@@ -525,7 +525,7 @@ export const caseStudies: CaseStudySeed[] = [
     ],
     results: [
       { value: "67.2%", label: "Increase in inspection throughput" },
-      { value: "32.8%", label: "Decrease in labor cost" },
+      { value: "32.8%", label: "Decrease in labour44 cost" },
     ],
     industry: "manufacturing",
     services: ["ai-services/computer-vision"],
@@ -554,7 +554,7 @@ export const caseStudies: CaseStudySeed[] = [
         title: "State-of-the-art computer vision algorithms",
         body: "Detect and identify a broad variety of fruits in photos with an accuracy rate of more than 95%, even in difficult visual environments.",
       },
-      { title: "Advanced CNN algorithms", body: "Reliably recognize and classify numerous fruit varieties, ensuring trustworthy identification in real time." },
+      { title: "Advanced CNN algorithms", body: "Reliably recognise and classify numerous fruit varieties, ensuring trustworthy identification in real time." },
       { title: "Nutritional tracking", body: "Simplifies managing dietary demands by providing quick and precise fruit identification." },
       {
         title: "Benefits for users",
@@ -586,7 +586,7 @@ export const caseStudies: CaseStudySeed[] = [
       "In various industries, especially those involving hazardous environments or infectious disease control, ensuring the safety of personnel is paramount. One significant challenge is monitoring whether individuals are adhering to Personal Protective Equipment (PPE) guidelines, such as wearing complete PPE kits, including items like masks, gloves, goggles, and gowns. Traditional methods of manual inspection are time-consuming, prone to errors, and often not scalable. There is a need for a more efficient and accurate solution to detect compliance with PPE protocols.",
     solution: [
       { title: "AI-driven computer vision algorithms autonomously monitor PPE usage in real-time, ensuring safety compliance." },
-      { title: "Recognizes 95%+ of common PPE types, such as helmets, gloves, and safety glasses." },
+      { title: "Recognises 95%+ of common PPE types, such as helmets, gloves, and safety glasses." },
       { title: "Detects non-compliance within seconds and triggers alerts for immediate action." },
       { title: "Integrates seamlessly with existing systems, enhancing safety, compliance, and efficiency by up to 30%" },
     ],
@@ -611,15 +611,15 @@ export const caseStudies: CaseStudySeed[] = [
     headlineMetric: "95%",
     metricLabel: "accurate real-time cinema analytics",
     summary:
-      "Monitors occupancy and audience behavior under dim lighting, providing instant insights on engagement and demographics through non-invasive analysis.",
+      "Monitors occupancy and audience behaviour under dim lighting, providing instant insights on engagement and demographics through non-invasive analysis.",
     overview:
-      "Accurately monitoring person count in cinema halls to optimize operations, enhance safety, and improve audience management.",
+      "Accurately monitoring person count in cinema halls to optimise operations, enhance safety, and improve audience management.",
     challenge:
-      "Cinema operators globally face challenges in accurately monitoring occupancy and understanding audience behaviours due to the dynamic nature of cinema environments, characterized by fluctuating lighting conditions, varying audience sizes, and diverse seating patterns.\n\nTraditional methods of occupancy monitoring and audience analysis often fall short in precision, adaptability, and depth of insights, leading to suboptimal utilization of space, inefficient advertising strategies, and a lack of personalized audience engagement.",
+      "Cinema operators globally face challenges in accurately monitoring occupancy and understanding audience behaviours due to the dynamic nature of cinema environments, characterised by fluctuating lighting conditions, varying audience sizes, and diverse seating patterns.\n\nTraditional methods of occupancy monitoring and audience analysis often fall short in precision, adaptability, and depth of insights, leading to suboptimal utilisation of space, inefficient advertising strategies, and a lack of personalised audience engagement.",
     solution: [
       { title: "Leverages Computer Vision and advanced image processing to offer an innovative analytics system for cinemas." },
-      { title: "Accurately monitors real-time occupancy and audience behavior, even under dim lighting conditions." },
-      { title: "Analyzes video feeds to discern occupancy levels and interprets anonymized body movements to gauge audience engagement and demographics." },
+      { title: "Accurately monitors real-time occupancy and audience behaviour, even under dim lighting conditions." },
+      { title: "Analyses video feeds to discern occupancy levels and interprets anonymised body movements to gauge audience engagement and demographics." },
       { title: "Employs a non-invasive approach that provides cinema operators with instant insights into audience dynamics." },
     ],
     results: [{ value: "95%", label: "Accuracy in real-time cinema occupancy analytics" }],
@@ -671,7 +671,7 @@ export const caseStudies: CaseStudySeed[] = [
     metricLabel: "accuracy in traffic analysis",
     summary: "[Placeholder] One-line summary of the traffic monitoring case study.",
     overview:
-      "Utilize AI-powered technology for intelligent traffic monitoring, enhancing safety, efficiency, and real-time decision-making in smarter, more connected spaces.",
+      "Utilise AI-powered technology for intelligent traffic monitoring, enhancing safety, efficiency, and real-time decision-making in smarter, more connected spaces.",
     challenge:
       "Traditional traffic monitoring frameworks fall short in their ability to gather in-depth data on vehicle characteristics, leading to obstacles in effective traffic management and insightful analysis. The lack of capabilities for real-time, precise vehicle detection and analysis plays a significant role in causing road congestion, elevating accident frequencies, and resulting in inefficient traffic control. Such an innovative system is essential, not just for streamlining traffic and enhancing road safety, but also for mitigating environmental impact by improving traffic flow and decreasing pollution levels.",
     solution: [
@@ -711,7 +711,7 @@ export const caseStudies: CaseStudySeed[] = [
   {
     slug: "kubernetes-operations-healthtech",
     label: "HealthTech",
-    title: "Modernizing Kubernetes Operations for a Leading HealthTech Company",
+    title: "Modernising Kubernetes Operations for a Leading HealthTech Company",
     headlineMetric: "[Placeholder]",
     metricLabel: "[Placeholder] metric label",
     summary:
@@ -720,11 +720,11 @@ export const caseStudies: CaseStudySeed[] = [
     overview:
       "A proactive, observable EKS operating environment — with the engineering team focused on the product, not the pager.",
     challenge:
-      "As the customer’s AWS and Kubernetes environment scaled, managing infrastructure reliability, operational visibility and day-to-day EKS operations became increasingly complex. The team needed to move from a reactive operating model to a proactive, structured cloud operations framework — with centralized monitoring, proactive alerting, EKS lifecycle management, incident response and ongoing AWS cost governance across a growing set of production workloads.",
+      "As the customer’s AWS and Kubernetes environment scaled, managing infrastructure reliability, operational visibility and day-to-day EKS operations became increasingly complex. The team needed to move from a reactive operating model to a proactive, structured cloud operations framework — with centralised monitoring, proactive alerting, EKS lifecycle management, incident response and ongoing AWS cost governance across a growing set of production workloads.",
     solution: [
       {
         title: "AWS Managed Services centred on Amazon EKS",
-        body: "Adamas implemented a comprehensive AWS Managed Services model centered on Amazon EKS. We established centralized observability using Amazon CloudWatch, Prometheus and Grafana, giving full visibility across EKS clusters, worker nodes, workloads and application health, and took on the ongoing operational responsibilities that come with running Kubernetes at scale.",
+        body: "Adamas implemented a comprehensive AWS Managed Services model centred on Amazon EKS. We established centralised observability using Amazon CloudWatch, Prometheus and Grafana, giving full visibility across EKS clusters, worker nodes, workloads and application health, and took on the ongoing operational responsibilities that come with running Kubernetes at scale.",
       },
       { title: "Cluster health, lifecycle and patch management" },
       { title: "Node health, capacity monitoring and planning" },
@@ -761,7 +761,7 @@ export const caseStudies: CaseStudySeed[] = [
         title: "AWS Managed Services for SAP disaster recovery",
         body: "Adamas designed and operates a comprehensive AWS Managed Services framework spanning SAP disaster recovery, infrastructure monitoring, incident management and infrastructure administration. For DR, the solution uses SAP HANA System Replication between primary and DR environments, backed by continuous replication monitoring, documented recovery runbooks and periodic validation — with RTO/RPO testing built in as a repeatable process rather than a one-time exercise.",
       },
-      { title: "Centralized monitoring across EC2 infrastructure, storage and networking" },
+      { title: "Centralised monitoring across EC2 infrastructure, storage and networking" },
       { title: "SAP application and SAP HANA health, replication and backup monitoring" },
       { title: "Documented recovery runbooks and failback procedures" },
       { title: "Periodic DR validation exercises and recovery testing" },

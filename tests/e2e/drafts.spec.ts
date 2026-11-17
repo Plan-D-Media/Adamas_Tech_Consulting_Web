@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { DRAFT_STRINGS, draftsOn, internalLinks } from "./helpers";
+import { DRAFT_STRINGS, draftsOn, internalLinks, linkOk } from "./helpers";
 
 /**
  * Draft-content leak check. With PREVIEW_DRAFTS=false nothing marked DRAFT, no placeholder tag and no unverified
@@ -42,18 +42,15 @@ test(`no draft content or placeholder tag on any sitemap page (drafts ${draftsOn
 });
 
 test("every internal link on the homepages and key templates answers 200 (no links to unpublished pages)", async ({ page }) => {
-  const pages = ["/in/", "/uk/", "/gcc/", "/services/cloud-services", "/services/digital-transformation", "/services/ai-services", "/solutions", "/case-studies", "/insights/events", "/about", "/contact"];
-  const checked = new Map<string, number>();
+  const pages = ["/in/", "/uk/", "/gcc/", "/services/cloud-services", "/services/digital-transformation", "/services/ai-services", "/case-studies", "/insights/events", "/about", "/contact", "/privacy-policy", "/terms-of-use", "/cookie-policy"];
+  const checked = new Map<string, string | null>();
   const bad: string[] = [];
   for (const p of pages) {
     await page.goto(p);
     for (const href of await internalLinks(page)) {
-      if (!checked.has(href)) {
-        const res = await page.request.get(href, { maxRedirects: 0 });
-        checked.set(href, res.status());
-      }
-      const status = checked.get(href)!;
-      if (status !== 200) bad.push(`${p}: ${href} -> ${status}`);
+      if (!checked.has(href)) checked.set(href, await linkOk(page.request, href));
+      const problem = checked.get(href);
+      if (problem) bad.push(`${p}: ${problem}`);
     }
   }
   expect(bad, bad.join("\n")).toEqual([]);
@@ -70,8 +67,8 @@ test("the mega menus carry no featured card for an unpublished page", async ({ p
     const links = await page.locator(`#${panelId} a[href]`).evaluateAll((as) => as.map((a) => (a as HTMLAnchorElement).getAttribute("href") || ""));
     for (const href of links) {
       if (!href.startsWith("/")) continue;
-      const res = await page.request.get(href, { maxRedirects: 0 });
-      if (res.status() !== 200) bad.push(`${href} -> ${res.status()}`);
+      const problem = await linkOk(page.request, href);
+      if (problem) bad.push(problem);
     }
     await page.keyboard.press("Escape");
   }

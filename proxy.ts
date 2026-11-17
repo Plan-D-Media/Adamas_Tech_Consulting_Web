@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import legacyRedirects from "@/lib/generated/redirects.json";
 import { LEGACY_REGION_SLUGS, REGION_COOKIE, REGION_SLUGS, defaultRegion, isRegionSlug, regionForCountry } from "@/lib/region";
+import { SOLUTIONS_ANCHOR } from "@/lib/anchors";
 import { securityHeaders } from "@/lib/security-headers";
 
 /**
@@ -9,6 +10,8 @@ import { securityHeaders } from "@/lib/security-headers";
  *    shared secret and is called server-to-server by the seed and the CMS. Unset locally and in production.
  * 1. "/" only: region cookie → that homepage; otherwise IP country → /in/, /uk/ or /gcc/. Inner pages are never geo-redirected.
  * 2. Homepages are canonical with a trailing slash (/in → /in/). The old Gulf homepage /ae/ (and anything under it) is a 301 to /gcc/.
+ * 2b. /solutions (and anything under it) is a 301 to the Products & Solutions section of the region homepage:
+ *    solutions have no pages here since 17 Nov 2026, they link out to their own websites.
  * 3. Legacy WordPress URLs → new URLs (Redirect table, compiled to lib/generated/redirects.json by the seed).
  * 4. Any other single-segment path that isn't a top-level page is a 404 (app/[region] only serves in/uk/gcc).
  * 5. Any other trailing slash is removed.
@@ -24,7 +27,7 @@ const redirects = legacyRedirects as unknown as Record<string, [string, number]>
  */
 const TOP_LEVEL_ROUTES = new Set([
   "about", "case-studies", "contact", "cookie-policy", "credentials", "insights", "privacy-policy",
-  "search", "services", "solutions", "terms-of-use", "thank-you",
+  "search", "services", "terms-of-use", "thank-you",
   "figma-fixture", // design-comparison fixture, served only with FIGMA_FIXTURE=1 (app/figma-fixture)
 ]);
 
@@ -48,6 +51,15 @@ function sameSecret(a: string, b: string): boolean {
   let diff = 0;
   for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
   return diff === 0;
+}
+
+/** The visitor's region: the cookie when it names one (legacy "ae" included), otherwise the CDN country, otherwise DEFAULT_REGION. */
+function regionFor(request: NextRequest) {
+  const raw = request.cookies.get(REGION_COOKIE)?.value;
+  const cookie = raw && LEGACY_REGION_SLUGS[raw] ? LEGACY_REGION_SLUGS[raw] : raw;
+  if (isRegionSlug(cookie)) return cookie;
+  const country = COUNTRY_HEADERS.map((h) => request.headers.get(h)).find(Boolean);
+  return regionForCountry(country, defaultRegion());
 }
 
 function previewAuthorized(request: NextRequest): boolean {
@@ -84,13 +96,7 @@ export function proxy(request: NextRequest) {
   }
 
   if (pathname === "/") {
-    const raw = request.cookies.get(REGION_COOKIE)?.value;
-    const cookie = raw && LEGACY_REGION_SLUGS[raw] ? LEGACY_REGION_SLUGS[raw] : raw;
-    let region = isRegionSlug(cookie) ? cookie : null;
-    if (!region) {
-      const country = COUNTRY_HEADERS.map((h) => request.headers.get(h)).find(Boolean);
-      region = regionForCountry(country, defaultRegion());
-    }
+    const region = regionFor(request);
     const res = NextResponse.redirect(new URL(`/${region}/${search}`, request.url), 307);
     res.headers.set("Vary", "Cookie, CloudFront-Viewer-Country");
     res.headers.set("Cache-Control", "private, no-store");
@@ -102,6 +108,14 @@ export function proxy(request: NextRequest) {
   // The Gulf homepage moved from /ae/ to /gcc/ (sitemap, 13 Nov 2026): one hop, whatever followed /ae/.
   if (bare === "/ae" || bare.startsWith("/ae/")) {
     return withSecurityHeaders(NextResponse.redirect(new URL(`/gcc/${search}`, request.url), 301));
+  }
+
+  // Solutions live on their own websites (17 Nov 2026): /solutions and anything under it land on the Products &
+  // Solutions section of the visitor's regional homepage, in one hop, with the region taken from the cookie.
+  if (bare === "/solutions" || bare.startsWith("/solutions/")) {
+    const res = NextResponse.redirect(new URL(`/${regionFor(request)}/${search}#${SOLUTIONS_ANCHOR}`, request.url), 301);
+    res.headers.set("Vary", "Cookie, CloudFront-Viewer-Country");
+    return withSecurityHeaders(res);
   }
 
   if (REGION_SLUGS.some((r) => bare === `/${r}`)) {

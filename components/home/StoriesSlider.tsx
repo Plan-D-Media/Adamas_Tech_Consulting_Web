@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import type { BlockExtra } from "@/lib/data/home-blocks";
 import { mediaUrl } from "@/lib/media";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SliderControls } from "@/components/ui/SliderControls";
 import { useSlider } from "@/components/motion/useSlider";
 import { Img } from "@/components/media/Img";
+import { SmartLink } from "@/components/ui/SmartLink";
 
 type Story = BlockExtra<"stories">["items"][number];
 
@@ -62,9 +62,9 @@ export function StoriesSlider({ eyebrow, heading, body, items }: { eyebrow: stri
                 {date && <p className="eyebrow text-[1.125rem] lg:leading-[15px]">{date}</p>}
                 <h3 className="mt-3 font-heading text-[clamp(1.5rem,1.2rem+1vw,2.375rem)] font-bold leading-[1.29] tracking-[-0.04em] text-navy-800 [text-wrap:wrap] lg:min-h-[137px]">{s.title}</h3>
                 {s.body && <p className="mt-[17px] max-w-[34.75rem] font-heading text-[1.125rem] leading-[1.36] text-grey-600">{s.body}</p>}
-                <Link href={s.href} tabIndex={clone ? -1 : undefined} className="mt-[17px] inline-flex w-fit items-center font-heading text-[1.125rem] font-medium text-blue-600 underline-offset-4 hover:underline lg:mt-[28px]">
+                <SmartLink href={s.href} icon={false} tabIndex={clone ? -1 : undefined} className="mt-[17px] inline-flex w-fit items-center font-heading text-[1.125rem] font-medium text-blue-600 underline-offset-4 hover:underline lg:mt-[28px]">
                   Read full story&rarr;
-                </Link>
+                </SmartLink>
               </div>
             </article>
           );

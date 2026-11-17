@@ -8,7 +8,6 @@ export const metadata: Metadata = { title: "Page not found", robots: { index: fa
 const LINKS = [
   { label: "Homepage", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Solutions", href: "/solutions" },
   { label: "Case studies", href: "/case-studies" },
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },

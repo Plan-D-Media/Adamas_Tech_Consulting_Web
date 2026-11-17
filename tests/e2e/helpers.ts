@@ -31,6 +31,12 @@ export async function countContactRows(email: string) {
   return p ? p.contactSubmission.count({ where: { email } }) : -1;
 }
 
+/** The stored enquiry for an address (null without a database URL or when nothing was stored). */
+export async function findContactRow(email: string) {
+  const p = db();
+  return p ? p.contactSubmission.findFirst({ where: { email }, orderBy: { createdAt: "desc" } }) : null;
+}
+
 export async function disconnectDb() {
   await prisma?.$disconnect();
   prisma = null;
@@ -42,6 +48,31 @@ export async function visibleEventPath(page: Page): Promise<string | null> {
   const xml = await res.text();
   const m = /<loc>[^<]*?(\/insights\/events\/[^<\/]+)<\/loc>/.exec(xml);
   return m ? m[1] : null;
+}
+
+/**
+ * Internal paths that are a deliberate redirect rather than a page. Since the 17 Nov 2026 scope change
+ * solutions have no pages here, so "/solutions" (and anything under it) 301s to the Products & Solutions
+ * section of the visitor's regional homepage.
+ */
+export const REDIRECTING_PATHS = /^\/solutions(\/|$)/;
+
+/** The region homepage URL with the solutions anchor that "/solutions" must land on. */
+export const SOLUTIONS_TARGET = /^\/(in|uk|gcc)\/(\?[^#]*)?#products-solutions$/;
+
+/**
+ * Final status of an internal link, allowing the one documented redirect: a path in REDIRECTING_PATHS must
+ * answer 301 and its target must answer 200. Anything else must answer 200 directly.
+ */
+export async function linkOk(request: import("@playwright/test").APIRequestContext, href: string): Promise<string | null> {
+  const res = await request.get(href, { maxRedirects: 0 });
+  if (!REDIRECTING_PATHS.test(href)) return res.status() === 200 ? null : `${href} -> ${res.status()}`;
+  if (res.status() !== 301) return `${href} -> ${res.status()} (expected a 301 to the homepage section)`;
+  const loc = res.headers()["location"] ?? "";
+  const path = loc.replace(/^https?:\/\/[^/]+/, "");
+  if (!SOLUTIONS_TARGET.test(path)) return `${href} -> 301 ${path} (expected a region homepage with #products-solutions)`;
+  const target = await request.get(path.split("#")[0], { maxRedirects: 0 });
+  return target.status() === 200 ? null : `${href} -> ${path} -> ${target.status()}`;
 }
 
 /** Internal hrefs on a page, de-duplicated, without fragments and mailto/tel links. */

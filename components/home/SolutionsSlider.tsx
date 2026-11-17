@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { cx } from "@/lib/cx";
 import { Icon } from "@/components/ui/Icon";
 import { ArrowLink } from "@/components/ui/Button";
@@ -16,15 +15,21 @@ export interface SolutionItem {
   namePending: boolean;
   tagline: string | null;
   taglinePending: boolean;
-  href: string;
-  external: boolean;
+  /** The product's own website. null only in the drafts preview, where the URL is still missing. */
+  href: string | null;
   image: { url: string; alt: string } | null;
   draft: boolean;
-  modules: { name: string; href: string; external: boolean }[];
+  modules: { name: string; href: string | null }[];
 }
 
+/**
+ * Every solution lives on its own website (scope change, 17 Nov 2026): the card title and the module chips are
+ * plain <a> elements opening in a new tab with rel="noopener noreferrer" and an external-link icon, and the card's
+ * call to action reads "Visit site". A card whose URL has not been supplied yet is only ever rendered in the drafts
+ * preview, where it carries a "Link to be confirmed" note instead of a link.
+ */
 function Card({ s }: { s: SolutionItem }) {
-  const Title = s.external ? "a" : Link;
+  const external = { target: "_blank", rel: "noopener noreferrer" } as const;
   return (
     <article className="relative flex h-[523px] w-[min(424px,85vw)] shrink-0 snap-start flex-col overflow-hidden rounded-lg bg-navy-900 text-white" data-reveal>
       {s.image && <Img src={s.image.url} alt={s.image.alt} fill sizes="(min-width: 1024px) 424px, 85vw" className="object-cover" />}
@@ -37,9 +42,14 @@ function Card({ s }: { s: SolutionItem }) {
       </div>
       <div className="relative mt-auto px-7 pb-7">
         <h3 className="font-ui text-[2rem] font-bold leading-[1.16] tracking-[-0.015em]">
-          <Title href={s.href} {...(s.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="after:absolute after:inset-0 after:content-['']">
-            {s.name}
-          </Title>
+          {s.href ? (
+            <a href={s.href} {...external} className="after:absolute after:inset-0 after:content-['']">
+              {s.name}
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          ) : (
+            s.name
+          )}
         </h3>
         {s.namePending && (
           <p className="mt-3 inline-flex items-center gap-1.5 rounded-pill bg-white/10 px-2.5 py-1 font-body text-[0.75rem] font-semibold leading-none text-sky-200 ring-1 ring-white/15">
@@ -52,19 +62,31 @@ function Card({ s }: { s: SolutionItem }) {
         {s.modules.length > 0 && (
           <ul className="relative z-10 mt-3 flex flex-wrap gap-[7px]" role="list">
             {s.modules.map((m) => (
-              <li key={m.href}>
-                <a href={m.href} target={m.external ? "_blank" : undefined} rel={m.external ? "noopener noreferrer" : undefined} className="inline-flex items-center gap-1 rounded-pill border border-white/40 bg-white/10 px-3 py-1.5 font-body text-[0.875rem] font-semibold text-white hover:bg-white/20">
-                  {m.name}
-                  {m.external && <Icon name="external" size={10} />}
-                </a>
+              <li key={m.name}>
+                {m.href ? (
+                  <a href={m.href} {...external} className="inline-flex items-center gap-1 rounded-pill border border-white/40 bg-white/10 px-3 py-1.5 font-body text-[0.875rem] font-semibold text-white hover:bg-white/20">
+                    {m.name}
+                    <Icon name="external" size={10} />
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center gap-1 rounded-pill border border-white/25 bg-white/5 px-3 py-1.5 font-body text-[0.875rem] font-semibold text-white/70">{m.name}</span>
+                )}
               </li>
             ))}
           </ul>
         )}
-        <p className="mt-6 inline-flex items-center gap-2 font-body text-[0.9375rem] font-semibold text-sky-400">
-          {s.external ? "Visit site" : "Explore"}
-          <Icon name={s.external ? "external" : "arrow"} size={s.external ? 12 : 18} />
-        </p>
+        {s.href ? (
+          <p className="mt-6 inline-flex items-center gap-2 font-body text-[0.9375rem] font-semibold text-sky-400">
+            Visit site
+            <Icon name="external" size={12} />
+          </p>
+        ) : (
+          <p className="mt-6 inline-flex items-center gap-1.5 rounded-pill bg-white/10 px-2.5 py-1 font-body text-[0.75rem] font-semibold leading-none text-sky-200 ring-1 ring-white/15">
+            <span className="h-1.5 w-1.5 rounded-full bg-sky-200" aria-hidden="true" />
+            Link to be confirmed
+          </p>
+        )}
       </div>
     </article>
   );

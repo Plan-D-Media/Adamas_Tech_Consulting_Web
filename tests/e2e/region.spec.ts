@@ -88,7 +88,7 @@ test.describe("legacy redirects", () => {
       const target = await request.get(loc, { maxRedirects: 0 });
       if (toRoot.includes(from)) {
         if (target.status() !== 307) bad.push(`${from} -> ${loc}: ${target.status()} (expected the geo 307)`);
-      } else if (target.status() === 307 && /^\/(case-studies|insights\/events|solutions|services)\/./.test(to)) {
+      } else if (target.status() === 307 && /^\/(case-studies|insights\/events|services)\/./.test(to)) {
         // A detail page whose row is still unpublished falls back to its listing (lib/data/unpublished.ts); the listing must answer 200.
         const listing = await request.get(target.headers()["location"] ?? "", { maxRedirects: 0 });
         if (listing.status() !== 200) bad.push(`${from} -> ${loc} -> listing: ${listing.status()}`);

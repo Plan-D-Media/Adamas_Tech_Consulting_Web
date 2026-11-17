@@ -84,7 +84,7 @@ async function RegionHome({ params }: { params: PageProps<"/[region]">["params"]
         {home.eventProminence !== "HIDDEN" && <Events block={b("home.events")} event={home.event} />}
         <Perspectives block={b("home.perspectives")} />
         {home.showWhyUs && <TechExcellence block={b("home.whyUs")} logos={home.logos} />}
-        <Presence block={b("home.presence")} offices={offices} featuredSlug={regionInfo?.featuredOfficeSlug ?? null} />
+        <Presence block={b("home.presence")} offices={offices} regions={regions} region={region} fallbackRegion={region} />
         <ContactSection block={b("home.contact")} regionSlug={region} />
       </div>
     </RevealScope>

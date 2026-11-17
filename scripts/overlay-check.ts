@@ -1,7 +1,7 @@
 /**
  * Dev-only QA: loads each path in `next dev` (fresh page each) and reports what the Next.js dev overlay shows:
  * its tabs (Issues / Insights counts), message and source location, plus console errors.
- * Usage: npx tsx scripts/overlay-check.ts http://localhost:3000 /in/ /uk/ /solutions/foo ...
+ * Usage: npx tsx scripts/overlay-check.ts http://localhost:3000 /in/ /uk/ /case-studies ...
  * (Git Bash: prefix with MSYS_NO_PATHCONV=1 so "/in/" isn't turned into a Windows path.)
  */
 import { chromium } from "playwright";

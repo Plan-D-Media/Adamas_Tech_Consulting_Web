@@ -7,15 +7,24 @@ import type { ContactField, ContactState } from "@/lib/contact-schema";
 import { fieldError } from "@/lib/contact-validate";
 import { HONEYPOT_FIELD } from "@/lib/honeypot";
 import { cx } from "@/lib/cx";
+import type { RegionSlug } from "@/lib/region";
+import { useLocationSearch } from "@/lib/use-client-snapshot";
 import { Icon } from "@/components/ui/Icon";
 import { Flag } from "@/components/nav/Flag";
+import { useRegionCookie } from "@/components/nav/regionClient";
 
 interface Props {
   placeholders: { name: string; email: string; phone: string; message: string };
   submitLabel: string;
   consentLabel: string;
+  /** The page's region on a regional homepage; null on global pages, where the visitor's cookie (then `fallbackRegion`) picks the default country. */
   regionSlug: string | null;
+  fallbackRegion?: RegionSlug;
+  /** Source path stored with the enquiry; the page's query string (e.g. ?service=sap) is appended in the browser. Defaults to the homepage path. */
+  sourcePath?: string;
 }
+
+const DEFAULT_COUNTRY: Record<string, string> = { in: "India", uk: "United Kingdom", gcc: "United Arab Emirates" };
 
 /** Country options for the phone selector (Figma shows a flag + chevron); the value doubles as the "country" field. */
 const COUNTRIES = [
@@ -65,11 +74,16 @@ function consentWithLinks(label: string) {
   );
 }
 
-export function HomeContactForm({ placeholders, submitLabel, consentLabel, regionSlug }: Props) {
+export function HomeContactForm({ placeholders, submitLabel, consentLabel, regionSlug, fallbackRegion = "in", sourcePath }: Props) {
   const [state, action, pending] = useActionState(submitContact, initial);
   const uid = useId();
-  const defaultCountry = regionSlug === "uk" ? "United Kingdom" : regionSlug === "gcc" ? "United Arab Emirates" : "India";
-  const [country, setCountry] = useState(state.values?.country || defaultCountry);
+  // Default country: the page's region, else the visitor's cookie once hydrated (null during SSR), else the fallback.
+  const cookieRegion = useRegionCookie();
+  const defaultCountry = DEFAULT_COUNTRY[regionSlug ?? cookieRegion ?? fallbackRegion] ?? "India";
+  const [chosen, setChosen] = useState<string | null>(state.values?.country || null);
+  const country = chosen ?? defaultCountry;
+  const search = useLocationSearch();
+  const source = sourcePath ? `${sourcePath}${search}` : regionSlug ? `/${regionSlug}/` : "/";
   const [live, setLive] = useState<Partial<Record<ContactField, string | undefined>>>({});
   const errors = { ...state.fieldErrors, ...live };
   const flag = FLAG_FOR[COUNTRIES.find((c) => c.label === country)?.code ?? ""] ?? null;
@@ -99,7 +113,7 @@ export function HomeContactForm({ placeholders, submitLabel, consentLabel, regio
         </p>
       )}
       <input type="text" name={HONEYPOT_FIELD} tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
-      <input type="hidden" name="sourcePath" value={regionSlug ? `/${regionSlug}/` : "/"} />
+      <input type="hidden" name="sourcePath" value={source} />
 
       <div>
         <label htmlFor={`${uid}-name`} className="sr-only">
@@ -139,7 +153,7 @@ export function HomeContactForm({ placeholders, submitLabel, consentLabel, regio
           </label>
           {/* The invisible select sits over the flag; its keyboard focus is drawn as a ring on the flag box (peer), since
               an opacity-0 control cannot show its own outline (QA BUG-009). */}
-          <select id={`${uid}-country`} name="country" value={country} onChange={(e) => setCountry(e.target.value)} className="peer absolute left-0 top-0 h-[52px] w-[50px] cursor-pointer opacity-0" aria-label="Country">
+          <select id={`${uid}-country`} name="country" value={country} onChange={(e) => setChosen(e.target.value)} className="peer absolute left-0 top-0 h-[52px] w-[50px] cursor-pointer opacity-0" aria-label="Country">
             {COUNTRIES.map((c) => (
               <option key={c.code} value={c.label}>
                 {c.label}

@@ -1,15 +1,25 @@
 import type { Block } from "@/lib/data/site";
 import { blockExtra } from "@/lib/data/home-blocks";
 import { plain } from "@/lib/placeholder";
+import type { RegionSlug } from "@/lib/region";
 import { HomeContactForm } from "@/components/home/HomeContactForm";
 import { Img } from "@/components/media/Img";
+
+interface Props {
+  block: Block;
+  regionSlug: string | null;
+  /** Default country of the phone selector on global pages when the visitor has no region cookie (the Contact page passes DEFAULT_REGION). */
+  fallbackRegion?: RegionSlug;
+  /** Stored with the enquiry as its source (the Contact page passes "/contact"; the homepages default to their own path). */
+  sourcePath?: string;
+}
 
 /**
  * Contact (Figma Rectangle 4511 card): a 1320x631 white card with a 40px shadow, the photo on the left and the form on
  * the right ("DO YOU HAVE ANY QUESTION?", blue heading, four fields with icons and the phone country selector,
  * "Submit Now!"). Posts to the contact server action (honeypot, rate limit, database, mail).
  */
-export function ContactSection({ block, regionSlug }: { block: Block; regionSlug: string | null }) {
+export function ContactSection({ block, regionSlug, fallbackRegion, sourcePath }: Props) {
   const extra = blockExtra(block, "contact");
   return (
     <section aria-labelledby="contact-heading" data-compare="contact" className="bg-white pb-16 pt-4 lg:pb-[105px] lg:pt-[40px]">
@@ -26,7 +36,7 @@ export function ContactSection({ block, regionSlug }: { block: Block; regionSlug
             <h2 id="contact-heading" className="mt-1 max-w-[21rem] text-balance font-ui text-[clamp(1.375rem,1.2rem+0.5vw,1.625rem)] font-bold leading-[1.3] text-blue-500 lg:-mt-[7px]">
               {plain(block.heading)}
             </h2>
-            <HomeContactForm placeholders={extra.placeholders} submitLabel={extra.submitLabel} consentLabel={extra.consentLabel} regionSlug={regionSlug} />
+            <HomeContactForm placeholders={extra.placeholders} submitLabel={extra.submitLabel} consentLabel={extra.consentLabel} regionSlug={regionSlug} fallbackRegion={fallbackRegion} sourcePath={sourcePath} />
           </div>
         </div>
       </div>

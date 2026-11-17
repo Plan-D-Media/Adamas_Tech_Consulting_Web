@@ -108,7 +108,7 @@ test("structured data and Open Graph tags are present (BUG-011, BUG-033)", async
   expect(home).toMatch(/property="og:title"/);
   expect(home).toMatch(/property="og:image"/);
   expect(home).toMatch(/hrefLang="x-default" href="https?:\/\/[^"]+\/"/);
-  for (const p of ["/services/cloud-services", "/about", "/solutions"]) {
+  for (const p of ["/services/cloud-services", "/about", "/case-studies", "/cookie-policy"]) {
     const html = await (await request.get(p)).text();
     expect(html, p).toMatch(/"@type":"BreadcrumbList"/);
     expect(html, p).toMatch(/property="og:title"/);

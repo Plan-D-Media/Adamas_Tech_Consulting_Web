@@ -56,7 +56,7 @@ const privacy = {
       title: "1. What information do we collect?",
       parts: [
         {
-          text: "### Personal information you disclose to us\n\nIn Short: We collect personal information that you provide to us.\n\nWe collect personal information that you voluntarily provide to us when you express an interest in obtaining information about us or our products and Services, when you participate in activities on the Services, or otherwise when you contact us.\n\n### Personal Information Provided by You\n\nThe personal information that we collect depends on the context of your interactions with us and the Services, the choices you make, and the products and features you use. The personal information we collect may include the following:\n\n- names\n- phone numbers\n- email addresses\n- organization name\n\n### Sensitive Information\n\nWe do not process sensitive information.\n\nAll personal information that you provide to us must be true, complete, and accurate, and you must notify us of any changes to such personal information.",
+          text: "### Personal information you disclose to us\n\nIn Short: We collect personal information that you provide to us.\n\nWe collect personal information that you voluntarily provide to us when you express an interest in obtaining information about us or our products and Services, when you participate in activities on the Services, or otherwise when you contact us.\n\n### Personal Information Provided by You\n\nThe personal information that we collect depends on the context of your interactions with us and the Services, the choices you make, and the products and features you use. The personal information we collect may include the following:\n\n- names\n- phone numbers\n- email addresses\n- organisation name\n\n### Sensitive Information\n\nWe do not process sensitive information.\n\nAll personal information that you provide to us must be true, complete, and accurate, and you must notify us of any changes to such personal information.",
         },
       ],
       links: [],
@@ -86,7 +86,7 @@ const privacy = {
       title: "4. When and with whom do we share your personal information?",
       parts: [
         {
-          text: "In Short: We may share information in specific situations described in this section and/or with the following third parties.\n\nWe may need to share your personal information in the following situations:\n\n- Business Transfers. We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.\n- When we use Google Analytics. We may share your information with Google Analytics to track and analyze the use of the Services. The Google Analytics Advertising Features that we may use include: Google Analytics Demographics and Interests Reporting. To opt out of being tracked by Google Analytics across the Services, visit https://tools.google.com/dlpage/gaoptout. You can opt out of Google Analytics Advertising Features through Ads Settings and Ad Settings for mobile apps. Other opt out means include http://optout.networkadvertising.org/ and http://www.networkadvertising.org/mobile-choice. For more information on the privacy practices of Google, please visit the Google Privacy & Terms page.",
+          text: "In Short: We may share information in specific situations described in this section and/or with the following third parties.\n\nWe may need to share your personal information in the following situations:\n\n- Business Transfers. We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.\n- When we use Google Analytics. We may share your information with Google Analytics to track and analyse the use of the Services. The Google Analytics Advertising Features that we may use include: Google Analytics Demographics and Interests Reporting. To opt out of being tracked by Google Analytics across the Services, visit https://tools.google.com/dlpage/gaoptout. You can opt out of Google Analytics Advertising Features through Ads Settings and Ad Settings for mobile apps. Other opt out means include http://optout.networkadvertising.org/ and http://www.networkadvertising.org/mobile-choice. For more information on the privacy practices of Google, please visit the Google Privacy & Terms page.",
         },
       ],
       links: [
@@ -548,6 +548,111 @@ privacy.sections.find((s) => s.id === "do-we-use-cookies-and-other")?.links.push
 const termsPrivacy = terms.sections.find((s) => s.id === "privacy-policy");
 if (termsPrivacy) termsPrivacy.links = [{ label: "Privacy Policy", href: "/privacy-policy" }];
 
+/**
+ * Cookie policy. Not migrated copy: there is no cookie policy on the live site, so this was drafted on
+ * 17 November 2026 from the cookies this codebase actually sets. The only one is `region`
+ * (components/nav/regionClient.ts, name and lifetime from lib/region.ts), read by proxy.ts on the bare "/" and by
+ * the header, footer and form actions. There is no analytics, advertising or consent cookie anywhere in the code.
+ * Needs client legal review before launch, and a rewrite if GA4/GTM or any third-party embed is added.
+ */
+const cookiePolicy = {
+  updated: "17 November 2026",
+  intro:
+    "This cookie policy explains how the Adamas Tech Consulting website uses cookies, and how you can control them. It covers this website only, and not any other website you reach from here.\n\nA cookie is a small text file that a website asks your browser to keep on your device. Cookies can be used to make a site work, to remember a preference, or to recognise and track people across websites. This site uses one cookie, and only for the middle reason: to remember which region you chose.",
+  sections: [
+    {
+      id: "cookies-we-use",
+      title: "Cookies we use",
+      parts: [
+        {
+          text: "We set one cookie. It is a first-party cookie, which means this website sets it and only this website receives it.\n\nIt is there to make the site behave the way you asked it to. We do not use it to measure, profile or personalise anything, and we do not use it to follow your behaviour on this or any other site.",
+        },
+        {
+          table: {
+            columns: ["Name", "Purpose", "Type", "Duration"],
+            rows: [
+              [
+                "region",
+                "Remembers the region you chose (India, the United Kingdom or the GCC) so that the homepage, telephone number, email address and office details you are shown match it.",
+                "Strictly necessary (functional), first party",
+                "One year from the time it is set or updated",
+              ],
+            ],
+          },
+        },
+        {
+          text: "### What the cookie holds\n\nThe cookie holds one short value: the code for your region (in, uk or gcc). It holds no name, no email address, no telephone number and no identifier that could be used to recognise you. It is set with Path=/ and SameSite=Lax, and with the Secure flag whenever the site is served over HTTPS.\n\n### When it is set\n\nThe cookie is set the first time you choose a region with the region switcher in the site header. Until then no cookie is set at all, and the site shows its default region.\n\n### How it is read\n\nWhen you arrive at the site without a region in the address, the cookie is read so that you land on the homepage for your region. The header and footer read it to show the right telephone number, email address and office. Our forms record which region a message came from, so that the right team replies to you.",
+        },
+      ],
+      links: [],
+    },
+    {
+      id: "no-analytics-advertising-or-tracking-cookies",
+      title: "No analytics, advertising or tracking cookies",
+      parts: [
+        {
+          text: "This site sets no analytics cookies. There is no Google Analytics, no Google Tag Manager and no other measurement tool in the site's code, so nothing is stored on your device to count visits or to study how the pages are used.\n\nThere are no advertising or marketing cookies, no social media tracking pixels, and no third-party content embedded in our pages that could set a cookie while you are here. Nothing on the site profiles you or personalises what you see from your behaviour.\n\nBecause none of that is happening, there is nothing for you to consent to: the site shows no cookie banner and stores no consent cookie.\n\nThis describes the site as it stands on the date at the top of this page. If analytics, advertising or embedded third-party content is added later, this policy will be updated to list those cookies before they are switched on, and consent will be asked for where the law requires it.",
+        },
+      ],
+      links: [],
+    },
+    {
+      id: "cookies-set-by-other-websites",
+      title: "Cookies set by other websites",
+      parts: [
+        {
+          text: "Some links take you away from this site, among them our education platform at arivoo.in and our pages on Facebook and LinkedIn. Once you follow one of those links you are on a website we do not control, and it may set its own cookies under its own policy, which this policy does not cover. Those destinations are linked, not embedded, so none of them can set a cookie while you are reading our pages.",
+        },
+      ],
+      links: [
+        { label: "arivoo.in", href: "https://arivoo.in" },
+        { label: "Adamas Tech Consulting on LinkedIn", href: "https://www.linkedin.com/company/adamas-tech-consulting/" },
+        { label: "Adamas Tech Consulting on Facebook", href: "https://www.facebook.com/AdamasTechConsulting/" },
+      ],
+    },
+    {
+      id: "forms-and-the-information-you-send-us",
+      title: "Forms and the information you send us",
+      parts: [
+        {
+          text: "Our enquiry, event registration and newsletter forms use no cookies. What you type is stored in this site's database so that we can reply to you, and a one-way hash of your IP address is kept for a short time to stop the forms being used for automated abuse. Our Privacy Policy explains how we handle that information and what rights you have over it.",
+        },
+      ],
+      links: [{ label: "Privacy Policy", href: "/privacy-policy" }],
+    },
+    {
+      id: "managing-cookies",
+      title: "Managing cookies",
+      parts: [
+        {
+          text: "You decide what is kept on your device. Every current browser lets you see the cookies a site has set, delete them, and block new ones, either for one site or for every site. The controls usually sit under Privacy, or Cookies and site data, in your browser's settings, and clearing your browsing data removes cookies as well. A private or incognito window discards them when you close it.\n\nBlocking or deleting our region cookie costs you very little. The site keeps working: you are simply shown the default region again, and the site asks you which region you want the next time you change it. Nothing else here depends on a cookie.\n\nSince we set no analytics or advertising cookies, there is nothing else to opt out of.",
+        },
+      ],
+      links: [],
+    },
+    {
+      id: "changes-to-this-policy",
+      title: "Changes to this policy",
+      parts: [
+        {
+          text: "We will update this policy whenever the cookies the site sets change, and the 'Last updated' date at the top of the page will change with it. Please look here if you want to know what this site keeps on your device.",
+        },
+      ],
+      links: [],
+    },
+    {
+      id: "contact",
+      title: "Contact",
+      parts: [
+        {
+          text: "If you have a question about this policy, or about the cookie this site sets, please write to us at marketing@adamastech.in.",
+        },
+      ],
+      links: [{ label: "marketing@adamastech.in", href: "mailto:marketing@adamastech.in" }],
+    },
+  ],
+} satisfies LegalDoc;
+
 // ── Pages ────────────────────────────────────────────────────────────────
 
 export const pages: PageSeed[] = [
@@ -598,7 +703,7 @@ export const pages: PageSeed[] = [
           { title: "End-to-End Services", body: "We manage every phase, from planning to deployment and ongoing support." },
           { title: "Innovative Approach", body: "We use the latest technology trends to drive your digital transformation journey" },
           { title: "Agile Methodology", body: "We adapt quickly to changes, ensuring your project is delivered on time" },
-          { title: "Customer-Centric", body: "We prioritize your needs, building long-term partnerships with exceptional service." },
+          { title: "Customer-Centric", body: "We prioritise your needs, building long-term partnerships with exceptional service." },
         ],
       },
       model: {
@@ -781,16 +886,13 @@ export const pages: PageSeed[] = [
     template: "legal",
     eyebrow: "Legal",
     title: "Cookie Policy",
-    blocks: {
-      sections: [],
-      pending: "[Placeholder] Cookie policy text.",
-    },
+    blocks: { updated: cookiePolicy.updated, intro: cookiePolicy.intro, sections: cookiePolicy.sections },
     seoTitle: "Cookie Policy",
-    noindex: true,
+    seoDescription: "The one cookie the Adamas Tech Consulting website sets, why it is set, and how to clear or block it.",
     status: "PUBLISHED",
     sortOrder: 8,
     needsReview: true,
     editorNote:
-      "MISSING (Q10.2–Q10.4): no cookie policy on the live site. The privacy notice refers to a 'Cookie Notice'. Designed placeholder until the client supplies the text; noindex until then.",
+      "DRAFTED, NOT CLIENT COPY (Q10.2–Q10.4: no cookie policy on the live site; the privacy notice refers to a 'Cookie Notice'). Written on 17 November 2026 from the cookies this codebase actually sets: only `region` (components/nav/regionClient.ts, lib/region.ts), read by proxy.ts, the header, the footer and the form actions. No analytics, advertising or consent cookie exists in the code today. Needs client legal review before launch, and must be rewritten if GA4/GTM or any third-party embed is added (CONTENT_TODO.md: GA4 / GTM container IDs still missing).",
   },
 ];

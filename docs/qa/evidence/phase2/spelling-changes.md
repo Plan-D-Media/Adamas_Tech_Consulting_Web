@@ -1,0 +1,310 @@
+# British spelling conversion (2026-11-17)
+
+102 lines changed in 8 files. Service and product names kept as written: "Migration & Modernization", "Google Developers Agency Program".
+
+- `blocks.ts:87`
+  - before: title: "Customized Solutions",
+  - after: title: "Customised Solutions",
+- `blocks.ts:160`
+  - before: eyebrow: "India Engineering Delivery Center · Kolkata & Pan-India",
+  - after: eyebrow: "India Engineering Delivery Centre · Kolkata & Pan-India",
+- `blocks.ts:162`
+  - before: body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernization for governments and top enterprises across the GCC.",
+  - after: body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernisation for governments and top enterprises across the GCC.",
+- `blocks.ts:174`
+  - before: eyebrow: "India Engineering Delivery Center · Kolkata & Pan-India",
+  - after: eyebrow: "India Engineering Delivery Centre · Kolkata & Pan-India",
+- `blocks.ts:176`
+  - before: body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernization for governments and top enterprises across India.",
+  - after: body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernisation for governments and top enterprises across India.",
+- `blocks.ts:190`
+  - before: body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernization for governments and top enterprises across the UK & Ireland.",
+  - after: body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernisation for governments and top enterprises across the UK & Ireland.",
+- `blocks.ts:204`
+  - before: body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernization for governments and top enterprises across the GCC.",
+  - after: body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernisation for governments and top enterprises across the GCC.",
+- `blocks.ts:382`
+  - before: body: "Our CloudSMART strategy gives enterprises a complete cloud consultancy and delivery platform that adapts to your needs.\n\nBuilt on our engineering heritage and partnerships with top cloud solutions providers, Clo
+  - after: body: "Our CloudSMART strategy gives enterprises a complete cloud consultancy and delivery platform that adapts to your needs.\n\nBuilt on our engineering heritage and partnerships with top cloud solutions providers, Clo
+- `caseStudies.ts:24`
+  - before: "Utilize cutting-edge facial feature extraction and matching techniques for accurate, simultaneous identification across multiple faces in live video streams.",
+  - after: "Utilise cutting-edge facial feature extraction and matching techniques for accurate, simultaneous identification across multiple faces in live video streams.",
+- `caseStudies.ts:30`
+  - before: { title: "Utilize advanced facial feature extraction and encoding techniques to accurately identify individuals in real-time." },
+  - after: { title: "Utilise advanced facial feature extraction and encoding techniques to accurately identify individuals in real-time." },
+- `caseStudies.ts:57`
+  - before: "Implementing smart solutions to enhance parking efficiency, improve space utilization, and streamline vehicle management in busy parking lots.",
+  - after: "Implementing smart solutions to enhance parking efficiency, improve space utilisation, and streamline vehicle management in busy parking lots.",
+- `caseStudies.ts:59`
+  - before: "Created an intelligent car parking solution to efficiently detect and allocate available parking spaces, minimizing congestion, enhancing the overall parking experience and saving driver’s valuable time by providing rea
+  - after: "Created an intelligent car parking solution to efficiently detect and allocate available parking spaces, minimising congestion, enhancing the overall parking experience and saving driver’s valuable time by providing rea
+- `caseStudies.ts:87`
+  - before: "Streamline your treasury operations, enhance cash management, and maximize investment efficiency with our proven ASAP implementation approach.",
+  - after: "Streamline your treasury operations, enhance cash management, and maximise investment efficiency with our proven ASAP implementation approach.",
+- `caseStudies.ts:90`
+  - before: "Accelerate your treasury, investment, and cash management processes with streamlined implementation for optimized financial operations and enhanced efficiency.\n\nProject Process Re-organization – An Indian Multinationa
+  - after: "Accelerate your treasury, investment, and cash management processes with streamlined implementation for optimised financial operations and enhanced efficiency.\n\nProject Process Re-organisation – An Indian Multinationa
+- `caseStudies.ts:127`
+  - before: "Implement SAP Analytics Cloud for seamless data integration, real-time insights, and advanced analytics, empowering smarter decision-making across your organization.\n\nCustomer is one of the largest manufacturers of In
+  - after: "Implement SAP Analytics Cloud for seamless data integration, real-time insights, and advanced analytics, empowering smarter decision-making across your organisation.\n\nCustomer is one of the largest manufacturers of In
+- `caseStudies.ts:133`
+  - before: body: "Enables businesses to forecast and manage expected sales volumes, ensuring efficient alignment between production, inventory, and market demand. It supports better decision-making and optimized resource allocation
+  - after: body: "Enables businesses to forecast and manage expected sales volumes, ensuring efficient alignment between production, inventory, and market demand. It supports better decision-making and optimised resource allocation
+- `caseStudies.ts:173`
+  - before: "Revolutionize your financial operations with AI-powered invoice parsing, automated PO reconciliation, and seamless ERP integration.\n\nManual invoice processing is often a bottleneck in financial operations, characteriz
+  - after: "Revolutionize your financial operations with AI-powered invoice parsing, automated PO reconciliation, and seamless ERP integration.\n\nManual invoice processing is often a bottleneck in financial operations, characteris
+- `caseStudies.ts:179`
+  - before: body: "Utilizes advanced OCR and NLP to automatically extract and structure key data fields (Invoice ID, PO Number, Amount, Tax) from diverse vendor formats.",
+  - after: body: "Utilises advanced OCR and NLP to automatically extract and structure key data fields (Invoice ID, PO Number, Amount, Tax) from diverse vendor formats.",
+- `caseStudies.ts:224`
+  - before: { title: "Workflow Optimization", body: "By setting flexible matching and reconciliation rules, it can achieve high automation and continuous accounting." },
+  - after: { title: "Workflow Optimisation", body: "By setting flexible matching and reconciliation rules, it can achieve high automation and continuous accounting." },
+- `caseStudies.ts:255`
+  - before: "Optimize your workflow with a 70% improvement in batch processing time, enabling faster operations and increased productivity.",
+  - after: "Optimise your workflow with a 70% improvement in batch processing time, enabling faster operations and increased productivity.",
+- `caseStudies.ts:264`
+  - before: { title: "Payment Authorization", body: "Grouping and approval of Payments in BCM with Digital Signatures." },
+  - after: { title: "Payment Authorisation", body: "Grouping and approval of Payments in BCM with Digital Signatures." },
+- `caseStudies.ts:297`
+  - before: "Empower your workforce with instant, context-aware access to organizational knowledge through a secure, AI-driven conversational interface.\n\nIn a data-rich enterprise environment, finding the right information quickly
+  - after: "Empower your workforce with instant, context-aware access to organisational knowledge through a secure, AI-driven conversational interface.\n\nIn a data-rich enterprise environment, finding the right information quickly
+- `caseStudies.ts:299`
+  - before: "Employees were struggling with slow, manual information retrieval across fragmented sources like PDFs, Word documents, and intranets. Traditional keyword-based search tools lacked contextual understanding, often returni
+  - after: "Employees were struggling with slow, manual information retrieval across fragmented sources like PDFs, Word documents, and intranets. Traditional keyword-based search tools lacked contextual understanding, often returni
+- `caseStudies.ts:303`
+  - before: body: "Understands the intent behind user queries to deliver accurate, context-rich answers derived directly from organizational documents rather than generic keyword matches.",
+  - after: body: "Understands the intent behind user queries to deliver accurate, context-rich answers derived directly from organisational documents rather than generic keyword matches.",
+- `caseStudies.ts:306`
+  - before: title: "Centralized Knowledge Access",
+  - after: title: "Centralised Knowledge Access",
+- `caseStudies.ts:423`
+  - before: "Implement IoT-enabled proactive and predictive machine health monitoring to optimize maintenance, minimize downtime, and improve operational efficiency.\n\nVarious customers in manufacturing businesses like steel, ferti
+  - after: "Implement IoT-enabled proactive and predictive machine health monitoring to optimise maintenance, minimise downtime, and improve operational efficiency.\n\nVarious customers in manufacturing businesses like steel, ferti
+- `caseStudies.ts:437`
+  - before: body: "Using machine learning algorithms and predictive models, SAP ALM can analyze historical and current data to predict potential failures or performance degradation. It can detect anomalies, deviations from normal op
+  - after: body: "Using machine learning algorithms and predictive models, SAP ALM can analyse historical and current data to predict potential failures or performance degradation. It can detect anomalies, deviations from normal op
+- `caseStudies.ts:516`
+  - before: "Utilizing groundbreaking technology to enhance the accuracy and efficiency of steel plate inspection and severity detection processes.",
+  - after: "Utilising groundbreaking technology to enhance the accuracy and efficiency of steel plate inspection and severity detection processes.",
+- `caseStudies.ts:518`
+  - before: "Traditional steel plate inspection methods are labor-intensive, error-prone, and lack precision, hampering accurate defect detection and quality control, especially in manufacturing and construction.",
+  - after: "Traditional steel plate inspection methods are labour54-intensive, error-prone, and lack precision, hampering accurate defect detection and quality control, especially in manufacturing and construction.",
+- `caseStudies.ts:520`
+  - before: { title: "Advanced Object Detection", body: "Utilizes cutting-edge techniques for identifying defects on steel plates." },
+  - after: { title: "Advanced Object Detection", body: "Utilises cutting-edge techniques for identifying defects on steel plates." },
+- `caseStudies.ts:528`
+  - before: { value: "32.8%", label: "Decrease in labor cost" },
+  - after: { value: "32.8%", label: "Decrease in labour44 cost" },
+- `caseStudies.ts:557`
+  - before: { title: "Advanced CNN algorithms", body: "Reliably recognize and classify numerous fruit varieties, ensuring trustworthy identification in real time." },
+  - after: { title: "Advanced CNN algorithms", body: "Reliably recognise and classify numerous fruit varieties, ensuring trustworthy identification in real time." },
+- `caseStudies.ts:589`
+  - before: { title: "Recognizes 95%+ of common PPE types, such as helmets, gloves, and safety glasses." },
+  - after: { title: "Recognises 95%+ of common PPE types, such as helmets, gloves, and safety glasses." },
+- `caseStudies.ts:614`
+  - before: "Monitors occupancy and audience behavior under dim lighting, providing instant insights on engagement and demographics through non-invasive analysis.",
+  - after: "Monitors occupancy and audience behaviour under dim lighting, providing instant insights on engagement and demographics through non-invasive analysis.",
+- `caseStudies.ts:616`
+  - before: "Accurately monitoring person count in cinema halls to optimize operations, enhance safety, and improve audience management.",
+  - after: "Accurately monitoring person count in cinema halls to optimise operations, enhance safety, and improve audience management.",
+- `caseStudies.ts:618`
+  - before: "Cinema operators globally face challenges in accurately monitoring occupancy and understanding audience behaviours due to the dynamic nature of cinema environments, characterized by fluctuating lighting conditions, vary
+  - after: "Cinema operators globally face challenges in accurately monitoring occupancy and understanding audience behaviours due to the dynamic nature of cinema environments, characterised by fluctuating lighting conditions, vary
+- `caseStudies.ts:621`
+  - before: { title: "Accurately monitors real-time occupancy and audience behavior, even under dim lighting conditions." },
+  - after: { title: "Accurately monitors real-time occupancy and audience behaviour, even under dim lighting conditions." },
+- `caseStudies.ts:622`
+  - before: { title: "Analyzes video feeds to discern occupancy levels and interprets anonymized body movements to gauge audience engagement and demographics." },
+  - after: { title: "Analyses video feeds to discern occupancy levels and interprets anonymised body movements to gauge audience engagement and demographics." },
+- `caseStudies.ts:674`
+  - before: "Utilize AI-powered technology for intelligent traffic monitoring, enhancing safety, efficiency, and real-time decision-making in smarter, more connected spaces.",
+  - after: "Utilise AI-powered technology for intelligent traffic monitoring, enhancing safety, efficiency, and real-time decision-making in smarter, more connected spaces.",
+- `caseStudies.ts:714`
+  - before: title: "Modernizing Kubernetes Operations for a Leading HealthTech Company",
+  - after: title: "Modernising Kubernetes Operations for a Leading HealthTech Company",
+- `caseStudies.ts:723`
+  - before: "As the customer’s AWS and Kubernetes environment scaled, managing infrastructure reliability, operational visibility and day-to-day EKS operations became increasingly complex. The team needed to move from a reactive ope
+  - after: "As the customer’s AWS and Kubernetes environment scaled, managing infrastructure reliability, operational visibility and day-to-day EKS operations became increasingly complex. The team needed to move from a reactive ope
+- `caseStudies.ts:727`
+  - before: body: "Adamas implemented a comprehensive AWS Managed Services model centered on Amazon EKS. We established centralized observability using Amazon CloudWatch, Prometheus and Grafana, giving full visibility across EKS clu
+  - after: body: "Adamas implemented a comprehensive AWS Managed Services model centred on Amazon EKS. We established centralised observability using Amazon CloudWatch, Prometheus and Grafana, giving full visibility across EKS clus
+- `caseStudies.ts:764`
+  - before: { title: "Centralized monitoring across EC2 infrastructure, storage and networking" },
+  - after: { title: "Centralised monitoring across EC2 infrastructure, storage and networking" },
+- `home.ts:28`
+  - before: body: "From cloud migration to AI automation, we help you optimize workloads, boost performance, and drive profitable growth with AWS-certified capabilities.",
+  - after: body: "From cloud migration to AI automation, we help you optimise workloads, boost performance, and drive profitable growth with AWS-certified capabilities.",
+- `home.ts:52`
+  - before: body: "Modernize legacy systems, integrate business functions, and deliver smarter workflows with our end-to-end SAP transformation services.",
+  - after: body: "Modernise legacy systems, integrate business functions, and deliver smarter workflows with our end-to-end SAP transformation services.",
+- `industries.ts:21`
+  - before: body: "We help healthcare providers improve patient care and manage hospital operations with smart digital solutions.\n\nOur technology helps organize patient records, simplify daily tasks, and keep healthcare data secur
+  - after: body: "We help healthcare providers improve patient care and manage hospital operations with smart digital solutions.\n\nOur technology helps organise patient records, simplify daily tasks, and keep healthcare data secur
+- `industries.ts:43`
+  - before: body: "Drive growth in the retail and e-commerce sector with scalable platforms that support online storefronts, personalized marketing, inventory management, and CRM integration.\n\nOur solutions enhance customer experi
+  - after: body: "Drive growth in the retail and e-commerce sector with scalable platforms that support online storefronts, personalised marketing, inventory management, and CRM integration.\n\nOur solutions enhance customer experi
+- `industries.ts:75`
+  - before: body: "Increase efficiency and productivity in manufacturing with solutions that optimize supply chain management, production planning, and inventory control.\n\nOur technology-driven approach enhances operational effici
+  - after: body: "Increase efficiency and productivity in manufacturing with solutions that optimise supply chain management, production planning, and inventory control.\n\nOur technology-driven approach enhances operational effici
+- `navigation.ts:42`
+  - before: descriptor: "Migrate workloads, modernize architecture, and move from legacy systems to scalable AWS-native environments.",
+  - after: descriptor: "Migrate workloads, modernise architecture, and move from legacy systems to scalable AWS-native environments.",
+- `navigation.ts:47`
+  - before: descriptor: "Resilient | Reliable | Cost optimized | Intelligent",
+  - after: descriptor: "Resilient | Reliable | Cost optimised | Intelligent",
+- `navigation.ts:222`
+  - before: descriptor: "Centralized learning, seamless education, enhanced outcomes.",
+  - after: descriptor: "Centralised learning, seamless education, enhanced outcomes.",
+- `pages.ts:59`
+  - before: text: "### Personal information you disclose to us\n\nIn Short: We collect personal information that you provide to us.\n\nWe collect personal information that you voluntarily provide to us when you express an interest i
+  - after: text: "### Personal information you disclose to us\n\nIn Short: We collect personal information that you provide to us.\n\nWe collect personal information that you voluntarily provide to us when you express an interest i
+- `pages.ts:89`
+  - before: text: "In Short: We may share information in specific situations described in this section and/or with the following third parties.\n\nWe may need to share your personal information in the following situations:\n\n- Busi
+  - after: text: "In Short: We may share information in specific situations described in this section and/or with the following third parties.\n\nWe may need to share your personal information in the following situations:\n\n- Busi
+- `pages.ts:601`
+  - before: { title: "Customer-Centric", body: "We prioritize your needs, building long-term partnerships with exceptional service." },
+  - after: { title: "Customer-Centric", body: "We prioritise your needs, building long-term partnerships with exceptional service." },
+- `services.ts:19`
+  - before: tagline: "Resilient | Reliable | Cost optimized | Intelligent",
+  - after: tagline: "Resilient | Reliable | Cost optimised | Intelligent",
+- `services.ts:21`
+  - before: "Adamas Tech Consulting helps enterprises, institutions, and public-sector organizations design modern cloud foundations, optimize operations, and apply AI on AWS for measurable business outcomes.",
+  - after: "Adamas Tech Consulting helps enterprises, institutions, and public-sector organisations design modern cloud foundations, optimise operations, and apply AI on AWS for measurable business outcomes.",
+- `services.ts:24`
+  - before: "AWS is no longer only a hosting platform; it is the backbone for modernization, intelligent automation, data-led decisions, and industry transformation. Adamas helps clients move from fragmented infrastructure and isola
+  - after: "AWS is no longer only a hosting platform; it is the backbone for modernisation, intelligent automation, data-led decisions, and industry transformation. Adamas helps clients move from fragmented infrastructure and isola
+- `services.ts:118`
+  - before: "Migrate workloads, modernize architecture, and move from legacy systems to scalable AWS-native environments.",
+  - after: "Migrate workloads, modernise architecture, and move from legacy systems to scalable AWS-native environments.",
+- `services.ts:121`
+  - before: whoFor: "Adamas supports organizations that need to modernize legacy systems without disrupting operations.",
+  - after: whoFor: "Adamas supports organisations that need to modernise legacy systems without disrupting operations.",
+- `services.ts:125`
+  - before: { title: "Application rehosting, replatforming, or modernization" },
+  - after: { title: "Application rehosting, replatforming, or modernisation" },
+- `services.ts:126`
+  - before: { title: "Performance, security, and cost optimization" },
+  - after: { title: "Performance, security, and cost optimisation" },
+- `services.ts:141`
+  - before: "Adamas Tech is one of the preferred partners of AWS, enabling businesses to migrate, optimize & scale on cloud with speed & security. Whether you are a fast-scaling startup or a complex enterprise, we deliver a tailored
+  - after: "Adamas Tech is one of the preferred partners of AWS, enabling businesses to migrate, optimise & scale on cloud with speed & security. Whether you are a fast-scaling startup or a complex enterprise, we deliver a tailored
+- `services.ts:172`
+  - before: { title: "Cost optimization and rightsizing reviews" },
+  - after: { title: "Cost optimisation and rightsizing reviews" },
+- `services.ts:203`
+  - before: "NetSuite includes purpose-built capabilities for contractors, EPC firms, MEP providers, and engineering organizations.",
+  - after: "NetSuite includes purpose-built capabilities for contractors, EPC firms, MEP providers, and engineering organisations.",
+- `services.ts:207`
+  - before: body: "Real-time cost-to-complete · Automated WIP calculation · Labor, material, subcontractor cost flow · Variance analysis & proactive budget control",
+  - after: body: "Real-time cost-to-complete · Automated WIP calculation · Labour76, material, subcontractor cost flow · Variance analysis & proactive budget control",
+- `services.ts:215`
+  - before: body: "Multi-location warehouse & site stores · Materials planning based on BOQs & project timelines · Mobile receiving with photo proof · Equipment tracking & utilization visibility",
+  - after: body: "Multi-location warehouse & site stores · Materials planning based on BOQs & project timelines · Mobile receiving with photo proof · Equipment tracking & utilisation visibility",
+- `services.ts:293`
+  - before: "Our end to end SAP comprehensive services and consulting expertise in advance cloud based solutions empowers business for smarter and faster cloud adoption, propels digital transformation journeys and enables readiness 
+  - after: "Our end to end SAP comprehensive services and consulting expertise in advance cloud based solutions empowers business for smarter and faster cloud adoption, propels digital transformation journeys and enables readiness 
+- `services.ts:301`
+  - before: body: "Automate tasks, eliminate paperwork, and optimize processes, resulting in improved efficiency and cost savings.",
+  - after: body: "Automate tasks, eliminate paperwork, and optimise processes, resulting in improved efficiency and cost savings.",
+- `services.ts:329`
+  - before: "At Adamas Tech Consulting, we specialize in Application Development Solutions that drive innovation and accelerate business growth. Our team of skilled developers and designers are committed to creating tailored applica
+  - after: "At Adamas Tech Consulting, we specialise in Application Development Solutions that drive innovation and accelerate business growth. Our team of skilled developers and designers are committed to creating tailored applica
+- `services.ts:351`
+  - before: { title: "$259B", body: "The global enterprise application market will reach $259.51 billion by 2028, highlighting the rising demand for customized business solutions." },
+  - after: { title: "$259B", body: "The global enterprise application market will reach $259.51 billion by 2028, highlighting the rising demand for customised business solutions." },
+- `services.ts:368`
+  - before: body: "Utilize advanced statistical modeling and predictive analytics to uncover trends, forecast future outcomes, and drive data-informed decisions effectively.",
+  - after: body: "Utilise advanced statistical modelling48 and predictive analytics to uncover trends, forecast future outcomes, and drive data-informed decisions effectively.",
+- `services.ts:372`
+  - before: body: "Utilize natural language processing and text analytics to extract insights, understand sentiments, and analyze textual data for actionable intelligence.",
+  - after: body: "Utilise natural language processing and text analytics to extract insights, understand sentiments, and analyse textual data for actionable intelligence.",
+- `services.ts:376`
+  - before: body: "Apply machine learning algorithms and techniques to uncover patterns, optimize processes, and enhance decision-making with data-driven precision.",
+  - after: body: "Apply machine learning algorithms and techniques to uncover patterns, optimise processes, and enhance decision-making with data-driven precision.",
+- `services.ts:379`
+  - before: title: "Data Visualization & Storytelling",
+  - after: title: "Data Visualisation & Storytelling",
+- `services.ts:380`
+  - before: body: "Transform data into compelling visuals and narratives with data visualization and storytelling to communicate insights and drive impactful decisions.",
+  - after: body: "Transform data into compelling visuals and narratives with data visualisation and storytelling to communicate insights and drive impactful decisions.",
+- `services.ts:384`
+  - before: { title: "2.5x", body: "Organizations effectively leveraging data analytics are 2.5 times more likely to make faster decisions and execute them successfully." },
+  - after: { title: "2.5x", body: "Organisations effectively leveraging data analytics are 2.5 times more likely to make faster decisions and execute them successfully." },
+- `services.ts:387`
+  - before: { title: "6%", body: "Organizations adopting data-driven decision-making see a 5-6% productivity boost and a 4-5% increase in profitability on average." },
+  - after: { title: "6%", body: "Organisations adopting data-driven decision-making see a 5-6% productivity boost and a 4-5% increase in profitability on average." },
+- `services.ts:409`
+  - before: body: "Protect sensitive information, maintaining compliance, and safeguarding against unauthorized access and data breaches.",
+  - after: body: "Protect sensitive information, maintaining compliance, and safeguarding against unauthorised access and data breaches.",
+- `services.ts:432`
+  - before: body: "Empower your education business with our Open edX® E-commerce support. Seamlessly integrate and sell courses online, leveraging a robust platform. Elevate your e-learning experience and maximize revenue effortless
+  - after: body: "Empower your education business with our Open edX® E-commerce support. Seamlessly integrate and sell courses online, leveraging a robust platform. Elevate your e-learning experience and maximise revenue effortless
+- `services.ts:436`
+  - before: body: "Our integrated edX and LMS solution offers a centralized platform to effortlessly create, update, and organize your courses, streamlining the educational content management process. Experience the convenience of a
+  - after: body: "Our integrated edX and LMS solution offers a centralised platform to effortlessly create, update, and organise your courses, streamlining the educational content management process. Experience the convenience of a
+- `services.ts:440`
+  - before: body: "Simplify content organization and enhance educational materials with Open edX® Content Management. Deliver a polished, efficient online learning experience, optimizing a diverse array of content for maximum impact
+  - after: body: "Simplify content organisation and enhance educational materials with Open edX® Content Management. Deliver a polished, efficient online learning experience, optimising a diverse array of content for maximum impact
+- `services.ts:444`
+  - before: body: "Streamline exam processes effortlessly with Open edX® Exam Management. Our professional platform ensures efficient administration, creating a seamless and organized experience for online assessments, enhancing the
+  - after: body: "Streamline exam processes effortlessly with Open edX® Exam Management. Our professional platform ensures efficient administration, creating a seamless and organised experience for online assessments, enhancing the
+- `services.ts:456`
+  - before: body: "Optimize your online meetings and collaborative learning with our integrated meeting platform feature. Seamlessly connect your courses to popular meeting platforms, making it easy for educators and learners to sch
+  - after: body: "Optimise your online meetings and collaborative learning with our integrated meeting platform feature. Seamlessly connect your courses to popular meeting platforms, making it easy for educators and learners to sch
+- `services.ts:587`
+  - before: "At Adamas Tech Consulting, we empower businesses with AI and data analytics, specializing in computer vision technologies. We provide tailored solutions to optimize decision-making, streamline operations, and enhance cu
+  - after: "At Adamas Tech Consulting, we empower businesses with AI and data analytics, specialising in computer vision technologies. We provide tailored solutions to optimise decision-making, streamline operations, and enhance cu
+- `services.ts:588`
+  - before: outcomeLine: "Innovate, Optimize, Succeed: Your Journey with AI and Data Begins Here",
+  - after: outcomeLine: "Innovate, Optimise, Succeed: Your Journey with AI and Data Begins Here",
+- `services.ts:607`
+  - before: title: "Enhance Customer Experience through Personalization",
+  - after: title: "Enhance Customer Experience through Personalisation",
+- `services.ts:608`
+  - before: body: "Leverage analytics to understand customer behavior and preferences, delivering personalized experiences that foster loyalty and satisfaction.",
+  - after: body: "Leverage analytics to understand customer behaviour and preferences, delivering personalised experiences that foster loyalty and satisfaction.",
+- `services.ts:610`
+  - before: { title: "Optimize Operations and Increase Efficiency" },
+  - after: { title: "Optimise Operations and Increase Efficiency" },
+- `services.ts:613`
+  - before: body: "Utilize state-of-the-art technologies such as Computer Vision and Generative AI to innovate your offerings, positioning your business at the forefront of the market with a distinct competitive advantage.",
+  - after: body: "Utilise state-of-the-art technologies such as Computer Vision and Generative AI to innovate your offerings, positioning your business at the forefront of the market with a distinct competitive advantage.",
+- `services.ts:619`
+  - before: { title: "+28%", body: "Organizations using advanced data visualization tools gain 28% more actionable insights, leading to faster, more accurate decision-making." },
+  - after: { title: "+28%", body: "Organisations using advanced data visualisation tools gain 28% more actionable insights, leading to faster, more accurate decision-making." },
+- `services.ts:678`
+  - before: "Establish a robust data platform to fuel generative AI initiatives. Centralize data, ensure quality and governance, and unlock deeper insights.\n\nIn generative AI, quality data is the foundation for success. We help yo
+  - after: "Establish a robust data platform to fuel generative AI initiatives. Centralise data, ensure quality and governance, and unlock deeper insights.\n\nIn generative AI, quality data is the foundation for success. We help yo
+- `services.ts:682`
+  - before: { title: "AWS Best Practices", body: "Proven solutions for data security and performance optimization." },
+  - after: { title: "AWS Best Practices", body: "Proven solutions for data security and performance optimisation." },
+- `solutions.ts:31`
+  - before: "Arivoo UMS is an integrated university management system that simplifies student enrollment, administrative tasks, and data analytics. It provides higher education institutions with a comprehensive solution to efficient
+  - after: "Arivoo UMS is an integrated university management system that simplifies student enrolment, administrative tasks, and data analytics. It provides higher education institutions with a comprehensive solution to efficientl
+- `solutions.ts:47`
+  - before: "Arivoo SMS optimizes school management by streamlining class schedules, teacher assignments, and student records. This powerful system enhances operational efficiency, providing a seamless experience for administrators,
+  - after: "Arivoo SMS optimises school management by streamlining class schedules, teacher assignments, and student records. This powerful system enhances operational efficiency, providing a seamless experience for administrators,
+- `solutions.ts:60`
+  - before: tagline: "Centralized learning, seamless education, enhanced outcomes.",
+  - after: tagline: "Centralised learning, seamless education, enhanced outcomes.",
+- `solutions.ts:62`
+  - before: "Arivoo LMS is a dynamic learning management system that enhances the educational experience with features like course management, online exams, and interactive content. Its customizable and user-friendly interface suppo
+  - after: "Arivoo LMS is a dynamic learning management system that enhances the educational experience with features like course management, online exams, and interactive content. Its customisable and user-friendly interface suppo
+- `solutions.ts:110`
+  - before: body: "Strengthening security measures by implementing precise identification technology, ensuring accurate access control and minimizing unauthorized entry risks.",
+  - after: body: "Strengthening security measures by implementing precise identification technology, ensuring accurate access control and minimising unauthorised entry risks.",
+- `solutions.ts:115`
+  - before: body: "Minimizing fraud risks by enhancing authentication protocols, leading to more secure transactions and protecting against unauthorized activities.",
+  - after: body: "Minimising fraud risks by enhancing authentication protocols, leading to more secure transactions and protecting against unauthorised activities.",
+- `solutions.ts:136`
+  - before: "Implementing smart solutions to enhance parking efficiency, improve space utilization, and streamline vehicle management in busy parking lots.",
+  - after: "Implementing smart solutions to enhance parking efficiency, improve space utilisation, and streamline vehicle management in busy parking lots.",
+- `solutions.ts:137`
+  - before: body: "Created an intelligent car parking solution to efficiently detect and allocate available parking spaces, minimizing congestion, enhancing the overall parking experience and saving driver’s valuable time by providi
+  - after: body: "Created an intelligent car parking solution to efficiently detect and allocate available parking spaces, minimising congestion, enhancing the overall parking experience and saving driver’s valuable time by providi
+- `solutions.ts:151`
+  - before: title: "Revenue Optimization",
+  - after: title: "Revenue Optimisation",
+- `solutions.ts:168`
+  - before: "Accelerate your treasury, investment, and cash management processes with streamlined implementation for optimized financial operations and enhanced efficiency.",
+  - after: "Accelerate your treasury, investment, and cash management processes with streamlined implementation for optimised financial operations and enhanced efficiency.",

@@ -42,7 +42,6 @@ function descriptor(...candidates: (string | null | undefined)[]): string {
 const STATIC_PAGES: Omit<SearchItem, "external">[] = [
   { type: "Page", title: "Services", descriptor: "Cloud, digital transformation and AI services.", href: "/services", keywords: "overview capabilities" },
   { type: "Page", title: "Case studies", descriptor: "", href: "/case-studies", keywords: "success stories results clients" },
-  { type: "Page", title: "Solutions", descriptor: "", href: "/solutions", keywords: "products platforms" },
   { type: "Page", title: "Events", descriptor: "", href: "/insights/events", keywords: "insights" },
 ];
 
@@ -82,15 +81,17 @@ export async function getSearchIndex(): Promise<SearchItem[]> {
     }
   }
 
+  // Solutions have no pages here (17 Nov 2026): only the ones with their own website are findable.
   for (const s of solutions) {
     const href = solutionHref(s);
+    if (!href) continue;
     items.push({
       type: "Solution",
       title: text(s.name),
       descriptor: descriptor(s.tagline, s.summary),
       href,
       keywords: [s.parent?.name, s.kind === "AI_SOLUTION" ? "AI" : ""].filter(Boolean).join(" "),
-      external: /^https?:\/\//.test(href),
+      external: true,
     });
   }
 

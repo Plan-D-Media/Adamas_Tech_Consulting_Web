@@ -4,6 +4,7 @@ import { badge, db, visible, visibleStatuses } from "@/lib/db";
 import { linkGate } from "@/lib/data/links";
 import { mediaSelect, mediaUrl, toMedia, type Media } from "@/lib/media";
 import type { RegionCode } from "@/lib/region";
+import { previewingDrafts } from "@/lib/preview";
 
 export interface HeroSlideData {
   id: string;
@@ -58,11 +59,11 @@ export interface SolutionCardData {
   name: string;
   tagline: string | null;
   summary: string | null;
-  href: string;
-  external: boolean;
+  /** The product's own website (always external); null when the client has not supplied it yet (preview only). */
+  href: string | null;
   image: Media | null;
   draft: boolean;
-  children: { name: string; href: string; external: boolean }[];
+  children: { name: string; href: string | null }[];
 }
 
 export interface IndustryData {
@@ -142,8 +143,12 @@ export interface HomeData {
   claims: ClaimData[];
 }
 
-export function solutionHref(s: { slug: string; externalUrl: string | null }) {
-  return s.externalUrl ?? `/solutions/${s.slug}`;
+/**
+ * Solutions have no pages on this site (scope change, 17 Nov 2026): the only link a solution can have is its own
+ * website. A row without one is not linkable, and the public readers drop it (lib/data/solutions.ts).
+ */
+export function solutionHref(s: { externalUrl: string | null }) {
+  return s.externalUrl;
 }
 
 export async function getHome(region: RegionCode): Promise<HomeData | null> {
@@ -261,18 +266,20 @@ export async function getHome(region: RegionCode): Promise<HomeData | null> {
       image: toMedia(p.image),
       services: p.services.map((s) => ({ slug: s.slug, name: s.name, descriptor: s.descriptor, href: `/services/${p.slug}/${s.slug}` })),
     })),
-    solutions: solutions.map((s) => ({
-      slug: s.slug,
-      kind: s.kind,
-      name: s.name,
-      tagline: s.tagline,
-      summary: s.summary,
-      href: solutionHref(s),
-      external: !!s.externalUrl,
-      image: toMedia(s.image),
-      draft: badge(s.status),
-      children: s.children.map((c) => ({ name: c.name, href: solutionHref(c), external: !!c.externalUrl })),
-    })),
+    // A solution with no website URL has nowhere to link to, so it is shown only while drafts are previewed.
+    solutions: solutions
+      .filter((s) => previewingDrafts || s.externalUrl)
+      .map((s) => ({
+        slug: s.slug,
+        kind: s.kind,
+        name: s.name,
+        tagline: s.tagline,
+        summary: s.summary,
+        href: solutionHref(s),
+        image: toMedia(s.image),
+        draft: badge(s.status),
+        children: s.children.filter((c) => previewingDrafts || c.externalUrl).map((c) => ({ name: c.name, href: solutionHref(c) })),
+      })),
     industries: industries.map((i) => ({ slug: i.slug, tabLabel: i.tabLabel, title: i.title, body: i.body, image: toMedia(i.image), draft: badge(i.status) })),
     caseStudies: caseStudies.map((c) => ({
       slug: c.slug,

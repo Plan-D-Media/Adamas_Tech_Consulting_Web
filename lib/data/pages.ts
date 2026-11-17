@@ -5,6 +5,8 @@ import { badge, db, visible } from "@/lib/db";
 import { mediaSelect, toMedia, type Media } from "@/lib/media";
 import type { FaqData, SeoData } from "./mappers";
 import type { StatData } from "./home";
+import { isPending } from "@/lib/public-copy";
+import { previewingDrafts } from "@/lib/preview";
 
 /**
  * Company, utility and legal pages (Page table). `blocks` is free JSON in the DB, so each template's shape is
@@ -35,9 +37,10 @@ const aboutBlocks = z.object({
   credentials: header.extend({ ctaLabel: z.string().optional(), ctaHref: z.string().optional() }).optional(),
 });
 
+/** Both labels name their own absence, so they are review-only copy: withheld with PREVIEW_DRAFTS off. */
 const teamBlocks = z.object({
-  bioPendingLabel: z.string().default("Biography to be confirmed"),
-  emptyLabel: z.string().default("Leadership profiles to be confirmed"),
+  bioPendingLabel: z.string().optional(),
+  emptyLabel: z.string().optional(),
 });
 
 const comingSoonBlocks = z.object({
@@ -49,9 +52,8 @@ const comingSoonBlocks = z.object({
 const credentialsBlocks = z.object({
   certifications: header.optional(),
   partners: header.optional(),
-  pending: z
-    .object({ certificate: z.string(), number: z.string(), validity: z.string(), tier: z.string() })
-    .default({ certificate: "Certificate to be supplied", number: "To be confirmed", validity: "To be confirmed", tier: "Programme and tier to be confirmed" }),
+  /** Stand-in labels for certificate numbers, validity and partner tiers: review-only, withheld when drafts are off. */
+  pending: z.object({ certificate: z.string(), number: z.string(), validity: z.string(), tier: z.string() }).optional(),
 });
 
 const contactBlocks = z.object({
@@ -90,6 +92,36 @@ const schemas = {
   legal: legalBlocks,
 } as const;
 
+/**
+ * Block-level placeholder gate (Swayang, 17 Nov 2026): a PUBLISHED page may still carry a placeholder paragraph
+ or a "to be confirmed" label inside one block, and taking the whole page to DRAFT would remove a page the
+ * visitor needs. With PREVIEW_DRAFTS off those blocks are dropped here, so the template simply leaves the
+ * section out; with drafts previewed everything is passed through for review. See lib/public-copy.ts.
+ */
+function prunePending(template: PageTemplate, blocks: Record<string, unknown>): Record<string, unknown> {
+  if (previewingDrafts) return blocks;
+  const out = { ...blocks };
+  if (template === "about") {
+    const story = out.story as { pendingLabel?: string; held?: unknown[] } | undefined;
+    if (story) {
+      const { pendingLabel, held, ...rest } = story;
+      void pendingLabel;
+      // `held` is the live copy withheld for conflicting figures, with the reason: internal, never public.
+      void held;
+      out.story = rest;
+    }
+    const group = out.group as { body?: string } | undefined;
+    if (group && isPending(group.body)) delete out.group;
+  }
+  if (template === "team") {
+    if (isPending(out.bioPendingLabel as string | undefined)) delete out.bioPendingLabel;
+    if (isPending(out.emptyLabel as string | undefined)) delete out.emptyLabel;
+  }
+  if (template === "credentials") delete out.pending;
+  if (template === "legal" && isPending(out.pending as string | undefined)) delete out.pending;
+  return out;
+}
+
 export type PageTemplate = keyof typeof schemas;
 export type PageBlocks<T extends PageTemplate> = z.infer<(typeof schemas)[T]>;
 export type LegalBlocks = PageBlocks<"legal">;
@@ -118,7 +150,7 @@ export async function getPage<T extends PageTemplate>(path: string, template: T)
   });
   if (!p) return null;
   if (p.template !== template) console.warn(`[pages] ${path}: template "${p.template}" read as "${template}"`);
-  const parsed = schemas[template].safeParse(p.blocks ?? {});
+  const parsed = schemas[template].safeParse(prunePending(template, (p.blocks as Record<string, unknown> | null) ?? {}));
   if (!parsed.success) console.error(`[pages] ${path}: invalid blocks`, z.prettifyError(parsed.error));
   return {
     path: p.path,

@@ -5,6 +5,7 @@ import { linkGate, type LinkGate } from "@/lib/data/links";
 import { mediaSelect, toMedia, type Media } from "@/lib/media";
 import type { RegionCode } from "@/lib/region";
 import { optionalCopy, plain } from "@/lib/placeholder";
+import { publicCopy } from "@/lib/public-copy";
 
 // ── Types returned to components ───────────────────────────────────────
 
@@ -198,12 +199,15 @@ export async function getBlocks(region: RegionCode | null): Promise<Record<strin
   const out: Record<string, Block> = {};
   // Global rows first, region rows override. Teasers inside `extra` that link to unpublished pages are dropped and a
   // CTA to one falls back to the listing (lib/data/links.ts), so drafts-off never links to a missing page.
+  // A single placeholder field inside an otherwise finished block is withheld rather than taking the whole
+  // section away (lib/public-copy.ts): the component falls back, e.g. the Cloud Services hero shows the
+  // pillar's own outcome line instead of the designed "[Placeholder]" headline (BUG-014, 17 Nov 2026).
   for (const r of [...rows].sort((a, b) => Number(!!a.region) - Number(!!b.region))) {
     out[r.key] = {
-      eyebrow: r.eyebrow,
-      heading: r.heading,
-      body: r.body,
-      ctaLabel: r.ctaLabel,
+      eyebrow: publicCopy(r.eyebrow),
+      heading: publicCopy(r.heading),
+      body: publicCopy(r.body),
+      ctaLabel: publicCopy(r.ctaLabel),
       ctaHref: links.fallback(r.ctaHref),
       extra: links.prune((r.extra as Record<string, unknown> | null) ?? null),
     };

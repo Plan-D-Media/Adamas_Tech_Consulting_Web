@@ -84,7 +84,7 @@ export const contentBlocks: ContentBlockSeed[] = [
       items: [
         {
           image: "images/home/tech-gear-1.webp",
-          title: "Customized Solutions",
+          title: "Customised Solutions",
           body: "A client-centric approach that emphasizes collaboration, understanding goals, and creating custom solutions for growth.",
         },
         {
@@ -157,9 +157,9 @@ export const contentBlocks: ContentBlockSeed[] = [
   // ── Approved design, 13 Nov 2026 (Figma Home Page 236:1395) ─────────────
   {
     key: "home.hero",
-    eyebrow: "India Engineering Delivery Center · Kolkata & Pan-India",
+    eyebrow: "India Engineering Delivery Centre · Kolkata & Pan-India",
     heading: "Powering Enterprise Excellence With Cloud, SAP & AI",
-    body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernization for governments and top enterprises across the GCC.",
+    body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernisation for governments and top enterprises across the GCC.",
     ctaLabel: "Talk to an expert",
     ctaHref: "/contact",
     extra: { secondaryLabel: "Explore services", secondaryHref: "/services" },
@@ -171,9 +171,9 @@ export const contentBlocks: ContentBlockSeed[] = [
   {
     key: "home.hero",
     region: "IN",
-    eyebrow: "India Engineering Delivery Center · Kolkata & Pan-India",
+    eyebrow: "India Engineering Delivery Centre · Kolkata & Pan-India",
     heading: "Powering Enterprise Excellence With Cloud, SAP & AI",
-    body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernization for governments and top enterprises across India.",
+    body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernisation for governments and top enterprises across India.",
     ctaLabel: "Talk to an expert",
     ctaHref: "/contact",
     extra: { secondaryLabel: "Explore services", secondaryHref: "/services" },
@@ -187,7 +187,7 @@ export const contentBlocks: ContentBlockSeed[] = [
     region: "UK",
     eyebrow: "UK & Ireland Delivery · London",
     heading: "Powering Enterprise Excellence With Cloud, SAP & AI",
-    body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernization for governments and top enterprises across the UK & Ireland.",
+    body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernisation for governments and top enterprises across the UK & Ireland.",
     ctaLabel: "Talk to an expert",
     ctaHref: "/contact",
     extra: { secondaryLabel: "Explore services", secondaryHref: "/services" },
@@ -201,7 +201,7 @@ export const contentBlocks: ContentBlockSeed[] = [
     region: "GCC",
     eyebrow: "GCC Delivery · Dubai",
     heading: "Powering Enterprise Excellence With Cloud, SAP & AI",
-    body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernization for governments and top enterprises across the GCC.",
+    body: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernisation for governments and top enterprises across the GCC.",
     ctaLabel: "Talk to an expert",
     ctaHref: "/contact",
     extra: { secondaryLabel: "Explore services", secondaryHref: "/services" },
@@ -285,13 +285,13 @@ export const contentBlocks: ContentBlockSeed[] = [
       },
       cards: [
         { label: "Cloud Modernisation", title: "Building a resilient foundation for mission-critical operations.", body: "A secure cloud architecture designed for agility, control and future growth.", href: "/case-studies/kubernetes-operations-healthtech", linkLabel: "Read Case Study" },
-        { label: "Education Technology", title: "Connecting the entire learning journey through Arivoo.", body: "One digital ecosystem for academic and administrative experiences.", href: "/solutions/arivoo", linkLabel: "Read Case Study" },
+        { label: "Education Technology", title: "Connecting the entire learning journey through Arivoo.", body: "One digital ecosystem for academic and administrative experiences.", href: "https://arivoo.in", linkLabel: "Visit Arivoo" },
       ],
     },
     status: "PUBLISHED",
     sortOrder: 12,
     needsReview: true,
-    editorNote: "Copy from the approved Figma Home Page (236:1395), 13 Nov 2026. Links chosen for the Figma cards: the SAP Treasury case study, the Kubernetes (HealthTech) case study and the Arivoo page. The 30% figure is a DRAFT stat (cash-forecasting-improvement-30). Confirm the three stories.",
+    editorNote: "Copy from the approved Figma Home Page (236:1395), 13 Nov 2026. Links chosen for the Figma cards: the SAP Treasury case study, the Kubernetes (HealthTech) case study and the Arivoo website (arivoo.in, a new tab: solutions have no pages here since 17 Nov 2026, and the card label became “Visit Arivoo” because it is not a case study). The 30% figure is a DRAFT stat (cash-forecasting-improvement-30). Confirm the three stories.",
   },
   {
     key: "home.difference",
@@ -379,7 +379,7 @@ export const contentBlocks: ContentBlockSeed[] = [
   {
     key: "services.cloud-services.difference",
     heading: "What Makes CloudSMART Different",
-    body: "Our CloudSMART strategy gives enterprises a complete cloud consultancy and delivery platform that adapts to your needs.\n\nBuilt on our engineering heritage and partnerships with top cloud solutions providers, CloudSMART offers an adaptive portfolio of cloud consulting services for continuous modernization, enhanced agility and better operational efficiency. Our cloud consultancy experts create tailored solutions aligned with your changing business requirements.",
+    body: "Our CloudSMART strategy gives enterprises a complete cloud consultancy and delivery platform that adapts to your needs.\n\nBuilt on our engineering heritage and partnerships with top cloud solutions providers, CloudSMART offers an adaptive portfolio of cloud consulting services for continuous modernisation, enhanced agility and better operational efficiency. Our cloud consultancy experts create tailored solutions aligned with your changing business requirements.",
     ctaLabel: "Learn more",
     ctaHref: "#capabilities",
     status: "PUBLISHED",

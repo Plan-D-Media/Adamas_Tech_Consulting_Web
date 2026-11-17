@@ -22,7 +22,7 @@ export const FIXTURE_HERO: Block = {
 /** Frame 47: the three designer-baked cards (scripts/figma-fixture.mjs crops them from the Figma sheet). */
 export const FIXTURE_HERO_CARDS: HeroCard[] = [
   { id: "f1", category: "Event", eyebrow: null, title: "Join us at the House of Lords, London", href: "/insights/events", external: false, image: { url: "/media/figma-fixture/hero-card-1.png", alt: "" }, artwork: true },
-  { id: "f2", category: "Solutions", eyebrow: null, title: "Arivoo runs universities, schools and learning programmes", href: "/solutions", external: false, image: { url: "/media/figma-fixture/hero-card-2.png", alt: "" }, artwork: true },
+  { id: "f2", category: "Solutions", eyebrow: null, title: "Arivoo runs universities, schools and learning programmes", href: "https://arivoo.in", external: true, image: { url: "/media/figma-fixture/hero-card-2.png", alt: "" }, artwork: true },
   { id: "f3", category: "Case study", eyebrow: null, title: "How SAP Treasury improved cash forecasting by 30%", href: "/case-studies", external: false, image: { url: "/media/figma-fixture/hero-card-3.png", alt: "" }, artwork: true },
 ];
 

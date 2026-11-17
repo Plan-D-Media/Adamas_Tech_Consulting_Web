@@ -33,6 +33,7 @@ export function ServicePage({ service, blocks }: { service: ServicePageData; blo
   const heroExtra = serviceBlockExtra(hero, "hero");
   const quality = pillarBlock(blocks, service.pillar.slug, "quality");
   const qualityExtra = serviceBlockExtra(quality, "quality");
+  // Placeholder "what we do" items are already left out of `service.whatWeDo` outside the drafts preview (lib/data/services.ts).
   const whatWeDo = service.whatWeDo.map((t) => ({ title: plain(t.title), body: t.body ? plain(t.body) : null }));
   const intro = paragraphs(service.summary, service.whoFor);
   return (

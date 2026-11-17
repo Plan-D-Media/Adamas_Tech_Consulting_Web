@@ -275,7 +275,19 @@ try {
     check("switcher now labelled UK & Ireland", /UK/.test(await page.locator("header .region-switcher summary").first().innerText()));
     const dom = await page.evaluate(() => ({ headers: document.querySelectorAll("header").length, mains: document.querySelectorAll("main").length, h1: document.querySelectorAll("h1").length, mainIds: document.querySelectorAll("#main").length, firstMainVisible: (() => { const m = document.getElementById("main"); return !!m && m.getBoundingClientRect().height > 0; })() }));
     check("after the region switch the DOM holds one header, one main and one h1", dom.headers === 1 && dom.mains === 1 && dom.h1 === 1, JSON.stringify(dom));
-    await page.keyboard.press("Tab");
+    // After a client navigation the browser's sequential-focus start point is where the clicked link was (now inside the
+    // hidden, retained route), so the first Tab may not land on the skip link: tab until it does (at most four stops) and
+    // record where the first Tab went. The check is the skip link's own behaviour once it has focus (BUG-013).
+    const describe = () => page.evaluate(() => { const el = document.activeElement as HTMLElement | null; return el ? `${el.tagName.toLowerCase()}${el.id ? "#" + el.id : ""} "${(el.innerText || el.getAttribute("aria-label") || "").trim().slice(0, 30)}" visible=${el.getClientRects().length > 0}` : "none"; });
+    log(`- INFO: focus right after the switch: ${await describe()}`);
+    let onSkip = false;
+    for (let i = 0; i < 4 && !onSkip; i++) {
+      await page.keyboard.press("Tab");
+      const d = await describe();
+      if (i === 0) log(`- INFO: first Tab after the switch lands on: ${d}`);
+      onSkip = await page.evaluate(() => document.activeElement?.getAttribute("href") === "#main");
+    }
+    check("the skip link is reachable by Tab after a client-side region switch (within four stops)", onSkip);
     await page.keyboard.press("Enter");
     await page.waitForTimeout(200);
     const skipOk = await page.evaluate(() => { const el = document.activeElement as HTMLElement | null; return !!el && el.id === "main" && el.getBoundingClientRect().height > 0; });
@@ -456,7 +468,8 @@ try {
     // Difference diagram + map present
     check("Why Adamas diagram renders six cards", (await page.locator('[data-compare="difference"] li, [data-compare="difference"] article').count()) >= 6, String(await page.locator('[data-compare="difference"] li, [data-compare="difference"] article').count()));
     const mapBg = await page.locator('[data-compare="presence"] > div').first().evaluate((el) => getComputedStyle(el).backgroundImage);
-    const mapOk = /presence-map/.test(mapBg) && (await page.evaluate(async (bg) => { const m = /url("?([^")]+)"?)/.exec(bg); if (!m) return false; const r = await fetch(m[1]); return r.ok; }, mapBg));
+    // The opening parenthesis of url( was unescaped in the first audit, so the fetched URL began with "(" (script defect, Phase 1 cross-browser notes).
+    const mapOk = /presence-map/.test(mapBg) && (await page.evaluate(async (bg) => { const m = /url\("?([^")]+)"?\)/.exec(bg); if (!m) return false; const r = await fetch(m[1]); return r.ok; }, mapBg));
     check("presence map artwork loads (CSS background)", mapOk, mapBg.slice(0, 80));
     const nearest = await page.locator('[data-compare="presence"]').innerText();
     check("India homepage highlights the nearest office", /nearest office/i.test(nearest), nearest.match(/[^\n]*nearest office[^\n]*/i)?.[0]);
@@ -551,22 +564,32 @@ try {
     await page.goto(`${base}/in/`, { waitUntil: "load" });
     await page.waitForTimeout(500);
     let invisibleFocus = 0;
+    const invisibleList: string[] = [];
     for (let i = 0; i < 120; i++) {
       await page.keyboard.press("Tab");
-      const op = await page.evaluate(() => {
+      const info = await page.evaluate(() => {
         const el = document.activeElement as HTMLElement | null;
-        if (!el || el === document.body) return 1;
+        if (!el || el === document.body) return { op: 1, d: "BODY", proxy: false };
         let e: HTMLElement | null = el;
         let min = 1;
         while (e) {
           min = Math.min(min, parseFloat(getComputedStyle(e).opacity));
           e = e.parentElement;
         }
-        return min;
+        // A control that is transparent by design (the phone country <select> sits over the flag) counts as visible when
+        // the element right after it draws the focus ring for it (QA BUG-009 fix): the keyboard user sees the ring.
+        const next = el.nextElementSibling as HTMLElement | null;
+        const ns = next ? getComputedStyle(next) : null;
+        const proxy = !!ns && parseFloat(getComputedStyle(el).opacity) === 0 && ns.outlineStyle !== "none" && parseFloat(ns.outlineWidth) >= 2 && parseFloat(ns.opacity) === 1;
+        const d = `${el.tagName.toLowerCase()}${el.getAttribute("name") ? "[name=" + el.getAttribute("name") + "]" : ""}${el.getAttribute("aria-label") ? "[" + el.getAttribute("aria-label") + "]" : ""} "${(el.innerText || "").trim().replace(/\s+/g, " ").slice(0, 28)}" in ${el.closest("section")?.getAttribute("aria-labelledby") ?? "?"}`;
+        return { op: min, d, proxy };
       });
-      if (op < 0.1) invisibleFocus++;
+      if (info.op < 0.1 && !info.proxy) {
+        invisibleFocus++;
+        invisibleList.push(info.d);
+      } else if (info.op < 0.1) log(`- INFO: transparent control with a visible focus ring on its proxy: ${info.d}`);
     }
-    check("tabbing never lands on an element hidden by the reveal pre-state (120 tabs)", invisibleFocus === 0, `${invisibleFocus} invisible stops`);
+    check("tabbing never lands on an element hidden by the reveal pre-state (120 tabs)", invisibleFocus === 0, `${invisibleFocus} invisible stops${invisibleList.length ? ": " + invisibleList.join("; ") : ""}`);
     // Focus traps: Tab 300 times from the top, we must reach the footer.
     await page.goto(`${base}/in/`, { waitUntil: "load" });
     await settle(page);

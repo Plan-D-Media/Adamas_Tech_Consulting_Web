@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { internalLinks } from "./helpers";
+import { internalLinks, linkOk } from "./helpers";
 
 /** Header, mega menus (mouse and keyboard), mobile drawer, skip link and footer links. */
 
@@ -122,8 +122,8 @@ test.describe("skip link and footer", () => {
     expect(links.length).toBeGreaterThan(20);
     const bad: string[] = [];
     for (const href of links) {
-      const res = await page.request.get(href, { maxRedirects: 0 });
-      if (res.status() !== 200) bad.push(`${href} -> ${res.status()}`);
+      const problem = await linkOk(page.request, href);
+      if (problem) bad.push(problem);
     }
     expect(bad, bad.join("\n")).toEqual([]);
   });

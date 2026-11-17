@@ -6,6 +6,10 @@
  * Then: every internal link found (status + hops), the redirect table (hops, final status), region routing on "/",
  * /ae/ 301, legacy cookie, and the security probes (revalidate, figma-fixture, unknown route, stack traces).
  *
+ * Only this site is requested. Links to other sites (the product websites: solutions have no pages here since
+ * 17 Nov 2026, and the social profiles) are reported through "external links with bad rel/target" only, so a slow
+ * or failing third-party site can never fail the crawl.
+ *
  * Usage: PLAYWRIGHT_BROWSERS_PATH=E:/ms-playwright MSYS_NO_PATHCONV=1 npx tsx scripts/qa/crawl.mts <baseUrl> <label>
  * Output: docs/qa/evidence/<label>/crawl.json and crawl.md
  */
@@ -104,7 +108,8 @@ const sitemapRes = await fetchText(`${base}/sitemap.xml`);
 const sitemapUrls = [...sitemapRes.text.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 const sitemapOrigin = sitemapUrls[0] ? new URL(sitemapUrls[0]).origin : base;
 const routes = Array.from(new Set(sitemapUrls.map((u) => u.replace(sitemapOrigin, "") || "/")));
-const extraRoutes = ["/search", "/thank-you", "/insights/events/house-of-lords-2026", "/no-such-page-qa", "/services/cloud-services/no-such-service", "/figma-fixture"];
+// "/solutions" has no page any more: it is probed so the evidence records its 301 to the homepage section.
+const extraRoutes = ["/search", "/thank-you", "/insights/events/house-of-lords-2026", "/solutions", "/no-such-page-qa", "/services/cloud-services/no-such-service", "/figma-fixture"];
 for (const r of extraRoutes) if (!routes.includes(r)) routes.push(r);
 
 const results: PageResult[] = [];

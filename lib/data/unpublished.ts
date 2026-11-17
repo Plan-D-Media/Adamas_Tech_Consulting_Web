@@ -9,21 +9,19 @@ import { db } from "@/lib/db";
  * no row at all stay 404s. Used by the dynamic routes after their visible lookup returns nothing (QA BUG-002: the
  * legacy WordPress redirects point at case studies and the event that are still DRAFT).
  */
-type Kind = "case-studies" | "insights/events" | "solutions" | "services";
+type Kind = "case-studies" | "insights/events" | "services";
 
-const LISTING: Record<Kind, string> = { "case-studies": "/case-studies", "insights/events": "/insights/events", solutions: "/solutions", services: "/services" };
+const LISTING: Record<Kind, string> = { "case-studies": "/case-studies", "insights/events": "/insights/events", services: "/services" };
 
 async function rowExists(kind: Kind, slug: string): Promise<boolean> {
   "use cache";
   cacheLife("hours");
-  cacheTag("links", "case-studies", "events", "solutions", "services");
+  cacheTag("links", "case-studies", "events", "services");
   switch (kind) {
     case "case-studies":
       return !!(await db.caseStudy.findUnique({ where: { slug }, select: { id: true } }));
     case "insights/events":
       return !!(await db.event.findUnique({ where: { slug }, select: { id: true } }));
-    case "solutions":
-      return !!(await db.solution.findUnique({ where: { slug }, select: { id: true } }));
     case "services":
       return !!(await db.servicePillar.findUnique({ where: { slug }, select: { id: true } })) || !!(await db.service.findFirst({ where: { slug }, select: { id: true } }));
   }

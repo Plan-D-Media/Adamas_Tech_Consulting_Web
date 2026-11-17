@@ -84,4 +84,165 @@ PLAYWRIGHT_BROWSERS_PATH=E:/ms-playwright npm run test:e2e        # starts next 
 PREVIEW_DRAFTS=true SHOW_DRAFT_BADGES=true npm run build && PLAYWRIGHT_BROWSERS_PATH=E:/ms-playwright npm run test:e2e
 ```
 
-The suite (`tests/e2e/`): `navigation.spec.ts` (header, four mega menus by mouse and keyboard, drawer focus trap, skip link, homepage links), `region.spec.ts` (eleven country cases, cookie precedence, `/ae/`, canonical slashes, the switcher, every legacy redirect row), `forms.spec.ts` (contact validation, country selector focus, honeypot, double submit, HTML escaping, event registration and duplicate, `.ics`), `nojs.spec.ts` (sections visible, drawer and accordions, both forms, the switcher), `drafts.spec.ts` (sitemap 200s, draft-string leak check when drafts are off, every internal link 200, featured menu cards) and `security.spec.ts` (headers on every response type, CSP console, Basic Auth when configured, probes, secrets in chunks), plus `home.spec.ts` for the behaviours fixed in this phase. Form rows the suite creates (`@e2e.invalid` addresses) and the rate-limit windows are deleted at the end of each run.
+### 6.8 Progress log, 17 November 2026 (continuation; heavy jobs pending on memory)
+
+Done without a server (light work only, free memory stayed at about 3.1 GB, under the 4 GB line set for builds, servers, Playwright, Lighthouse and axe):
+
+- PostgreSQL was found stopped (unclean shutdown logged by the server, `evidence/phase2/build/server-3100-drafts.log`); restarted with `pg_ctl`, recovery clean. Leftover `next start` processes on ports 3000 and 3100 from the stopped runs were ended.
+- Decision 3 (British English): `scripts/content/british-spelling.mjs` converted 102 lines in eight seed files (log `evidence/phase2/spelling-changes.md`); "Migration & Modernization" and "Google Developers Agency Program" kept and listed in `CONTENT_TODO.md`.
+- Decision 4 (BUG-014 sweep): `scripts/qa/placeholder-sweep.mts` scans every PUBLISHED row (string and JSON columns). 53 hits before (`evidence/phase2/placeholder-sweep-before.md`), 16 after. 21 rows plus the six milestones moved to DRAFT by `scripts/content/bug-014-draft.mjs` (each with a `// DRAFT: BUG-014 sweep` comment); placeholder "what we do" list items are now preview-only (`lib/data/services.ts`). The 16 remaining hits are in rows whose DRAFT would remove a whole page (Cloud Services hero block, two pillars, About/Team/Credentials/Cookie policy pages, the Top Stories item already dropped by the link gate): listed in `CONTENT_TODO.md` as a decision for Swayang. Local database reseeded.
+- Item 2 (open interaction failures): `interactions.mts` corrected (the presence-map check fetched a URL beginning with "(" because `url(` was unescaped in its regex; the skip-link check now tabs to the skip link and records where the first Tab after a client navigation lands; the invisible-stop check names the element and treats the transparent country `<select>` as visible when its flag box draws the ring). `scripts/qa/probe-focus.mts` written to confirm both against the drafts build before the verdict is recorded.
+- Item 8 (Contact page): built at `app/(site)/contact/page.tsx` from the homepage Contact card (`ContactSection`, now with `sourcePath` and `fallbackRegion`) and the Our Presence cards (`components/home/OfficeCards.tsx`, client, region from the cookie; `Presence` reuses it), plus `components/contact/ContactChannels.tsx` (the three regional phone/email cards, visitor's region first) and `components/ui/Breadcrumb.tsx`. H1, metadata from the Page row, visible breadcrumb, BreadcrumbList and ContactPage JSON-LD; the form's phone selector follows the cookie region on every global page (DEFAULT_REGION without a cookie). e2e: `tests/e2e/contact.spec.ts` (7 tests, including no-JavaScript submit and the 1440/390 captures to `evidence/phase2-contact/`).
+- Item 9 (LCP) preparation: the Phase 1 traces show the LCP image (first hero card) loaded by about 0.7 s but painted at 3.6 s (render delay 2.9 s); in the unthrottled trace first paint equals the load event (450 to 530 ms), i.e. nothing paints until the JavaScript has executed. `HeroCarousel` now preloads only the first card (`decoding="sync"`), cards two and three load eagerly without preload. The remaining levers (fonts, inline SVG weight, HTML size: 454 KB of which 169 KB is the hydration payload) are to be measured on the next build before changing anything else.
+- `tsc` and `eslint` clean after the changes.
+
+Still to run, in order, once free memory is above 4 GB: drafts build (items 1, 2, 4, 5, LCP baseline), public build (items 3, 6), LCP changes and rebuild (item 9), final regression (item 10), report merge (item 11).
+
+### 6.10 Scope change and the four decisions, 17 November 2026 (second half of the day)
+
+Swayang's instructions of 17 November, in order, and what was done. Everything below is uncommitted, and every
+decision taken by default is named so it can be reversed.
+
+#### A. Solutions have no pages on this site (scope change)
+
+Each solution now links out to its own website. What changed:
+
+- **Routes gone**: `app/(site)/solutions/page.tsx` and `app/(site)/solutions/[slug]/page.tsx` were deleted, with
+  the readers behind them (`getSolution`, `getSolutionParams`, `SolutionPageData`). No overview page was built.
+- **One link per solution**: `externalUrl` is now the only link a solution can carry (`lib/data/solutions.ts`,
+  `lib/data/home.ts`). A row without one is dropped from the public site, because it has nowhere to go; in the
+  drafts preview it is still listed, with a "Link to be confirmed" note, so the gap is visible in review.
+- **New-tab contract**: product links are plain anchors with `target="_blank"`, `rel="noopener noreferrer"`, the
+  external-link icon and a screen-reader "(opens in a new tab)" note. The Products & Solutions cards and module
+  chips do it themselves; `components/ui/SmartLink.tsx` does it for the Client Outcomes cards and the Top Stories
+  cards, which carry hrefs from content and can no longer assume an internal route.
+- **"All solutions" and `/solutions`**: both keep the single URL `/solutions`, and `proxy.ts` 301s it, and anything
+  under it, to `/<region>/#products-solutions`, the Products & Solutions section of the visitor's regional homepage
+  (`lib/anchors.ts`). The region comes from the cookie, so the link is right in every region, works with JavaScript
+  off, and the response carries `Vary: Cookie, CloudFront-Viewer-Country`. The section has `scroll-margin-top` for
+  the sticky header. `/solutions` is no longer in the sitemap, the search index or the 404 page's links.
+- **Redirect map**: `docs/qa/evidence/phase2/solutions-redirect-map.md`, written for sign-off before the deploy.
+  One live WordPress URL moved: `/sap-treasury-investment-and-cash-management-implementation/` now lands on
+  `/services/digital-transformation/sap` instead of a solution page. The four internal `/solutions/<slug>` renames
+  from the prototype round were deleted (never public, and now covered by the blanket rule).
+- **Arivoo is published**: tagline from the live homepages, and a suite summary composed from the live site's own
+  UMS / SMS / LMS descriptions, because the live site has no suite-level overview. Flagged for confirmation.
+- **Decisions taken by default, both reversible:**
+  1. **TestGUARD is published as a fourth Arivoo module** (it was DRAFT, `kind: PRODUCT`). It is a real product with
+     a live URL, so it was not held back; as a module it appears as a link on the Arivoo card and keeps its footer
+     link, and it is not a Solutions menu item of its own, which is what the sitemap asks for (Q7.3).
+  2. **Face Recognition Security and Industrial Analytics moved from PUBLISHED to DRAFT.** Their copy is migrated
+     and ready, but no website URL exists for them, and with no pages here a published row would be a card with
+     nothing behind it. Each is published again by adding `externalUrl` and nothing else. The same is true of A-EYE,
+     AIR-MIND, Asset Tracking and AI solutions 4 to 6, which were already DRAFT.
+- **Tests and QA**: new `tests/e2e/solutions.spec.ts` (nine assertions: the anchor section exists on all three
+  homepages, `/solutions` 301s per cookie region and keeps the query string, the legacy `ae` cookie maps to `gcc`,
+  old solution URLs land in one hop, the old SAP Treasury URL lands on the service page, no page links to
+  `/solutions/<slug>`, the sitemap lists no solution URL, every product link has the right target, rel and marker,
+  and with drafts off every card has a link). `tests/e2e/helpers.ts` gained `linkOk()`, so the two "every internal
+  link answers 200" sweeps allow exactly one documented hop for `/solutions` and nothing else. The crawl probes
+  `/solutions` to record the 301 and still never requests an external site, so a slow third party cannot fail it.
+
+#### B. The remaining placeholder hits: hidden at block level
+
+The 16 hits stay in PUBLISHED rows, and the blocks around them are withheld rather than the pages:
+
+- `lib/public-copy.ts` is the gate: a `[Placeholder]` prefix, a bracketed name, or a "to be confirmed / to be
+  supplied / TBC / TBD" label is withheld when `PREVIEW_DRAFTS=false` and passed through in the drafts preview.
+- Applied in the data layer, so no component can leak one and every future template inherits it:
+  `lib/data/site.ts` (every ContentBlock eyebrow, heading, body, CTA label), `lib/data/services.ts` (pillar and
+  service tagline, summary, outcome line, challenge, descriptor), `lib/data/pages.ts` (whole pending blocks: the
+  About group paragraph and its held-back sentences, the Team and Credentials "to be confirmed" labels, a legal
+  page's placeholder body). The pending labels in the Team and Credentials schemas became optional rather than
+  defaulted, so withholding them is expressible.
+- Every affected template already had a fallback, so each page renders as designed minus the unconfirmed line: the
+  Cloud Services hero shows the pillar's own outcome line, the About page leaves the group paragraph out.
+- Checked: the gate withholds all twelve placeholder strings the sweep still finds, and keeps six pieces of real
+  copy that look similar. The sweep now reports 15 hits (down from 16: the cookie policy placeholder is gone);
+  those 15 are database values by design, and the public drafts-leak test is what proves none of them renders.
+- Not a placeholder but worth one line: `Office.confirmed = false` does **not** hide an office. Five published
+  offices whose addresses are unconfirmed or contradictory (Bengaluru's postcode, Dubai's wording, Kolkata's
+  missing postcode, London's two addresses, Palo Alto labelled "San Francisco") are live exactly as seeded. Say the
+  word and `confirmed` becomes a visibility filter like `Stat.verified`.
+
+#### C. Legal pages
+
+`/privacy-policy`, `/terms-of-use` and `/cookie-policy` rendered only "N sections loaded" through the interim shell
+until now: the migrated text was in the database but nothing displayed it.
+
+- `components/legal/LegalDocument.tsx` and `components/legal/Prose.tsx` render a migrated document: head with
+  breadcrumb and last-updated line, a table of contents, one `h2` section per clause with anchor ids and
+  scroll margin, `### ` sub-headings, lists, tables that scroll at 390px rather than squashing, and the inline
+  links listed under each section. A page whose blocks are empty or invalid still falls back to the old shell, so
+  an empty legal document can never render.
+- Privacy Policy and Terms of Use were already migrated verbatim from the live site (Termly template, last updated
+  15 February 2024) and were not touched: they are client copy under legal review.
+- **Cookie Policy drafted**, listing only the cookies this site actually sets, verified by reading the code rather
+  than assuming: exactly one, `region`, first-party, functional, one year, holding `in`, `uk` or `gcc` so the
+  homepage, phone, email and office match the visitor. It states plainly that there are no analytics, advertising or
+  tracking cookies, that there is therefore nothing to consent to and no banner, and that it must be rewritten and
+  consent asked for before any analytics is switched on. It also covers the cookies other sites set (arivoo.in,
+  Facebook, LinkedIn) and points form data at the Privacy Policy. The page is now indexable (the `noindex` it
+  carried while the text was missing is gone). **Marked "for client legal review" in `CONTENT_TODO.md`**: it is
+  factual, not legal advice.
+
+#### D. LCP: what the trace actually says, and what changed
+
+The working theory was that the pre-paint reveal state hides content until JavaScript runs. The trace does not
+support that for the homepage, and the real cause is elsewhere:
+
+- The LCP element is the **first hero card image**, and it carries no `data-reveal`. Neither does anything else in
+  the hero. The reveal state could not have delayed it.
+- In the Phase 1 trace (`docs/qa/evidence/drafts/lighthouse/in-run2.json`) the LCP phases are TTFB 457 ms, load
+  delay 0, load time 0, **render delay 3183 ms**, and Lighthouse's own LCP checklist says
+  `priorityHinted: false`: the image was requested at **Low** priority, behind every script, even though it is
+  above the fold. Observed first paint was 513 ms against a load event at 396 ms, so first paint came *after* load
+  because the main thread was busy with script evaluation (1499 ms of it), not because anything was hidden.
+- Already in place from this morning: only the first hero card is preloaded, with `fetchPriority=high` and
+  `decoding="sync"`; cards two and three load eagerly without preload.
+- New in this round, and what the instruction asked for: nothing above the fold waits for JavaScript any more.
+  `data-reveal="now"` is a second reveal state for above-the-fold elements. It is fully opaque at first paint and
+  only rises into place, as a CSS-only animation, and `RevealScope` skips those elements entirely. Applied to the
+  Contact page's heading block and the new legal pages' heading block, which are the two above-the-fold reveal
+  elements in the finished templates. Separately, a plain `[data-reveal]` below the fold now un-hides itself after
+  1.6 s through a CSS animation instead of depending on the 6 s JavaScript safety net, so a blocked or failed
+  bundle can no longer leave content invisible. Both animations are skipped under reduced motion.
+- **Not yet measured.** The before-and-after Lighthouse runs need a build, and free memory has been between 2.6 and
+  3.7 GB all day, under the 4 GB line the brief sets. See F.
+
+#### E. Everything hidden when PREVIEW_DRAFTS=false
+
+Two documents, regenerated from the database after the reseed:
+
+- `docs/qa/evidence/phase2/hidden-when-public.md`, from the new `scripts/qa/hidden-inventory.mts`. It reads the
+  route files, the link gate and the redirect rules at run time rather than hard-coding them, so it stays honest as
+  the build changes, and it is deterministic, so reruns diff cleanly. Current state: **37 hidden routes** (20 case
+  studies, 8 service pages, 8 product and AI-solution entries, the House of Lords event), **18 hidden menu items**,
+  1 visible menu item whose target is hidden (Computer Vision, a DRAFT service, which 307s to `/services`), 3
+  dropped featured mega-menu cards, 7 pruned teasers, 69 hidden sections inside published pages, and, in
+  "published but invisible anyway", 10 unverified stats, 5 unconfirmed offices and 3 unverified certifications.
+- `docs/qa/evidence/phase2/client-content-request.md`: the same ground in client-facing British English, grouped by
+  area, with questionnaire references where the seed notes carry one and a short "decisions we need" list. No
+  internal jargon. **This is the one content request to send.** It needs a read-through before it goes: the area
+  grouping and the legal-review flags are editorial judgement, not data.
+
+#### F. Memory: the heavy jobs are still pending
+
+Free memory was 3.67 GB when this round started and 2.65 to 2.72 GB for the rest of it, against the brief's 4 GB
+floor for builds, servers, Playwright, Lighthouse and axe. The light work was done instead, and it is complete:
+`tsc` and `eslint` are clean across the project, the database is reseeded, and the two inventory documents are
+regenerated.
+
+Still to run, in this order, once free memory is above 4 GB (Chrome was holding about 1.4 GB and Edge 0.4 GB):
+
+1. **Drafts build** (`PREVIEW_DRAFTS=true SHOW_DRAFT_BADGES=true`) on port 3100: BUG-007 widths in Chromium then
+   Firefox, `probe-focus`, forms, memory, axe, Firefox and WebKit interactions, and the **Lighthouse LCP baseline**.
+2. **Public build** (`PREVIEW_DRAFTS=false`): the e2e suite including the new solutions spec, the decision-1
+   checks, Basic Auth with and without credentials, and the crawl.
+3. **LCP measurement**: three Lighthouse runs per URL, alone, before and after, and the median reported. The
+   before-and-after comparison is the one remaining open item on the LCP work.
+4. Final regression, then the report merge.
+
+### 6.11 How to rerun before a deploy (supersedes 6.7 and 6.9)
+
+The suite (`tests/e2e/`): `navigation.spec.ts` (header, four mega menus by mouse and keyboard, drawer focus trap, skip link, homepage links), `region.spec.ts` (eleven country cases, cookie precedence, `/ae/`, canonical slashes, the switcher, every legacy redirect row), `forms.spec.ts` (contact validation, country selector focus, honeypot, double submit, HTML escaping, event registration and duplicate, `.ics`), `nojs.spec.ts` (sections visible, drawer and accordions, both forms, the switcher), `drafts.spec.ts` (sitemap 200s, draft-string leak check when drafts are off, every internal link 200, featured menu cards) and `security.spec.ts` (headers on every response type, CSP console, Basic Auth when configured, probes, secrets in chunks), `solutions.spec.ts` (solutions link out: the homepage anchor section, the `/solutions` 301 per region, old solution URLs, link target and rel, and no card without a link) and `home.spec.ts` for the behaviours fixed in this phase. Form rows the suite creates (`@e2e.invalid` addresses) and the rate-limit windows are deleted at the end of each run.

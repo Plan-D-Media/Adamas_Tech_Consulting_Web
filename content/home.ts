@@ -25,7 +25,7 @@ const slideDigitalTransformation: HeroSlideSeed = {
 const slideAws: HeroSlideSeed = {
   navLabel: "AWS",
   headline: "Scale Smarter. Build Faster. On AWS.",
-  body: "From cloud migration to AI automation, we help you optimize workloads, boost performance, and drive profitable growth with AWS-certified capabilities.",
+  body: "From cloud migration to AI automation, we help you optimise workloads, boost performance, and drive profitable growth with AWS-certified capabilities.",
   ...CTA,
   vimeoId: "1177633889",
   poster: "images/hero/aws.jpg",
@@ -49,7 +49,7 @@ const slideOracle: HeroSlideSeed = {
 const slideSap: HeroSlideSeed = {
   navLabel: "SAP",
   headline: "Reinvent SAP for the Digital Era",
-  body: "Modernize legacy systems, integrate business functions, and deliver smarter workflows with our end-to-end SAP transformation services.",
+  body: "Modernise legacy systems, integrate business functions, and deliver smarter workflows with our end-to-end SAP transformation services.",
   ...CTA,
   vimeoId: "1142019553",
   poster: "images/hero/sap.jpg",
@@ -91,7 +91,8 @@ const heroCardTreasury: HeroSlideSeed = {
   ctaLabel: "Read the case study",
   ctaHref: "/case-studies/sap-treasury-cash-forecasting",
   poster: "images/home/hero-card-treasury.webp",
-  status: "PUBLISHED",
+  // DRAFT: BUG-014 sweep, 17 Nov 2026: unverified 30% figure (Q5.5); the card links to a DRAFT case study
+  status: "DRAFT",
   needsReview: true,
   editorNote: FIGMA_CARD + " The 30% figure is unverified (case study DRAFT, Q5.5).",
 };

@@ -1,9 +1,9 @@
-import Link from "next/link";
 import type { ClaimData } from "@/lib/data/home";
 import type { Block } from "@/lib/data/site";
 import { blockExtra } from "@/lib/data/home-blocks";
 import { plain } from "@/lib/placeholder";
 import { Icon } from "@/components/ui/Icon";
+import { SmartLink, isExternalHref } from "@/components/ui/SmartLink";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Img } from "@/components/media/Img";
 
@@ -40,10 +40,14 @@ export function Outcomes({ block, claims }: { block: Block; claims: ClaimData[] 
                     </p>
                   </div>
                 )}
-                <Link href={feature.href} className={`${metric ? "" : "mt-auto"} inline-flex h-[42px] w-fit items-center gap-3 border border-white/40 bg-white/5 px-[19px] font-heading text-[0.75rem] font-bold text-white transition-colors duration-(--duration-fast) hover:bg-white/15`}>
+                <SmartLink
+                  href={feature.href}
+                  icon={false}
+                  className={`${metric ? "" : "mt-auto"} inline-flex h-[42px] w-fit items-center gap-3 border border-white/40 bg-white/5 px-[19px] font-heading text-[0.75rem] font-bold text-white transition-colors duration-(--duration-fast) hover:bg-white/15`}
+                >
                   {feature.linkLabel}
-                  <Icon name="arrow" size={17} />
-                </Link>
+                  <Icon name={isExternalHref(feature.href) ? "external" : "arrow"} size={isExternalHref(feature.href) ? 13 : 17} />
+                </SmartLink>
               </div>
             </article>
           )}
@@ -55,10 +59,10 @@ export function Outcomes({ block, claims }: { block: Block; claims: ClaimData[] 
                     <p className="font-heading text-[0.875rem] font-extrabold uppercase leading-none tracking-[0.08em] text-blue-600">{c.label}</p>
                     <h3 className="mt-[13px] font-heading text-[1.125rem] font-bold leading-[1.37] text-navy-800">{c.title}</h3>
                     {c.body && <p className="mt-2 font-heading text-[1rem] leading-[1.41] text-grey-600">{c.body}</p>}
-                    <Link href={c.href} className="mt-auto inline-flex h-7 items-center gap-3 font-heading text-[0.875rem] font-bold leading-[15px] text-blue-600 hover:text-blue-500">
+                    <SmartLink href={c.href} icon={false} className="mt-auto inline-flex h-7 items-center gap-3 font-heading text-[0.875rem] font-bold leading-[15px] text-blue-600 hover:text-blue-500">
                       {c.linkLabel}
-                      <Icon name="arrow" size={17} />
-                    </Link>
+                      <Icon name={isExternalHref(c.href) ? "external" : "arrow"} size={isExternalHref(c.href) ? 13 : 17} />
+                    </SmartLink>
                   </article>
                 </li>
               ))}

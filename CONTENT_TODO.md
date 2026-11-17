@@ -48,12 +48,32 @@ Legend: **CONFLICT** = the live site contradicts itself · **MISSING** = no sour
 - Theme leftover: visible pricing block ("30/year", "30 Days Free Trail") on /sap-treasury… and /openedx. **Not migrated.**
 
 ## Solutions (Q7.1–Q7.4, Q5.3)
-- PLACEHOLDER: [AI Product A], [AI Product B]: name, page, screenshots (Q7.2). Seeded as draft, hidden from the menu until published.
-- PLACEHOLDER: AI solutions 4–6 (Q5.3). Candidates from existing case studies: PPE Detection, Steel Plate Inspection, Invoice AI, RAG chatbot. Please confirm.
-- DECISION: Arivoo as `/solutions/arivoo` page vs direct link (Q7.1). Built as a page.
-- CONFLICT: Arivoo URLs: header uses arivoo.in/lms, /sms; footer uses /arivoo-lms, /arivoo-sms, /arivoo-ums. Sitemap uses /arivoo-*. Using the sitemap.
-- DECISION: TestGUARD placement (Q7.3). Not in the menu; footer link kept.
-- MISSING: product UI screenshots for every solution (placeholder frames until supplied).
+
+**SCOPE CHANGE (Swayang, 17 November 2026): solutions have no pages on this site.** Every solution links out to
+its own website in a new tab, `/solutions` 301s to the Products & Solutions section of the visitor's regional
+homepage, and the old solution detail pages are gone (map: `docs/qa/evidence/phase2/solutions-redirect-map.md`).
+Two consequences for content:
+
+- **MISSING, blocking (one per solution): the website URL.** A solution with no URL has nowhere to link to, so it
+  is not shown at all. Needed for: **A-EYE**, **AIR-MIND**, **Face Recognition Security**, **Industrial
+  Analytics**, **Asset Tracking**, and AI solutions 4 to 6 once they are named (Q7.2, Q5.3). No URL was guessed.
+  Every one of these rows already holds its copy, so each is published by adding the URL and nothing else.
+- **CONFIRM: that solutions should link out rather than have pages here.** This is the 17 November decision as
+  given; the client has not been told yet. It changes what the client is asked for (a URL per product instead of
+  page copy, screenshots and SEO text) and it means those products get no SEO benefit from this site.
+- DONE: Arivoo is published, links to https://arivoo.in, and its card carries UMS, SMS, LMS and TestGUARD as
+  module links. Its suite summary was composed from the live site's own module descriptions, because the live
+  site has no suite-level overview: **please confirm the wording.**
+- DECISION TAKEN (Q7.3): TestGUARD is now a fourth Arivoo module, so it keeps its footer link and its live URL
+  and is not a menu item of its own. Reversible.
+- CONFLICT: Arivoo URLs: header uses arivoo.in/lms, /sms; footer uses /arivoo-lms, /arivoo-sms, /arivoo-ums. The
+  sitemap's `/arivoo-*` form is used everywhere. The live header also labels UMS "Coming soon" with no link:
+  confirm the four URLs and whether UMS is live.
+- PLACEHOLDER: AI solutions 4–6 (Q5.3). Candidates from existing case studies: PPE Detection, Steel Plate
+  Inspection, Invoice AI, RAG chatbot. Please confirm which three, and give a URL for each.
+- NO LONGER NEEDED (because there are no pages): per-solution page copy, challenge text, capability panels, SEO
+  titles and descriptions, and product UI screenshots. Card images are still used and are placeholders from the
+  Figma file.
 
 ## Case studies (Q5.5, Q5.6)
 - DECISION: client clearance for each of the 20 case studies to publish.
@@ -76,7 +96,17 @@ Legend: **CONFLICT** = the live site contradicts itself · **MISSING** = no sour
 - DECISION: AWS partner tier. The live client strip image shows "AWS Partner Advanced Tier Services". Not stated as a credential until confirmed. SAP PartnerEdge / Oracle NetSuite partner status to confirm.
 
 ## Legal and global (Q10.2–Q10.4)
-- MISSING: Cookie Policy text (new page). Placeholder until supplied.
+- **FOR CLIENT LEGAL REVIEW: the Cookie Policy was drafted on 17 November 2026** (`content/pages.ts`,
+  `/cookie-policy`). It was written from the cookies this site actually sets, which is exactly one: `region`,
+  a first-party functional cookie holding `in`, `uk` or `gcc` for one year so that the homepage, phone number,
+  email and office shown match the visitor's region. The policy states plainly that there are no analytics,
+  advertising or tracking cookies, that there is therefore nothing to consent to and no cookie banner, and that
+  it must be updated and consent asked for before any analytics is switched on. It also covers cookies set by
+  other websites we link to (arivoo.in, Facebook, LinkedIn), and points form data at the Privacy Policy.
+  **It is not legal advice and has not been reviewed by a lawyer.** If the client's counsel wants the usual
+  Termly-style template instead, supply it and it will replace this text.
+- NOTE: adding GA4 or GTM (below) makes this policy wrong. It will need a new row in the cookie table, a consent
+  mechanism, and a fresh legal review.
 - Privacy Policy and Terms migrated verbatim. They contain the alternate addresses and emails above.
 - MISSING: social profile URLs (verify the footer links on the live site), newsletter provider/consent wording.
 - MISSING: meta descriptions. **No page on the live site has one.** Drafted from existing copy and flagged.
@@ -413,3 +443,48 @@ The prototype's visual layer was removed on 13 Nov 2026; the site is rebuilt to 
 ### Accessibility deviations from the design (AA)
 - Perspectives card labels sky-300 on white and the "Your nearest office" label blue-600 on navy fail 4.5:1 in the design; built in blue-600 and sky-300. Small numbers in the service page (#8D98A5, #6E7F95) are built in grey-550.
 - The mega-menu panel is frosted glass per the designer's decision; its links are blue-700 (not blue-600) so they pass over the hero.
+
+
+## QA Phase 2 (2026-11-17): British spelling and the BUG-014 placeholder sweep
+
+### Service and product names kept in American spelling (DECISION, client)
+Decision 3 of the Phase 2 brief: the general copy was converted to British English (`scripts/content/british-spelling.mjs`, 102 lines in eight seed files, change log in `docs/qa/evidence/phase2/spelling-changes.md`), but names the client wrote stay exactly as written. Ask the client whether these should follow:
+- **"Migration & Modernization"** · Cloud Services sub-service name (`content/services.ts` `name`, `content/navigation.ts` label, sitemap row, slug `migration-modernization`). The copy around it now reads "modernisation".
+- **"Google Developers Agency Program"** · partner logo name (`content/trust.ts`, DRAFT) and its alt text. Proper noun.
+- Left unchanged on purpose because the British form differs in meaning or usage: "license/licensee" (legal pages: the verb and "licensee" are the same in British English), "program" (software sense), "catalog" (none found), the sitemap/slug values and every URL.
+
+### Rows moved to DRAFT by the BUG-014 sweep (decision 4)
+Scan of every PUBLISHED row (`scripts/qa/placeholder-sweep.mts`, evidence `docs/qa/evidence/phase2/placeholder-sweep-before.md` and `-after.md`): 53 hits before, 16 after. Each row below carries a `// DRAFT: BUG-014 sweep` comment next to its status in `content/*.ts` and reappears on the public site the moment the client's copy replaces the placeholder and the status is set back to PUBLISHED.
+- **Hero card "How SAP Treasury improved cash forecasting by 30%"** (`content/home.ts`, all three homepages) · unverified 30 % figure (Q5.5); it also links to the DRAFT case study. The public hero shows the two remaining cards.
+- **Services** (`content/services.ts`): AI/ML Ops, Computer Vision, Data Engineering, Advanced Analytics, Sovereign AI, Responsible AI, AI Security & Governance · placeholder descriptor and/or summary (Q5.2). Their pages, menu links and sitemap entries are hidden on the public build; legacy redirects to them land on `/services`. Data & AI Services keeps AI/ML, Agentic AI and Generative AI publicly.
+- **Menu rows** (`content/navigation.ts`): the seven service links above plus A-EYE, AIR-MIND and Asset Tracking · placeholder descriptors or the 30 % figure.
+- **Solutions** (`content/solutions.ts`): Arivoo (placeholder summary, Q7.1; the UMS/SMS/LMS products stay public), A-EYE and AIR-MIND (placeholder tagline and overview), Asset Tracking (tagline "Boosting Cash Forecasting by 30%", unverified).
+- **Milestones** (`content/milestones.ts`, all six) · "Milestone title to be confirmed".
+- **"What we do" items** "[Placeholder] Cloud reselling (CSP)" (Managed Services) and "[Placeholder] FinOps and cloud cost governance" (Cloud Advisory & Consultation) are list entries inside PUBLISHED rows: they are now rendered only in the drafts preview (`lib/data/services.ts`).
+
+### Placeholder text still inside PUBLISHED rows (DECIDED, 17 November 2026)
+
+Swayang's decision: keep these pages PUBLISHED, but hide the placeholder **blocks** when `PREVIEW_DRAFTS=false`,
+at block level rather than page level. Implemented in the data layer, so no component can leak a placeholder and
+every future template inherits the rule:
+
+- `lib/public-copy.ts` decides whether one field may be shown: a `[Placeholder]` prefix, a bracketed name, or a
+  "to be confirmed / to be supplied / TBC / TBD" label is withheld with drafts off and passed through in the
+  drafts preview.
+- `lib/data/site.ts` applies it to every `ContentBlock` eyebrow, heading, body and CTA label; `lib/data/services.ts`
+  to every pillar and service tagline, summary, outcome line, challenge and descriptor; `lib/data/pages.ts` drops
+  whole pending blocks (the About group paragraph and its held-back sentences, the Team and Credentials
+  "to be confirmed" labels, a legal page's placeholder body).
+- Each affected template already had a fallback, so the result is the designed page minus the unconfirmed line:
+  the Cloud Services hero shows the pillar's own outcome line, the About page leaves the group paragraph out.
+
+The client copy still needed for these rows is unchanged, and is listed in
+`docs/qa/evidence/phase2/client-content-request.md`. The original 16 hits, for the record (none of them renders
+on the public build; the public crawl and the e2e draft-leak test check for "[", "to be confirmed", "TBC",
+"TBD", "Lorem", "30%", "500+", "100% Satisfied", "Zero Risk" on every sitemap URL):
+- `ContentBlock services.cloud-services.hero` heading "[Placeholder] The AI Impact Imperatives, 2026" · the hero title falls back to the pillar name; DRAFT would drop the hero copy and image.
+- `ContentBlock home.topStories` item 3 "Boosting cash forecasting by 30% with SAP Treasury" · dropped publicly because it links to the DRAFT case study (link gate); the block carries the other stories.
+- `NavItem` Cloud Automation descriptor "[Placeholder] One line on cloud automation." · the page itself has real copy; instruction descriptors never render.
+- `ServicePillar` digital-transformation `outcomeLine` and `challenge`, ai-services `challenge` · fallback fields only; DRAFT would remove two of the three pillars.
+- `Page /about` group body "[Placeholder] RICE Adamas Group description." and the pending label; `Page /about/team` empty-state labels; `Page /credentials` pending labels · now dropped from the public payload by `lib/data/pages.ts`. Client copy still needed: the RICE Adamas Group description, leadership profiles and bios, certificate numbers and validity dates.
+- `Page /cookie-policy` "[Placeholder] Cookie policy text." · **resolved**: the page now carries a factual cookie policy (see Legal and global above) and renders it through the new legal template, as /privacy-policy and /terms-of-use now do.

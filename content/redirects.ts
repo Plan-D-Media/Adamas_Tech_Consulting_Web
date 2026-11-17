@@ -7,7 +7,11 @@ import type { RedirectSeed } from "./types";
  *
  * Every WordPress URL points straight at the final new URL (no chains through renamed slugs; section 1b lists the renames).
  * Old URLs whose path is unchanged are NOT listed, because a redirect to the same normalised path would loop:
- * /contact/, /services/, /privacy-policy/, /terms-of-use/, /in/, /uk/, /ae/, /case-studies/, /solutions/ (and / itself).
+ * /contact/, /services/, /privacy-policy/, /terms-of-use/, /in/, /uk/, /ae/, /case-studies/ (and / itself).
+ *
+ * /solutions (and anything under it) is NOT in this table either: since the 17 Nov 2026 scope change solutions have
+ * no pages on this site, so proxy.ts 301s those URLs to the Products & Solutions section of the visitor's regional
+ * homepage. That target depends on the region cookie, which a static table cannot express.
  *
  * Case-study targets (/case-studies/<slug>) are DRAFT until client clearance (Q5.5): until a target is published,
  * the router should fall back to /case-studies rather than 404.
@@ -46,15 +50,20 @@ export const redirects: RedirectSeed[] = [
     "Q2.4",
     "DECISION Q2.4: /services/digital-transformation/e-invoicing-uae if the page is kept, /ae/ if retired. Set to /gcc/ for now (the new page is a draft).",
   ),
-  r("/sap-treasury-investment-and-cash-management-implementation/", "/solutions/asset-tracking", "Q2.5"),
+  // Scope change 17 Nov 2026: solutions have no pages here, so this page's nearest live page is the SAP service
+  // page (the old page is an SAP Treasury, Investment and Cash Management implementation). One hop.
+  r(
+    "/sap-treasury-investment-and-cash-management-implementation/",
+    "/services/digital-transformation/sap",
+    "Q2.5",
+    "Was /solutions/asset-tracking until the 17 Nov 2026 scope change (solutions link out and have no pages here).",
+  ),
   r("/clients/", "/case-studies", "Q2.6"),
 
   // ── 1b. Slugs renamed to the sitemap names (Swayang, 13 Nov 2026) ──
   // Old slugs from the prototype round and the first Figma round; the WordPress map above already points at the new URLs.
-  r("/solutions/ai-product-a", "/solutions/a-eye", "Sitemap 13 Nov 2026", "Slug renamed with the solution (A-EYE)."),
-  r("/solutions/ai-product-b", "/solutions/air-mind", "Sitemap 13 Nov 2026", "Slug renamed with the solution (AIR-MIND)."),
-  r("/solutions/smart-parking", "/solutions/industrial-analytics", "Sitemap 13 Nov 2026", "Slug renamed with the solution (Industrial Analytics)."),
-  r("/solutions/cash-forecasting", "/solutions/asset-tracking", "Sitemap 13 Nov 2026", "Slug renamed with the solution (Asset Tracking)."),
+  // The four /solutions/<slug> renames from the prototype round were removed on 17 Nov 2026: those URLs were never
+  // public, and solutions no longer have pages here (proxy.ts sends anything under /solutions to the homepage section).
   r("/services/cloud-services/cloud-migration", "/services/cloud-services/migration-modernization", "Sitemap 13 Nov 2026", "Slug renamed with the sub-service (Migration & Modernization)."),
   r("/services/cloud-services/cloud-transformation", "/services/cloud-services/devops-secops", "Sitemap 13 Nov 2026", "Slug renamed with the sub-service (DevOps & SecOps)."),
   r("/services/cloud-services/managed-cloud", "/services/cloud-services/managed-services", "Sitemap 13 Nov 2026", "Slug renamed with the sub-service (Managed Services)."),

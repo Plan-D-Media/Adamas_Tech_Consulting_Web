@@ -16,7 +16,7 @@ const label = process.argv[3] ?? "public";
 const outDir = path.join("docs", "qa", "evidence", label);
 fs.mkdirSync(outDir, { recursive: true });
 
-const PAGES = ["/in/", "/uk/", "/gcc/", "/services/cloud-services", "/services/cloud-services/migration-modernization", "/services/digital-transformation", "/services/ai-services", "/insights/events/house-of-lords-2026", "/insights/events", "/solutions", "/case-studies", "/case-studies/sap-treasury-cash-forecasting", "/about", "/contact"];
+const PAGES = ["/in/", "/uk/", "/gcc/", "/services/cloud-services", "/services/cloud-services/migration-modernization", "/services/digital-transformation", "/services/ai-services", "/insights/events/house-of-lords-2026", "/insights/events", "/case-studies", "/case-studies/sap-treasury-cash-forecasting", "/about", "/contact"];
 const DRAFT_STRINGS = ["100% Satisfied", "100% SATISFIED", "Zero Risk", "ZERO RISK", "30%", "500+", "DRAFT", "Draft", "to be confirmed", "TO BE CONFIRMED", "[", "Lorem", "TBD", "Middle East"];
 
 async function get(url: string) {
@@ -86,7 +86,7 @@ for (const route of PAGES) {
 await browser.close();
 const sitemap = await get(`${base}/sitemap.xml`);
 const urls = [...sitemap.text.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(/^https?:\/\/[^/]+/, ""));
-rows.push("", `Sitemap: ${urls.length} URLs. Contains the event page: ${urls.includes("/insights/events/house-of-lords-2026")}. Contains case studies: ${urls.filter((u) => u.startsWith("/case-studies/")).length}.`, "", `Event page direct request: ${(await get(`${base}/insights/events/house-of-lords-2026`)).status}; calendar: ${(await get(`${base}/insights/events/house-of-lords-2026/calendar`)).status}; draft case study: ${(await get(`${base}/case-studies/sap-treasury-cash-forecasting`)).status}; draft solution /solutions/ai-solution-4: ${(await get(`${base}/solutions/ai-solution-4`)).status}.`);
+rows.push("", `Sitemap: ${urls.length} URLs. Contains the event page: ${urls.includes("/insights/events/house-of-lords-2026")}. Contains case studies: ${urls.filter((u) => u.startsWith("/case-studies/")).length}.`, "", `Event page direct request: ${(await get(`${base}/insights/events/house-of-lords-2026`)).status}; calendar: ${(await get(`${base}/insights/events/house-of-lords-2026/calendar`)).status}; draft case study: ${(await get(`${base}/case-studies/sap-treasury-cash-forecasting`)).status}; /solutions (no page since 17 Nov 2026, expect a 301 to the region homepage section): ${(await get(`${base}/solutions`)).status} -> ${(await get(`${base}/solutions`)).location ?? "none"}.`);
 fs.writeFileSync(path.join(outDir, "crawl.md"), rows.join("\n") + "\n");
 fs.writeFileSync(path.join(outDir, "dead-links.md"), (dead.length > 2 ? dead : [...dead, "none"]).join("\n") + "\n");
 fs.writeFileSync(path.join(outDir, "hydration.md"), hydration.join("\n") + "\n");

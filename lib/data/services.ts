@@ -3,7 +3,16 @@ import { cacheLife, cacheTag } from "next/cache";
 import { badge, db, visible } from "@/lib/db";
 import { mediaSelect, toMedia, type Media } from "@/lib/media";
 import type { CaseCardData } from "./home";
-import { caseCardInclude, titleBodies, toCaseCard, type FaqData, type SeoData, type TitleBody } from "./mappers";
+import { caseCardInclude, titleBodies as allTitleBodies, toCaseCard, type FaqData, type SeoData, type TitleBody } from "./mappers";
+import { copy } from "@/lib/placeholder";
+import { previewingDrafts } from "@/lib/preview";
+import { publicCopy } from "@/lib/public-copy";
+
+/**
+ * "What we do" items whose title is still a placeholder ("[Placeholder] Cloud reselling (CSP)") are listed only while
+ * drafts are previewed; the public pages show the confirmed items alone (QA BUG-014 sweep, 17 Nov 2026).
+ */
+const titleBodies = (value: Parameters<typeof allTitleBodies>[0]): TitleBody[] => allTitleBodies(value).filter((t) => previewingDrafts || !copy(t.title).pending);
 
 export interface ServiceLink {
   slug: string;
@@ -62,12 +71,12 @@ export async function getPillars(): Promise<PillarSummary[]> {
   return rows.map((p) => ({
     slug: p.slug,
     name: p.name,
-    tagline: p.tagline,
-    summary: p.summary,
-    outcomeLine: p.outcomeLine,
+    tagline: publicCopy(p.tagline),
+    summary: publicCopy(p.summary),
+    outcomeLine: publicCopy(p.outcomeLine),
     image: toMedia(p.image),
     href: pillarHref(p.slug),
-    services: p.services.map((s) => ({ slug: s.slug, name: s.name, descriptor: s.descriptor, href: serviceHref(p.slug, s.slug) })),
+    services: p.services.map((s) => ({ slug: s.slug, name: s.name, descriptor: publicCopy(s.descriptor), href: serviceHref(p.slug, s.slug) })),
   }));
 }
 
@@ -88,13 +97,13 @@ export async function getPillar(slug: string): Promise<PillarPageData | null> {
   return {
     slug: p.slug,
     name: p.name,
-    tagline: p.tagline,
-    summary: p.summary,
-    outcomeLine: p.outcomeLine,
-    challenge: p.challenge,
+    tagline: publicCopy(p.tagline),
+    summary: publicCopy(p.summary),
+    outcomeLine: publicCopy(p.outcomeLine),
+    challenge: publicCopy(p.challenge),
     image: toMedia(p.image),
     href: pillarHref(p.slug),
-    services: p.services.map((s) => ({ slug: s.slug, name: s.name, descriptor: s.descriptor, href: serviceHref(p.slug, s.slug), bullets: titleBodies(s.whatWeDo).slice(0, 3).map((t) => t.title) })),
+    services: p.services.map((s) => ({ slug: s.slug, name: s.name, descriptor: publicCopy(s.descriptor), href: serviceHref(p.slug, s.slug), bullets: titleBodies(s.whatWeDo).slice(0, 3).map((t) => t.title) })),
     faqs: p.faqs.map((f) => ({ question: f.question, answer: f.answer, draft: badge(f.status) })),
     caseStudies: p.caseStudies.map(toCaseCard),
     seoTitle: p.seoTitle,
@@ -122,9 +131,9 @@ export async function getService(pillarSlug: string, slug: string): Promise<Serv
   return {
     slug: s.slug,
     name: s.name,
-    descriptor: s.descriptor,
-    summary: s.summary,
-    whoFor: s.whoFor,
+    descriptor: publicCopy(s.descriptor),
+    summary: publicCopy(s.summary),
+    whoFor: publicCopy(s.whoFor),
     whatWeDo: titleBodies(s.whatWeDo),
     image: toMedia(s.image),
     steps: s.steps.map((st) => ({ title: st.title, body: st.body ?? undefined })),
@@ -134,7 +143,7 @@ export async function getService(pillarSlug: string, slug: string): Promise<Serv
     pillar: { slug: s.pillar.slug, name: s.pillar.name, href: pillarHref(s.pillar.slug) },
     siblings: s.pillar.services
       .filter((x) => x.slug !== s.slug)
-      .map((x) => ({ slug: x.slug, name: x.name, descriptor: x.descriptor, href: serviceHref(s.pillar.slug, x.slug) })),
+      .map((x) => ({ slug: x.slug, name: x.name, descriptor: publicCopy(x.descriptor), href: serviceHref(s.pillar.slug, x.slug) })),
     seoTitle: s.seoTitle,
     seoDescription: s.seoDescription,
     noindex: s.noindex,

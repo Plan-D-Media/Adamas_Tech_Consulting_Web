@@ -76,7 +76,8 @@ export interface CaseStudyPageData extends SeoData {
   technologies: string[];
   services: { name: string; href: string }[];
   pillars: { name: string; href: string }[];
-  solutions: { name: string; href: string; external: boolean }[];
+  /** Linked solutions, each on its own website (they have no pages here since 17 Nov 2026). */
+  solutions: { name: string; href: string }[];
   related: CaseCardData[];
 }
 
@@ -168,7 +169,11 @@ export async function getCaseStudy(slug: string): Promise<CaseStudyPageData | nu
     technologies: c.technologies.map((t) => t.name),
     services: c.services.map((s) => ({ name: s.name, href: `/services/${s.pillar.slug}/${s.slug}` })),
     pillars: c.pillars.map((p) => ({ name: p.name, href: `/services/${p.slug}` })),
-    solutions: c.solutions.map((s) => ({ name: s.name, href: solutionHref(s), external: !!s.externalUrl })),
+    // Solutions have no pages here: a solution with no website URL is dropped rather than linked (17 Nov 2026).
+    solutions: c.solutions.flatMap((s) => {
+      const href = solutionHref(s);
+      return href ? [{ name: s.name, href }] : [];
+    }),
     related,
     seoTitle: c.seoTitle,
     seoDescription: c.seoDescription,

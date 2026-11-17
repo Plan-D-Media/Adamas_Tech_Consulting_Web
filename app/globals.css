@@ -358,14 +358,53 @@
   }
 
   /* Scroll reveals (components/motion/RevealScope.tsx). The pre-reveal state applies only where scripts can run,
-     from first paint (no class to wait for); with JavaScript off everything stays visible. */
+     from first paint (no class to wait for); with JavaScript off everything stays visible.
+
+     Three rules, in the order a visitor meets them (LCP work, 17 Nov 2026):
+     1. data-reveal="now" is for anything above the fold. It is fully opaque at first paint and only rises into
+        place, so the first paint never waits for JavaScript. CSS does the whole animation; RevealScope ignores it.
+     2. A plain [data-reveal] (below the fold) still starts invisible, so GSAP can fade it in on scroll.
+     3. ...but it now un-hides itself after 1.6s through a CSS animation, instead of depending on the 6s
+        JavaScript safety net. If the bundle never arrives, nothing stays invisible. Once RevealScope has set
+        data-revealed (which it does before GSAP touches the element) this selector stops matching, so the
+        animation never fights the scroll tween.
+     Reduced motion skips both animations: everything is simply visible. */
   @media (scripting: enabled) {
-    [data-reveal]:not([data-revealed]) {
+    [data-reveal="now"] {
+      animation: reveal-rise 0.7s var(--ease-out, ease-out) both;
+    }
+    [data-reveal]:not([data-reveal="now"]):not([data-revealed]) {
       opacity: 0;
+      animation: reveal-fallback 0.4s linear 1.6s forwards;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-reveal="now"] {
+        animation: none;
+      }
+      [data-reveal]:not([data-reveal="now"]):not([data-revealed]) {
+        animation-delay: 0s;
+        animation-duration: 0.01s;
+      }
     }
     /* Tab panels rendered for no-JavaScript visitors (components/home/ServicesTabs.tsx). */
     [data-tabs] [data-nojs-panel] {
       display: none;
+    }
+  }
+
+  /* Entry animations for the two reveal states above. reveal-rise never touches opacity, so the element it runs
+     on is painted in full on the first frame. */
+  @keyframes reveal-rise {
+    from {
+      transform: translateY(16px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  @keyframes reveal-fallback {
+    to {
+      opacity: 1;
     }
   }
 

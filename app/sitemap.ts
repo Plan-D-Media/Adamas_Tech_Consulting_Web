@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getRegions } from "@/lib/data/site";
 import { getPillars } from "@/lib/data/services";
-import { getSolutionParams } from "@/lib/data/solutions";
 import { getCaseStudyParams } from "@/lib/data/caseStudies";
 import { getEventParams } from "@/lib/data/events";
 import { getPageLinks } from "@/lib/data/pages";
@@ -17,10 +16,9 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").re
  * and production never previews drafts).
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [regions, pillars, solutions, cases, events, pages] = await Promise.all([
+  const [regions, pillars, cases, events, pages] = await Promise.all([
     getRegions(),
     getPillars(),
-    getSolutionParams(),
     getCaseStudyParams(),
     getEventParams(),
     getPageLinks(),
@@ -41,9 +39,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...pillars.flatMap((p) => [page(p.href, 0.8), ...p.services.map((s) => page(s.href, 0.7))]),
   ];
 
+  // No /solutions entries: solutions link out to their own websites and "/solutions" 301s to the homepage
+  // section, and a sitemap must only list canonical URLs that answer 200 (17 Nov 2026).
   const rest: MetadataRoute.Sitemap = [
-    page("/solutions", 0.8),
-    ...solutions.map((s) => page(`/solutions/${s.slug}`, 0.7)),
     page("/case-studies", 0.8),
     ...cases.map((c) => page(`/case-studies/${c.slug}`, 0.6)),
     page("/insights", 0.5),
