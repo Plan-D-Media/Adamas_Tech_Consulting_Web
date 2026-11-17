@@ -30,6 +30,13 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     remotePatterns,
   },
+  experimental: {
+    // Static generation forks one worker per CPU by default (this machine reported 7), and each one holds its own
+    // copy of the route modules: that is what pushed the build over the free-memory floor. Three keeps the build
+    // near two minutes while leaving headroom (next/dist/build/index.js reads experimental.cpus for the worker
+    // count). Vercel's build container is not constrained this way, but three is still comfortable there.
+    cpus: 3,
+  },
   turbopack: {
     rules: {
       "*.css": {

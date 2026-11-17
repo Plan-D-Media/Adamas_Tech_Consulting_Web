@@ -82,8 +82,20 @@ const legalBlocks = z.object({
   pending: z.string().optional(),
 });
 
+/**
+ * Careers (Figma 274:2667). Every band is optional: the page is DRAFT until the client sends vacancies, and a
+ * band whose copy has not been approved is left out rather than filled with the design's placeholder text.
+ */
+const careersBlocks = z.object({
+  why: header.extend({ ctaLabel: z.string().optional(), ctaHref: z.string().optional() }).optional(),
+  process: header.extend({ steps: z.array(z.object({ title: z.string(), body: z.string().optional() })).default([]) }).optional(),
+  openings: header.extend({ emptyLabel: z.string().optional() }).optional(),
+  recognitions: header.extend({ items: z.array(z.object({ title: z.string(), body: z.string().optional() })).default([]) }).optional(),
+});
+
 const schemas = {
   about: aboutBlocks,
+  careers: careersBlocks,
   team: teamBlocks,
   "coming-soon": comingSoonBlocks,
   credentials: credentialsBlocks,

@@ -176,3 +176,48 @@ case-studies listing have no frame and reuse these components and tokens, as agr
 - **Case-study filters:** the pills wrap; the group label keeps a 72px column so the rows stay aligned. No
   horizontal scroller, so nothing is hidden off-screen.
 - No horizontal overflow at 1920, 1440, 1024, 768, 414 or 360 on any of the new pages.
+
+### Careers (274:2667), 17 November 2026
+
+Built and kept DRAFT, as the brief asks: hidden from the public, visible in the drafts preview, and the menu
+still shows "Careers (coming soon)" as plain text rather than a link.
+
+1. **"Carrer" is spelled "Careers"** everywhere, and the copy has been put into British spelling
+   ("optimised"). The words are otherwise the designer's and still need the client's sign-off.
+2. **The job rows come from a new `Job` table**, which is empty: the brief forbids invented vacancies. The band
+   therefore renders its empty state - "No vacancies are open at the moment", the client's line about keeping CVs
+   on file, and a contact call to action. **Mithu: the frame has no empty state; please confirm this one.**
+3. **The discipline chips are generated from the roles that exist** (plus "Remote" when a remote role does), not
+   the frame's fixed Remote / Design / Marketing / JAVA-Tech / Mobile App / #Trend. Each chip is a link with a
+   query string, so the filter works without JavaScript.
+4. **No Apply button is drawn** until `CAREERS_APPLY_URL` or `CAREERS_EMAIL` is set. The application and CV upload
+   are out of scope for this phase, and a button that goes nowhere is worse than no button.
+5. **The "Recognitions / Good Firms" band is not built.** Its four badges all read "Top mobile app developers in
+   the industry", which is another company's award. It is on the client's content list.
+6. **Responsive:** the five hiring stages run across one row at 1024px and above with the connecting rule behind
+   the numbers; below that they become two columns and then one, and the rule is dropped. Job rows go from
+   three columns (role, location, apply) to stacked at 1024px.
+
+### What the per-section comparison says (17 November 2026)
+
+`node scripts/qa/compare-figma-page.mjs <about|case-detail|careers>` compares each `data-compare` band with the
+matching band of the frame render. It measures **layout**, not words: these pages carry the client's content from
+the database while the frames carry the designer's placeholder copy, so a band can be structurally right and still
+report mismatch wherever the text or the photograph differs.
+
+About us: company 91%, credentials 86%, approach 85%, people 81%, journey 79%, expertise 77%, hero 70%.
+Case study: technology 94%, results 88%, summary 83%, facts strip 74%, solution 55%, hero 52%.
+
+The four that sit below 80% are all content, not layout:
+
+- **Expertise (77%)**: the frame draws three cards with photographs and the title over the image; the client's
+  copy has six items and no per-item imagery, so they are icon cards in a three-column grid. **Mithu: may we have
+  the three photographs, or should the band stay on icons for six items?**
+- **Case-study hero (52%)**: same layout (centred label, title, descriptor, button, facts strip under it), but the
+  frame's photograph is an SAP dashboard and the row's own image is a warehouse interior. The wash over it was
+  lightened on 17 Nov to sit closer to the frame.
+- **Case-study solution (55%)**: the frame gives this band 2113px - an intro, a product screenshot and six
+  capability cards. The database has the capabilities but no screenshot, so the band is 1103px of cards.
+  **Mithu: is the screenshot per case study, or one illustration reused?**
+- **Journey (79%)**: the frame draws a horizontal 2020-2029 timeline; the milestones in the database have no years
+  confirmed yet, so they render as a card grid. It will be revisited once the client sends the dates.

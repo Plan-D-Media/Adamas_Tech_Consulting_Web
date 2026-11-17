@@ -31,7 +31,9 @@ export function AboutHero({ eyebrow, title, intro, crumbs }: Props) {
         sizes="100vw"
         className="absolute inset-0 -z-10 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(4_18_45/0.78)_0%,rgb(4_18_45/0.62)_45%,rgb(4_18_45/0.82)_100%)]" aria-hidden="true" />
+      {/* The wash is lighter than it was: the frame shows much more of the photograph, and axe still
+          reports no contrast failure on the white type at this strength (compare run, 17 Nov). */}
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(4_18_45/0.62)_0%,rgb(4_18_45/0.46)_45%,rgb(4_18_45/0.70)_100%)]" aria-hidden="true" />
       <div className="container-site py-16 text-center text-white lg:py-[90px]">
         {eyebrow && <p className="font-heading text-[clamp(2rem,1.2rem+2.6vw,3.875rem)] font-bold leading-[1.1] tracking-[-0.02em]">{eyebrow}</p>}
         <h1 className="mt-2 font-heading text-[clamp(1.75rem,1.1rem+2vw,2.875rem)] font-bold leading-[1.18] tracking-[-0.01em] lg:mt-[18px]">{title}</h1>

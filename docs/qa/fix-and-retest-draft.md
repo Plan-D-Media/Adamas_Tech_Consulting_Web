@@ -368,3 +368,91 @@ the DRAFT badge is the solid orange badge the service hero already uses (7.69:1)
 follows the page's heading level, and the case-studies grid has a visually hidden `<h2>` so the card `<h3>`s do not
 skip a level. The same `#B4600A`-on-tint pairing was corrected in the contact and event registration forms, where
 it affected real visitors seeing a validation message.
+
+### 6.15 Build pipeline, memory and Careers, 17 November 2026 (evening)
+
+**BUG-039 hardened for Vercel.** The fix shipped in 6.14 wrote `lib/generated/unpublished.json` from the seed, and
+Vercel never runs the seed: a deploy would have carried whatever snapshot was committed. `npm run build` now runs a
+`prebuild` step (`scripts/prebuild.ts`), so Vercel gets it automatically. It generates the Prisma client when the
+build needs one, opens the database, **fails the build with an explanatory message if it cannot reach it**, and
+compiles both `lib/generated/redirects.json` and `lib/generated/unpublished.json` from live data. The rules now
+live in `scripts/generated-files.ts`, which the seed, `npm run redirects:build` and the prebuild all import, so the
+three cannot drift. Verified three ways: the happy path (120 redirects, 29 fallbacks), a deliberately wrong
+`DATABASE_URL` (exit 1, the message names `DATABASE_URL`, nothing else in the build runs), and `npm run build`
+itself, where the prebuild output appears before `next build` starts. Consequence for the client: publishing a row
+in Neon now needs a redeploy, not just a revalidation. Written up in `docs/deploy.md`.
+
+**Build memory.** `next.config.ts` sets `experimental.cpus: 3`. Static generation forked one worker per CPU (seven
+on this machine) and each worker holds its own copy of the route modules, which is what pushed builds through the
+4 GB floor. Playwright was already `workers: 1` with `fullyParallel: false`. The chain samples free memory every
+second and prints a table; measured after the change:
+
+| Step | Taken during the step | Lowest free |
+|---|---|---|
+| drafts build | 1694 MB | 5604 MB |
+| public build | 1113 MB | 6050 MB |
+| e2e (full suite) | 923 MB | 6270 MB |
+| GTM dummy build | 1607 MB | 5606 MB |
+| consent suite | 749 MB | 6384 MB |
+
+Builds now take 18-30 s each (they were 90-95 s with seven workers), so the cap costs nothing here.
+
+**The chain cleans up after itself.** `cleanup()` kills the running step's process tree, frees ports 3000 and 3100
+and stops the Playwright browsers - matched on the executable path under `PLAYWRIGHT_BROWSERS_PATH`, so the
+browser the reviewer is using is never touched. It runs on a failed step, on Ctrl+C, on SIGTERM and on an uncaught
+error; a clean finish still leaves the review server on 3000, which is the point of step 6. A leftover `next start`
+used to hold a lock on its dist directory and block the next build on Windows. The port kill was tested against a
+throwaway server: it failed silently at first because `spawnSync(..., { shell: true })` sends the command through
+cmd.exe, which swallows the pipe before PowerShell sees it.
+
+**Test output is out of git.** `test-results/`, `playwright-report/`, `blob-report/`, `playwright/.cache/`,
+`docs/qa/evidence/e2e-report/`, `docs/qa/evidence/e2e-results/` and `trace.zip` are ignored, and the two files that
+had been committed (`e2e-report/index.html`, `e2e-results/.last-run.json`) were removed from the index with
+`git rm --cached`. The deliberate evidence in `docs/qa/evidence/` - logs, markdown, screenshots - stays tracked.
+
+**svgo** 4.0.2 to 4.1.0 (four advisories, one of them the `removeScripts` bypass). The asset pipeline was re-run on
+a raster and a vector entry afterwards. What is left in `npm audit` is three advisories, all dev-only and all
+needing a major: `deepmerge-ts` through the pinned `prisma` CLI, `picomatch` and `minimatch` through
+`eslint-config-next` and `typescript-eslint`. Nothing in the runtime bundle.
+
+**Careers** (Figma 274:2667) is built and DRAFT. New `Job` table (migration `20261117174539_add_job`), empty by
+design. `JobPosting` structured data is emitted for published roles only, so none today. The Apply buttons appear
+only when `CAREERS_APPLY_URL` or `CAREERS_EMAIL` is set; with neither, the page offers none. The page row is DRAFT,
+so the public build answers 404 there and the menu keeps showing "Careers (coming soon)" as plain text.
+
+**BUG-041. An unpublished page answered 200 with the 404 page (soft 404).** Found while checking the public build
+of the new Careers page. `/about/careers` is DRAFT, `getPage` returns null and the route calls `notFound()`, but
+the route is dynamic and streams, so the 200 had already been sent: every request returned the "Page not found"
+body under a 200, on every hit, not only the first (the permanent form of BUG-035). Search engines treat that as a
+soft 404. Fixed with the mechanism built for BUG-039: the prebuild also writes `lib/generated/unpublished-pages.json`
+(paths whose Page row is not PUBLISHED, empty in a drafts build) and `proxy.ts` rewrites those to the
+unknown-route path, which answers a real 404 before the app renders. Retest: `/about/careers` answers **404** in
+the public build and **200** in the drafts build, and it is absent from `sitemap.xml` in both.
+
+### 6.16 Lighthouse on the new templates (mobile, median of 3, drafts build)
+
+Run alone against the review server on port 3000, which is the only configuration where all four render (the case
+studies and Careers are DRAFT). The homepage row is the baseline from the same harness.
+
+| URL | Perf | A11y | BP | SEO | LCP | CLS | TBT | DOM |
+|---|---|---|---|---|---|---|---|---|
+| `/in/` (baseline) | 89 | 100 | 100 | 69 | 3639 ms | 0.000 | 94 ms | 1608 |
+| `/about` | 92 | 100 | 96 | 69 | 3202 ms | 0.000 | 63 ms | 824 |
+| `/case-studies` | 81 | 100 | 96 | 69 | 4576 ms | 0.000 | 134 ms | 856 |
+| `/case-studies/sap-treasury-cash-forecasting` | 90 | 100 | 96 | 69 | 3275 ms | 0.000 | 176 ms | 764 |
+| `/about/careers` | 93 | 100 | 96 | 69 | 3151 ms | 0.000 | 85 ms | 616 |
+
+SEO 69 is the staging `noindex`, the same on every URL including the baseline. Accessibility is 100 everywhere,
+which matches the axe runs.
+
+**Against the brief's bar ("must not raise TBT above the homepage's"):** `/about` (63 ms) and `/about/careers`
+(85 ms) are under it; `/case-studies` (134 ms) and the case-study detail (176 ms) are over it, by 40 ms and 82 ms.
+Both are still inside Lighthouse's "good" band (under 200 ms), and both figures come from the drafts build, where
+the listing renders 20 draft cards and the detail page renders every band; the public listing is the empty state.
+They are worth a look in the same round as the homepage's hydration work rather than on their own.
+
+**LCP.** `scripts/qa/lcp-report.mjs inner-pages` on `/about`: the hero image is the LCP element,
+`fetchpriority=high` is applied, it is discoverable in the HTML, not lazy, and it loads in 50 ms - but the render
+delay is 2689 ms of a 3202 ms LCP, with 742 ms of script evaluation. That is the same picture as the homepage
+(6.12): the image is not the problem, hydration is. The one lever left is the one already proposed and not pulled -
+hydrating the below-the-fold islands only on visibility or first interaction.

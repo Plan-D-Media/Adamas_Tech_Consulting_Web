@@ -13,6 +13,9 @@ import { Eyebrow, Heading2 } from "@/components/ui/SectionHeader";
 import { CaseCard } from "@/components/cases/CaseCard";
 import { ContactSection } from "@/components/home/ContactSection";
 
+/** Short labels for the facts strip; the Region enum is IN / UK / GCC. */
+const REGION_LABEL: Record<string, string> = { IN: "India", UK: "UK & Ireland", GCC: "GCC" };
+
 const paragraphs = (s: string | null | undefined) => {
   const c = optionalCopy(s);
   return c && !c.pending ? c.text.split(/\n\s*\n/).filter(Boolean) : [];
@@ -37,20 +40,29 @@ export function CaseStudyPage({ study, blocks, crumbs }: { study: CaseStudyPageD
   const shownResults = previewingDrafts ? results : results.filter((r) => !r.pending);
   const sectionHead = "mx-auto max-w-[820px]";
 
+  /** The hero facts strip, in the design's order; every cell comes from the row, so none of it is invented. */
+  const facts = [
+    { label: "Industry", value: study.industry?.label ?? null },
+    { label: "Focus area", value: study.pillars[0] ? plain(study.pillars[0].name) : null },
+    { label: "Service", value: study.services[0] ? plain(study.services[0].name) : null },
+    { label: "Technology", value: study.technologies[0] ?? null },
+    { label: "Region", value: study.regions.length ? study.regions.map((r) => REGION_LABEL[r] ?? r).join(", ") : null },
+  ].filter((f): f is { label: string; value: string } => !!f.value);
+
   return (
     <RevealScope>
       {/* Hero (Figma band y 0-1535): label, title, and the executive summary card overlapping the band below. */}
       <section data-dark-hero data-compare="case-hero" className="relative isolate overflow-hidden bg-navy-950 pb-[120px] text-white lg:pb-[180px]">
         {study.image && <Img src={study.image} alt="" fill priority fetchPriority="high" sizes="100vw" className="-z-10 object-cover" />}
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(0_12_51/0.72)_0%,rgb(0_12_51/0.86)_100%)]" aria-hidden="true" />
-        <div className="container-site pt-10 lg:pt-[56px]">
-          <Breadcrumb crumbs={crumbs} className="[&_a]:text-white/75 [&_a:hover]:text-white [&_li]:text-white/60 [&_span[aria-current]]:text-white" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(0_12_51/0.58)_0%,rgb(0_12_51/0.78)_100%)]" aria-hidden="true" />
+        <div className="container-site pt-10 text-center lg:pt-[56px]">
+          <Breadcrumb crumbs={crumbs} className="flex justify-center [&_a]:text-white/75 [&_a:hover]:text-white [&_li]:text-white/60 [&_span[aria-current]]:text-white" />
           <p className="mt-10 font-heading text-[1.25rem] font-medium uppercase tracking-[0.08em] text-sky-300">
             {plain(study.label) || "Case study"}
             {study.industry && ` | ${study.industry.label}`}
           </p>
-          <h1 className="mt-4 max-w-[1100px] text-balance font-heading text-[clamp(2rem,1.2rem+2.6vw,3.875rem)] font-bold leading-[1.14] tracking-[-0.02em]">{plain(study.title)}</h1>
-          {study.clientDescriptor && <p className="mt-5 max-w-[760px] font-body text-[1.125rem] leading-[1.6] text-white/80">{plain(study.clientDescriptor)}</p>}
+          <h1 className="mx-auto mt-4 max-w-[1100px] text-balance font-heading text-[clamp(2rem,1.2rem+2.6vw,3.875rem)] font-bold leading-[1.14] tracking-[-0.02em]">{plain(study.title)}</h1>
+          {study.clientDescriptor && <p className="mx-auto mt-5 max-w-[760px] font-body text-[1.125rem] leading-[1.6] text-white/80">{plain(study.clientDescriptor)}</p>}
           <Link href="/contact" className="mt-9 inline-flex min-h-[48px] items-center gap-3 rounded-pill bg-blue-600 px-7 font-heading text-[1rem] font-bold text-white hover:bg-blue-500">
             Talk to an expert
             <Icon name="arrow" size={17} />
@@ -58,9 +70,29 @@ export function CaseStudyPage({ study, blocks, crumbs }: { study: CaseStudyPageD
         </div>
       </section>
 
+      {/*
+        The facts strip the design hangs off the bottom of the hero (Figma y 1260-1400: INDUSTRY, FOCUS AREA,
+        SOLUTION, TECHNOLOGY, PROJECT TYPE). Each cell is filled from the row's own relations, so a case study that
+        carries no industry or no technology simply shows fewer cells, and the strip disappears when it has none.
+      */}
+      {facts.length > 0 && (
+        <div data-compare="case-facts" className="relative z-10 -mt-[70px] lg:-mt-[86px]">
+          <div className="container-site">
+            <dl className="grid gap-x-6 gap-y-5 rounded-lg bg-white px-7 py-7 shadow-lift ring-1 ring-grey-200 sm:grid-cols-2 lg:grid-cols-5 lg:px-10" data-reveal>
+              {facts.map((f) => (
+                <div key={f.label}>
+                  <dt className="font-heading text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-grey-500">{f.label}</dt>
+                  <dd className="mt-1.5 font-heading text-[1.0625rem] font-bold leading-[1.3] text-navy-850">{f.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      )}
+
       {/* Executive summary (Figma y 943-1400): the summary beside the headline figure and the first results. */}
       {(summary.length > 0 || metric || shownResults.length > 0) && (
-        <section data-compare="case-summary" aria-labelledby="case-summary-heading" className="relative z-10 -mt-[90px] pb-14 lg:-mt-[130px] lg:pb-[88px]">
+        <section data-compare="case-summary" aria-labelledby="case-summary-heading" className="relative z-10 pt-14 pb-14 lg:pt-[72px] lg:pb-[88px]">
           <div className="container-site">
             <div className="rounded-lg bg-white p-8 shadow-lift ring-1 ring-grey-200 lg:p-[56px]" data-reveal>
               {/* The design puts a second line under "EXECUTIVE SUMMARY" that no field holds; repeating the title
@@ -153,25 +185,26 @@ export function CaseStudyPage({ study, blocks, crumbs }: { study: CaseStudyPageD
         </section>
       )}
 
-      {/* Results and business impact (Figma y 8585-9509). */}
+      {/* Results and business impact (Figma y 8585-9509): drawn on navy with a screenshot per result. The dark
+          treatment is kept; the screenshots are not, since no case study row carries per-result imagery. */}
       {shownResults.length > 0 && (
-        <section data-compare="case-results" aria-labelledby="case-results-heading" className="bg-white py-14 lg:py-[88px]">
+        <section data-compare="case-results" aria-labelledby="case-results-heading" className="bg-navy-950 py-14 text-white lg:py-[88px]">
           <div className="container-site">
             <div className={sectionHead} data-reveal>
-              <Eyebrow className="!text-[1rem] !tracking-[0.08em]">Results and business impact</Eyebrow>
-              <Heading2 id="case-results-heading" className="mt-3">
+              <Eyebrow className="!text-[1rem] !tracking-[0.08em] !text-sky-300">Results and business impact</Eyebrow>
+              <Heading2 id="case-results-heading" className="mt-3 !text-white">
                 What changed for the client
               </Heading2>
             </div>
             <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" role="list">
               {shownResults.map((r) => (
-                <li key={r.label} className="rounded-lg bg-tint-50 p-7" data-reveal>
+                <li key={r.label} className="rounded-lg bg-white/[0.06] p-7 ring-1 ring-white/15" data-reveal>
                   {r.pending ? (
-                    <p className="font-body text-[0.8125rem] text-[#9A5208]">Client-validated result to be added</p>
+                    <p className="rounded-sm bg-orange-500 px-2 py-1 font-body text-[0.75rem] font-bold text-navy-950">Client-validated result to be added</p>
                   ) : (
-                    <p className="font-heading text-[clamp(1.75rem,1.2rem+1.4vw,2.5rem)] font-bold leading-none text-blue-600">{plain(r.value)}</p>
+                    <p className="font-heading text-[clamp(1.75rem,1.2rem+1.4vw,2.5rem)] font-bold leading-none text-sky-300">{plain(r.value)}</p>
                   )}
-                  <p className="mt-3 font-body text-[1rem] leading-[1.55] text-grey-700">{plain(r.label)}</p>
+                  <p className="mt-3 font-body text-[1rem] leading-[1.55] text-white/80">{plain(r.label)}</p>
                 </li>
               ))}
             </ul>

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/prisma-generate-if-needed.mjs && tsx scripts/prebuild.ts",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -45,7 +46,7 @@
     "pngjs": "^7.0.0",
     "prisma": "6.19.3",
     "sharp": "0.35.5",
-    "svgo": "^4.0.0",
+    "svgo": "^4.1.0",
     "tailwindcss": "4.3.3",
     "tsx": "4.23.15",
     "typescript": "5.9.3"

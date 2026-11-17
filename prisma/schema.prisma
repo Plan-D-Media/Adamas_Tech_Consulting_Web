@@ -866,6 +866,42 @@ model EventRegistration {
   @@unique([eventId, email])
 }
 
+/// A vacancy on /about/careers. The page and every row stay DRAFT until the client sends real vacancies:
+/// the brief forbids invented job listings, and JobPosting structured data is emitted for published rows only.
+model Job {
+  id          String      @id @default(cuid())
+  slug        String      @unique
+  title       String
+  /// Discipline shown as the filter chip, e.g. "Engineering", "Design"
+  discipline  String?
+  /// Free text as the design writes it, e.g. "Exp: 2 to 4 years"
+  experience  String?
+  location    String?
+  /// Delivery region the role belongs to; drives the regional filter and JobPosting jobLocation.
+  region      RegionCode?
+  /// "Full-time", "Contract", "Internship"; maps to JobPosting employmentType.
+  type        String?
+  /// Whether the role can be done remotely (the design's "Remote" chip).
+  remote      Boolean     @default(false)
+  summary     String?
+  description String?
+  /// Where an application goes for this role; falls back to CAREERS_APPLY_URL / CAREERS_EMAIL.
+  applyUrl    String?
+  closesAt    DateTime?
+
+  status      Status    @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sortOrder   Int       @default(0)
+  needsReview Boolean   @default(false)
+  editorNote  String?
+
+  seoTitle       String?
+  seoDescription String?
+  noindex        Boolean @default(false)
+}
+
 model NewsletterSubscriber {
   id        String      @id @default(cuid())
   createdAt DateTime    @default(now())

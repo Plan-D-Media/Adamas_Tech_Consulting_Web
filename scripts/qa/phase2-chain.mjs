@@ -27,11 +27,11 @@
  *   - at least FREE_MEM_FLOOR_MB free, the brief's 4 GB floor for builds.
  */
 
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import { createConnection } from "node:net";
 import { appendFileSync, existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { freemem } from "node:os";
+import { freemem, totalmem } from "node:os";
 
 const root = process.cwd();
 const EVIDENCE = join(root, "docs", "qa", "evidence", "phase2", "build");
@@ -119,11 +119,95 @@ async function preflight() {
   log("preflight OK");
 }
 
+/* ------------------------------------------------------- cleanup and memory */
+
+/** Every process this run started, so none of them outlives it (servers, test runners, browsers). */
+const started = { child: null, ports: new Set(), reviewPid: null };
+let cleanedUp = false;
+
+function killTree(pid) {
+  if (!pid) return;
+  try {
+    spawnSync('taskkill', ['/PID', String(pid), '/T', '/F'], { stdio: 'ignore', shell: true });
+  } catch {
+    /* already gone */
+  }
+}
+
+/** Whatever is listening on `port`, by PID, without assuming it is one of ours. */
+function killPort(port) {
+  try {
+    const res = spawnSync('powershell', ['-NoProfile', '-Command',
+      `Get-NetTCPConnection -LocalPort ${port} -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique`],
+      { encoding: 'utf8' });
+    for (const line of (res.stdout || '').split(/\r?\n/)) {
+      const pid = line.trim();
+      if (/^\d+$/.test(pid)) killTree(pid);
+    }
+  } catch {
+    /* nothing listening */
+  }
+}
+
+/**
+ * Playwright's own browsers only: matched on the executable path under PLAYWRIGHT_BROWSERS_PATH, so the browser
+ * the user is reading this in is never touched.
+ */
+function killPlaywrightBrowsers() {
+  const dir = (process.env.PLAYWRIGHT_BROWSERS_PATH ?? 'E:/ms-playwright').replace(/\\/g, '/').replace(/\/$/, '');
+  const leaf = dir.split('/').pop();
+  try {
+    spawnSync('powershell', ['-NoProfile', '-Command',
+      `Get-CimInstance Win32_Process -ErrorAction SilentlyContinue | Where-Object { $_.ExecutablePath -like '*${leaf}*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }`],
+      { stdio: 'ignore' });
+  } catch {
+    /* none running */
+  }
+}
+
+/**
+ * Leaves nothing behind. Called on every exit path, including a failed step, Ctrl+C and an uncaught error: a
+ * half-finished run used to leave `next start` holding a port and a dist directory, which then blocked the next
+ * build on Windows and kept a browser's worth of memory out of reach.
+ */
+function cleanup({ keepReview = false } = {}) {
+  if (cleanedUp) return;
+  cleanedUp = true;
+  killTree(started.child?.pid);
+  for (const port of started.ports) {
+    if (keepReview && port === REVIEW_PORT) continue;
+    killPort(port);
+  }
+  killPlaywrightBrowsers();
+}
+
+process.on('SIGINT', () => { log('interrupted: stopping servers and browsers'); cleanup(); process.exit(130); });
+process.on('SIGTERM', () => { cleanup(); process.exit(143); });
+process.on('uncaughtException', (err) => { log(`uncaught error: ${err?.message ?? err}`); cleanup(); process.exit(1); });
+
+/** Free-memory samples for one step: the machine's headroom is what the 4 GB floor is about. */
+const memory = [];
+const MB = (bytes) => Math.round(bytes / 1048576);
+
+/** One line per step, plus the worst moment of the whole run, written to the log and the console. */
+function reportMemory() {
+  if (memory.length === 0) return;
+  const total = MB(totalmem());
+  log('-'.repeat(78));
+  log(`memory per step (machine total ${total} MB, floor ${FREE_MEM_FLOOR_MB} MB)`);
+  for (const m of memory) {
+    log(`  ${m.label.padEnd(42)} start ${String(MB(m.freeAtStart)).padStart(5)} MB  lowest ${String(MB(m.lowestFree)).padStart(5)} MB  used ${String(MB(m.usedByStep)).padStart(5)} MB`);
+  }
+  const worst = memory.reduce((a, b) => (a.lowestFree <= b.lowestFree ? a : b));
+  log(`  worst moment: ${MB(worst.lowestFree)} MB free during "${worst.label}"`);
+  log('-'.repeat(78));
+}
+
 /* ---------------------------------------------------------------- step runner */
 
 function run(cmd, args, { env = {}, label, logFile } = {}) {
   return new Promise((resolve) => {
-    const started = Date.now();
+    const startedAt = Date.now();
     log(`START ${label}: ${cmd} ${args.join(" ")}`);
     const out = logFile ? join(EVIDENCE, logFile) : null;
     if (out) writeFileSync(out, `# ${label}\n# ${cmd} ${args.join(" ")}\n\n`);
@@ -134,6 +218,19 @@ function run(cmd, args, { env = {}, label, logFile } = {}) {
       env: { ...process.env, ...env },
       stdio: ["ignore", "pipe", "pipe"],
     });
+
+    started.child = child;
+
+    // Free memory, sampled once a second. The 4 GB floor is about the machine's headroom, so a step reports how
+    // little was left at its worst moment rather than a per-process figure (other applications are part of the
+    // pressure too, and Windows gives no cheap way to total a process tree from Node).
+    const freeAtStart = freemem();
+    let lowestFree = freeAtStart;
+    const sampler = setInterval(() => {
+      const f = freemem();
+      if (f < lowestFree) lowestFree = f;
+    }, 1000);
+    sampler.unref?.();
 
     const tail = [];
     const onChunk = (buf) => {
@@ -149,7 +246,11 @@ function run(cmd, args, { env = {}, label, logFile } = {}) {
     child.stderr.on("data", onChunk);
 
     child.on("close", (code) => {
-      const secs = Math.round((Date.now() - started) / 1000);
+      clearInterval(sampler);
+      started.child = null;
+      const secs = Math.round((Date.now() - startedAt) / 1000);
+      memory.push({ label, freeAtStart, lowestFree, usedByStep: Math.max(0, freeAtStart - lowestFree) });
+      log(`      memory: free ${MB(freeAtStart)} MB at start, lowest ${MB(lowestFree)} MB, ${MB(Math.max(0, freeAtStart - lowestFree))} MB taken during the step`);
       if (code === 0) {
         log(`PASS  ${label} (${secs}s)${out ? ` -> ${logFile}` : ""}`);
       } else {
@@ -166,6 +267,11 @@ function run(cmd, args, { env = {}, label, logFile } = {}) {
 /* ---------------------------------------------------------------- the chain */
 
 const PLAYWRIGHT_ENV = { PLAYWRIGHT_BROWSERS_PATH: process.env.PLAYWRIGHT_BROWSERS_PATH ?? "E:/ms-playwright" };
+
+// Playwright starts `next start` on E2E_PORT itself, and step 6 owns REVIEW_PORT. Both are registered so that a
+// failed or interrupted run leaves no server holding a port (and, on Windows, a lock on its dist directory).
+started.ports.add(E2E_PORT);
+started.ports.add(REVIEW_PORT);
 
 const steps = [
   {
@@ -280,6 +386,8 @@ for (const s of steps) {
   const code = await s.go();
   if (code !== 0) {
     log(`CHAIN STOPPED at ${s.label}. Later steps not run.`);
+    reportMemory();
+    cleanup();
     log(`Resume with: node scripts/qa/phase2-chain.mjs --from ${s.n}`);
     process.exit(1);
   }
@@ -289,6 +397,8 @@ for (const s of steps) {
 
 if (!existsSync(join(root, DRAFTS_DIST))) {
   log(`step 6 SKIPPED: ${DRAFTS_DIST} does not exist (the drafts build did not run).`);
+  reportMemory();
+  cleanup();
   process.exit(1);
 }
 
@@ -324,6 +434,8 @@ for (let i = 0; i < 40; i++) {
 
 if (!up) {
   log(`step 6 FAILED: nothing answering on ${REVIEW_PORT} after 40s. See ${serverLog}`);
+  reportMemory();
+  cleanup();
   process.exit(1);
 }
 
@@ -331,6 +443,8 @@ writeFileSync(join(EVIDENCE, "chain-6-server.pid"), String(server.pid ?? ""));
 server.unref();
 
 log(`PASS  step 6 - review server up: http://localhost:${REVIEW_PORT}/in/  (pid ${server.pid}, drafts build)`);
+reportMemory();
+cleanup({ keepReview: true });
 log("CHAIN COMPLETE. The review server is left running on purpose; stop it when the review is done:");
 log(`  Stop-Process -Id ${server.pid}`);
 log("=".repeat(78));

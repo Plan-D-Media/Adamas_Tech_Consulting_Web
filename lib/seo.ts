@@ -110,3 +110,45 @@ export function articleJsonLd(opts: { headline: string; description?: string | n
     publisher: { "@type": "Organization", name: SITE_NAME, url: `${siteUrl}/` },
   };
 }
+
+/**
+ * schema.org JobPosting for a published vacancy (INNER_PAGES.md section 3: published jobs only).
+ * `hiringOrganization` is the Organization the chrome already emits.
+ */
+export function jobPostingJsonLd(opts: {
+  title: string;
+  description?: string | null;
+  path: string;
+  location?: string | null;
+  region?: string | null;
+  type?: string | null;
+  remote?: boolean;
+  posted?: string | null;
+  closes?: string | null;
+}) {
+  const COUNTRY: Record<string, string> = { IN: "IN", UK: "GB", GCC: "AE" };
+  return {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: opts.title,
+    url: absoluteUrl(opts.path),
+    ...(opts.description ? { description: opts.description } : {}),
+    ...(opts.posted ? { datePosted: opts.posted.slice(0, 10) } : {}),
+    ...(opts.closes ? { validThrough: opts.closes } : {}),
+    ...(opts.type ? { employmentType: opts.type.toUpperCase().replace(/[^A-Z]+/g, "_") } : {}),
+    ...(opts.remote ? { jobLocationType: "TELECOMMUTE" } : {}),
+    ...(opts.location || opts.region
+      ? {
+          jobLocation: {
+            "@type": "Place",
+            address: {
+              "@type": "PostalAddress",
+              ...(opts.location ? { addressLocality: opts.location } : {}),
+              ...(opts.region && COUNTRY[opts.region] ? { addressCountry: COUNTRY[opts.region] } : {}),
+            },
+          },
+        }
+      : {}),
+    hiringOrganization: { "@type": "Organization", name: SITE_NAME, url: `${siteUrl}/` },
+  };
+}

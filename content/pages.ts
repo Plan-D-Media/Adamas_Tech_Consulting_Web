@@ -792,25 +792,48 @@ export const pages: PageSeed[] = [
   },
   {
     path: "/about/careers",
-    template: "coming-soon",
-    eyebrow: "About Us",
-    title: "Careers",
+    template: "careers",
+    eyebrow: "Careers",
+    title: "We seek dreamers",
+    intro:
+      "Adamas promotes a culture of impacting users’ lives with our innovations, and we are looking for people who share that vision and contribute to it.",
     blocks: {
-      status: "Coming soon",
-      message: "Our careers page is on its way. In the meantime, we would be glad to hear from you.",
-      links: [
-        { label: "Contact us", href: "/contact" },
-        { label: "About AdamasTech", href: "/about" },
-        { label: "Meet our leadership", href: "/about/team" },
-      ],
+      why: {
+        eyebrow: "Why us",
+        heading: "Why work with AdamasTech",
+        body:
+          "Adamas promotes a culture of impacting users’ lives with our innovations. And we are looking for people who share, understand our vision and contribute to it. Our company facilitates an environment with open communication, togetherness and equal opportunities. We’re passionate about constantly expanding and forever keen to find dynamic talent. Join us to level up not just the company’s benchmarks but your own as well.",
+        ctaLabel: "Apply now",
+      },
+      process: {
+        eyebrow: "Process",
+        heading: "Our hiring process",
+        body:
+          "We respect our candidates and value their personal time, which is reflected in how we have optimised our recruiting and hiring process over time.",
+        steps: [
+          { title: "Send your CV" },
+          { title: "Initial screening" },
+          { title: "Job interview" },
+          { title: "Test task" },
+          { title: "You’re hired" },
+        ],
+      },
+      openings: {
+        eyebrow: "Current openings",
+        heading: "Join us to shape the future of enterprise technology",
+        body:
+          "We promise an inclusive working environment where you will enjoy being challenged as much as taking on a challenge.",
+        emptyLabel:
+          "We are not advertising a role at the moment. Send us your CV anyway: we keep every application on file and get in touch when something fits.",
+      },
     },
     seoTitle: "Careers",
     noindex: true,
-    status: "PUBLISHED",
+    status: "DRAFT",
     sortOrder: 2,
     needsReview: true,
     editorNote:
-      "Phase 2 (Q2.9, Q13.1). No careers content on the live site. INTERIM MICROCOPY: the 'coming soon' message is UI copy for sign-off. noindex until live.",
+      "Phase 2 (Q2.9, Q13.1). Built to Figma 274:2667 on 17 Nov 2026 and kept DRAFT per the brief: hidden publicly, the menu shows ‘Careers (coming soon)’. Copy is the designer’s, with ‘Carrer’ corrected and British spelling applied; it needs client sign-off. The Job table is empty by design (no invented vacancies), so the openings band renders its empty state. MISSING: real vacancies, the recognitions band (the design’s badges are template filler), and a decision on CAREERS_APPLY_URL vs CAREERS_EMAIL.",
   },
   {
     path: "/credentials",

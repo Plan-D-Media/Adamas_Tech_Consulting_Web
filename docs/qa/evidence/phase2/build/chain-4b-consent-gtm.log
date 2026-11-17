@@ -4,10 +4,10 @@
 
 Running 5 tests using 1 worker
 
-  ✓  1 [chromium] › tests\e2e\consent.spec.ts:30:7 › cookie consent › nothing from Google is requested before the visitor chooses (2.9s)
-  ✓  2 [chromium] › tests\e2e\consent.spec.ts:52:7 › cookie consent › rejecting stores the choice, closes the banner and still loads nothing (4.1s)
-  ✓  3 [chromium] › tests\e2e\consent.spec.ts:69:7 › cookie consent › accepting loads Tag Manager, and only then (999ms)
-  ✓  4 [chromium] › tests\e2e\consent.spec.ts:90:7 › cookie consent › the footer reopens the banner so a choice can be changed (2.3s)
-  ✓  5 [chromium] › tests\e2e\consent.spec.ts:114:7 › cookie consent › the cookie policy describes the build it is served from (926ms)
+  ✓  1 [chromium] › tests\e2e\consent.spec.ts:30:7 › cookie consent › nothing from Google is requested before the visitor chooses (2.5s)
+  ✓  2 [chromium] › tests\e2e\consent.spec.ts:52:7 › cookie consent › rejecting stores the choice, closes the banner and still loads nothing (3.1s)
+  ✓  3 [chromium] › tests\e2e\consent.spec.ts:69:7 › cookie consent › accepting loads Tag Manager, and only then (855ms)
+  ✓  4 [chromium] › tests\e2e\consent.spec.ts:90:7 › cookie consent › the footer reopens the banner so a choice can be changed (1.6s)
+  ✓  5 [chromium] › tests\e2e\consent.spec.ts:114:7 › cookie consent › the cookie policy describes the build it is served from (2.9s)
 
-  5 passed (17.2s)
+  5 passed (14.3s)

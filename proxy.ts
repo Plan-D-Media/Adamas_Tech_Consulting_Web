@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import legacyRedirects from "@/lib/generated/redirects.json";
 import unpublishedFallbacks from "@/lib/generated/unpublished.json";
+import unpublishedPages from "@/lib/generated/unpublished-pages.json";
 import { LEGACY_REGION_SLUGS, REGION_COOKIE, REGION_SLUGS, defaultRegion, isRegionSlug, regionForCountry } from "@/lib/region";
 import { SOLUTIONS_ANCHOR } from "@/lib/anchors";
 import { securityHeaders } from "@/lib/security-headers";
@@ -15,7 +16,8 @@ import { previewingDrafts } from "@/lib/preview";
  * 2b. /solutions (and anything under it) is a 301 to the Products & Solutions section of the region homepage:
  *    solutions have no pages here since 17 Nov 2026, they link out to their own websites.
  * 3. Legacy WordPress URLs → new URLs (Redirect table, compiled to lib/generated/redirects.json by the seed).
- * 3b. A detail URL whose row exists but is not published → its listing, as a real 307 with a Location header
+ * 3b. A path whose Page row is not published → a real 404 (the route's own notFound() arrives after the 200).
+ * 3c. A detail URL whose row exists but is not published → its listing, as a real 307 with a Location header
  *    (lib/generated/unpublished.json). In the route itself redirect() would only emit a client-side meta
  *    refresh, because the route is prerendered and streams (QA BUG-039). Skipped while drafts are previewed.
  * 4. Any other single-segment path that isn't a top-level page is a 404 (app/[region] only serves in/uk/gcc).
@@ -26,6 +28,8 @@ import { previewingDrafts } from "@/lib/preview";
 const redirects = legacyRedirects as unknown as Record<string, [string, number]>;
 /** Detail path → the listing to send a visitor to while the row is unpublished; empty in a drafts build. */
 const unpublished = previewingDrafts ? {} : (unpublishedFallbacks as unknown as Record<string, string>);
+/** Paths whose Page row is not published; empty while drafts are previewed. */
+const hiddenPages = new Set(previewingDrafts ? [] : (unpublishedPages as unknown as string[]));
 
 /**
  * Top-level folders in app/ besides [region]. app/[region] reads its param inside <Suspense> (instant navigation), so
@@ -137,6 +141,12 @@ export function proxy(request: NextRequest) {
 
   // The row exists but is not published yet: a temporary redirect to its listing, never cached, so the page
   // starts answering 200 again the moment the row is published (QA BUG-002, BUG-039).
+  // An unpublished page answers a real 404. The route calls notFound() too, but these routes stream, so the 200
+  // has already been sent by then and the visitor gets the 404 page under a 200 - a soft 404 (QA BUG-041).
+  if (hiddenPages.has(bare.toLowerCase())) {
+    return NextResponse.rewrite(new URL("/_unknown/region", request.url));
+  }
+
   const hidden = unpublished[bare.toLowerCase()];
   if (hidden) {
     const res = NextResponse.redirect(new URL(`${hidden}${search}`, request.url), 307);
