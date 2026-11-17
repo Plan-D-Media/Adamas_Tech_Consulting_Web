@@ -88,7 +88,8 @@ export async function Footer({ nav, legal, social, regions, offices, region, fal
           <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4">
             {nav.map((col) => (
               <div key={col.key ?? col.label}>
-                <h3 className="label-caps font-body text-sky-400">{col.label}</h3>
+                {/* h2: pages without a body H2 skipped from H1 to H3 (QA BUG-024); the look comes from the classes. */}
+                <h2 className="label-caps font-body text-sky-400">{col.label}</h2>
                 <ul className="mt-3 grid gap-1" role="list">
                   {col.children.map((l) => (
                     <li key={l.key ?? l.label}>
@@ -103,9 +104,9 @@ export async function Footer({ nav, legal, social, regions, offices, region, fal
 
         {offices.length > 0 && (
           <section aria-labelledby="footer-offices" className="mt-16 border-t border-navy-700 pt-10">
-            <h3 id="footer-offices" className="label-caps font-body text-sky-400">
+            <h2 id="footer-offices" className="label-caps font-body text-sky-400">
               Our offices
-            </h3>
+            </h2>
             <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-5" role="list">
               {offices.map((o) => (
                 <li key={o.slug}>

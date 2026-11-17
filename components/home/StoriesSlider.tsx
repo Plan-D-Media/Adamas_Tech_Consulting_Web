@@ -20,7 +20,10 @@ const fmtDate = (iso?: string) => (iso ? new Intl.DateTimeFormat("en-GB", { day:
 export function StoriesSlider({ eyebrow, heading, body, items }: { eyebrow: string; heading: string; body: string; items: Story[] }) {
   const { trackRef, index, loopReady, prev, next } = useSlider(items.length, { loop: items.length > 1 });
   const wave = mediaUrl("images/home/story-wave.webp");
-  const slides = loopReady && items.length > 1 ? [{ story: items[items.length - 1], clone: true }, ...items.map((story) => ({ story, clone: false })), { story: items[0], clone: true }] : items.map((story) => ({ story, clone: false }));
+  // Stable keys: the real stories keep their <article> elements when the two copies are inserted after hydration (index
+  // keys shifted the content instead and left the last two elements unrevealed, QA BUG-006).
+  const real = items.map((story, i) => ({ story, clone: false, key: `s${i}` }));
+  const slides = loopReady && items.length > 1 ? [{ story: items[items.length - 1], clone: true, key: "clone-last" }, ...real, { story: items[0], clone: true, key: "clone-first" }] : real;
   return (
     <>
       <div className="container-chrome">
@@ -38,13 +41,14 @@ export function StoriesSlider({ eyebrow, heading, body, items }: { eyebrow: stri
         className="scrollbar-none mt-[31px] flex snap-x snap-mandatory gap-[37px] overflow-x-auto px-[max(var(--gutter),calc((100%-76.0625rem)/2))] pb-6 [scroll-padding-inline:max(var(--gutter),calc((100%-76.0625rem)/2))]"
         aria-label="Stories"
       >
-        {slides.map(({ story: s, clone }, i) => {
+        {slides.map(({ story: s, clone, key }) => {
           const date = fmtDate(s.date);
           return (
             <article
-              key={i}
+              key={key}
               aria-hidden={clone || undefined}
-              data-reveal
+              // The copies are added after the reveal pass has started, so they are never part of it: always visible.
+              data-reveal={clone ? undefined : ""}
               className="relative flex w-[min(76.0625rem,calc(100vw-2*var(--gutter)))] shrink-0 snap-start flex-col overflow-hidden rounded-2xl bg-tint-50 shadow-[0_2px_18.4px_rgb(5_44_89/0.12)] ring-1 ring-white lg:h-[365px] lg:flex-row"
               style={{ backgroundImage: `linear-gradient(90deg, rgb(255 255 255), rgb(255 255 255 / 0)), url(${wave})`, backgroundSize: "cover" }}
             >

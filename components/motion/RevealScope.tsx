@@ -33,9 +33,13 @@ export function RevealScope({ children, className }: { children: ReactNode; clas
     const fold = window.innerHeight * 1.1;
     for (const el of nodes) if (el.getBoundingClientRect().top < fold) show(el);
 
+    // Once GSAP owns the inline opacity, a focus inside a still-hidden element also clears the tween (QA BUG-026).
+    let revealNow: ((el: HTMLElement) => void) | undefined;
     const onFocus = (e: FocusEvent) => {
-      const el = (e.target as HTMLElement | null)?.closest<HTMLElement>("[data-reveal]:not([data-revealed])");
-      if (el) show(el);
+      const el = (e.target as HTMLElement | null)?.closest<HTMLElement>("[data-reveal]");
+      if (!el) return;
+      if (!el.hasAttribute("data-revealed")) show(el);
+      revealNow?.(el);
     };
     root.addEventListener("focusin", onFocus);
 
@@ -51,6 +55,11 @@ export function RevealScope({ children, className }: { children: ReactNode; clas
         .then(([{ gsap }, { ScrollTrigger }]) => {
           if (cancelled) return;
           gsap.registerPlugin(ScrollTrigger);
+          revealNow = (el) => {
+            if (parseFloat(getComputedStyle(el).opacity) >= 1) return;
+            gsap.killTweensOf(el);
+            gsap.set(el, { clearProps: "opacity,transform" });
+          };
           const groups = new Map<Element, HTMLElement[]>();
           for (const el of nodes) {
             if (el.hasAttribute("data-revealed")) continue;

@@ -1,0 +1,15 @@
+Cloud Services page height: ours 11213px vs Figma 11313px
+Sections found on the page: hero, intro, difference, expertise, platforms, industries, capabilities, cases, ecosystem, quality, faq, contact, footer
+Hero: 92.3% match (height 530px vs Figma 530px)
+Intro: 95.5% match (height 798px vs Figma 798px)
+What makes it different: 92.4% match (height 968px vs Figma 923px)
+Expertise cards: 93.6% match (height 696px vs Figma 670px)
+Platform expertise: 94.7% match (height 766px vs Figma 767px)
+Industries: 89.5% match (height 1168px vs Figma 1196px)
+Services & capabilities: 96.2% match (height 1257px vs Figma 1274px)
+Case studies: 81.4% match (height 886px vs Figma 1010px)
+Technology ecosystem: 95.7% match (height 788px vs Figma 742px)
+Quality & trust: 96.4% match (height 858px vs Figma 894px)
+FAQ: 96.4% match (height 859px vs Figma 869px)
+Contact card: 84.6% match (height 779px vs Figma 810px)
+Footer: 92.2% match (height 861px vs Figma 830px)

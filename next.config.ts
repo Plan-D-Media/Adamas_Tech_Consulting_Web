@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { securityHeaders } from "./lib/security-headers";
 
 // Allow next/image to optimise media from CloudFront when MEDIA_BASE_URL is absolute.
 const mediaBase = process.env.MEDIA_BASE_URL ?? "/media";
@@ -14,6 +15,10 @@ const nextConfig: NextConfig = {
   // Homepages live at /in/, /uk/, /ae/ (trailing slash) while inner pages have none; proxy.ts owns slash handling.
   skipTrailingSlashRedirect: true,
   poweredByHeader: false,
+  // Security headers on every response Next serves (lib/security-headers.ts; proxy.ts covers its own redirects).
+  async headers() {
+    return [{ source: "/:path*", headers: securityHeaders() }];
+  },
   images: {
     qualities: [75, 85],
     formats: ["image/avif", "image/webp"],

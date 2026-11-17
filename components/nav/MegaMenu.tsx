@@ -169,6 +169,10 @@ function DraftBadge() {
  * Desktop navigation with mega menus (About Us, Services, Solutions, Insights; Case Studies is a direct link).
  * Hover intent (140ms open / 200ms close), click or tap toggles, Enter/Space opens, Esc closes and returns focus,
  * the panel closes when focus leaves it. Panels fade and slide in over 200ms (CSS keyframes), none with reduced motion.
+ *
+ * The open panel is rendered inside its own trigger's <li>, directly after the button, so Tab from the trigger moves
+ * into the panel in DOM order (the panel is positioned against the header box, so it looks the same wherever it
+ * lives). Rendering every panel after the whole trigger list skipped the panel for all but the last menu (QA BUG-008).
  */
 export function MegaMenu({ items }: { items: NavLink[] }) {
   const [openKey, setOpenKey] = useState<string | null>(null);
@@ -206,11 +210,14 @@ export function MegaMenu({ items }: { items: NavLink[] }) {
     return () => document.removeEventListener("keydown", onKey);
   }, [openKey, close]);
 
+  // Close when focus leaves the open trigger and its panel (another trigger, the switcher, the page). Pointer
+  // clicks on triggers are handled by onClick, so a click on another trigger still toggles cleanly.
   const onBlur = (e: React.FocusEvent) => {
-    if (!navRef.current?.contains(e.relatedTarget as Node)) close();
+    if (!openKey) return;
+    const next = e.relatedTarget as Node | null;
+    const owner = navRef.current?.querySelector(`li[data-menu-item="${openKey}"]`);
+    if (!next || !owner?.contains(next)) close();
   };
-
-  const open = items.find((i) => i.key === openKey && i.children.length > 0);
 
   return (
     <nav ref={navRef} aria-label="Main" className="static hidden h-full flex-1 items-center justify-end nav:flex" onBlur={onBlur}>
@@ -223,7 +230,7 @@ export function MegaMenu({ items }: { items: NavLink[] }) {
           const isOpen = openKey === key;
           const cls = cx("inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap font-ui text-nav text-ink transition-colors duration-(--duration-fast) hover:text-blue-600", isOpen && "text-blue-600");
           return (
-            <li key={key} className="static" onPointerEnter={hasMenu ? () => scheduleOpen(key) : undefined} onPointerLeave={hasMenu ? scheduleClose : undefined}>
+            <li key={key} data-menu-item={key} className="static" onPointerEnter={hasMenu ? () => scheduleOpen(key) : undefined} onPointerLeave={hasMenu ? scheduleClose : undefined}>
               {hasMenu ? (
                 <button
                   type="button"
@@ -242,23 +249,22 @@ export function MegaMenu({ items }: { items: NavLink[] }) {
                   <Icon name="chevron-down" size={10} className={cx("transition-transform duration-(--duration-fast)", isOpen && "rotate-180")} />
                 </button>
               ) : (
-                <Link href={item.href ?? "#"} className={cls} onFocus={close}>
+                <Link href={item.href ?? "#"} className={cls}>
                   {item.label}
                 </Link>
+              )}
+              {/* The hover zone starts at the bar's bottom edge: the 45px gap in Figma is transparent padding, so the pointer can cross it. */}
+              {hasMenu && isOpen && (
+                <div className="absolute left-0 right-0 top-full pt-[45px]" onPointerEnter={clear} onPointerLeave={scheduleClose}>
+                  <div className="anim-panel-in rounded-lg">
+                    <Panel item={item} panelId={panelId} labelId={labelId} />
+                  </div>
+                </div>
               )}
             </li>
           );
         })}
       </ul>
-
-      {/* The hover zone starts at the bar's bottom edge: the 45px gap in Figma is transparent padding, so the pointer can cross it. */}
-      <div className="absolute left-0 right-0 top-full pt-[45px]" onPointerEnter={clear} onPointerLeave={scheduleClose}>
-        {open && (
-          <div key={open.key ?? open.label} className="anim-panel-in rounded-lg">
-            <Panel item={open} panelId={`${uid}-${(open.key ?? open.label).replace(/\W+/g, "-")}`} labelId={`${uid}-${(open.key ?? open.label).replace(/\W+/g, "-")}-label`} />
-          </div>
-        )}
-      </div>
     </nav>
   );
 }

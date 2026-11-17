@@ -369,6 +369,21 @@
     }
   }
 
+  /* Hero auto-advance progress bar (components/ui/SliderControls.tsx): a transform-only CSS animation, paused and
+     resumed through animation-play-state, whose end event advances the carousel (QA BUG-005). */
+  .progress-fill {
+    transform-origin: left center;
+    animation: progress-fill var(--progress-duration, 7s) linear forwards;
+  }
+  @keyframes progress-fill {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
   /* Partners marquee (components/home/Marquee.tsx) */
   .marquee-track {
     animation: marquee var(--marquee-duration, 48s) linear infinite;
@@ -436,7 +451,8 @@
     gap: 0.375rem;
   }
   .placeholder nav a {
-    color: var(--color-blue-500);
+    /* blue-600 (4.6:1 on white); blue-500 measured 3.59:1 in the axe pass (QA BUG-012). */
+    color: var(--color-blue-600);
     text-decoration: underline;
     text-underline-offset: 3px;
   }

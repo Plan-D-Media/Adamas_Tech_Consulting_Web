@@ -6,7 +6,7 @@ import { NextResponse, type NextRequest } from "next/server";
  * POST /api/revalidate  { "tags": ["home", "nav"] }   header: x-revalidate-secret: <REVALIDATE_SECRET>
  * Omitting tags invalidates every content tag.
  */
-const ALL_TAGS = ["home", "nav", "regions", "offices", "blocks", "milestones"];
+const ALL_TAGS = ["home", "nav", "regions", "offices", "blocks", "milestones", "links", "events", "case-studies", "solutions", "services", "pages"];
 
 export async function POST(request: NextRequest) {
   const secret = process.env.REVALIDATE_SECRET;

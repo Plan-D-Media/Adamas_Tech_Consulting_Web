@@ -43,10 +43,13 @@ export function ServiceCases({ eyebrow, heading, body, note, ctaLabel, ctaHref, 
             </div>
           )}
         </div>
-        <ul ref={trackRef} className="scrollbar-none mt-10 flex snap-x snap-mandatory gap-[18px] overflow-x-auto pb-2 lg:mt-[60px]" role="list" aria-label="Case studies">
+        {/* The rail and the card link are positioned: the card's visually-hidden ": title" span is position:absolute, and
+            without a positioned ancestor it was laid out against the viewport, outside the scroll container, widening
+            the document by the hidden cards once GSAP cleared the reveal transform that had been containing it (QA BUG-007). */}
+        <ul ref={trackRef} className="scrollbar-none relative mt-10 flex snap-x snap-mandatory gap-[18px] overflow-x-auto pb-2 lg:mt-[60px]" role="list" aria-label="Case studies">
           {items.map((c, i) => (
             <li key={c.slug} className="w-[min(428px,85vw)] shrink-0 snap-start" data-reveal>
-              <Link href={`/case-studies/${c.slug}`} className="group flex h-full flex-col rounded-[9px] bg-white/68 p-[7px] pb-[22px] shadow-[0_10px_32px_rgb(58_74_110/0.07)] ring-1 ring-white/95 transition-shadow duration-(--duration-base) hover:shadow-[0_14px_40px_rgb(58_74_110/0.14)]">
+              <Link href={`/case-studies/${c.slug}`} className="group relative flex h-full flex-col rounded-[9px] bg-white/68 p-[7px] pb-[22px] shadow-[0_10px_32px_rgb(58_74_110/0.07)] ring-1 ring-white/95 transition-shadow duration-(--duration-base) hover:shadow-[0_14px_40px_rgb(58_74_110/0.14)]">
                 <div className="relative h-[250px] overflow-hidden rounded-md bg-navy-900">
                   {c.image && <Img src={c.image} fill sizes="412px" className="object-cover" />}
                   <span className="absolute left-[15px] top-[15px] inline-flex h-[37px] w-[37px] items-center justify-center rounded-full bg-navy-900/70 font-heading text-[0.5625rem] font-bold text-white backdrop-blur" aria-hidden="true">

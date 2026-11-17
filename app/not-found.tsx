@@ -1,5 +1,9 @@
+import type { Metadata } from "next";
 import { SiteChrome } from "@/components/nav/SiteChrome";
 import { Placeholder } from "@/components/Placeholder";
+
+/** A titled 404 (QA BUG-031); never indexed. */
+export const metadata: Metadata = { title: "Page not found", robots: { index: false, follow: false } };
 
 const LINKS = [
   { label: "Homepage", href: "/" },

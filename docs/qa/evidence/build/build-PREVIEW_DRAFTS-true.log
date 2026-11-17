@@ -1,0 +1,82 @@
+
+> adamas-tech-consulting-web@0.1.0 build
+> next build
+
+▲ Next.js 16.4.3 (Turbopack)
+- Environments: .env.local, .env
+✓ Running next.config.ts took 123ms
+- Cache Components enabled
+- Partial Prefetching enabled
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 2.5s
+  Running TypeScript ...
+  Finished TypeScript in 3.0s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/90) ...
+  Generating static pages using 7 workers (22/90) 
+  Generating static pages using 7 workers (44/90) 
+  Generating static pages using 7 workers (67/90) 
+✓ Generating static pages using 7 workers (90/90) in 5.1s
+  Finalizing page optimization ...
+
+Route (app)                                             Revalidate  Expire
+┌ ○ /_not-found                                                 1h      1d
+├   /[region]                                                   1h      1d
+│ ├ ◐ /[region]                                                 1h      1d
+│ ├ ○ /in                                                       1h      1d
+│ ├ ○ /uk                                                       1h      1d
+│ └ ○ /gcc                                                      1h      1d
+├ ○ /about                                                      1h      1d
+├ ○ /about/careers                                              1h      1d
+├ ○ /about/team                                                 1h      1d
+├ ƒ /api/revalidate
+├ ○ /case-studies                                               1h      1d
+├   /case-studies/[slug]                                        1h      1d
+│ ├ ◐ /case-studies/[slug]                                      1h      1d
+│ ├ ○ /case-studies/face-recognition                            1h      1d
+│ ├ ○ /case-studies/car-parking-lot                             1h      1d
+│ └ ◐ [+18 more paths]
+├ ○ /contact                                                    1h      1d
+├ ○ /cookie-policy                                              1h      1d
+├ ○ /credentials                                                1h      1d
+├ ○ /figma-fixture                                              1h      1d
+├ ○ /insights                                                   1h      1d
+├ ○ /insights/blog                                              1h      1d
+├ ○ /insights/events                                            1h      1d
+├   /insights/events/[slug]                                     1h      1d
+│ ├ ◐ /insights/events/[slug]                                   1h      1d
+│ └ ○ /insights/events/house-of-lords-2026                      1h      1d
+├ ƒ /insights/events/[slug]/calendar
+├ ○ /privacy-policy                                             1h      1d
+├ ○ /robots.txt
+├ ○ /search                                                     1h      1d
+├ ○ /services                                                   1h      1d
+├   /services/[pillar]                                          1h      1d
+│ ├ ◐ /services/[pillar]                                        1h      1d
+│ ├ ○ /services/cloud-services                                  1h      1d
+│ ├ ○ /services/digital-transformation                          1h      1d
+│ └ ○ /services/ai-services                                     1h      1d
+├   /services/[pillar]/[service]                                1h      1d
+│ ├ ◐ /services/[pillar]/[service]                              1h      1d
+│ ├ ◐ /services/cloud-services/[service]                        1h      1d
+│ ├ ○ /services/cloud-services/migration-modernization          1h      1d
+│ └ ◐ [+22 more paths]
+├ ○ /sitemap.xml                                                1h      1d
+├ ○ /solutions                                                  1h      1d
+├   /solutions/[slug]                                           1h      1d
+│ ├ ◐ /solutions/[slug]                                         1h      1d
+│ ├ ○ /solutions/arivoo                                         1h      1d
+│ ├ ○ /solutions/a-eye                                          1h      1d
+│ └ ◐ [+8 more paths]
+├ ○ /terms-of-use                                               1h      1d
+└ ○ /thank-you                                                  1h      1d
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)             prerendered as static content
+◐  (Partial Prerender)  prerendered as static HTML with dynamic server-streamed content
+ƒ  (Dynamic)            server-rendered on demand
+
+BUILD EXIT 0

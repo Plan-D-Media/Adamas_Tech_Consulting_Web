@@ -45,7 +45,6 @@ export function ServicePlatforms({ eyebrow, heading, accent, body, note, items }
                       <span className="font-heading text-[1.25rem] font-bold leading-[1.5] text-navy-850">{it.title}</span>
                     </span>
                     <span className="mt-[6px] block max-w-[583px] font-heading text-[1.125rem] leading-[1.22] text-[#566272]">{it.summary}</span>
-                    {it.detail && <span className="mt-2 hidden max-w-[564px] font-heading text-[1.125rem] leading-[1.22] text-[#394A60] group-open:block">{it.detail}</span>}
                   </span>
                   <span className="relative mt-[2px] inline-flex h-[38px] w-[38px] items-center justify-center rounded-full text-blue-600 ring-1 ring-blue-600/30 group-open:bg-blue-600 group-open:text-white group-open:ring-blue-600" aria-hidden="true">
                     <svg viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -54,6 +53,9 @@ export function ServicePlatforms({ eyebrow, heading, accent, body, note, items }
                     </svg>
                   </span>
                 </summary>
+                {/* Expanded copy lives outside <summary>, so selecting or clicking the text does not collapse the row and
+                    screen readers do not read it as part of the button (QA BUG-030). Indented to the title column. */}
+                {it.detail && <p className="-mt-2 max-w-[564px] px-[22px] pb-5 pl-[58px] font-heading text-[1.125rem] leading-[1.22] text-[#394A60]">{it.detail}</p>}
               </details>
             ))}
           </div>

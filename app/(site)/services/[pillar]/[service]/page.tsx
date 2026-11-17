@@ -3,10 +3,13 @@ import { notFound } from "next/navigation";
 import { getService, getServiceParams } from "@/lib/data/services";
 import { getBlocks } from "@/lib/data/site";
 import { plain } from "@/lib/placeholder";
+import { NO_CONTENT_SLUG, atLeastOne } from "@/lib/static-params";
+import { redirectIfUnpublished } from "@/lib/data/unpublished";
 import { ServicePage } from "@/components/services/ServicePage";
 
+/** With no visible service the placeholder param keeps the build alive; it renders the 404 page (BUG-001). */
 export async function generateStaticParams() {
-  return getServiceParams();
+  return atLeastOne(await getServiceParams(), { pillar: NO_CONTENT_SLUG, service: NO_CONTENT_SLUG });
 }
 
 export async function generateMetadata({ params }: PageProps<"/services/[pillar]/[service]">): Promise<Metadata> {
@@ -32,6 +35,9 @@ export default function ServiceRoute({ params }: PageProps<"/services/[pillar]/[
 async function Service({ params }: { params: PageProps<"/services/[pillar]/[service]">["params"] }) {
   const { pillar, service } = await params;
   const [s, blocks] = await Promise.all([getService(pillar, service), getBlocks(null)]);
-  if (!s) notFound();
+  if (!s) {
+    await redirectIfUnpublished("services", service);
+    notFound();
+  }
   return <ServicePage service={s} blocks={blocks} />;
 }

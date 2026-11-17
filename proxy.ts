@@ -1,17 +1,22 @@
 import { NextResponse, type NextRequest } from "next/server";
 import legacyRedirects from "@/lib/generated/redirects.json";
 import { LEGACY_REGION_SLUGS, REGION_COOKIE, REGION_SLUGS, defaultRegion, isRegionSlug, regionForCountry } from "@/lib/region";
+import { securityHeaders } from "@/lib/security-headers";
 
 /**
+ * 0. Preview protection: when PREVIEW_USERNAME and PREVIEW_PASSWORD are both set (staging), every request, including
+ *    /_next data, media and API routes, must carry matching Basic Auth. /api/revalidate is exempt: it has its own
+ *    shared secret and is called server-to-server by the seed and the CMS. Unset locally and in production.
  * 1. "/" only: region cookie → that homepage; otherwise IP country → /in/, /uk/ or /gcc/. Inner pages are never geo-redirected.
  * 2. Homepages are canonical with a trailing slash (/in → /in/). The old Gulf homepage /ae/ (and anything under it) is a 301 to /gcc/.
  * 3. Legacy WordPress URLs → new URLs (Redirect table, compiled to lib/generated/redirects.json by the seed).
- * 4. Any other single-segment path that isn't a top-level page is a 404 (app/[region] only serves in/uk/ae).
+ * 4. Any other single-segment path that isn't a top-level page is a 404 (app/[region] only serves in/uk/gcc).
  * 5. Any other trailing slash is removed.
+ * Every response the proxy creates itself carries the security headers (lib/security-headers.ts); next.config.ts
+ * adds them to everything else.
  */
 const redirects = legacyRedirects as unknown as Record<string, [string, number]>;
 
-// Country headers set by the CDN in front of the app (CloudFront in production).
 /**
  * Top-level folders in app/ besides [region]. app/[region] reads its param inside <Suspense> (instant navigation), so
  * a notFound() there would arrive after the 200 has been sent; unknown regions are rejected here instead.
@@ -23,10 +28,60 @@ const TOP_LEVEL_ROUTES = new Set([
   "figma-fixture", // design-comparison fixture, served only with FIGMA_FIXTURE=1 (app/figma-fixture)
 ]);
 
+// Country headers set by the CDN in front of the app (CloudFront in production).
 const COUNTRY_HEADERS = ["cloudfront-viewer-country", "x-vercel-ip-country", "cf-ipcountry", "x-country-code"];
+
+/** Paths the routing rules below never touch (Next internals, API routes, media and files with an extension). */
+const PASS_THROUGH = /^\/(?:_next\/|api\/|media\/)|\.[\w]+$/;
+
+/** Root-level files the app serves (metadata routes); any other single-segment "file" is a 404, not a region. */
+const ROOT_FILES = new Set(["/robots.txt", "/sitemap.xml", "/favicon.ico"]);
+
+function withSecurityHeaders<T extends NextResponse>(res: T): T {
+  for (const { key, value } of securityHeaders()) res.headers.set(key, value);
+  return res;
+}
+
+/** Constant-time string comparison, so the challenge does not leak how much of a guess matched. */
+function sameSecret(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
+function previewAuthorized(request: NextRequest): boolean {
+  const user = process.env.PREVIEW_USERNAME;
+  const pass = process.env.PREVIEW_PASSWORD;
+  if (!user || !pass) return true;
+  if (request.nextUrl.pathname === "/api/revalidate") return true;
+  const header = request.headers.get("authorization") ?? "";
+  if (!/^Basic\s+/i.test(header)) return false;
+  try {
+    const decoded = atob(header.replace(/^Basic\s+/i, "").trim());
+    return sameSecret(decoded, `${user}:${pass}`);
+  } catch {
+    return false;
+  }
+}
 
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
+
+  if (!previewAuthorized(request)) {
+    return withSecurityHeaders(
+      new NextResponse("Authentication required", {
+        status: 401,
+        headers: { "WWW-Authenticate": 'Basic realm="AdamasTech preview", charset="UTF-8"', "Cache-Control": "no-store" },
+      }),
+    );
+  }
+
+  if (PASS_THROUGH.test(pathname)) {
+    // "/.env", "/wp-login.php" and the like would otherwise match app/[region] and get the App Shell (a 200) on their first hit.
+    const single = /^\/[^/]*\.[\w]+$/.test(pathname) && !ROOT_FILES.has(pathname.toLowerCase());
+    return single ? NextResponse.rewrite(new URL("/_unknown/region", request.url)) : NextResponse.next();
+  }
 
   if (pathname === "/") {
     const raw = request.cookies.get(REGION_COOKIE)?.value;
@@ -39,24 +94,24 @@ export function proxy(request: NextRequest) {
     const res = NextResponse.redirect(new URL(`/${region}/${search}`, request.url), 307);
     res.headers.set("Vary", "Cookie, CloudFront-Viewer-Country");
     res.headers.set("Cache-Control", "private, no-store");
-    return res;
+    return withSecurityHeaders(res);
   }
 
   const bare = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
 
   // The Gulf homepage moved from /ae/ to /gcc/ (sitemap, 13 Nov 2026): one hop, whatever followed /ae/.
   if (bare === "/ae" || bare.startsWith("/ae/")) {
-    return NextResponse.redirect(new URL(`/gcc/${search}`, request.url), 301);
+    return withSecurityHeaders(NextResponse.redirect(new URL(`/gcc/${search}`, request.url), 301));
   }
 
   if (REGION_SLUGS.some((r) => bare === `/${r}`)) {
-    return pathname.endsWith("/") ? NextResponse.next() : NextResponse.redirect(new URL(`${bare}/${search}`, request.url), 308);
+    return pathname.endsWith("/") ? NextResponse.next() : withSecurityHeaders(NextResponse.redirect(new URL(`${bare}/${search}`, request.url), 308));
   }
 
   const legacy = redirects[bare.toLowerCase()];
   if (legacy) {
     const [to, status] = legacy;
-    return NextResponse.redirect(new URL(to.startsWith("http") ? to : `${to}${search}`, request.url), status === 302 ? 302 : 301);
+    return withSecurityHeaders(NextResponse.redirect(new URL(to.startsWith("http") ? to : `${to}${search}`, request.url), status === 302 ? 302 : 301));
   }
 
   const segments = bare.split("/").filter(Boolean);
@@ -66,13 +121,13 @@ export function proxy(request: NextRequest) {
   }
 
   if (pathname !== bare) {
-    return NextResponse.redirect(new URL(`${bare}${search}`, request.url), 308);
+    return withSecurityHeaders(NextResponse.redirect(new URL(`${bare}${search}`, request.url), 308));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  // Skip Next internals, media and files with an extension.
-  matcher: ["/((?!_next/|api/|media/|.*\\.[\\w]+$).*)"],
+  // Everything, so the preview challenge covers /_next data, media and API routes too; PASS_THROUGH skips the routing rules for them.
+  matcher: ["/(.*)"],
 };

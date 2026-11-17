@@ -1,0 +1,24 @@
+/in/ run 1: perf 89 LCP 3652 ms TBT 88 ms CLS 0.001
+/in/ run 2: perf 89 LCP 3639 ms TBT 94 ms CLS 0.000
+/in/ run 3: perf 88 LCP 3639 ms TBT 135 ms CLS 0.000
+/uk/ run 1: perf 88 LCP 3635 ms TBT 136 ms CLS 0.000
+/uk/ run 2: perf 89 LCP 3653 ms TBT 105 ms CLS 0.000
+/uk/ run 3: perf 89 LCP 3635 ms TBT 124 ms CLS 0.000
+/gcc/ run 1: perf 90 LCP 3617 ms TBT 62 ms CLS 0.001
+/gcc/ run 2: perf 89 LCP 3645 ms TBT 58 ms CLS 0.001
+/gcc/ run 3: perf 86 LCP 3651 ms TBT 200 ms CLS 0.000
+/services/cloud-services run 1: perf 93 LCP 3164 ms TBT 59 ms CLS 0.000
+/services/cloud-services run 2: perf 93 LCP 2967 ms TBT 125 ms CLS 0.000
+/services/cloud-services run 3: perf 92 LCP 3179 ms TBT 80 ms CLS 0.000
+/insights/events/house-of-lords-2026 run 1: perf 94 LCP 3057 ms TBT 50 ms CLS 0.000
+/insights/events/house-of-lords-2026 run 2: perf 94 LCP 3015 ms TBT 53 ms CLS 0.000
+/insights/events/house-of-lords-2026 run 3: perf 94 LCP 3014 ms TBT 48 ms CLS 0.000
+| URL | Perf | A11y | BP | SEO | LCP | CLS | TBT | FCP | SI | DOM | Script | Images | Fonts |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| /in/ | 89 | 100 | 100 | 69 | 3639 ms | 0.000 | 94 ms | 1520 ms | 1878 ms | 1608 | 214 KB | 297 KB | 81 KB |
+| /uk/ | 89 | 100 | 100 | 69 | 3635 ms | 0.000 | 124 ms | 1518 ms | 1898 ms | 1608 | 214 KB | 297 KB | 81 KB |
+| /gcc/ | 89 | 100 | 100 | 69 | 3645 ms | 0.001 | 62 ms | 1518 ms | 1921 ms | 1606 | 214 KB | 297 KB | 81 KB |
+| /services/cloud-services | 93 | 100 | 96 | 69 | 3164 ms | 0.000 | 80 ms | 1514 ms | 1514 ms | 1213 | 219 KB | 54 KB | 81 KB |
+| /insights/events/house-of-lords-2026 | 94 | 100 | 96 | 69 | 3015 ms | 0.000 | 50 ms | 1365 ms | 1365 ms | 604 | 170 KB | 32 KB | 81 KB |
+
+EXIT 0

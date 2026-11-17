@@ -1,0 +1,33 @@
+
+> adamas-tech-consulting-web@0.1.0 build
+> next build
+
+▲ Next.js 16.4.3 (Turbopack)
+- Environments: .env.local, .env
+✓ Running next.config.ts took 119ms
+- Cache Components enabled
+- Partial Prefetching enabled
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 2.4s
+  Running TypeScript ...
+  Finished TypeScript in 3.2s ...
+  Collecting page data using 7 workers ...
+Error: When using Cache Components, all `generateStaticParams` functions must return at least one result. This is to ensure that we can perform build-time validation that there is no other dynamic accesses that would cause a runtime error.
+
+Learn more: https://nextjs.org/docs/messages/empty-generate-static-params
+    at a.s.params (app\(site)\insights\events\[slug]\page.tsx:11:8)
+   9 | const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  10 |
+> 11 | export async function generateStaticParams() {
+     |        ^
+  12 |   return getEventParams();
+  13 | }
+  14 |
+
+> Build error occurred
+Error: Failed to collect page data for /insights/events/[slug]
+    at ignore-listed frames {
+  type: 'Error'
+}
+BUILD EXIT 1

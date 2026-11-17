@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { breadcrumbJsonLd, type Crumb } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export interface PlaceholderLink {
   label: string;
@@ -13,15 +15,18 @@ interface Props {
   /** Child routes, so every page stays reachable while the design is rebuilt. */
   links?: PlaceholderLink[];
   linksLabel?: string;
+  /** Breadcrumb trail after Home, for the BreadcrumbList structured data (brief section 10). */
+  crumbs?: Crumb[];
 }
 
 /**
  * Interim page shell. The prototype's visual layer was removed on 13 Nov 2026; every route keeps loading its data and
  * metadata through this shell until it is rebuilt to the approved Figma design (docs/AdamasTech_Master_Build_Prompt_v2.md).
  */
-export function Placeholder({ title, eyebrow, intro, links, linksLabel = "In this section" }: Props) {
+export function Placeholder({ title, eyebrow, intro, links, linksLabel = "In this section", crumbs }: Props) {
   return (
     <article className="placeholder container-site">
+      {crumbs && crumbs.length > 0 && <JsonLd data={breadcrumbJsonLd(crumbs)} />}
       {eyebrow && <p className="placeholder-eyebrow">{eyebrow}</p>}
       <h1>{title}</h1>
       {intro && <p className="placeholder-intro">{intro}</p>}
@@ -30,8 +35,9 @@ export function Placeholder({ title, eyebrow, intro, links, linksLabel = "In thi
         <nav aria-label={linksLabel}>
           <h2>{linksLabel}</h2>
           <ul>
-            {links.map((l) => (
-              <li key={l.href}>
+            {/* Keyed by position: several links may share one href (the three regional enquiry inboxes, QA BUG-029). */}
+            {links.map((l, i) => (
+              <li key={`${i}-${l.href}`}>
                 {l.external ? (
                   <a href={l.href} target="_blank" rel="noopener noreferrer">
                     {l.label}

@@ -1,6 +1,7 @@
 import type { SolutionCardData } from "@/lib/data/home";
 import type { Block } from "@/lib/data/site";
 import { isPlaceholder, optionalCopy, plain } from "@/lib/placeholder";
+import { previewingDrafts } from "@/lib/preview";
 import { SolutionsSlider } from "@/components/home/SolutionsSlider";
 import { Img } from "@/components/media/Img";
 
@@ -28,9 +29,10 @@ export function Solutions({ block, solutions }: { block: Block; solutions: Solut
               slug: s.slug,
               kind: s.kind === "AI_SOLUTION" ? "AI solution" : "Product",
               name: name || "Solution",
-              namePending: isPlaceholder(s.name) || !name,
-              tagline: tagline ? tagline.text : null,
-              taglinePending: !tagline || tagline.pending,
+              // "To be confirmed" tags only while drafts are previewed; the public site shows nothing in their place (BUG-014).
+              namePending: previewingDrafts && (isPlaceholder(s.name) || !name),
+              tagline: tagline && !tagline.pending ? tagline.text : null,
+              taglinePending: previewingDrafts && (!tagline || tagline.pending),
               href: s.href,
               external: s.external,
               image: s.image ? { url: s.image.url, alt: s.image.alt } : null,

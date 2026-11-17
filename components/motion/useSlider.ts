@@ -12,6 +12,10 @@ import { useHydrated } from "@/lib/use-client-snapshot";
  * `loopReady` is true (clones are not server-rendered, so a no-JavaScript visitor sees the real order); the hook
  * starts the track on the first real item and, whenever a smooth scroll settles on a copy, jumps instantly to the
  * matching real item so the loop is seamless.
+ *
+ * Fast repeated clicks step from the last requested target rather than the index of the last render, so fifteen
+ * quick "next" clicks land on the fifteenth card (QA BUG-020). At the end of a track whose last card cannot reach
+ * the snap start, the index reports the last card so "next" disables and the side menu highlights it (QA BUG-010).
  */
 export function useSlider<T extends HTMLElement = HTMLDivElement>(count: number, options: { loop?: boolean } = {}) {
   const loop = !!options.loop;
@@ -20,6 +24,9 @@ export function useSlider<T extends HTMLElement = HTMLDivElement>(count: number,
   const hydrated = useHydrated();
   const loopReady = loop && hydrated;
   const offset = loopReady ? 1 : 0;
+  /** Index requested by the last goTo while its smooth scroll is still in flight (ignored once it is stale). */
+  const pending = useRef<{ i: number; at: number } | null>(null);
+  const PENDING_MS = 1200;
 
   const itemWidth = useCallback(() => {
     const track = trackRef.current;
@@ -41,6 +48,7 @@ export function useSlider<T extends HTMLElement = HTMLDivElement>(count: number,
       const track = trackRef.current;
       if (!track) return;
       const n = offset ? Math.max(-1, Math.min(count, i)) : Math.max(0, Math.min(count - 1, i));
+      pending.current = { i: n, at: performance.now() };
       track.scrollTo({ left: (n + offset) * itemWidth(), behavior: "smooth" });
       setIndex((n + count) % count);
     },
@@ -57,15 +65,20 @@ export function useSlider<T extends HTMLElement = HTMLDivElement>(count: number,
         raf = 0;
         const w = itemWidth();
         if (w <= 0) return;
-        const raw = Math.round(track.scrollLeft / w);
+        const max = track.scrollWidth - track.clientWidth;
+        const atEnd = !offset && max > 0 && track.scrollLeft >= max - 2;
+        const raw = atEnd ? count - 1 : Math.round(track.scrollLeft / w);
+        let next: number;
         if (offset) {
           // Settled on a copy: swap to the real item at the same visual position.
           if (Math.abs(track.scrollLeft) < 2) track.scrollLeft = count * w;
           else if (Math.abs(track.scrollLeft - (count + 1) * w) < 2) track.scrollLeft = w;
-          setIndex(((raw - 1) % count + count) % count);
+          next = ((raw - 1) % count + count) % count;
         } else {
-          setIndex(Math.max(0, Math.min(count - 1, raw)));
+          next = Math.max(0, Math.min(count - 1, raw));
         }
+        if (pending.current && ((pending.current.i + count) % count) === next) pending.current = null;
+        setIndex(next);
       });
     };
     track.addEventListener("scroll", onScroll, { passive: true });
@@ -75,8 +88,9 @@ export function useSlider<T extends HTMLElement = HTMLDivElement>(count: number,
     };
   }, [count, itemWidth, offset]);
 
-  const prev = () => goTo(index - 1);
-  const next = () => goTo(index + 1);
+  const base = () => (pending.current && performance.now() - pending.current.at < PENDING_MS ? pending.current.i : index);
+  const prev = () => goTo(base() - 1);
+  const next = () => goTo(base() + 1);
   return {
     trackRef,
     index,
@@ -84,7 +98,7 @@ export function useSlider<T extends HTMLElement = HTMLDivElement>(count: number,
     goTo,
     prev,
     next,
-    wrapPrev: offset ? prev : () => goTo(index === 0 ? count - 1 : index - 1),
-    wrapNext: offset ? next : () => goTo(index === count - 1 ? 0 : index + 1),
+    wrapPrev: offset ? prev : () => goTo(base() <= 0 ? count - 1 : base() - 1),
+    wrapNext: offset ? next : () => goTo(base() >= count - 1 ? 0 : base() + 1),
   };
 }

@@ -1,0 +1,471 @@
+[
+  {
+    "id": "color-contrast",
+    "impact": "serious",
+    "tags": [
+      "cat.color",
+      "wcag2aa",
+      "wcag143",
+      "TTv5",
+      "TT13.c",
+      "EN-301-549",
+      "EN-9.1.4.3",
+      "ACT",
+      "RGAAv4",
+      "RGAA-3.2.1"
+    ],
+    "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+    "help": "Elements must meet minimum color contrast ratio thresholds [1280px]",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+    "nodes": [
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(1) > a[href$=\"face-recognition\"]"
+        ],
+        "html": "<a href=\"/case-studies/face-recognition\">99% Accurate Real-Time Facial Recognition Across Multiple Individuals</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "a[href$=\"car-parking-lot\"]"
+        ],
+        "html": "<a href=\"/case-studies/car-parking-lot\">Real-Time Parking Spot Detection with 95% Accuracy</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(3) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-treasury-cash-forecasting\">Boosting Cash Forecasting by 30%</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(4) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-analytics-cloud-liquor\">Accelerate Decision-Making by 30% with Real-Time Dashboard Insights</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(5) > a"
+        ],
+        "html": "<a href=\"/case-studies/invoiceai-invoice-processing\">Reduced Invoice Processing Time by 90% with AI Automation</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(6) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-intercompany-reconciliation\">80% Faster Period Closure: Reduce Reporting Time to 2 Days</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(7) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-bank-communication-management\">Achieve 70% Faster Batch Processing for Enhanced Operational Efficiency</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(8) > a"
+        ],
+        "html": "<a href=\"/case-studies/rag-knowledge-assistant\">Instant Knowledge Retrieval with AI-Powered RAG Chatbot</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(9) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-business-partner-workflow\">Reduced Data Volume by 97% for Optimal Storage Efficiency</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(10) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-condition-contract-management\">Boosted Sales Revenue by 15% in Just One Year</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(11) > a"
+        ],
+        "html": "<a href=\"/case-studies/predictive-machine-health-monitoring\">Reduce Manual Efforts by 50% with Better Planning and Insights</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(12) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-fiori-btp-capex-real-estate\">Save 30% in Efforts with Smarter Resource Planning</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(13) > a"
+        ],
+        "html": "<a href=\"/case-studies/steel-plate-inspection\">Detect 80% of Steel Plate Defects with Advanced Computer Vision Algorithms</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(14) > a"
+        ],
+        "html": "<a href=\"/case-studies/fruit-recognition\">95% Accurate Fruit Detection with Advanced Computer Vision Algorithms</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "a[href$=\"ppe-detection\"]"
+        ],
+        "html": "<a href=\"/case-studies/ppe-detection\">AI Ensures 95%+ PPE Compliance with 30% Efficiency Boost</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(16) > a"
+        ],
+        "html": "<a href=\"/case-studies/cinema-hall-person-count\">95% Accurate Real-Time Cinema Analytics with Advanced Computer Vision</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(17) > a"
+        ],
+        "html": "<a href=\"/case-studies/entry-exit-time-tracker\">Monitor Crowd Flow with 98.7% Accuracy and 24/7 Real-Time Entry/Exit Tracking</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(18) > a"
+        ],
+        "html": "<a href=\"/case-studies/ai-traffic-monitoring\">AI Smarter Spaces: Analysing Traffic with 99% Accuracy, Improving Flow by 30%</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(19) > a"
+        ],
+        "html": "<a href=\"/case-studies/kubernetes-operations-healthtech\">Modernizing Kubernetes Operations for a Leading HealthTech Company</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(20) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-disaster-recovery-cement\">Strengthening SAP Resilience and Disaster Recovery on AWS</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  },
+  {
+    "id": "color-contrast",
+    "impact": "serious",
+    "tags": [
+      "cat.color",
+      "wcag2aa",
+      "wcag143",
+      "TTv5",
+      "TT13.c",
+      "EN-301-549",
+      "EN-9.1.4.3",
+      "ACT",
+      "RGAAv4",
+      "RGAA-3.2.1"
+    ],
+    "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+    "help": "Elements must meet minimum color contrast ratio thresholds [menu header.about]",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+    "nodes": [
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(3) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-treasury-cash-forecasting\">Boosting Cash Forecasting by 30%</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(4) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-analytics-cloud-liquor\">Accelerate Decision-Making by 30% with Real-Time Dashboard Insights</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(5) > a"
+        ],
+        "html": "<a href=\"/case-studies/invoiceai-invoice-processing\">Reduced Invoice Processing Time by 90% with AI Automation</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(6) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-intercompany-reconciliation\">80% Faster Period Closure: Reduce Reporting Time to 2 Days</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(7) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-bank-communication-management\">Achieve 70% Faster Batch Processing for Enhanced Operational Efficiency</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(8) > a"
+        ],
+        "html": "<a href=\"/case-studies/rag-knowledge-assistant\">Instant Knowledge Retrieval with AI-Powered RAG Chatbot</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(9) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-business-partner-workflow\">Reduced Data Volume by 97% for Optimal Storage Efficiency</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(10) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-condition-contract-management\">Boosted Sales Revenue by 15% in Just One Year</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(11) > a"
+        ],
+        "html": "<a href=\"/case-studies/predictive-machine-health-monitoring\">Reduce Manual Efforts by 50% with Better Planning and Insights</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(12) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-fiori-btp-capex-real-estate\">Save 30% in Efforts with Smarter Resource Planning</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(13) > a"
+        ],
+        "html": "<a href=\"/case-studies/steel-plate-inspection\">Detect 80% of Steel Plate Defects with Advanced Computer Vision Algorithms</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(14) > a"
+        ],
+        "html": "<a href=\"/case-studies/fruit-recognition\">95% Accurate Fruit Detection with Advanced Computer Vision Algorithms</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "a[href$=\"ppe-detection\"]"
+        ],
+        "html": "<a href=\"/case-studies/ppe-detection\">AI Ensures 95%+ PPE Compliance with 30% Efficiency Boost</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(16) > a"
+        ],
+        "html": "<a href=\"/case-studies/cinema-hall-person-count\">95% Accurate Real-Time Cinema Analytics with Advanced Computer Vision</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(17) > a"
+        ],
+        "html": "<a href=\"/case-studies/entry-exit-time-tracker\">Monitor Crowd Flow with 98.7% Accuracy and 24/7 Real-Time Entry/Exit Tracking</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(18) > a"
+        ],
+        "html": "<a href=\"/case-studies/ai-traffic-monitoring\">AI Smarter Spaces: Analysing Traffic with 99% Accuracy, Improving Flow by 30%</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(19) > a"
+        ],
+        "html": "<a href=\"/case-studies/kubernetes-operations-healthtech\">Modernizing Kubernetes Operations for a Leading HealthTech Company</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(20) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-disaster-recovery-cement\">Strengthening SAP Resilience and Disaster Recovery on AWS</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  },
+  {
+    "id": "color-contrast",
+    "impact": "serious",
+    "tags": [
+      "cat.color",
+      "wcag2aa",
+      "wcag143",
+      "TTv5",
+      "TT13.c",
+      "EN-301-549",
+      "EN-9.1.4.3",
+      "ACT",
+      "RGAAv4",
+      "RGAA-3.2.1"
+    ],
+    "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+    "help": "Elements must meet minimum color contrast ratio thresholds [menu header.services]",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+    "nodes": [
+      {
+        "target": [
+          "li:nth-child(17) > a"
+        ],
+        "html": "<a href=\"/case-studies/entry-exit-time-tracker\">Monitor Crowd Flow with 98.7% Accuracy and 24/7 Real-Time Entry/Exit Tracking</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(18) > a"
+        ],
+        "html": "<a href=\"/case-studies/ai-traffic-monitoring\">AI Smarter Spaces: Analysing Traffic with 99% Accuracy, Improving Flow by 30%</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(19) > a"
+        ],
+        "html": "<a href=\"/case-studies/kubernetes-operations-healthtech\">Modernizing Kubernetes Operations for a Leading HealthTech Company</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(20) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-disaster-recovery-cement\">Strengthening SAP Resilience and Disaster Recovery on AWS</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  },
+  {
+    "id": "color-contrast",
+    "impact": "serious",
+    "tags": [
+      "cat.color",
+      "wcag2aa",
+      "wcag143",
+      "TTv5",
+      "TT13.c",
+      "EN-301-549",
+      "EN-9.1.4.3",
+      "ACT",
+      "RGAAv4",
+      "RGAA-3.2.1"
+    ],
+    "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+    "help": "Elements must meet minimum color contrast ratio thresholds [menu header.solutions]",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+    "nodes": [
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(8) > a"
+        ],
+        "html": "<a href=\"/case-studies/rag-knowledge-assistant\">Instant Knowledge Retrieval with AI-Powered RAG Chatbot</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "nav[aria-label=\"Case studies\"] > ul > li:nth-child(9) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-business-partner-workflow\">Reduced Data Volume by 97% for Optimal Storage Efficiency</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(10) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-condition-contract-management\">Boosted Sales Revenue by 15% in Just One Year</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(11) > a"
+        ],
+        "html": "<a href=\"/case-studies/predictive-machine-health-monitoring\">Reduce Manual Efforts by 50% with Better Planning and Insights</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(12) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-fiori-btp-capex-real-estate\">Save 30% in Efforts with Smarter Resource Planning</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(13) > a"
+        ],
+        "html": "<a href=\"/case-studies/steel-plate-inspection\">Detect 80% of Steel Plate Defects with Advanced Computer Vision Algorithms</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(14) > a"
+        ],
+        "html": "<a href=\"/case-studies/fruit-recognition\">95% Accurate Fruit Detection with Advanced Computer Vision Algorithms</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "a[href$=\"ppe-detection\"]"
+        ],
+        "html": "<a href=\"/case-studies/ppe-detection\">AI Ensures 95%+ PPE Compliance with 30% Efficiency Boost</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(16) > a"
+        ],
+        "html": "<a href=\"/case-studies/cinema-hall-person-count\">95% Accurate Real-Time Cinema Analytics with Advanced Computer Vision</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(17) > a"
+        ],
+        "html": "<a href=\"/case-studies/entry-exit-time-tracker\">Monitor Crowd Flow with 98.7% Accuracy and 24/7 Real-Time Entry/Exit Tracking</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(18) > a"
+        ],
+        "html": "<a href=\"/case-studies/ai-traffic-monitoring\">AI Smarter Spaces: Analysing Traffic with 99% Accuracy, Improving Flow by 30%</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(19) > a"
+        ],
+        "html": "<a href=\"/case-studies/kubernetes-operations-healthtech\">Modernizing Kubernetes Operations for a Leading HealthTech Company</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          "li:nth-child(20) > a"
+        ],
+        "html": "<a href=\"/case-studies/sap-disaster-recovery-cement\">Strengthening SAP Resilience and Disaster Recovery on AWS</a>",
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.59 (foreground color: #1c85ff, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  }
+]

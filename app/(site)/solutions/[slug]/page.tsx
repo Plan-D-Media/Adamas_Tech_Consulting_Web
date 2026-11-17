@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getSolution, getSolutionParams } from "@/lib/data/solutions";
 import { isPlaceholder, optionalCopy, plain } from "@/lib/placeholder";
+import { NO_CONTENT_SLUG, atLeastOne } from "@/lib/static-params";
+import { redirectIfUnpublished } from "@/lib/data/unpublished";
 import { Placeholder } from "@/components/Placeholder";
 
+/** With no visible solution the placeholder param keeps the build alive; it renders the 404 page (BUG-001). */
 export async function generateStaticParams() {
-  return getSolutionParams();
+  return atLeastOne(await getSolutionParams(), { slug: NO_CONTENT_SLUG });
 }
 
 export async function generateMetadata({ params }: PageProps<"/solutions/[slug]">): Promise<Metadata> {
@@ -32,6 +35,9 @@ export default function SolutionPage({ params }: PageProps<"/solutions/[slug]">)
 async function Solution({ params }: { params: PageProps<"/solutions/[slug]">["params"] }) {
   const { slug } = await params;
   const s = await getSolution(slug);
-  if (!s) notFound();
-  return <Placeholder eyebrow="Solutions" title={plain(s.name) || "Solution"} intro={plain(s.tagline) || null} links={[{ label: "All solutions", href: "/solutions" }]} />;
+  if (!s) {
+    await redirectIfUnpublished("solutions", slug);
+    notFound();
+  }
+  return <Placeholder eyebrow="Solutions" title={plain(s.name) || "Solution"} intro={plain(s.tagline) || null} links={[{ label: "All solutions", href: "/solutions" }]} crumbs={[{ name: "Solutions", path: "/solutions" }, { name: plain(s.name) || "Solution", path: `/solutions/${s.slug}` }]} />;
 }

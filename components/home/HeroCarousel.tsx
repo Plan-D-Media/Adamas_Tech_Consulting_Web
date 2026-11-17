@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useReducedMotion } from "@/lib/use-client-snapshot";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import type { ClaimData } from "@/lib/data/home";
 import { cx } from "@/lib/cx";
 import { useHydrated } from "@/lib/use-client-snapshot";
@@ -66,37 +66,19 @@ function Card({ card, priority }: { card: HeroCard; priority: boolean }) {
  * Hero card carousel (Figma Frame 47 + Container 236:1405): three cards visible, prev/next, counter, progress bars,
  * a pause control and keyboard arrows. Auto-advances every 7s (not with reduced motion; paused on hover, focus or
  * the pause button). The track is a plain scroll-snap container, so it works without JavaScript.
+ *
+ * The timer is the progress bar itself: a CSS animation keyed on the slide index whose `animationend` advances the
+ * carousel (SliderControls). The previous requestAnimationFrame loop re-rendered the component 60 times a second and
+ * restarted itself on every render, so the bar never filled and the hero never advanced (QA BUG-005).
  */
 export function HeroCarousel({ cards, claims }: { cards: HeroCard[]; claims: ClaimData[] }) {
   const { trackRef, index, wrapPrev, wrapNext } = useSlider(cards.length);
   const [paused, setPaused] = useState(false);
   const [hovering, setHovering] = useState(false);
-  const [elapsed, setElapsed] = useState(0);
   const reduce = useReducedMotion();
   const hydrated = useHydrated();
   // Auto-advance only in the browser, with more than one card and no reduced-motion preference.
   const auto = hydrated && cards.length > 1 && !reduce;
-  const start = useRef<number>(0);
-
-  useEffect(() => {
-    if (!auto || paused || hovering) return;
-    start.current = performance.now();
-    let raf = 0;
-    const tick = (now: number) => {
-      const t = (now - start.current) / AUTO_MS;
-      if (t >= 1) {
-        wrapNext();
-        start.current = now;
-        setElapsed(0);
-      } else {
-        setElapsed(t);
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-    // wrapNext changes with index; restarting the timer on each slide is intended.
-  }, [auto, paused, hovering, wrapNext]);
 
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowRight") {
@@ -150,7 +132,10 @@ export function HeroCarousel({ cards, claims }: { cards: HeroCard[]; claims: Cla
             onPrev={wrapPrev}
             onNext={wrapNext}
             progress
-            elapsed={auto && !paused ? elapsed : index >= 0 ? 0 : 0}
+            running={auto}
+            durationMs={AUTO_MS}
+            onProgressEnd={wrapNext}
+            hold={paused || hovering}
             paused={paused || !auto}
             onTogglePause={auto ? () => setPaused((p) => !p) : undefined}
             label="highlights"

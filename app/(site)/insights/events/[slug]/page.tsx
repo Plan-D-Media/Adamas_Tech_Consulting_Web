@@ -3,13 +3,18 @@ import { notFound } from "next/navigation";
 import { getEvent, getEventParams } from "@/lib/data/events";
 import { longDate } from "@/lib/dates";
 import { optionalCopy, plain } from "@/lib/placeholder";
+import { NO_CONTENT_SLUG, atLeastOne } from "@/lib/static-params";
+import { redirectIfUnpublished } from "@/lib/data/unpublished";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo";
 import { EventHero } from "@/components/events/EventHero";
 import { EventDetails } from "@/components/events/EventDetails";
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
 
+/** With no visible event (all DRAFT) the placeholder param keeps the build alive; it renders the 404 page (BUG-001). */
 export async function generateStaticParams() {
-  return getEventParams();
+  return atLeastOne(await getEventParams(), { slug: NO_CONTENT_SLUG });
 }
 
 export async function generateMetadata({ params }: PageProps<"/insights/events/[slug]">): Promise<Metadata> {
@@ -40,7 +45,10 @@ export default function EventPage({ params }: PageProps<"/insights/events/[slug]
 async function Event({ params }: { params: PageProps<"/insights/events/[slug]">["params"] }) {
   const { slug } = await params;
   const e = await getEvent(slug);
-  if (!e) notFound();
+  if (!e) {
+    await redirectIfUnpublished("insights/events", slug);
+    notFound();
+  }
   const summary = optionalCopy(e.summary);
   const jsonLd = {
     "@context": "https://schema.org",
@@ -58,7 +66,8 @@ async function Event({ params }: { params: PageProps<"/insights/events/[slug]">[
   };
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumbJsonLd([{ name: "Insights", path: "/insights" }, { name: "Events", path: "/insights/events" }, { name: plain(e.title), path: `/insights/events/${e.slug}` }])} />
       <EventHero event={e} />
       <EventDetails event={e} />
     </>

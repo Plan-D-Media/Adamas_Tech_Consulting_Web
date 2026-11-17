@@ -1,0 +1,78 @@
+/in/: 200 h1=1 dom=1645 errors=0 flags=to be confirmed drafts={"30%":5}
+/uk/: 200 h1=1 dom=1645 errors=0 flags=to be confirmed drafts={"30%":5}
+/gcc/: 200 h1=1 dom=1643 errors=0 flags=to be confirmed drafts={"30%":5}
+/services: 200 h1=1 dom=528 errors=0 flags=- drafts={}
+/services/cloud-services: 200 h1=1 dom=1245 errors=0 flags=to be confirmed drafts={"500+":4}
+/services/cloud-services/migration-modernization: 200 h1=1 dom=755 errors=0 flags=- drafts={}
+/services/cloud-services/devops-secops: 200 h1=1 dom=813 errors=0 flags=- drafts={}
+/services/cloud-services/managed-services: 200 h1=1 dom=807 errors=0 flags=- drafts={}
+/services/cloud-services/ai-ml-ops: 200 h1=1 dom=651 errors=0 flags=- drafts={}
+/services/cloud-services/cloud-automation: 200 h1=1 dom=829 errors=0 flags=- drafts={}
+/services/cloud-services/cloud-advisory-consultation: 200 h1=1 dom=770 errors=0 flags=- drafts={}
+/services/digital-transformation: 200 h1=1 dom=891 errors=0 flags=- drafts={"30%":6}
+/services/digital-transformation/sap: 200 h1=1 dom=858 errors=0 flags=- drafts={"30%":6}
+/services/digital-transformation/application-development: 200 h1=1 dom=764 errors=0 flags=- drafts={"30%":2}
+/services/digital-transformation/data-analytics: 200 h1=1 dom=765 errors=0 flags=- drafts={"30%":2}
+/services/digital-transformation/master-data-governance: 200 h1=1 dom=763 errors=0 flags=- drafts={}
+/services/digital-transformation/edtech-openedx: 200 h1=1 dom=819 errors=0 flags=- drafts={}
+/services/digital-transformation/e-invoicing-uae: 200 h1=1 dom=881 errors=0 flags=- drafts={}
+/services/ai-services: 200 h1=1 dom=968 errors=0 flags=- drafts={"30%":4}
+/services/ai-services/ai-ml: 200 h1=1 dom=788 errors=0 flags=- drafts={}
+/services/ai-services/agentic-ai: 200 h1=1 dom=762 errors=0 flags=- drafts={}
+/services/ai-services/computer-vision: 200 h1=1 dom=926 errors=0 flags=- drafts={"30%":4}
+/services/ai-services/generative-ai: 200 h1=1 dom=801 errors=0 flags=- drafts={}
+/services/ai-services/data-engineering: 200 h1=1 dom=638 errors=0 flags=- drafts={}
+/services/ai-services/advanced-analytics: 200 h1=1 dom=638 errors=0 flags=- drafts={}
+/services/ai-services/sovereign-ai: 200 h1=1 dom=638 errors=0 flags=- drafts={}
+/services/ai-services/responsible-ai: 200 h1=1 dom=638 errors=0 flags=- drafts={}
+/services/ai-services/ai-security-governance: 200 h1=1 dom=638 errors=0 flags=- drafts={}
+/solutions: 200 h1=1 dom=544 errors=0 flags=- drafts={}
+/solutions/arivoo: 200 h1=1 dom=525 errors=0 flags=- drafts={}
+/solutions/a-eye: 200 h1=1 dom=524 errors=0 flags=- drafts={}
+/solutions/air-mind: 200 h1=1 dom=524 errors=0 flags=- drafts={}
+/solutions/face-recognition: 200 h1=1 dom=526 errors=0 flags=- drafts={}
+/solutions/industrial-analytics: 200 h1=1 dom=525 errors=0 flags=- drafts={}
+/solutions/asset-tracking: 200 h1=1 dom=525 errors=0 flags=- drafts={"30%":1}
+/solutions/ai-solution-4: 200 h1=1 dom=524 errors=0 flags=- drafts={}
+/solutions/ai-solution-5: 200 h1=1 dom=524 errors=0 flags=- drafts={}
+/solutions/ai-solution-6: 200 h1=1 dom=524 errors=0 flags=- drafts={}
+/solutions/testguard: 200 h1=1 dom=525 errors=0 flags=- drafts={}
+/case-studies: 200 h1=1 dom=563 errors=0 flags=- drafts={"30%":5}
+/case-studies/face-recognition: 200 h1=1 dom=533 errors=0 flags=- drafts={}
+/case-studies/car-parking-lot: 200 h1=1 dom=533 errors=0 flags=- drafts={}
+/case-studies/sap-treasury-cash-forecasting: 200 h1=1 dom=533 errors=0 flags=- drafts={"30%":1}
+/case-studies/sap-analytics-cloud-liquor: 200 h1=1 dom=534 errors=0 flags=- drafts={"30%":1}
+/case-studies/invoiceai-invoice-processing: 200 h1=1 dom=534 errors=0 flags=- drafts={}
+/case-studies/sap-intercompany-reconciliation: 200 h1=1 dom=534 errors=0 flags=- drafts={}
+/case-studies/sap-bank-communication-management: 200 h1=1 dom=534 errors=0 flags=- drafts={}
+/case-studies/rag-knowledge-assistant: 200 h1=1 dom=534 errors=0 flags=- drafts={}
+/case-studies/sap-business-partner-workflow: 200 h1=1 dom=534 errors=0 flags=- drafts={}
+/case-studies/sap-condition-contract-management: 200 h1=1 dom=534 errors=0 flags=- drafts={}
+/case-studies/predictive-machine-health-monitoring: 200 h1=1 dom=534 errors=0 flags=- drafts={}
+/case-studies/sap-fiori-btp-capex-real-estate: 200 h1=1 dom=534 errors=0 flags=- drafts={"30%":2}
+/case-studies/steel-plate-inspection: 200 h1=1 dom=534 errors=0 flags=- drafts={}
+/case-studies/fruit-recognition: 200 h1=1 dom=534 errors=0 flags=- drafts={}
+/case-studies/ppe-detection: 200 h1=1 dom=534 errors=0 flags=- drafts={"30%":1}
+/case-studies/cinema-hall-person-count: 200 h1=1 dom=534 errors=0 flags=- drafts={}
+/case-studies/entry-exit-time-tracker: 200 h1=1 dom=529 errors=0 flags=- drafts={}
+/case-studies/ai-traffic-monitoring: 200 h1=1 dom=528 errors=0 flags=- drafts={"30%":1}
+/case-studies/kubernetes-operations-healthtech: 200 h1=1 dom=533 errors=0 flags=- drafts={}
+/case-studies/sap-disaster-recovery-cement: 200 h1=1 dom=533 errors=0 flags=- drafts={}
+/insights: 200 h1=1 dom=527 errors=0 flags=- drafts={}
+/insights/events: 200 h1=1 dom=528 errors=0 flags=- drafts={}
+/insights/events/house-of-lords-2026: 200 h1=1 dom=637 errors=0 flags=to be confirmed drafts={}
+/insights/blog: 200 h1=1 dom=525 errors=0 flags=- drafts={}
+/about: 200 h1=1 dom=530 errors=0 flags=- drafts={}
+/about/team: 200 h1=1 dom=525 errors=0 flags=- drafts={}
+/credentials: 200 h1=1 dom=526 errors=0 flags=- drafts={}
+/contact: 200 h1=1 dom=530 errors=0 flags=- drafts={}
+/privacy-policy: 200 h1=1 dom=520 errors=0 flags=- drafts={}
+/terms-of-use: 200 h1=1 dom=520 errors=0 flags=- drafts={}
+/search: 200 h1=1 dom=520 errors=0 flags=- drafts={}
+/thank-you: 200 h1=1 dom=530 errors=0 flags=- drafts={}
+/no-such-page-qa: 404 h1=1 dom=527 errors=1 flags=- drafts={}
+/services/cloud-services/no-such-service: 404 h1=1 dom=989 errors=1 flags=- drafts={}
+/figma-fixture: 404 h1=1 dom=519 errors=1 flags=- drafts={}
+
+Wrote docs\qa\evidence\drafts\crawl.md; bad links 0; redirects not one-hop 12
+EXIT 0

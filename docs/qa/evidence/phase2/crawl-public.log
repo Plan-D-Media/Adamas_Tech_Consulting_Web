@@ -1,0 +1,53 @@
+/in/: 200 h1=1 dom=1351 errors=0 flags=to be confirmed drafts={"30%":1}
+/uk/: 200 h1=1 dom=1351 errors=0 flags=to be confirmed drafts={"30%":1}
+/gcc/: 200 h1=1 dom=1349 errors=0 flags=to be confirmed drafts={"30%":1}
+/services: 200 h1=1 dom=522 errors=0 flags=- drafts={}
+/services/cloud-services: 200 h1=1 dom=1030 errors=0 flags=to be confirmed drafts={}
+/services/cloud-services/migration-modernization: 200 h1=1 dom=748 errors=0 flags=- drafts={}
+/services/cloud-services/devops-secops: 200 h1=1 dom=806 errors=0 flags=- drafts={}
+/services/cloud-services/managed-services: 200 h1=1 dom=763 errors=0 flags=- drafts={}
+/services/cloud-services/ai-ml-ops: 200 h1=1 dom=620 errors=0 flags=- drafts={}
+/services/cloud-services/cloud-automation: 200 h1=1 dom=822 errors=0 flags=- drafts={}
+/services/cloud-services/cloud-advisory-consultation: 200 h1=1 dom=763 errors=0 flags=- drafts={}
+/services/digital-transformation: 200 h1=1 dom=741 errors=0 flags=- drafts={}
+/services/digital-transformation/sap: 200 h1=1 dom=731 errors=0 flags=- drafts={}
+/services/digital-transformation/application-development: 200 h1=1 dom=729 errors=0 flags=- drafts={}
+/services/digital-transformation/data-analytics: 200 h1=1 dom=730 errors=0 flags=- drafts={}
+/services/digital-transformation/master-data-governance: 200 h1=1 dom=728 errors=0 flags=- drafts={}
+/services/digital-transformation/edtech-openedx: 200 h1=1 dom=808 errors=0 flags=- drafts={}
+/services/ai-services: 200 h1=1 dom=808 errors=0 flags=- drafts={}
+/services/ai-services/ai-ml: 200 h1=1 dom=744 errors=0 flags=- drafts={}
+/services/ai-services/agentic-ai: 200 h1=1 dom=755 errors=0 flags=- drafts={}
+/services/ai-services/computer-vision: 200 h1=1 dom=803 errors=0 flags=- drafts={}
+/services/ai-services/generative-ai: 200 h1=1 dom=757 errors=0 flags=- drafts={}
+/services/ai-services/data-engineering: 200 h1=1 dom=631 errors=0 flags=- drafts={}
+/services/ai-services/advanced-analytics: 200 h1=1 dom=631 errors=0 flags=- drafts={}
+/services/ai-services/sovereign-ai: 200 h1=1 dom=631 errors=0 flags=- drafts={}
+/services/ai-services/responsible-ai: 200 h1=1 dom=631 errors=0 flags=- drafts={}
+/services/ai-services/ai-security-governance: 200 h1=1 dom=631 errors=0 flags=- drafts={}
+/solutions: 200 h1=1 dom=527 errors=0 flags=- drafts={}
+/solutions/arivoo: 200 h1=1 dom=519 errors=0 flags=- drafts={}
+/solutions/a-eye: 200 h1=1 dom=517 errors=0 flags=- drafts={}
+/solutions/air-mind: 200 h1=1 dom=517 errors=0 flags=- drafts={}
+/solutions/face-recognition: 200 h1=1 dom=519 errors=0 flags=- drafts={}
+/solutions/industrial-analytics: 200 h1=1 dom=519 errors=0 flags=- drafts={}
+/solutions/asset-tracking: 200 h1=1 dom=519 errors=0 flags=- drafts={"30%":1}
+/case-studies: 200 h1=1 dom=514 errors=0 flags=- drafts={}
+/insights: 200 h1=1 dom=520 errors=0 flags=- drafts={}
+/insights/events: 200 h1=1 dom=514 errors=0 flags=- drafts={}
+/insights/blog: 200 h1=1 dom=518 errors=0 flags=- drafts={}
+/about: 200 h1=1 dom=534 errors=0 flags=- drafts={}
+/about/team: 200 h1=1 dom=528 errors=0 flags=- drafts={}
+/credentials: 200 h1=1 dom=529 errors=0 flags=- drafts={}
+/contact: 200 h1=1 dom=533 errors=0 flags=- drafts={}
+/privacy-policy: 200 h1=1 dom=523 errors=0 flags=- drafts={}
+/terms-of-use: 200 h1=1 dom=524 errors=0 flags=- drafts={}
+/search: 200 h1=1 dom=513 errors=0 flags=- drafts={}
+/thank-you: 200 h1=1 dom=533 errors=0 flags=- drafts={}
+/insights/events/house-of-lords-2026: 404 h1=1 dom=971 errors=1 flags=- drafts={}
+/no-such-page-qa: 404 h1=1 dom=519 errors=1 flags=- drafts={}
+/services/cloud-services/no-such-service: 200 h1=1 dom=933 errors=0 flags=- drafts={}
+/figma-fixture: 404 h1=1 dom=509 errors=1 flags=- drafts={}
+
+Wrote docs\qa\evidence\phase2-public\crawl.md; bad links 0; redirects not one-hop 15
+CRAWL_EXIT=0

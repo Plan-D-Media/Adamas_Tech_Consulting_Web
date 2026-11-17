@@ -1,6 +1,7 @@
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
-import { badge, db, visible } from "@/lib/db";
+import { badge, db, visible, visibleStatuses } from "@/lib/db";
+import { linkGate, type LinkGate } from "@/lib/data/links";
 import { mediaSelect, toMedia, type Media } from "@/lib/media";
 import type { RegionCode } from "@/lib/region";
 import { optionalCopy, plain } from "@/lib/placeholder";
@@ -68,9 +69,10 @@ async function loadNavRows(menu: "HEADER" | "FOOTER" | "LEGAL" | "SOCIAL") {
   return db.navItem.findMany({ where: { menu, ...visible }, include: navInclude, orderBy: { sortOrder: "asc" } });
 }
 
+/** The menu's featured card, unless its case study or event is not visible (a DRAFT target with drafts off). */
 function featuredFrom(row: NavRow): FeaturedCard | null {
   const cs = row.featuredCaseStudy;
-  if (cs) {
+  if (cs && visibleStatuses.includes(cs.status)) {
     return {
       kind: "case-study",
       href: `/case-studies/${cs.slug}`,
@@ -81,7 +83,7 @@ function featuredFrom(row: NavRow): FeaturedCard | null {
     };
   }
   const ev = row.featuredEvent;
-  if (ev) {
+  if (ev && visibleStatuses.includes(ev.status)) {
     return {
       kind: "event",
       href: `/insights/events/${ev.slug}`,
@@ -94,7 +96,7 @@ function featuredFrom(row: NavRow): FeaturedCard | null {
   return null;
 }
 
-function buildTree(rows: NavRow[]): NavLink[] {
+function buildTree(rows: NavRow[], links: LinkGate): NavLink[] {
   const byParent = new Map<string | null, NavRow[]>();
   for (const r of rows) {
     const list = byParent.get(r.parentId) ?? [];
@@ -107,7 +109,8 @@ function buildTree(rows: NavRow[]): NavLink[] {
       // Menus never show placeholder brackets: "[AI Product A]" → "AI Product A"; instruction descriptors are dropped.
       label: plain(r.label),
       descriptor: optionalCopy(r.descriptor)?.text ?? null,
-      href: r.href,
+      // A menu link to an unpublished detail page goes to that section's listing instead (lib/data/links.ts).
+      href: links.fallback(r.href),
       external: r.external,
       comingSoon: r.comingSoon,
       draft: badge(r.status),
@@ -120,14 +123,15 @@ function buildTree(rows: NavRow[]): NavLink[] {
 export async function getNavigation() {
   "use cache";
   cacheLife("hours");
-  cacheTag("nav");
-  const [header, footer, legal, social] = await Promise.all([
+  cacheTag("nav", "links");
+  const [header, footer, legal, social, links] = await Promise.all([
     loadNavRows("HEADER"),
     loadNavRows("FOOTER"),
     loadNavRows("LEGAL"),
     loadNavRows("SOCIAL"),
+    linkGate(),
   ]);
-  return { header: buildTree(header), footer: buildTree(footer), legal: buildTree(legal), social: buildTree(social) };
+  return { header: buildTree(header, links), footer: buildTree(footer, links), legal: buildTree(legal, links), social: buildTree(social, links) };
 }
 
 export async function getRegions(): Promise<RegionInfo[]> {
@@ -183,21 +187,25 @@ export interface Block {
 export async function getBlocks(region: RegionCode | null): Promise<Record<string, Block>> {
   "use cache";
   cacheLife("hours");
-  cacheTag("blocks");
-  const rows = await db.contentBlock.findMany({
-    where: { ...visible, OR: [{ region: null }, ...(region ? [{ region }] : [])] },
-    orderBy: { sortOrder: "asc" },
-  });
+  cacheTag("blocks", "links");
+  const [rows, links] = await Promise.all([
+    db.contentBlock.findMany({
+      where: { ...visible, OR: [{ region: null }, ...(region ? [{ region }] : [])] },
+      orderBy: { sortOrder: "asc" },
+    }),
+    linkGate(),
+  ]);
   const out: Record<string, Block> = {};
-  // Global rows first, region rows override.
+  // Global rows first, region rows override. Teasers inside `extra` that link to unpublished pages are dropped and a
+  // CTA to one falls back to the listing (lib/data/links.ts), so drafts-off never links to a missing page.
   for (const r of [...rows].sort((a, b) => Number(!!a.region) - Number(!!b.region))) {
     out[r.key] = {
       eyebrow: r.eyebrow,
       heading: r.heading,
       body: r.body,
       ctaLabel: r.ctaLabel,
-      ctaHref: r.ctaHref,
-      extra: (r.extra as Record<string, unknown> | null) ?? null,
+      ctaHref: links.fallback(r.ctaHref),
+      extra: links.prune((r.extra as Record<string, unknown> | null) ?? null),
     };
   }
   return out;

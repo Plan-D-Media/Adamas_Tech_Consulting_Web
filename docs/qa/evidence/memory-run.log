@@ -1,0 +1,29 @@
+0 /in/ [initial load] heap 5.6 MB nodes 2574 listeners 706 script +319ms
+1 /services/cloud-services [client nav] heap 6.8 MB nodes 5026 listeners 1076 script +76ms
+2 /uk/ [client nav] heap 8.1 MB nodes 7295 listeners 1473 script +157ms
+3 /services/cloud-services/migration-modernization [client nav] heap 8.4 MB nodes 7663 listeners 1483 script +45ms
+4 /insights/events/house-of-lords-2026 [client nav] heap 8.7 MB nodes 7838 listeners 1499 script +36ms
+5 /gcc/ [client nav] heap 9 MB nodes 7872 listeners 1538 script +194ms
+6 /about [client nav] heap 9.2 MB nodes 7870 listeners 1515 script +39ms
+7 /services/digital-transformation [client nav] heap 9.4 MB nodes 8582 listeners 1582 script +39ms
+8 /solutions [client nav] heap 9.4 MB nodes 8449 listeners 1575 script +27ms
+9 /case-studies [client nav] heap 9.5 MB nodes 8498 listeners 1592 script +32ms
+10 /in/ [client nav] heap 9.6 MB nodes 8521 listeners 1618 script +157ms
+11 /services/ai-services [client nav] heap 9.9 MB nodes 9349 listeners 1677 script +48ms
+12 /insights/events [client nav] heap 9.9 MB nodes 9320 listeners 1668 script +24ms
+13 /uk/ [client nav] heap 10 MB nodes 9345 listeners 1694 script +155ms
+14 /services/cloud-services/devops-secops [client nav] heap 10.2 MB nodes 9792 listeners 1711 script +51ms
+15 /credentials [client nav] heap 10.2 MB nodes 9737 listeners 1691 script +25ms
+16 /gcc/ [client nav] heap 10.2 MB nodes 9759 listeners 1722 script +179ms
+17 /solutions/arivoo [client nav] heap 10.2 MB nodes 9734 listeners 1691 script +38ms
+18 /privacy-policy [client nav] heap 9.2 MB nodes 6365 listeners 1364 script +27ms
+19 /in/ [client nav] heap 9.2 MB nodes 6389 listeners 1392 script +150ms
+20 /services/cloud-services [client nav] heap 9.5 MB nodes 7524 listeners 1471 script +53ms
+21 /uk/ [client nav] heap 9.5 MB nodes 7543 listeners 1495 script +159ms
+- Heap after GC: 5.6 MB at the start, 9.5 MB after 21 navigations (3.9 MB change).
+- /in/ visited 3 times: heap 5.6 -> 9.6 -> 9.2 MB, nodes 2574 -> 8521 -> 6389, listeners 706 -> 1618 -> 1392.
+- Idle 10 s on the last page (pointer parked): script 363 ms, 603 layouts, 602 style recalcs.
+- Console errors during the pass: none.
+
+Reading: a leak shows as heap and listener counts rising on every return to the same route; a render loop shows as hundreds of ms of script per second while idle.
+EXIT 0

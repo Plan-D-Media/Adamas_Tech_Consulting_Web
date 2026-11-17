@@ -1,0 +1,32 @@
+/in/: critical 0, serious 0, moderate 0, minor 0
+/uk/: critical 0, serious 0, moderate 0, minor 0
+/gcc/: critical 0, serious 0, moderate 0, minor 0
+/services/cloud-services: critical 0, serious 0, moderate 0, minor 0
+/services/cloud-services/migration-modernization: critical 0, serious 0, moderate 0, minor 0
+/services/digital-transformation: critical 0, serious 0, moderate 0, minor 0
+/insights/events/house-of-lords-2026: critical 0, serious 0, moderate 0, minor 0
+/insights/events: critical 0, serious 1, moderate 0, minor 0
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [1280px] (1 node; e.g. nav[aria-label="Events"] > ul > li > a)
+/about: critical 0, serious 2, moderate 0, minor 0
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [1280px] (3 nodes; e.g. li:nth-child(1) > a[href$="team"])
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [menu header.about] (2 nodes; e.g. a[href$="careers"])
+/contact: critical 0, serious 2, moderate 0, minor 0
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [1280px] (3 nodes; e.g. li:nth-child(1) > a[href="mailto:marketing@adamastech.in"][target="_blank"][rel="noopener noreferrer"])
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [menu header.about] (2 nodes; e.g. li:nth-child(2) > a[href="mailto:marketing@adamastech.in"][target="_blank"][rel="noopener noreferrer"])
+/case-studies: critical 0, serious 4, moderate 0, minor 0
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [1280px] (20 nodes; e.g. nav[aria-label="Case studies"] > ul > li:nth-child(1) > a[href$="face-recognition"])
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [menu header.about] (18 nodes; e.g. nav[aria-label="Case studies"] > ul > li:nth-child(3) > a)
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [menu header.services] (4 nodes; e.g. li:nth-child(17) > a)
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [menu header.solutions] (13 nodes; e.g. nav[aria-label="Case studies"] > ul > li:nth-child(8) > a)
+/solutions: critical 0, serious 3, moderate 0, minor 0
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [1280px] (10 nodes; e.g. nav[aria-label="Solutions"] > ul > li:nth-child(1) > a[href$="arivoo.in"][target="_blank"][rel="noopener noreferrer"])
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [menu header.about] (7 nodes; e.g. li:nth-child(4) > a[href$="face-recognition"])
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [menu header.solutions] (2 nodes; e.g. li:nth-child(9) > a[href$="ai-solution-6"])
+/search: critical 0, serious 0, moderate 1, minor 0
+  [moderate] heading-order: Heading levels should only increase by one [1280px] (1 node; e.g. div:nth-child(1) > h3)
+/thank-you: critical 0, serious 2, moderate 0, minor 0
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [1280px] (3 nodes; e.g. nav[aria-label="What next"] > ul > li:nth-child(1) > a[href$="services"])
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [menu header.about] (2 nodes; e.g. li:nth-child(2) > a[href$="case-studies"])
+/no-such-page-qa: critical 0, serious 2, moderate 0, minor 0
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [1280px] (6 nodes; e.g. li:nth-child(1) > a[href="/"])
+  [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds [menu header.about] (5 nodes; e.g. nav[aria-label="Start from a section"] > ul > li:nth-child(2) > a[href$="services"])

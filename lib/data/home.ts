@@ -1,6 +1,7 @@
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
 import { badge, db, visible, visibleStatuses } from "@/lib/db";
+import { linkGate } from "@/lib/data/links";
 import { mediaSelect, mediaUrl, toMedia, type Media } from "@/lib/media";
 import type { RegionCode } from "@/lib/region";
 
@@ -205,13 +206,15 @@ export async function getHome(region: RegionCode): Promise<HomeData | null> {
 
   const ev = home.featuredEvent;
   const eventVisible = !!ev && visibleStatuses.includes(ev.status);
+  // Hero cards that advertise an unpublished case study, event or solution are left out (lib/data/links.ts).
+  const links = await linkGate();
 
   return {
     region,
     seoTitle: home.seoTitle,
     seoDescription: home.seoDescription,
     ogImage: toMedia(home.ogImage),
-    slides: home.heroSlides.map((s) => ({
+    slides: home.heroSlides.filter((s) => links.visible(s.ctaHref)).map((s) => ({
       id: s.id,
       navLabel: s.navLabel,
       eyebrow: s.eyebrow,

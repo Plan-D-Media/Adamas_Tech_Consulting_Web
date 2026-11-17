@@ -41,7 +41,7 @@ export function ServiceSectionHead({ id, eyebrow, heading, accent, body, gap = "
     <div className={className} data-reveal>
       {eyebrow && <ServiceEyebrow>{eyebrow}</ServiceEyebrow>}
       {heading && (
-        <h2 id={id} className={cx("font-heading text-[clamp(2rem,1.4rem+1.9vw,3.25rem)] font-semibold leading-[1.1] tracking-[-0.045em] text-navy-850", eyebrow && (gap === "lg" ? "mt-10" : "mt-[31px]"), headingClassName)}>
+        <h2 id={id} className={cx("font-heading text-[clamp(2rem,1.4rem+1.9vw,3.25rem)] font-semibold leading-[1.1] tracking-[-0.045em] text-navy-850 [text-wrap:pretty]", eyebrow && (gap === "lg" ? "mt-10" : "mt-[31px]"), headingClassName)}>
           <AccentHeading text={heading} accent={accent} />
         </h2>
       )}

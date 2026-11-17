@@ -47,11 +47,8 @@ function Card({ s }: { s: SolutionItem }) {
             Name to be confirmed
           </p>
         )}
-        {s.tagline && !s.taglinePending ? (
-          <p className="mt-3 font-ui text-[1.0625rem] leading-[1.65] text-grey-300">{s.tagline}</p>
-        ) : (
-          <p className="mt-3 font-ui text-[0.875rem] italic leading-[1.5] text-grey-300/80">Details to be confirmed</p>
-        )}
+        {s.tagline && <p className="mt-3 font-ui text-[1.0625rem] leading-[1.65] text-grey-300">{s.tagline}</p>}
+        {s.taglinePending && <p className="mt-3 font-ui text-[0.875rem] italic leading-[1.5] text-grey-300/80">Details to be confirmed</p>}
         {s.modules.length > 0 && (
           <ul className="relative z-10 mt-3 flex flex-wrap gap-[7px]" role="list">
             {s.modules.map((m) => (

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // QA evidence (Playwright HTML reports, traces) is generated output, not source.
+    "docs/qa/evidence/**",
   ]),
 ]);
 

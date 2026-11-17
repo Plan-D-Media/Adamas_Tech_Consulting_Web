@@ -98,6 +98,9 @@ export function IndustriesExplorer({ sideLabel, label, heading, body, cardCta, c
                 </div>
               </article>
             ))}
+            {/* Trailing space so the last card can reach the snap start; without it the rail stopped one card short and
+                the last industry could never be selected (QA BUG-010). */}
+            <div className="w-[calc(100%-min(600px,100%))] shrink-0" aria-hidden="true" />
           </div>
 
           <div className="mt-9 flex items-center gap-5">

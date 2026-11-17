@@ -3,11 +3,17 @@ import { notFound } from "next/navigation";
 import { getPillar, getPillars } from "@/lib/data/services";
 import { getBlocks } from "@/lib/data/site";
 import { plain } from "@/lib/placeholder";
+import { NO_CONTENT_SLUG, atLeastOne } from "@/lib/static-params";
+import { redirectIfUnpublished } from "@/lib/data/unpublished";
 import { PillarPage } from "@/components/services/PillarPage";
 
+/** With no visible pillar the placeholder param keeps the build alive; it renders the 404 page (BUG-001). */
 export async function generateStaticParams() {
   const pillars = await getPillars();
-  return pillars.map((p) => ({ pillar: p.slug }));
+  return atLeastOne(
+    pillars.map((p) => ({ pillar: p.slug })),
+    { pillar: NO_CONTENT_SLUG },
+  );
 }
 
 export async function generateMetadata({ params }: PageProps<"/services/[pillar]">): Promise<Metadata> {
@@ -33,6 +39,9 @@ export default function PillarRoute({ params }: PageProps<"/services/[pillar]">)
 async function Pillar({ params }: { params: PageProps<"/services/[pillar]">["params"] }) {
   const { pillar } = await params;
   const [p, blocks] = await Promise.all([getPillar(pillar), getBlocks(null)]);
-  if (!p) notFound();
+  if (!p) {
+    await redirectIfUnpublished("services", pillar);
+    notFound();
+  }
   return <PillarPage pillar={p} blocks={blocks} />;
 }

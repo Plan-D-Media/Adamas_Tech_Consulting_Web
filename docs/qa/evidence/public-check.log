@@ -1,0 +1,18 @@
+/in/: 200 h1=1 drafts=[30% x4, to be confirmed x2] tags=2 links=47 dead=3 console=3 hydration=3
+/uk/: 200 h1=1 drafts=[30% x4, to be confirmed x2] tags=2 links=47 dead=3 console=3 hydration=3
+/gcc/: 200 h1=1 drafts=[30% x4, to be confirmed x2] tags=2 links=47 dead=3 console=5 hydration=5
+/services/cloud-services: 200 h1=1 drafts=[TO BE CONFIRMED x1] tags=1 links=43 dead=0 console=2 hydration=2
+/services/cloud-services/migration-modernization: 200 h1=1 drafts=[] tags=0 links=43 dead=0 console=1 hydration=1
+/services/digital-transformation: 200 h1=1 drafts=[] tags=0 links=43 dead=0 console=2 hydration=2
+/services/ai-services: 200 h1=1 drafts=[] tags=0 links=43 dead=0 console=1 hydration=1
+/insights/events/house-of-lords-2026: 500 h1=0 drafts=[] tags=0 links=0 dead=0 console=2 hydration=0
+/insights/events: 200 h1=1 drafts=[] tags=0 links=43 dead=0 console=1 hydration=1
+/solutions: 200 h1=1 drafts=[] tags=0 links=43 dead=0 console=1 hydration=1
+/case-studies: 200 h1=1 drafts=[] tags=0 links=43 dead=0 console=1 hydration=1
+/case-studies/sap-treasury-cash-forecasting: 500 h1=0 drafts=[] tags=0 links=0 dead=0 console=2 hydration=0
+/about: 200 h1=1 drafts=[] tags=0 links=44 dead=0 console=1 hydration=1
+/contact: 200 h1=1 drafts=[] tags=0 links=43 dead=0 console=3 hydration=3
+Sitemap: 44 URLs. Contains the event page: false. Contains case studies: 0.
+
+Event page direct request: 500; calendar: 404; draft case study: 500; draft solution /solutions/ai-solution-4: 404.
+EXIT 0

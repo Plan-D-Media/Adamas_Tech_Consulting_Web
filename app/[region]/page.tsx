@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getHome } from "@/lib/data/home";
 import { emptyBlock, getBlocks, getOffices, getRegions } from "@/lib/data/site";
 import { REGION_SLUGS, isRegionSlug, slugToCode } from "@/lib/region";
+import { openGraphFor, siteUrl } from "@/lib/seo";
 import { RevealScope } from "@/components/motion/RevealScope";
 import { Hero } from "@/components/home/Hero";
 import { TopStories } from "@/components/home/TopStories";
@@ -27,14 +28,16 @@ export async function generateMetadata({ params }: PageProps<"/[region]">): Prom
   const { region } = await params;
   if (!isRegionSlug(region)) return {};
   const [home, regions] = await Promise.all([getHome(slugToCode[region]), getRegions()]);
-  // hreflang on homepages only: every regional variant + x-default → "/".
-  const languages: Record<string, string> = { "x-default": "/" };
+  // hreflang on homepages only: every regional variant; x-default → "/" is rendered by the page itself (the metadata
+  // resolver drops the trailing slash of the root URL, which the sitemap keeps; QA BUG-033).
+  const languages: Record<string, string> = {};
   for (const r of regions) for (const tag of r.hreflang) languages[tag] = `/${r.slug}/`;
+  const title = home?.seoTitle ?? "AdamasTech Consulting";
   return {
-    title: { absolute: home?.seoTitle ?? "AdamasTech Consulting" },
+    title: { absolute: title },
     description: home?.seoDescription ?? undefined,
     alternates: { canonical: `/${region}/`, languages },
-    openGraph: home?.ogImage ? { images: [{ url: home.ogImage.url }] } : undefined,
+    ...openGraphFor(title, home?.seoDescription ?? undefined, `/${region}/`, home?.ogImage?.url),
   };
 }
 
@@ -66,6 +69,8 @@ async function RegionHome({ params }: { params: PageProps<"/[region]">["params"]
 
   return (
     <RevealScope>
+      {/* React hoists the link into <head>; the metadata API would strip the trailing slash from the root URL (BUG-033). */}
+      <link rel="alternate" hrefLang="x-default" href={`${siteUrl}/`} />
       <div lang={regionInfo?.locale}>
         <Hero block={b("home.hero")} cards={home.slides} claims={home.claims} />
         <TopStories block={b("home.topStories")} />

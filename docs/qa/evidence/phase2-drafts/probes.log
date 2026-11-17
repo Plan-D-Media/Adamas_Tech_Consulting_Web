@@ -1,0 +1,37 @@
+##### probe-autoplay
+headed=false
+0ms: 01 / 03 bar= pause=Pause highlights/false vis=visible focus=true reduce=false
+1500ms: 01 / 03 bar= pause=Pause highlights/false vis=visible focus=true reduce=false
+3000ms: 01 / 03 bar= pause=Pause highlights/false vis=visible focus=true reduce=false
+4500ms: 01 / 03 bar= pause=Pause highlights/false vis=visible focus=true reduce=false
+6000ms: 01 / 03 bar= pause=Pause highlights/false vis=visible focus=true reduce=false
+7500ms: 02 / 03 bar= pause=Pause highlights/false vis=visible focus=true reduce=false
+9000ms: 02 / 03 bar= pause=Pause highlights/false vis=visible focus=true reduce=false
+track scrollLeft: 0
+console: none
+##### probe-home
+stories articles: [{"clone":true,"opacity":"1","revealed":false,"inline":""},{"clone":false,"opacity":"1","revealed":true,"inline":"1"},{"clone":false,"opacity":"1","revealed":true,"inline":"1"},{"clone":false,"opacity":"1","revealed":true,"inline":"1"},{"clone":true,"opacity":"1","revealed":false,"inline":""}]
+stories opacities after prev: 1,1,1,1,1
+after 90 tabs + 1.5s: {"active":"A +44 7768 706988","minOpacity":1,"culprit":"","top":475,"vh":900}
+autoplay isolated: 01 / 03 -> 02 / 03 (pause aria-pressed=false)
+progress bar width now: 
+solutions after 12 slow next clicks: 10 / 10 {"scrollLeft":3136,"max":3136,"cards":10}
+industries: clicked item 12 of 12; aria-current on item 12; rail {"scrollLeft":6723,"max":6768,"cardW":600}; next disabled=true
+industries: clicked item 11; aria-current on item 11
+country select focused: {"opacity":"0","outline":"solid","focused":true} (opacity 0 means no visible focus indicator)
+no-JS /uk/ tabpanels: [{"id":"_R_2b5fibtb_-panel-0","display":"block","opacity":"0.484222","h":556,"cls":"anim-fade-up","parent":"relative mt-10 lg:mt-[44px]"},{"id":"_R_2b5fibtb_-panel-1","display":"block","opacity":"1","h":556,"cls":"mt-12","parent":"relative mt-10 lg:mt-[44px]"},{"id":"_R_2b5fibtb_-panel-2","display":"block","opacity":"1","h":589,"cls":"mt-12","parent":"relative mt-10 lg:mt-[44px]"}]
+no-JS /services/cloud-services tabpanels: [{"id":"_R_tbsnpfibtb_-panel-0","display":"block","opacity":"1","h":511,"cls":"anim-fade-up","parent":"relative mt-3"},{"id":"_R_tbsnpfibtb_-panel-1","display":"block","opacity":"1","h":486,"cls":"mt-3","parent":"relative mt-3"},{"id":"_R_tbsnpfibtb_-panel-2","display":"block","opacity":"1","h":511,"cls":"mt-3","parent":"relative mt-3"},{"id":"_R_tbsnpfibtb_-panel-3","display":"block","opacity":"1","h":286,"cls":"mt-3","parent":"relative mt-3"},{"id":"_R_tbsnpfibtb_-panel-4","display":"block","opacity":"1","h":486,"cls":"mt-3","parent":"relative mt-3"},{"id":"_R_tbsnpfibtb_-panel-5","display":"block","opacity":"1","h":511,"cls":"mt-3","parent":"relative mt-3"}]
+##### probe-resnap
+1440px reduced=false scrollTo: before {"stories":"01 / 03","storiesLeft":1254,"industry":1,"railLeft":0,"overflow":0} -> after {"stories":"01 / 03","storiesLeft":1254,"industry":1,"railLeft":0,"overflow":0}
+1440px reduced=false wheel: before {"stories":"01 / 03","storiesLeft":1254,"industry":1,"railLeft":0,"overflow":0} -> after {"stories":"01 / 03","storiesLeft":1254,"industry":1,"railLeft":0,"overflow":0}
+1440px reduced=true scrollTo: before {"stories":"01 / 03","storiesLeft":1254,"industry":1,"railLeft":0,"overflow":0} -> after {"stories":"01 / 03","storiesLeft":1254,"industry":1,"railLeft":0,"overflow":0}
+768px reduced=false scrollTo: before {"stories":"01 / 03","storiesLeft":741,"industry":1,"railLeft":0,"overflow":0} -> after {"stories":"01 / 03","storiesLeft":741,"industry":1,"railLeft":0,"overflow":0}
+768px reduced=true scrollTo: before {"stories":"01 / 03","storiesLeft":741,"industry":1,"railLeft":0,"overflow":0} -> after {"stories":"01 / 03","storiesLeft":741,"industry":1,"railLeft":0,"overflow":0}
+##### probe-industries-init
+390px: {"industry":1,"railScrollLeft":0,"railClient":308,"cardW":308,"storiesCounter":"01 / 03","storiesScrollLeft":395,"storiesClient":390}
+768px: {"industry":1,"railScrollLeft":0,"railClient":654,"cardW":600,"storiesCounter":"01 / 03","storiesScrollLeft":741,"storiesClient":768}
+1024px: {"industry":1,"railScrollLeft":0,"railClient":530,"cardW":530,"storiesCounter":"01 / 03","storiesScrollLeft":965,"storiesClient":1024}
+1280px: {"industry":1,"railScrollLeft":0,"railClient":786,"cardW":600,"storiesCounter":"01 / 03","storiesScrollLeft":1221,"storiesClient":1280}
+1440px: {"industry":1,"railScrollLeft":0,"railClient":922,"cardW":600,"storiesCounter":"01 / 03","storiesScrollLeft":1254,"storiesClient":1440}
+1920px: {"industry":1,"railScrollLeft":0,"railClient":922,"cardW":600,"storiesCounter":"01 / 03","storiesScrollLeft":1254,"storiesClient":1920}
+DONE

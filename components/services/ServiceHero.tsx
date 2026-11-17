@@ -1,4 +1,5 @@
 import type { Media } from "@/lib/media";
+import { previewingDrafts } from "@/lib/preview";
 import { Img } from "@/components/media/Img";
 
 interface Props {
@@ -25,7 +26,7 @@ export function ServiceHero({ pill, title, body, image, imageAlt = "", pending }
       <div className="container-site relative flex flex-col items-center pb-14 pt-10 text-center lg:pb-[139px] lg:pt-[66px]">
         <p className="inline-flex min-h-10 items-center rounded-pill border border-white/45 bg-black/30 px-[38px] font-ui text-[clamp(1rem,0.9rem+0.4vw,1.25rem)] font-medium leading-tight text-white">
           {pill}
-          {pending && <span className="ml-3 rounded-xs bg-orange-500 px-1.5 py-0.5 font-body text-[0.625rem] font-bold uppercase tracking-wider text-navy-950">Title to be confirmed</span>}
+          {pending && previewingDrafts && <span className="ml-3 rounded-xs bg-orange-500 px-1.5 py-0.5 font-body text-[0.625rem] font-bold uppercase tracking-wider text-navy-950">Title to be confirmed</span>}
         </p>
         <h1 id="service-heading" className="mt-[19px] max-w-[1017px] text-balance font-ui text-[clamp(2.25rem,1.3rem+3vw,3.875rem)] font-bold leading-[1.17]">
           {title}

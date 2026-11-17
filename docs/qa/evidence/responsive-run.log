@@ -1,0 +1,167 @@
+chromium /in/ 1920x1080: 200 clipped 12, overlaps 1, anchors covered 1
+chromium /in/ 1440x900: 200 clipped 12, overlaps 1, anchors covered 1
+chromium /in/ 1366x768: 200 clipped 12, overlaps 1, anchors covered 1
+chromium /in/ 1280x800: 200 clipped 12, overlaps 1, anchors covered 1
+chromium /in/ 1024x768: 200 clipped 12, overlaps 26, anchors covered 1
+chromium /in/ 768x1024: 200 clipped 12, overlaps 28, small targets 9, anchors covered 1
+chromium /in/ 414x896: 200 clipped 12, overlaps 40, small targets 10, anchors covered 1
+chromium /in/ 390x844: 200 clipped 12, overlaps 39, small targets 10, anchors covered 1
+chromium /in/ 360x740: 200 clipped 12, overlaps 39, small targets 10, anchors covered 1
+chromium /uk/ 1920x1080: 200 clipped 12, overlaps 1, anchors covered 1
+chromium /uk/ 1440x900: 200 clipped 12, overlaps 1, anchors covered 1
+chromium /uk/ 1366x768: 200 clipped 12, overlaps 1, anchors covered 1
+chromium /uk/ 1280x800: 200 clipped 12, overlaps 1, anchors covered 1
+chromium /uk/ 1024x768: 200 clipped 12, overlaps 26, anchors covered 1
+chromium /uk/ 768x1024: 200 clipped 12, overlaps 28, small targets 9, anchors covered 1
+chromium /uk/ 414x896: 200 clipped 12, overlaps 40, small targets 10, anchors covered 1
+chromium /uk/ 390x844: 200 clipped 12, overlaps 39, small targets 10, anchors covered 1
+chromium /uk/ 360x740: 200 clipped 12, overlaps 39, small targets 10, anchors covered 1
+chromium /gcc/ 1920x1080: 200 clipped 12, overlaps 1, anchors covered 1
+chromium /gcc/ 1440x900: 200 clipped 12, overlaps 1, anchors covered 1
+chromium /gcc/ 1366x768: 200 clipped 12, overlaps 1, anchors covered 1
+chromium /gcc/ 1280x800: 200 clipped 12, overlaps 1, anchors covered 1
+chromium /gcc/ 1024x768: 200 clipped 12, overlaps 26, anchors covered 1
+chromium /gcc/ 768x1024: 200 clipped 12, overlaps 28, small targets 9, anchors covered 1
+chromium /gcc/ 414x896: 200 clipped 12, overlaps 40, small targets 10, anchors covered 1
+chromium /gcc/ 390x844: 200 clipped 12, overlaps 39, small targets 10, anchors covered 1
+chromium /gcc/ 360x740: 200 clipped 12, overlaps 39, small targets 10, anchors covered 1
+chromium /services/cloud-services 1920x1080: 200 clipped 8, anchors covered 1
+chromium /services/cloud-services 1440x900: 200 clipped 8, anchors covered 1
+chromium /services/cloud-services 1366x768: 200 clipped 8, anchors covered 1
+chromium /services/cloud-services 1280x800: 200 clipped 8, anchors covered 1
+chromium /services/cloud-services 1024x768: 200 clipped 10, overlaps 26, anchors covered 1
+chromium /services/cloud-services 768x1024: 200 clipped 8, overlaps 28, small targets 8, anchors covered 1
+chromium /services/cloud-services 414x896: 200 clipped 8, overlaps 47, small targets 10, anchors covered 1
+chromium /services/cloud-services 390x844: 200 clipped 8, overlaps 46, small targets 10, anchors covered 1
+chromium /services/cloud-services 360x740: 200 overflow 1px, clipped 9, overlaps 45, small targets 10, anchors covered 1
+chromium /services/cloud-services/migration-modernization 1920x1080: 200 clipped 6, orphans 1, anchors covered 1
+chromium /services/cloud-services/migration-modernization 1440x900: 200 clipped 6, orphans 1, anchors covered 1
+chromium /services/cloud-services/migration-modernization 1366x768: 200 clipped 6, orphans 1, anchors covered 1
+chromium /services/cloud-services/migration-modernization 1280x800: 200 clipped 7, orphans 1, anchors covered 1
+chromium /services/cloud-services/migration-modernization 1024x768: 200 clipped 11, overlaps 28, anchors covered 1
+chromium /services/cloud-services/migration-modernization 768x1024: 200 clipped 6, overlaps 28, orphans 1, small targets 6, anchors covered 1
+chromium /services/cloud-services/migration-modernization 414x896: 200 clipped 11, overlaps 44, small targets 10, anchors covered 1
+chromium /services/cloud-services/migration-modernization 390x844: 200 clipped 11, overlaps 45, orphans 1, small targets 10, anchors covered 1
+chromium /services/cloud-services/migration-modernization 360x740: 200 clipped 11, overlaps 45, orphans 1, small targets 10, anchors covered 1
+chromium /services/digital-transformation 1920x1080: 200 overflow 1523px, clipped 12, anchors covered 1
+chromium /services/digital-transformation 1440x900: 200 overflow 1763px, clipped 12, anchors covered 1
+chromium /services/digital-transformation 1366x768: 200 overflow 1825px, clipped 12, anchors covered 1
+chromium /services/digital-transformation 1280x800: 200 overflow 1911px, clipped 12, anchors covered 1
+chromium /services/digital-transformation 1024x768: 200 overflow 2167px, clipped 12, overlaps 26, orphans 1, anchors covered 1
+chromium /services/digital-transformation 768x1024: 200 overflow 2407px, clipped 12, overlaps 26, orphans 1, small targets 7, anchors covered 1
+chromium /services/digital-transformation 414x896: 200 overflow 2212px, clipped 12, overlaps 34, orphans 1, small targets 10, anchors covered 1
+chromium /services/digital-transformation 390x844: 200 overflow 2094px, clipped 12, overlaps 34, orphans 1, small targets 10, anchors covered 1
+chromium /services/digital-transformation 360x740: 200 overflow 1945px, clipped 12, overlaps 38, orphans 1, small targets 10, anchors covered 1
+chromium /insights/events/house-of-lords-2026 1920x1080: 200 clipped 1, orphans 1, anchors covered 1
+chromium /insights/events/house-of-lords-2026 1440x900: 200 clipped 1, orphans 1, anchors covered 1
+chromium /insights/events/house-of-lords-2026 1366x768: 200 clipped 1, orphans 1, anchors covered 1
+chromium /insights/events/house-of-lords-2026 1280x800: 200 clipped 1, orphans 1, anchors covered 1
+chromium /insights/events/house-of-lords-2026 1024x768: 200 clipped 1, overlaps 26, anchors covered 1
+chromium /insights/events/house-of-lords-2026 768x1024: 200 clipped 1, overlaps 27, small targets 5, anchors covered 1
+chromium /insights/events/house-of-lords-2026 414x896: 200 clipped 1, overlaps 41, small targets 10, anchors covered 1
+chromium /insights/events/house-of-lords-2026 390x844: 200 clipped 1, overlaps 40, small targets 10, anchors covered 1
+chromium /insights/events/house-of-lords-2026 360x740: 200 clipped 1, overlaps 39, small targets 10, anchors covered 1
+chromium /about 1920x1080: 200 clipped 1
+chromium /about 1440x900: 200 clipped 1
+chromium /about 1366x768: 200 clipped 1
+chromium /about 1280x800: 200 clipped 1
+chromium /about 1024x768: 200 clipped 1, overlaps 26
+chromium /about 768x1024: 200 clipped 1, overlaps 28, small targets 6
+chromium /about 414x896: 200 clipped 1, overlaps 39, small targets 10
+chromium /about 390x844: 200 clipped 1, overlaps 40, small targets 10
+chromium /about 360x740: 200 clipped 1, overlaps 42, small targets 10
+chromium /case-studies 1920x1080: 200 clipped 1
+chromium /case-studies 1440x900: 200 clipped 1
+chromium /case-studies 1366x768: 200 clipped 1
+chromium /case-studies 1280x800: 200 clipped 1
+chromium /case-studies 1024x768: 200 clipped 1, overlaps 26
+chromium /case-studies 768x1024: 200 clipped 1, overlaps 26, small targets 10
+chromium /case-studies 414x896: 200 clipped 1, overlaps 38, small targets 10
+chromium /case-studies 390x844: 200 clipped 1, overlaps 41, small targets 10
+chromium /case-studies 360x740: 200 clipped 1, overlaps 43, small targets 10
+chromium /search 1920x1080: 200 clipped 1
+chromium /search 1440x900: 200 clipped 1
+chromium /search 1366x768: 200 clipped 1
+chromium /search 1280x800: 200 clipped 1
+chromium /search 1024x768: 200 clipped 1, overlaps 26
+chromium /search 768x1024: 200 clipped 1, overlaps 26, small targets 3
+chromium /search 414x896: 200 clipped 1, overlaps 40, small targets 10
+chromium /search 390x844: 200 clipped 1, overlaps 38, small targets 10
+chromium /search 360x740: 200 clipped 1, overlaps 39, small targets 10
+chromium /no-such-page-qa 1920x1080: 404 clipped 1, console 1
+chromium /no-such-page-qa 1440x900: 404 clipped 1, console 1
+chromium /no-such-page-qa 1366x768: 404 clipped 1, console 1
+chromium /no-such-page-qa 1280x800: 404 clipped 1, console 1
+chromium /no-such-page-qa 1024x768: 404 clipped 1, overlaps 26, console 1
+chromium /no-such-page-qa 768x1024: 404 clipped 1, overlaps 26, small targets 9, console 1
+chromium /no-such-page-qa 414x896: 404 clipped 1, overlaps 38, small targets 10, console 1
+chromium /no-such-page-qa 390x844: 404 clipped 1, overlaps 38, small targets 10, console 1
+chromium /no-such-page-qa 360x740: 404 clipped 1, overlaps 40, small targets 10, console 1
+firefox /in/ 1440x900: 200 clipped 12, overlaps 1, anchors covered 1
+firefox /in/ 1024x768: 200 clipped 12, overlaps 26, anchors covered 1
+firefox /in/ 390x844: 200 clipped 12, overlaps 38, orphans 3, small targets 10, anchors covered 1
+firefox /uk/ 1440x900: 200 clipped 12, overlaps 1, anchors covered 1
+firefox /uk/ 1024x768: 200 clipped 12, overlaps 26, anchors covered 1
+firefox /uk/ 390x844: 200 clipped 12, overlaps 38, orphans 3, small targets 10, anchors covered 1
+firefox /gcc/ 1440x900: 200 clipped 12, overlaps 1, anchors covered 1
+firefox /gcc/ 1024x768: 200 clipped 12, overlaps 26, anchors covered 1
+firefox /gcc/ 390x844: 200 clipped 12, overlaps 38, orphans 3, small targets 10, anchors covered 1
+firefox /services/cloud-services 1440x900: 200 clipped 8, anchors covered 1
+firefox /services/cloud-services 1024x768: 200 clipped 10, overlaps 26, anchors covered 1
+firefox /services/cloud-services 390x844: 200 clipped 8, overlaps 47, small targets 10, anchors covered 1
+firefox /services/cloud-services/migration-modernization 1440x900: 200 clipped 6, orphans 1, anchors covered 1
+firefox /services/cloud-services/migration-modernization 1024x768: 200 clipped 11, overlaps 28, anchors covered 1
+firefox /services/cloud-services/migration-modernization 390x844: 200 clipped 11, overlaps 44, orphans 1, small targets 10, anchors covered 1
+firefox /services/digital-transformation 1440x900: 200 overflow 1763px, clipped 12, anchors covered 1
+firefox /services/digital-transformation 1024x768: 200 overflow 2167px, clipped 12, overlaps 26, orphans 1, anchors covered 1
+firefox /services/digital-transformation 390x844: 200 overflow 2094px, clipped 12, overlaps 34, orphans 3, small targets 10, anchors covered 1
+firefox /insights/events/house-of-lords-2026 1440x900: 200 clipped 1, orphans 1, anchors covered 1
+firefox /insights/events/house-of-lords-2026 1024x768: 200 clipped 1, overlaps 26, anchors covered 1
+firefox /insights/events/house-of-lords-2026 390x844: 200 clipped 1, overlaps 40, small targets 10, anchors covered 1
+firefox /about 1440x900: 200 clipped 1
+firefox /about 1024x768: 200 clipped 1, overlaps 26
+firefox /about 390x844: 200 clipped 1, overlaps 40, small targets 10
+firefox /case-studies 1440x900: 200 clipped 1
+firefox /case-studies 1024x768: 200 clipped 1, overlaps 26
+firefox /case-studies 390x844: 200 clipped 1, overlaps 41, small targets 10
+firefox /search 1440x900: 200 clipped 1
+firefox /search 1024x768: 200 clipped 1, overlaps 26
+firefox /search 390x844: 200 clipped 1, overlaps 38, small targets 10
+firefox /no-such-page-qa 1440x900: 404 clipped 1
+firefox /no-such-page-qa 1024x768: 404 clipped 1, overlaps 26
+firefox /no-such-page-qa 390x844: 404 clipped 1, overlaps 38, small targets 10
+webkit /in/ 1440x900: 200 clipped 12, overlaps 1, anchors covered 1
+webkit /in/ 1024x768: 200 clipped 12, overlaps 26, anchors covered 1
+webkit /in/ 390x844: 200 clipped 12, overlaps 39, small targets 10, anchors covered 1
+webkit /uk/ 1440x900: 200 clipped 12, overlaps 1, anchors covered 1
+webkit /uk/ 1024x768: 200 clipped 12, overlaps 26, anchors covered 1
+webkit /uk/ 390x844: 200 clipped 12, overlaps 39, small targets 10, anchors covered 1
+webkit /gcc/ 1440x900: 200 clipped 12, overlaps 1, anchors covered 1
+webkit /gcc/ 1024x768: 200 clipped 12, overlaps 26, anchors covered 1
+webkit /gcc/ 390x844: 200 clipped 12, overlaps 39, small targets 10, anchors covered 1
+webkit /services/cloud-services 1440x900: 200 clipped 8, anchors covered 1
+webkit /services/cloud-services 1024x768: 200 clipped 10, overlaps 26, anchors covered 1
+webkit /services/cloud-services 390x844: 200 clipped 8, overlaps 46, small targets 10, anchors covered 1
+webkit /services/cloud-services/migration-modernization 1440x900: 200 clipped 6, orphans 1, anchors covered 1
+webkit /services/cloud-services/migration-modernization 1024x768: 200 clipped 11, overlaps 28, anchors covered 1
+webkit /services/cloud-services/migration-modernization 390x844: 200 clipped 11, overlaps 45, orphans 1, small targets 10, anchors covered 1
+webkit /services/digital-transformation 1440x900: 200 overflow 1763px, clipped 12, anchors covered 1
+webkit /services/digital-transformation 1024x768: 200 overflow 2167px, clipped 12, overlaps 26, anchors covered 1
+webkit /services/digital-transformation 390x844: 200 overflow 2094px, clipped 12, overlaps 34, small targets 10, anchors covered 1
+webkit /insights/events/house-of-lords-2026 1440x900: 200 clipped 1, orphans 1, anchors covered 1
+webkit /insights/events/house-of-lords-2026 1024x768: 200 clipped 1, overlaps 26, anchors covered 1
+webkit /insights/events/house-of-lords-2026 390x844: 200 clipped 1, overlaps 40, small targets 10, anchors covered 1
+webkit /about 1440x900: 200 clipped 1
+webkit /about 1024x768: 200 clipped 1, overlaps 26
+webkit /about 390x844: 200 clipped 1, overlaps 40, small targets 10
+webkit /case-studies 1440x900: 200 clipped 1
+webkit /case-studies 1024x768: 200 clipped 1, overlaps 26
+webkit /case-studies 390x844: 200 clipped 1, overlaps 41, small targets 10
+webkit /search 1440x900: 200 clipped 1
+webkit /search 1024x768: 200 clipped 1, overlaps 26
+webkit /search 390x844: 200 clipped 1, overlaps 38, small targets 10
+webkit /no-such-page-qa 1440x900: 404 clipped 1, console 1
+webkit /no-such-page-qa 1024x768: 404 clipped 1, overlaps 26, console 1
+webkit /no-such-page-qa 390x844: 404 clipped 1, overlaps 38, small targets 10, console 1
+Wrote docs\qa\evidence\drafts\responsive\responsive.md (165 runs)
+EXIT 0

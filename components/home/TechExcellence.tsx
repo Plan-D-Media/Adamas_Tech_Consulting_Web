@@ -29,7 +29,8 @@ export function TechExcellence({ block, logos }: { block: Block; logos: LogoData
                   <ul className="mt-5 flex flex-wrap justify-center gap-3" role="list" aria-label="Certifications">
                     {badges.map((b) => (
                       <li key={b.name} className="flex h-14 w-20 items-center justify-center rounded-xs bg-white p-2 ring-1 ring-grey-200">
-                        <Img src={b.logo!} width={64} height={40} sizes="64px" className="h-auto max-h-10 w-auto max-w-16 object-contain" />
+                        {/* Both dimensions fixed (next/image warned when only the height was styled, QA BUG-028); object-contain keeps the badge's ratio. */}
+                        <Img src={b.logo!} width={64} height={40} sizes="64px" className="h-10 w-16 object-contain" />
                       </li>
                     ))}
                   </ul>

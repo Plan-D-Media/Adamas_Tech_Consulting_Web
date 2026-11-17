@@ -1,0 +1,18 @@
+Page height: ours 13646px vs Figma 13566px
+Hero: 92.8% match (height 960px vs Figma 961px)
+Top Stories: 75.8% match (height 852px vs Figma 852px)
+Partners & Certifications: 94.3% match (height 456px vs Figma 404px)
+About Adamas: 93.1% match (height 792px vs Figma 780px)
+Our Services: 92.8% match (height 1122px vs Figma 1124px)
+Products & Solutions: 92.4% match (height 1006px vs Figma 979px)
+Client Outcomes: 91.8% match (height 934px vs Figma 935px)
+Industries: 94.8% match (height 999px vs Figma 1000px)
+Why Organisations Choose Adamas: 96.1% match (height 1006px vs Figma 1013px)
+Events & Insights: 90.6% match (height 957px vs Figma 949px)
+Latest Perspectives: 93.0% match (height 955px vs Figma 993px)
+Tech Excellence: 97.5% match (height 830px vs Figma 835px)
+Our Presence: 99.1% match (height 1138px vs Figma 1138px)
+Contact form: 99.0% match (height 779px vs Figma 776px)
+Footer: 97.6% match (height 861px vs Figma 830px)
+Header: 95.5% match
+Mega menu (Services): 78.8% match

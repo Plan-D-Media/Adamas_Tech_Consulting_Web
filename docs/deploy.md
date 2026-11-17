@@ -65,6 +65,31 @@ Check these before the push (Settings > Environment Variables, Production and Pr
 | `MAIL_FROM` | `AdamasTech Consulting <marketing@adamastech.in>` (a sender the relay is allowed to use) | the From header (new in round 7) |
 | `MAIL_TO_ENQUIRIES` | the inbox that receives enquiries and registrations | all forms |
 | `NEXT_PUBLIC_GTM_ID` | empty until analytics is approved | analytics (not wired yet) |
+| `PREVIEW_USERNAME`, `PREVIEW_PASSWORD` | set both on the staging preview; leave both unset at launch | Basic Auth challenge on every route in `proxy.ts` (new in the QA fix round, 16 Nov 2026) |
 
 Not set on Vercel: `FIGMA_TOKEN` (build scripts only) and `FIGMA_FIXTURE` (the design-comparison page is for local QA only).
 `AWS_REGION` from `.env.example` is unused now that mail goes through SMTP.
+
+## Preview protection and security headers (QA fix round, 16 Nov 2026)
+
+- **Basic Auth.** When `PREVIEW_USERNAME` and `PREVIEW_PASSWORD` are both set, `proxy.ts` answers every request
+  without matching credentials with `401` and a `WWW-Authenticate: Basic` challenge: pages, `/_next` data and static
+  chunks, media and API routes alike. The one exemption is `POST /api/revalidate`, which has its own shared secret and
+  is called server-to-server by the seed and, later, the CMS. Unset both variables (or either) and the site is open;
+  Vercel Deployment Protection can be used on top, not instead, if the preview must stay private.
+- **Headers.** `lib/security-headers.ts` sets `Content-Security-Policy` (with `frame-ancestors 'none'`),
+  `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`,
+  `Permissions-Policy`, `Cross-Origin-Opener-Policy: same-origin` and, when `NEXT_PUBLIC_SITE_URL` is `https://`,
+  `Strict-Transport-Security: max-age=31536000; includeSubDomains`. They are applied by `next.config.ts` to every
+  response Next serves and by `proxy.ts` to its own redirects and the auth challenge. The CSP allows `'unsafe-inline'`
+  scripts and styles because the pages are prerendered (Cache Components), so a per-request nonce cannot be used;
+  external scripts are limited to the site's origin, so adding Google Tag Manager later means adding its host to
+  `script-src` and `connect-src` in `lib/security-headers.ts`. `MEDIA_BASE_URL`, when absolute, is added to
+  `img-src`, `media-src` and `connect-src` automatically.
+- **Rate limiting behind a proxy.** `lib/forms.ts` hashes the first `X-Forwarded-For` address. Vercel and CloudFront
+  overwrite that header with the real client address, so the limit holds there. On a bare origin (a plain `next
+  start` reachable from the internet without a trusted proxy) a client can spoof the header and bypass the limit:
+  always deploy behind Vercel, CloudFront or another proxy that normalises `X-Forwarded-For` (QA BUG-022).
+- **Redirect hops.** The eleven old WordPress homepage URLs (`/home-old` and friends) redirect to `/` on purpose and
+  take a second hop to the visitor's regional homepage (`/in/`, `/uk/` or `/gcc/`): the second hop is the cookie
+  or geo decision and is expected. Every other legacy URL lands in one hop (QA BUG-018).

@@ -82,7 +82,8 @@ export function HomeContactForm({ placeholders, submitLabel, consentLabel, regio
     "aria-describedby": errors[name] ? `${uid}-${name}-error` : undefined,
     onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => setLive((l) => ({ ...l, [name]: fieldError(name, e.target.value) })),
   });
-  const inputCls = "h-[52px] w-full rounded-sm border border-[#EDF5F8] bg-white pr-4 font-ui text-[1.125rem] text-[#333E63] placeholder:text-[#333E63]/50 focus:border-blue-500 focus:outline-none";
+  // Keyboard focus keeps the global 2px blue ring (focus-visible); the 1px border change alone was too thin (QA BUG-016).
+  const inputCls = "h-[52px] w-full rounded-sm border border-[#EDF5F8] bg-white pr-4 font-ui text-[1.125rem] text-[#333E63] placeholder:text-[#333E63]/50 focus:border-blue-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-600";
   const err = (name: ContactField) =>
     errors[name] ? (
       <p id={`${uid}-${name}-error`} className="mt-1 font-body text-[0.8125rem] text-[#B4600A]">
@@ -136,11 +137,9 @@ export function HomeContactForm({ placeholders, submitLabel, consentLabel, regio
           <label htmlFor={`${uid}-country`} className="sr-only">
             Country
           </label>
-          <span className="pointer-events-none absolute left-[10px] top-1/2 z-10 flex -translate-y-1/2 items-center gap-1" aria-hidden="true">
-            {flag ? <Flag slug={flag} className="[&_img]:h-[22px] [&_img]:w-[22px] [&_img]:rounded-full" /> : <Icon name="globe" size={20} className="text-grey-500" />}
-            <Icon name="chevron-down" size={8} className="text-blue-500" />
-          </span>
-          <select id={`${uid}-country`} name="country" value={country} onChange={(e) => setCountry(e.target.value)} className="absolute left-0 top-0 h-[52px] w-[50px] cursor-pointer opacity-0" aria-label="Country">
+          {/* The invisible select sits over the flag; its keyboard focus is drawn as a ring on the flag box (peer), since
+              an opacity-0 control cannot show its own outline (QA BUG-009). */}
+          <select id={`${uid}-country`} name="country" value={country} onChange={(e) => setCountry(e.target.value)} className="peer absolute left-0 top-0 h-[52px] w-[50px] cursor-pointer opacity-0" aria-label="Country">
             {COUNTRIES.map((c) => (
               <option key={c.code} value={c.label}>
                 {c.label}
@@ -148,6 +147,10 @@ export function HomeContactForm({ placeholders, submitLabel, consentLabel, regio
               </option>
             ))}
           </select>
+          <span className="pointer-events-none absolute left-[6px] top-1/2 z-10 flex h-9 -translate-y-1/2 items-center gap-1 rounded-sm px-1 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-0 peer-focus-visible:outline-blue-600" aria-hidden="true">
+            {flag ? <Flag slug={flag} className="[&_img]:h-[22px] [&_img]:w-[22px] [&_img]:rounded-full" /> : <Icon name="globe" size={20} className="text-grey-500" />}
+            <Icon name="chevron-down" size={8} className="text-blue-500" />
+          </span>
           <input {...field("phone")} type="tel" autoComplete="tel" placeholder={placeholders.phone} className={cx(inputCls, "pl-[65px]")} />
         </div>
         {err("phone")}

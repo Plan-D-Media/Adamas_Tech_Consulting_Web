@@ -2,6 +2,7 @@ import type { IndustryData } from "@/lib/data/home";
 import type { Block } from "@/lib/data/site";
 import { mediaUrl } from "@/lib/media";
 import { optionalCopy, plain } from "@/lib/placeholder";
+import { previewingDrafts } from "@/lib/preview";
 import { IndustriesExplorer } from "@/components/home/IndustriesExplorer";
 
 /**
@@ -29,7 +30,7 @@ export function Industries({ block, industries }: { block: Block; industries: In
               label: plain(i.tabLabel),
               title: plain(i.title),
               paragraphs: body && !body.pending ? body.text.split(/\n\s*\n/).filter(Boolean) : [],
-              pending: !body || body.pending,
+              pending: previewingDrafts && (!body || body.pending),
               draft: i.draft,
               image: i.image ? { url: i.image.url, alt: i.image.alt } : null,
               phone: i.slug === "healthcare" ? mediaUrl("images/industries/healthcare-phone.webp") : null,

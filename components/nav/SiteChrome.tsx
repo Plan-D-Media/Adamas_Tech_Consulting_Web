@@ -1,8 +1,11 @@
 import type { ReactNode } from "react";
 import { getNavigation, getOffices, getRegions } from "@/lib/data/site";
 import { defaultRegion, type RegionSlug } from "@/lib/region";
+import { organizationJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Header } from "@/components/nav/Header";
 import { Footer } from "@/components/nav/Footer";
+import { SkipLink } from "@/components/nav/SkipLink";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 
 interface Props {
@@ -15,11 +18,14 @@ interface Props {
 export async function SiteChrome({ region, children }: Props) {
   const [nav, regions, offices] = await Promise.all([getNavigation(), getRegions(), getOffices()]);
   const fallback = defaultRegion();
+  const organization = organizationJsonLd({
+    sameAs: nav.social.map((s) => s.href).filter((h): h is string => !!h && /^https?:\/\//.test(h)),
+    phones: regions.filter((r) => r.phone).map((r) => ({ phone: r.phone as string, region: r.label })),
+  });
   return (
     <>
-      <a href="#main" className="sr-only-focusable fixed left-4 top-4 z-[100] rounded-sm bg-white px-4 py-2 font-ui text-button font-bold text-navy-950 shadow-lift">
-        Skip to content
-      </a>
+      <JsonLd data={organization} />
+      <SkipLink />
       <Header nav={nav.header} social={nav.social} regions={regions} region={region} fallbackRegion={fallback} />
       <main id="main" tabIndex={-1} className="outline-none">
         {children}

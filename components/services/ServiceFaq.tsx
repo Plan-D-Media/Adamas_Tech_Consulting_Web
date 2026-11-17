@@ -1,5 +1,6 @@
 import type { FaqData } from "@/lib/data/mappers";
 import { copy } from "@/lib/placeholder";
+import { previewingDrafts } from "@/lib/preview";
 import { ServiceSectionHead } from "@/components/services/ServiceSectionHead";
 
 interface Props {
@@ -38,7 +39,10 @@ function Row({ f, index, open }: { f: FaqData; index: number; open?: boolean }) 
  * plus/minus circle; the first row open). Native <details>, so it works without JavaScript; answers that are still
  * placeholders say so.
  */
-export function ServiceFaq({ eyebrow, heading, items }: Props) {
+export function ServiceFaq({ eyebrow, heading, items: all }: Props) {
+  // A question whose answer is still a placeholder is shown (flagged) only while drafts are previewed (BUG-014).
+  const items = previewingDrafts ? all : all.filter((f) => !copy(f.answer).pending);
+  if (items.length === 0) return null;
   const half = Math.ceil(items.length / 2);
   const cols = [items.slice(0, half), items.slice(half)];
   return (

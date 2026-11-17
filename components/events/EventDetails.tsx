@@ -1,11 +1,13 @@
 import type { EventPageData } from "@/lib/data/events";
 import { clock, mapsUrl } from "@/lib/dates";
 import { copy, optionalCopy, plain } from "@/lib/placeholder";
+import { previewingDrafts } from "@/lib/preview";
 import { Icon } from "@/components/ui/Icon";
 import { Img } from "@/components/media/Img";
 import { RegistrationForm } from "@/components/events/RegistrationForm";
 
-const TBC = <span className="ml-2 align-middle font-body text-[0.6875rem] font-semibold uppercase tracking-wider text-[#9A5208]">to be confirmed</span>;
+/** "To be confirmed" tag, shown only while drafts are previewed (the public site shows nothing in its place, BUG-014). */
+const TBC = previewingDrafts ? <span className="ml-2 align-middle font-body text-[0.6875rem] font-semibold uppercase tracking-wider text-[#9A5208]">to be confirmed</span> : null;
 
 /**
  * Event body: description, agenda (timeline), speakers and venue on the left; the registration card on the right

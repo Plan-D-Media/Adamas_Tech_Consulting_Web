@@ -1,0 +1,28 @@
+/** Probe: event registration without JavaScript: what does the browser show after the POST? Cleans up its row. */
+import { chromium } from "playwright";
+import { PrismaClient } from "@prisma/client";
+const base = (process.argv[2] ?? "http://localhost:3100").replace(/\/+$/, "");
+const db = new PrismaClient();
+const email = `qa-audit-nojs-${Date.now().toString(36)}@example.com`;
+const browser = await chromium.launch();
+const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
+const page = await ctx.newPage();
+await page.goto(`${base}/insights/events/house-of-lords-2026`, { waitUntil: "load" });
+await page.locator('form#register input[name="name"]').fill("QA NoJS Probe");
+await page.locator('form#register input[name="email"]').fill(email);
+await page.locator('form#register input[name="consent"]').check();
+const [resp] = await Promise.all([page.waitForNavigation({ timeout: 30_000 }).catch((e) => `TIMEOUT ${String(e).split("\n")[0]}`), page.locator('form#register button[type="submit"]').click({ noWaitAfter: true })]);
+const body = await page.locator("body").innerText();
+const status = typeof resp === "string" ? resp : `${resp?.status()} ${resp?.url()}`;
+const msg = body.match(/Registration received[^\n]*|Thank you[^\n]*|Too many[^\n]*|There (is|are)[^\n]*|closed[^\n]*/i)?.[0];
+console.log("response:", status);
+console.log("message on page:", msg ?? "(none of the expected messages found)");
+console.log("form still rendered:", await page.locator("form#register").count());
+console.log("name value after post:", await page.locator('form#register input[name="name"]').inputValue().catch(() => "n/a"));
+await page.screenshot({ path: "docs/qa/evidence/drafts/forms/nojs-registration-after-post.png", fullPage: false });
+const rows = await db.eventRegistration.findMany({ where: { email } });
+console.log("rows saved:", rows.length);
+await db.eventRegistration.deleteMany({ where: { email } });
+await db.rateLimitHit.deleteMany({ where: { key: { startsWith: "event-registration:" } } });
+await db.$disconnect();
+await browser.close();

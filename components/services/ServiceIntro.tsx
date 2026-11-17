@@ -55,7 +55,8 @@ export function ServiceIntro({ eyebrow, heading, paragraphs, ctaLabel, ctaHref, 
         <div className="relative lg:min-h-[536px]" data-reveal>
           {image && (
             <div className="relative aspect-[660/536] w-full overflow-hidden rounded-[30px] bg-navy-900 lg:absolute lg:right-0 lg:top-0 lg:aspect-auto lg:h-[536px] lg:w-[660px]">
-              <Img src={image} alt={imageAlt} fill sizes="(min-width: 1024px) 660px, 100vw" className="object-cover" />
+              {/* The intro photo is the page's LCP element (Lighthouse, QA BUG-028): fetched eagerly with high priority. */}
+              <Img src={image} alt={imageAlt} fill priority sizes="(min-width: 1024px) 660px, 100vw" className="object-cover" />
             </div>
           )}
           {pills.length > 0 && (

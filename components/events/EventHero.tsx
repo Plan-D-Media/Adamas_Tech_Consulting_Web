@@ -1,6 +1,7 @@
 import type { EventPageData } from "@/lib/data/events";
 import { dateParts, longDate, timeRange } from "@/lib/dates";
 import { copy, optionalCopy, plain } from "@/lib/placeholder";
+import { previewingDrafts } from "@/lib/preview";
 import { Icon } from "@/components/ui/Icon";
 import { ButtonLink } from "@/components/ui/Button";
 import { Img } from "@/components/media/Img";
@@ -40,7 +41,7 @@ export function EventHero({ event }: { event: EventPageData }) {
         </div>
         <h1 id="event-heading" className="mt-6 max-w-[46rem] text-balance font-heading text-[clamp(2rem,1.3rem+2.2vw,3.25rem)] font-bold leading-[1.12] tracking-[-0.03em]">
           {title.text}
-          {title.pending && <span className="ml-3 align-middle font-body text-[0.75rem] font-semibold uppercase tracking-wider text-sky-300">Title to be confirmed</span>}
+          {title.pending && previewingDrafts && <span className="ml-3 align-middle font-body text-[0.75rem] font-semibold uppercase tracking-wider text-sky-300">Title to be confirmed</span>}
         </h1>
         {summary && !summary.pending && <p className="mt-5 max-w-[40rem] font-heading text-[clamp(1rem,0.95rem+0.3vw,1.25rem)] leading-[1.5] text-grey-300">{summary.text}</p>}
         <dl className="mt-7 grid gap-3 font-body text-[1rem] text-white sm:grid-cols-2 lg:max-w-[46rem]">

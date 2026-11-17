@@ -1,0 +1,25 @@
+▲ Next.js 16.4.3
+- Local:         http://localhost:3100
+- Network:       http://192.168.7.5:3100
+✓ Ready in 176ms
+✓ Running next.config.ts took 37ms
+[mail] to=marketing@adamastech.in subject="Website enquiry from E2E Person (United Kingdom)"
+Name: E2E Person
+Email: e2e-contact-1794837571372@e2e.invalid
+Phone: +447700900000
+Country: United Kingdom
+Region: -
+Service: -
+Page: /uk/
+
+Regression test message, please ignore.
+[mail] to=marketing@adamastech.in subject="Website enquiry from E2E NoJS (India)"
+Name: E2E NoJS
+Email: e2e-nojs-1794837740310@e2e.invalid
+Phone: +919999999998
+Country: India
+Region: -
+Service: -
+Page: /in/
+
+No-JavaScript regression submission, please ignore.

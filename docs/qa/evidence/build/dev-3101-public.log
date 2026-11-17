@@ -1,0 +1,822 @@
+▲ Next.js 16.4.3 (Turbopack)
+- Local:         http://localhost:3101
+- Network:       http://192.168.7.5:3101
+- Environments: .env.local, .env
+✓ Ready in 681ms
+✓ Running next.config.ts took 55ms
+- Cache Components enabled
+- Partial Prefetching enabled
+
+ GET /in/ 200 in 6.7s (next.js: 2.8s, proxy.ts: 122ms, generate-params: 1274ms, application-code: 2.4s)
+ GET /in/ 200 in 939ms (next.js: 46ms, proxy.ts: 8ms, generate-params: 32ms, application-code: 853ms)
+[browser] Image with src "/media/images/certifications/iso-9001-bsi.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "/media/images/certifications/iso-27001-dqs.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "/media/images/certifications/cmmi-level-3.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+ GET /in/ 200 in 665ms (next.js: 10ms, proxy.ts: 8ms, generate-params: 31ms, application-code: 616ms)
+ GET /case-studies 200 in 2.8s (next.js: 2.3s, proxy.ts: 7ms, application-code: 479ms)
+ GET /uk/ 200 in 1785ms (next.js: 14ms, proxy.ts: 13ms, generate-params: 31ms, application-code: 1728ms)
+ GET /gcc/ 200 in 2.3s (next.js: 14ms, proxy.ts: 9ms, generate-params: 38ms, application-code: 2.2s)
+ GET /contact 200 in 1032ms (next.js: 392ms, proxy.ts: 9ms, application-code: 631ms)
+ GET /about 200 in 754ms (next.js: 60ms, proxy.ts: 7ms, application-code: 687ms)
+ GET /about/team 200 in 1725ms (next.js: 1317ms, proxy.ts: 10ms, application-code: 398ms)
+ GET /services 200 in 1167ms (next.js: 799ms, proxy.ts: 6ms, application-code: 363ms)
+ GET /services/cloud-services 200 in 3.9s (next.js: 1136ms, proxy.ts: 5ms, generate-params: 1595ms, application-code: 1132ms)
+ GET /services/cloud-services/migration-modernization 200 in 3.5s (next.js: 1153ms, proxy.ts: 6ms, generate-params: 1720ms, application-code: 606ms)
+ GET /services/cloud-services/devops-secops 200 in 692ms (next.js: 20ms, proxy.ts: 6ms, generate-params: 29ms, application-code: 638ms)
+ GET /services/cloud-services/managed-services 200 in 708ms (next.js: 8ms, proxy.ts: 5ms, generate-params: 0.1ms, application-code: 695ms)
+ GET /services/cloud-services/ai-ml-ops 200 in 577ms (next.js: 8ms, proxy.ts: 18ms, generate-params: 36ms, application-code: 515ms)
+ GET /services/cloud-services/cloud-automation 200 in 954ms (next.js: 10ms, proxy.ts: 13ms, generate-params: 0.1ms, application-code: 932ms)
+ GET /services/cloud-services/cloud-advisory-consultation 200 in 812ms (next.js: 12ms, proxy.ts: 6ms, generate-params: 31ms, application-code: 762ms)
+ GET /services/digital-transformation 200 in 859ms (next.js: 86ms, proxy.ts: 7ms, generate-params: 28ms, application-code: 738ms)
+ GET /services/digital-transformation/sap 200 in 961ms (next.js: 11ms, proxy.ts: 7ms, generate-params: 31ms, application-code: 912ms)
+ GET /services/digital-transformation/application-development 200 in 1064ms (next.js: 18ms, proxy.ts: 14ms, generate-params: 0.0ms, application-code: 1032ms)
+ GET /services/digital-transformation/data-analytics 200 in 1002ms (next.js: 7ms, proxy.ts: 5ms, generate-params: 25ms, application-code: 965ms)
+ GET /services/digital-transformation/master-data-governance 200 in 859ms (next.js: 9ms, proxy.ts: 6ms, generate-params: 0.0ms, application-code: 845ms)
+ GET /services/digital-transformation/edtech-openedx 200 in 1104ms (next.js: 8ms, proxy.ts: 5ms, generate-params: 39ms, application-code: 1052ms)
+ GET /services/ai-services 200 in 1021ms (next.js: 91ms, proxy.ts: 8ms, generate-params: 35ms, application-code: 888ms)
+ GET /services/ai-services/ai-ml 200 in 1063ms (next.js: 17ms, proxy.ts: 9ms, generate-params: 34ms, application-code: 1002ms)
+ GET /services/ai-services/agentic-ai 200 in 1112ms (next.js: 29ms, proxy.ts: 7ms, generate-params: 0.1ms, application-code: 1077ms)
+ GET /services/ai-services/computer-vision 200 in 1153ms (next.js: 171ms, proxy.ts: 8ms, generate-params: 31ms, application-code: 943ms)
+ GET /services/ai-services/generative-ai 200 in 1078ms (next.js: 17ms, proxy.ts: 14ms, generate-params: 0.1ms, application-code: 1047ms)
+ GET /services/ai-services/data-engineering 200 in 1182ms (next.js: 55ms, proxy.ts: 35ms, generate-params: 51ms, application-code: 1041ms)
+ GET /services/ai-services/advanced-analytics 200 in 1311ms (next.js: 31ms, proxy.ts: 18ms, generate-params: 0.1ms, application-code: 1261ms)
+ GET /services/ai-services/sovereign-ai 200 in 1177ms (next.js: 22ms, proxy.ts: 26ms, generate-params: 48ms, application-code: 1081ms)
+ GET /services/ai-services/responsible-ai 200 in 1050ms (next.js: 32ms, proxy.ts: 7ms, generate-params: 0.1ms, application-code: 1011ms)
+ GET /services/ai-services/ai-security-governance 200 in 1159ms (next.js: 10ms, proxy.ts: 14ms, generate-params: 36ms, application-code: 1098ms)
+ GET /solutions 200 in 3.4s (next.js: 2.4s, proxy.ts: 13ms, application-code: 1007ms)
+ GET /solutions/a-eye 200 in 5.5s (next.js: 1843ms, proxy.ts: 49ms, generate-params: 2.6s, application-code: 1071ms)
+ GET /solutions/air-mind 200 in 1653ms (next.js: 379ms, proxy.ts: 10ms, generate-params: 45ms, application-code: 1219ms)
+ GET /solutions/face-recognition 200 in 1021ms (next.js: 22ms, proxy.ts: 23ms, generate-params: 0.1ms, application-code: 976ms)
+ GET /solutions/industrial-analytics 200 in 1046ms (next.js: 256ms, proxy.ts: 19ms, generate-params: 34ms, application-code: 736ms)
+ GET /solutions/asset-tracking 200 in 920ms (next.js: 19ms, proxy.ts: 7ms, generate-params: 0.1ms, application-code: 894ms)
+ GET /insights/events 200 in 3.3s (next.js: 2.0s, proxy.ts: 42ms, application-code: 1167ms)
+⨯ Error: When using Cache Components, all `generateStaticParams` functions must return at least one result. This is to ensure that we can perform build-time validation that there is no other dynamic accesses that would cause a runtime error.
+
+Learn more: https://nextjs.org/docs/messages/empty-generate-static-params
+    at generateStaticParams (app\(site)\insights\events\[slug]\page.tsx:11:8)
+   9 | const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  10 |
+> 11 | export async function generateStaticParams() {
+     |        ^
+  12 |   return getEventParams();
+  13 | }
+  14 | {
+  type: 'Error',
+  page: '/insights/events/house-of-lords-2026'
+}
+○ Compiling /_error ...
+ GET /insights/events/house-of-lords-2026 500 in 10.7s (next.js: 10.3s, proxy.ts: 4ms, application-code: 365ms)
+⨯ Error: When using Cache Components, all `generateStaticParams` functions must return at least one result. This is to ensure that we can perform build-time validation that there is no other dynamic accesses that would cause a runtime error.
+
+Learn more: https://nextjs.org/docs/messages/empty-generate-static-params
+    at generateStaticParams (app\(site)\case-studies\[slug]\page.tsx:7:8)
+   5 | import { Placeholder } from "@/components/Placeholder";
+   6 |
+>  7 | export async function generateStaticParams() {
+     |        ^
+   8 |   return getCaseStudyParams();
+   9 | }
+  10 | {
+  type: 'Error',
+  page: '/case-studies/sap-treasury-cash-forecasting'
+}
+ GET /case-studies/sap-treasury-cash-forecasting 500 in 3.3s (next.js: 3.2s, proxy.ts: 7ms, application-code: 21ms)
+ GET /insights 200 in 1972ms (next.js: 1507ms, proxy.ts: 7ms, application-code: 458ms)
+⨯ Error: When using Cache Components, all `generateStaticParams` functions must return at least one result. This is to ensure that we can perform build-time validation that there is no other dynamic accesses that would cause a runtime error.
+
+Learn more: https://nextjs.org/docs/messages/empty-generate-static-params
+    at generateStaticParams (app\(site)\case-studies\[slug]\page.tsx:7:8)
+   5 | import { Placeholder } from "@/components/Placeholder";
+   6 |
+>  7 | export async function generateStaticParams() {
+     |        ^
+   8 |   return getCaseStudyParams();
+   9 | }
+  10 | {
+  type: 'Error',
+  page: '/case-studies/kubernetes-operations-healthtech'
+}
+ GET /case-studies/kubernetes-operations-healthtech 500 in 1645ms (next.js: 1630ms, proxy.ts: 5ms, application-code: 10ms)
+ GET /solutions/arivoo 200 in 634ms (next.js: 14ms, proxy.ts: 5ms, generate-params: 35ms, application-code: 580ms)
+ GET /privacy-policy 200 in 1699ms (next.js: 1009ms, proxy.ts: 6ms, application-code: 684ms)
+ GET /terms-of-use 200 in 1817ms (next.js: 1052ms, proxy.ts: 4ms, application-code: 762ms)
+ GET /credentials 200 in 1812ms (next.js: 1400ms, proxy.ts: 4ms, application-code: 408ms)
+ GET /cookie-policy 200 in 1895ms (next.js: 1317ms, proxy.ts: 7ms, application-code: 571ms)
+ GET /uk/ 200 in 702ms (next.js: 22ms, proxy.ts: 8ms, generate-params: 36ms, application-code: 636ms)
+[browser] Image with src "/media/images/certifications/iso-9001-bsi.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "/media/images/certifications/iso-27001-dqs.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "/media/images/certifications/cmmi-level-3.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+ GET /gcc/ 200 in 632ms (next.js: 209ms, proxy.ts: 5ms, generate-params: 26ms, application-code: 393ms)
+[browser] Image with src "/media/images/home/about-team.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[browser] Image with src "/media/images/certifications/iso-27001-dqs.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "/media/images/certifications/iso-9001-bsi.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "/media/images/certifications/cmmi-level-3.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "/media/images/home/perspective-data.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET /services/cloud-services 200 in 428ms (next.js: 22ms, proxy.ts: 3ms, generate-params: 30ms, application-code: 373ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/services/..." tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+          <SegmentViewNode type="layout" pagePath="(site)/lay...">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <SiteLayout>
+              <SiteChrome>
+                <a>
+                <Header>
+                  <HeaderShell>
+                    <header className="site-heade..." data-scrolled={undefined}>
+                      <div className="container-...">
+                        <div>
+                        <div className="headerbar ...">
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" priority={true}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                <main>
+                <Footer>
+                  <footer className="bg-navy-90..." data-compare="footer">
+                    <div className="container-...">
+                      <div className="grid gap-1...">
+                        <div>
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" width={178} height={52}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                        ...
+                      ...
+                ...
+        ...
+ 
+[browser] Image with src "/media/images/services/cloud/intro.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET /uk/ 200 in 319ms (next.js: 6ms, proxy.ts: 2ms, generate-params: 15ms, application-code: 296ms)
+ GET /services/cloud-services/migration-modernization 200 in 1004ms (next.js: 77ms, proxy.ts: 3ms, generate-params: 25ms, application-code: 899ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/services/..." tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+          <SegmentViewNode type="layout" pagePath="(site)/lay...">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <SiteLayout>
+              <SiteChrome>
+                <a>
+                <Header>
+                  <HeaderShell>
+                    <header className="site-heade..." data-scrolled={undefined}>
+                      <div className="container-...">
+                        <div>
+                        <div className="headerbar ...">
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" priority={true}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                <main>
+                <Footer>
+                  <footer className="bg-navy-90..." data-compare="footer">
+                    <div className="container-...">
+                      <div className="grid gap-1...">
+                        <div>
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" width={178} height={52}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                        ...
+                      ...
+                ...
+        ...
+ 
+ GET /services/digital-transformation 200 in 665ms (next.js: 8ms, proxy.ts: 6ms, generate-params: 31ms, application-code: 619ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/services/..." tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+          <SegmentViewNode type="layout" pagePath="(site)/lay...">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <SiteLayout>
+              <SiteChrome>
+                <a>
+                <Header>
+                  <HeaderShell>
+                    <header className="site-heade..." data-scrolled={undefined}>
+                      <div className="container-...">
+                        <div>
+                        <div className="headerbar ...">
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" priority={true}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                <main>
+                <Footer>
+                  <footer className="bg-navy-90..." data-compare="footer">
+                    <div className="container-...">
+                      <div className="grid gap-1...">
+                        <div>
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" width={178} height={52}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                        ...
+                      ...
+                ...
+        ...
+ 
+[browser] Image with src "/media/images/home/contact-photo.webp" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET /services/ai-services 200 in 439ms (next.js: 9ms, proxy.ts: 5ms, generate-params: 24ms, application-code: 402ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/services/..." tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+          <SegmentViewNode type="layout" pagePath="(site)/lay...">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <SiteLayout>
+              <SiteChrome>
+                <a>
+                <Header>
+                  <HeaderShell>
+                    <header className="site-heade..." data-scrolled={undefined}>
+                      <div className="container-...">
+                        <div>
+                        <div className="headerbar ...">
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" priority={true}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                <main>
+                <Footer>
+                  <footer className="bg-navy-90..." data-compare="footer">
+                    <div className="container-...">
+                      <div className="grid gap-1...">
+                        <div>
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" width={178} height={52}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                        ...
+                      ...
+                ...
+        ...
+ 
+⨯ Error: When using Cache Components, all `generateStaticParams` functions must return at least one result. This is to ensure that we can perform build-time validation that there is no other dynamic accesses that would cause a runtime error.
+
+Learn more: https://nextjs.org/docs/messages/empty-generate-static-params
+    at generateStaticParams (app\(site)\insights\events\[slug]\page.tsx:11:8)
+   9 | const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  10 |
+> 11 | export async function generateStaticParams() {
+     |        ^
+  12 |   return getEventParams();
+  13 | }
+  14 | {
+  type: 'Error',
+  page: '/insights/events/house-of-lords-2026'
+}
+ GET /insights/events/house-of-lords-2026 500 in 1362ms (next.js: 1344ms, proxy.ts: 5ms, application-code: 13ms)
+[browser] Uncaught Error: When using Cache Components, all `generateStaticParams` functions must return at least one result. This is to ensure that we can perform build-time validation that there is no other dynamic accesses that would cause a runtime error.
+
+Learn more: https://nextjs.org/docs/messages/empty-generate-static-params
+    at generateStaticParams (app/(site)/insights/events/[slug]/page.tsx:11:8)
+   9 | const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  10 |
+> 11 | export async function generateStaticParams() {
+     |        ^
+  12 |   return getEventParams();
+  13 | }
+  14 |
+ GET /insights/events 200 in 393ms (next.js: 124ms, proxy.ts: 4ms, application-code: 265ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/insights/..." tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+          <SegmentViewNode type="layout" pagePath="(site)/lay...">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <SiteLayout>
+              <SiteChrome>
+                <a>
+                <Header>
+                  <HeaderShell>
+                    <header className="site-heade..." data-scrolled={undefined}>
+                      <div className="container-...">
+                        <div>
+                        <div className="headerbar ...">
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" priority={true}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                <main>
+                <Footer>
+                  <footer className="bg-navy-90..." data-compare="footer">
+                    <div className="container-...">
+                      <div className="grid gap-1...">
+                        <div>
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" width={178} height={52}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                        ...
+                      ...
+                ...
+        ...
+ 
+ GET /solutions 200 in 299ms (next.js: 39ms, proxy.ts: 3ms, application-code: 256ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/solutions" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+          <SegmentViewNode type="layout" pagePath="(site)/lay...">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <SiteLayout>
+              <SiteChrome>
+                <a>
+                <Header>
+                  <HeaderShell>
+                    <header className="site-heade..." data-scrolled={undefined}>
+                      <div className="container-...">
+                        <div>
+                        <div className="headerbar ...">
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" priority={true}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                <main>
+                <Footer>
+                  <footer className="bg-navy-90..." data-compare="footer">
+                    <div className="container-...">
+                      <div className="grid gap-1...">
+                        <div>
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" width={178} height={52}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                        ...
+                      ...
+                ...
+        ...
+ 
+ GET /case-studies 200 in 215ms (next.js: 30ms, proxy.ts: 3ms, application-code: 182ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/case-studies" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+          <SegmentViewNode type="layout" pagePath="(site)/lay...">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <SiteLayout>
+              <SiteChrome>
+                <a>
+                <Header>
+                  <HeaderShell>
+                    <header className="site-heade..." data-scrolled={undefined}>
+                      <div className="container-...">
+                        <div>
+                        <div className="headerbar ...">
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" priority={true}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                <main>
+                <Footer>
+                  <footer className="bg-navy-90..." data-compare="footer">
+                    <div className="container-...">
+                      <div className="grid gap-1...">
+                        <div>
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" width={178} height={52}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                        ...
+                      ...
+                ...
+        ...
+ 
+⨯ Error: When using Cache Components, all `generateStaticParams` functions must return at least one result. This is to ensure that we can perform build-time validation that there is no other dynamic accesses that would cause a runtime error.
+
+Learn more: https://nextjs.org/docs/messages/empty-generate-static-params
+    at generateStaticParams (app\(site)\case-studies\[slug]\page.tsx:7:8)
+   5 | import { Placeholder } from "@/components/Placeholder";
+   6 |
+>  7 | export async function generateStaticParams() {
+     |        ^
+   8 |   return getCaseStudyParams();
+   9 | }
+  10 | {
+  type: 'Error',
+  page: '/case-studies/sap-treasury-cash-forecasting'
+}
+ GET /case-studies/sap-treasury-cash-forecasting 500 in 1310ms (next.js: 1288ms, proxy.ts: 4ms, application-code: 18ms)
+[browser] Uncaught Error: When using Cache Components, all `generateStaticParams` functions must return at least one result. This is to ensure that we can perform build-time validation that there is no other dynamic accesses that would cause a runtime error.
+
+Learn more: https://nextjs.org/docs/messages/empty-generate-static-params
+    at generateStaticParams (app/(site)/case-studies/[slug]/page.tsx:7:8)
+   5 | import { Placeholder } from "@/components/Placeholder";
+   6 |
+>  7 | export async function generateStaticParams() {
+     |        ^
+   8 |   return getCaseStudyParams();
+   9 | }
+  10 |
+ GET /about 200 in 303ms (next.js: 35ms, proxy.ts: 6ms, application-code: 263ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/about" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+          <SegmentViewNode type="layout" pagePath="(site)/lay...">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <SiteLayout>
+              <SiteChrome>
+                <a>
+                <Header>
+                  <HeaderShell>
+                    <header className="site-heade..." data-scrolled={undefined}>
+                      <div className="container-...">
+                        <div>
+                        <div className="headerbar ...">
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" priority={true}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                <main>
+                <Footer>
+                  <footer className="bg-navy-90..." data-compare="footer">
+                    <div className="container-...">
+                      <div className="grid gap-1...">
+                        <div>
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" width={178} height={52}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                        ...
+                      ...
+                ...
+        ...
+ 
+ GET /about/careers 200 in 1129ms (next.js: 895ms, proxy.ts: 2ms, application-code: 231ms)
+ GET /contact 200 in 331ms (next.js: 42ms, proxy.ts: 3ms, application-code: 286ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/contact" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+          <SegmentViewNode type="layout" pagePath="(site)/lay...">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <SiteLayout>
+              <SiteChrome>
+                <a>
+                <Header>
+                  <HeaderShell>
+                    <header className="site-heade..." data-scrolled={undefined}>
+                      <div className="container-...">
+                        <div>
+                        <div className="headerbar ...">
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" priority={true}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                <main>
+                <Footer>
+                  <footer className="bg-navy-90..." data-compare="footer">
+                    <div className="container-...">
+                      <div className="grid gap-1...">
+                        <div>
+                          <LogoLink regions={[...]} region={null} fallbackRegion="uk" width={178} height={52}>
+                            <LinkComponent href="/uk/" prefetch={true} className="inline-fle..." ...>
+                              <a
+                                className="inline-flex shrink-0 items-center"
+                                aria-label={"AdamasTech Consulting, UK & Ireland homepage"}
+                                ref={function}
+                                onClick={function onClick}
+                                onMouseEnter={function onMouseEnter}
+                                onTouchStart={function onTouchStart}
++                               href="/uk/"
+-                               href="/"
+                              >
+                          ...
+                        ...
+                      ...
+                ...
+        ...
+ 
+[browser] Encountered two children with the same key, `mailto:marketing@adamastech.in`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+[browser] Encountered two children with the same key, `mailto:marketing@adamastech.in`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+ GET /sitemap.xml 200 in 421ms (next.js: 241ms, application-code: 180ms)
+⨯ Error: When using Cache Components, all `generateStaticParams` functions must return at least one result. This is to ensure that we can perform build-time validation that there is no other dynamic accesses that would cause a runtime error.
+
+Learn more: https://nextjs.org/docs/messages/empty-generate-static-params
+    at generateStaticParams (app\(site)\insights\events\[slug]\page.tsx:11:8)
+   9 | const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  10 |
+> 11 | export async function generateStaticParams() {
+     |        ^
+  12 |   return getEventParams();
+  13 | }
+  14 | {
+  type: 'Error',
+  page: '/insights/events/house-of-lords-2026'
+}
+ GET /insights/events/house-of-lords-2026 500 in 1011ms (next.js: 999ms, proxy.ts: 4ms, application-code: 8ms)
+ GET /insights/events/house-of-lords-2026/calendar 404 in 3.4s (next.js: 3.3s, proxy.ts: 3ms, application-code: 32ms)
+⨯ Error: When using Cache Components, all `generateStaticParams` functions must return at least one result. This is to ensure that we can perform build-time validation that there is no other dynamic accesses that would cause a runtime error.
+
+Learn more: https://nextjs.org/docs/messages/empty-generate-static-params
+    at generateStaticParams (app\(site)\case-studies\[slug]\page.tsx:7:8)
+   5 | import { Placeholder } from "@/components/Placeholder";
+   6 |
+>  7 | export async function generateStaticParams() {
+     |        ^
+   8 |   return getCaseStudyParams();
+   9 | }
+  10 | {
+  type: 'Error',
+  page: '/case-studies/sap-treasury-cash-forecasting'
+}
+ GET /case-studies/sap-treasury-cash-forecasting 500 in 1645ms (next.js: 1630ms, proxy.ts: 6ms, application-code: 9ms)
+ GET /solutions/ai-solution-4 404 in 774ms (next.js: 22ms, proxy.ts: 5ms, generate-params: 28ms, application-code: 719ms)
+[?25h

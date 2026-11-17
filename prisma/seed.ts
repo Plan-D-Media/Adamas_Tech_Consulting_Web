@@ -51,9 +51,13 @@ function seo(s: Seo) {
 
 const json = (v: unknown) => (v === undefined ? Prisma.DbNull : (v as Prisma.InputJsonValue));
 
+/** The three homepages are canonical with a trailing slash; every other path is canonical without one (proxy.ts). */
+const HOMEPAGE = /^\/(in|uk|gcc)\/?$/;
+
 function normalisePath(p: string) {
   if (/^https?:\/\//.test(p)) return p;
   const clean = p.split("#")[0].split("?")[0];
+  if (HOMEPAGE.test(clean)) return clean.replace(/\/?$/, "/");
   return clean.length > 1 ? clean.replace(/\/+$/, "") : clean;
 }
 
@@ -535,7 +539,8 @@ async function seedRedirects() {
 /** Compile active redirects for proxy.ts. Re-run with `npm run redirects:build` after editing redirects in the DB. */
 export async function writeRedirectsFile() {
   const rows = await prisma.redirect.findMany({ where: { active: true }, select: { fromPath: true, toPath: true, statusCode: true } });
-  const map = Object.fromEntries(rows.map((r) => [r.fromPath.toLowerCase(), [r.toPath, r.statusCode]]));
+  // Homepage targets keep their trailing slash, so /e-invoicing-uae lands on /gcc/ in one hop (QA BUG-018).
+  const map = Object.fromEntries(rows.map((r) => [r.fromPath.toLowerCase(), [normalisePath(r.toPath), r.statusCode]]));
   const out = path.join(ROOT, "lib", "generated", "redirects.json");
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, JSON.stringify(map, null, 2) + "\n");
