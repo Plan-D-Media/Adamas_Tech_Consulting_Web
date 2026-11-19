@@ -772,6 +772,247 @@
       "blur": true,
       "fit": "cover",
       "enlarge": true
+    },
+    {
+      "id": "about-band-photo",
+      "kind": "raster",
+      "src": "design-ref/fills/229c29eddfc861c3835915bcc73e75a13b5b4c68.png",
+      "out": "images/about/band-photo",
+      "width": 1048,
+      "height": 616,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "about-globe",
+      "kind": "raster",
+      "src": "design-ref/fills/878d9172d5fb86e9bb0bd586a2d6983a4e2bbf9a.png",
+      "out": "images/about/globe",
+      "width": 660,
+      "height": 660,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "inside"
+    },
+    {
+      "id": "about-statement-bg",
+      "kind": "raster",
+      "src": "design-ref/fills/e11a910fc47022043eebe481c47aac30e2ef4280.png",
+      "out": "images/about/statement-bg",
+      "width": 1585,
+      "height": 779,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 50,
+      "webpQuality": 72,
+      "fit": "cover",
+      "blur": true,
+      "enlarge": true
+    },
+    {
+      "id": "about-life-1",
+      "kind": "raster",
+      "src": "design-ref/fills/bd805dc4c8062ea2420c743f94438f479702d6cf.png",
+      "out": "images/about/life-1",
+      "width": 341,
+      "height": 209,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "about-life-2",
+      "kind": "raster",
+      "src": "design-ref/fills/09f0620b638b34b712e63b6dca87f18be0b79f4c.png",
+      "out": "images/about/life-2",
+      "width": 238,
+      "height": 146,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "about-life-3",
+      "kind": "raster",
+      "src": "design-ref/fills/13438e7d6fae82d3df39f4afb6d7e17d92138043.png",
+      "out": "images/about/life-3",
+      "width": 212,
+      "height": 130,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "about-life-4",
+      "kind": "raster",
+      "src": "design-ref/fills/176f81f57bfaefc27776506bb092b9601a944e78.png",
+      "out": "images/about/life-4",
+      "width": 212,
+      "height": 206,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "about-life-video",
+      "kind": "raster",
+      "src": "design-ref/fills/6cb4524c22f7aef43ae0ec9a214e76634223f6c2.png",
+      "out": "images/about/life-video",
+      "width": 625,
+      "height": 383,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "about-cta-bg",
+      "kind": "raster",
+      "src": "design-ref/fills/43d8c0800cfb3d748e4e2e095017178fa941f0a3.png",
+      "out": "images/about/cta-bg",
+      "width": 589,
+      "height": 467,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 50,
+      "webpQuality": 72,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "about-expertise-1",
+      "kind": "raster",
+      "src": "design-ref/fills/524d46a3cdc32789ff15ed7781527485853dd035.png",
+      "out": "images/about/expertise-1",
+      "width": 378,
+      "height": 291,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "about-expertise-2",
+      "kind": "raster",
+      "src": "design-ref/fills/efc06c62247369f108f6435201030ea9da44ce4f.png",
+      "out": "images/about/expertise-2",
+      "width": 378,
+      "height": 291,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "about-expertise-3",
+      "kind": "raster",
+      "src": "design-ref/fills/dc890dc02842646231a7c1ee69a85cb288b63904.png",
+      "out": "images/about/expertise-3",
+      "width": 378,
+      "height": 291,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "case-hero-draft",
+      "kind": "raster",
+      "src": "design-ref/fills/92a8f3547c32f876c289a458d36395872ea06936.png",
+      "out": "images/case-studies/draft-hero",
+      "width": 1920,
+      "height": 530,
+      "scales": [
+        1
+      ],
+      "avifQuality": 50,
+      "webpQuality": 72,
+      "fit": "cover",
+      "blur": true,
+      "enlarge": true
+    },
+    {
+      "id": "case-solution-draft",
+      "kind": "raster",
+      "src": "design-ref/fills/d4ab0a24ffd6e3b1a7a947f2b9dbfdac34ee362c.png",
+      "out": "images/case-studies/draft-solution",
+      "width": 600,
+      "height": 400,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "case-strip-draft",
+      "kind": "raster",
+      "src": "design-ref/fills/bc79ed6d80fe318373e07cff1161e2ac73d9e739.png",
+      "out": "images/case-studies/draft-strip",
+      "width": 1349,
+      "height": 235,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "fit": "cover",
+      "blur": true,
+      "enlarge": true
     }
   ]
 }

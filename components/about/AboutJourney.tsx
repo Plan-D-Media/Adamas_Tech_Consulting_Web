@@ -19,7 +19,7 @@ export function AboutJourney({ eyebrow, heading, body, milestones }: Props) {
   if (milestones.length === 0) return null;
   return (
     <section data-compare="about-journey" aria-labelledby="about-journey-heading" className="bg-white py-14 lg:py-[96px]">
-      <div className="container-site">
+      <div className="container-about">
         <div className="max-w-[760px]" data-reveal>
           {eyebrow && <Eyebrow className="!text-[1.25rem] !tracking-normal">{eyebrow}</Eyebrow>}
           {heading && <Heading2 id="about-journey-heading" className="mt-3">{heading}</Heading2>}

@@ -494,3 +494,21 @@ on the public build; the public crawl and the e2e draft-leak test check for "[",
 - `ServicePillar` digital-transformation `outcomeLine` and `challenge`, ai-services `challenge` · fallback fields only; DRAFT would remove two of the three pillars.
 - `Page /about` group body "[Placeholder] RICE Adamas Group description." and the pending label; `Page /about/team` empty-state labels; `Page /credentials` pending labels · now dropped from the public payload by `lib/data/pages.ts`. Client copy still needed: the RICE Adamas Group description, leadership profiles and bios, certificate numbers and validity dates.
 - `Page /cookie-policy` "[Placeholder] Cookie policy text." · **resolved**: the page now carries a factual cookie policy (see Legal and global above) and renders it through the new legal template, as /privacy-policy and /terms-of-use now do.
+
+## Round 8 (18 November 2026): design slots vs client content
+
+- **`Page /about` `whyUs.items` has six items; the Figma "Our Expertise" band has three card slots.** The first
+  three now fill the design's three photo cards and the remaining three are listed under the band for the reviewer
+  only. **Question for the client: which three belong in this band, or should the design grow to six?** The six
+  current titles are in `content/pages.ts` under the `whyUs` block.
+- **About hero copy differs from the design.** The frame says "About Adamas / Technology That Moves Businesses
+  Forward"; the `Page /about` row carries "About Us / Innovative Solutions for a Better Tomorrow". The client's
+  copy is what renders. Confirm which the client wants.
+- **Designer's copy now shown in the drafts preview only** (`lib/figma-draft.ts`), awaiting client approval:
+  About "Our Commitment", "Our Strategic Direction", "Progress in Numbers" headings, "Clients & Partners", the
+  statement band, "Life at Adamas" and the CTA band. Each moves into `content/pages.ts` as a real block the moment
+  the client approves it.
+- **Still missing, and blocking those bands from going public:** nine "Progress in Numbers" figures, real client
+  testimonials with permission to publish, the client logo set, real award and certification marks, the four CTA
+  statistics, client office photography for "Life at Adamas", a film for the two video cards, and a product
+  screenshot for the case-study solution band.

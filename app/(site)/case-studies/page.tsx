@@ -16,6 +16,12 @@ import { CaseFilters, type CaseFilterState } from "@/components/cases/CaseFilter
 const PATH = "/case-studies";
 const CRUMBS: Crumb[] = [{ name: "Case studies", path: PATH }];
 
+/** Cards rendered per page, and how many carry an eager photograph (the first row at 1024px and above). */
+const PAGE_SIZE = 9;
+const EAGER_CARDS = 3;
+/** A ceiling so a hand-edited ?page= cannot ask for an unbounded document. */
+const MAX_PAGES = 20;
+
 const TITLE = "Case studies";
 const DESCRIPTION = "Success stories from AdamasTech Consulting’s cloud, digital transformation and AI work.";
 
@@ -57,6 +63,16 @@ async function Listing({ searchParams }: { searchParams: PageProps<"/case-studie
       (!active.region || (c.regions as string[]).some((r) => r.toLowerCase() === active.region)),
   );
 
+  // Only the first page is rendered server-side: the listing used to emit every card, and with a photograph each
+  // that was an LCP of 4.6s. "Show more" raises the page, so page N serves N*PAGE_SIZE cards in one document and
+  // the behaviour is identical without JavaScript (QA round 8).
+  const page = Math.max(1, Math.min(MAX_PAGES, Number(one(params.page)) || 1));
+  const shown = items.slice(0, PAGE_SIZE * page);
+  const remaining = items.length - shown.length;
+  const filterParams = Object.fromEntries(
+    Object.entries({ industry: active.industry, service: active.service, region: active.region }).filter((e): e is [string, string] => !!e[1]),
+  );
+
   return (
     <RevealScope>
       <JsonLd data={breadcrumbJsonLd(CRUMBS)} />
@@ -81,12 +97,28 @@ async function Listing({ searchParams }: { searchParams: PageProps<"/case-studie
                   and skip a level (axe heading-order). The label is for assistive technology only. */}
               <h2 className="sr-only">All case studies</h2>
               <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
-                {items.map((c, i) => (
+                {shown.map((c, i) => (
                   <li key={c.slug} data-reveal>
-                    <CaseCard item={c} index={i} />
+                    <CaseCard item={c} index={i} eager={i < EAGER_CARDS} />
                   </li>
                 ))}
               </ul>
+              {remaining > 0 && (
+                <div className="mt-10 flex flex-col items-center gap-3" id="more">
+                  {/* A link, not a button: "show more" has to work with JavaScript off, so it is a full navigation
+                      that raises the page count and re-renders the list on the server. */}
+                  <Link
+                    href={`${PATH}?${new URLSearchParams({ ...filterParams, page: String(page + 1) }).toString()}#more`}
+                    className="inline-flex min-h-[46px] items-center gap-3 rounded-pill bg-white px-7 font-heading text-[0.9375rem] font-bold text-navy-850 ring-1 ring-grey-150 hover:bg-grey-50"
+                  >
+                    Show more case studies
+                    <Icon name="arrow" size={17} />
+                  </Link>
+                  <p className="font-body text-[0.875rem] text-grey-600" aria-live="polite">
+                    Showing {shown.length} of {items.length}
+                  </p>
+                </div>
+              )}
             </>
           ) : (
             <div className="mt-10 rounded-lg bg-tint-50 px-6 py-12 text-center lg:px-12 lg:py-16" data-reveal>

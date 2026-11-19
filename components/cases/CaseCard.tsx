@@ -12,7 +12,7 @@ import { Icon } from "@/components/ui/Icon";
  * The headline figure is only drawn when the row carries a real one: lib/data/caseStudies.ts replaces a figure the
  * sources contradict with a placeholder, and a placeholder never reaches the public build (QA BUG-014).
  */
-export function CaseCard({ item, index }: { item: CaseCardData; index?: number }) {
+export function CaseCard({ item, index, eager = false }: { item: CaseCardData; index?: number; eager?: boolean }) {
   const metric = isPending(item.headlineMetric) ? null : plain(item.headlineMetric);
   return (
     <Link
@@ -20,7 +20,18 @@ export function CaseCard({ item, index }: { item: CaseCardData; index?: number }
       className="group relative flex h-full flex-col rounded-[9px] bg-white p-[7px] pb-[22px] shadow-[0_10px_32px_rgb(58_74_110/0.07)] ring-1 ring-grey-200 transition-shadow duration-(--duration-base) hover:shadow-[0_14px_40px_rgb(58_74_110/0.14)]"
     >
       <div className="relative h-[216px] overflow-hidden rounded-md bg-navy-900">
-        {item.image && <Img src={item.image} fill sizes="(min-width: 1024px) 420px, (min-width: 640px) 50vw, 100vw" className="object-cover" />}
+        {/* `eager` is set for the cards above the fold on the listing. The first card's photograph is the LCP
+            element there, and without fetchPriority the browser discovers it late (QA Phase 2 LCP round); every
+            other card stays lazy, which is next/image's default. */}
+        {item.image && (
+          <Img
+            src={item.image}
+            fill
+            sizes="(min-width: 1024px) 420px, (min-width: 640px) 50vw, 100vw"
+            className="object-cover"
+            {...(eager ? { priority: true, fetchPriority: "high" as const } : { loading: "lazy" as const })}
+          />
+        )}
         {typeof index === "number" && (
           <span className="absolute left-[15px] top-[15px] inline-flex h-[37px] w-[37px] items-center justify-center rounded-full bg-navy-900/70 font-heading text-[0.5625rem] font-bold text-white backdrop-blur" aria-hidden="true">
             {String(index + 1).padStart(2, "0")}

@@ -221,3 +221,31 @@ The four that sit below 80% are all content, not layout:
   **Mithu: is the screenshot per case study, or one illustration reused?**
 - **Journey (79%)**: the frame draws a horizontal 2020-2029 timeline; the milestones in the database have no years
   confirmed yet, so they render as a card grid. It will be revisited once the client sends the dates.
+
+## Round 8 (18 November 2026)
+
+- **Mega-menu panels are portalled to `<body>`.** The header bar carries `isolation: isolate`, which makes it a
+  backdrop root, so a `backdrop-filter` inside it could only sample the header box and the panel never blurred.
+  The panels are now `fixed`, positioned from the header's 1312px chrome box and the bar's bottom edge. Panel is
+  white at 95% over `blur(24px) saturate(1.6)`; a navy `#000C33` 30% scrim sits behind it, under the header.
+  The entrance animation moved onto the panel element itself, because an ancestor at `opacity < 1` is also a
+  backdrop root.
+- **New `.container-about` (1194px content).** The About frame lays its sections on a narrower column than the
+  homepage - x 366-1560 at 1920, shared by the approach steps, expertise cards, people cards, CTA band and award
+  badges. Every About section had been using `container-site` (1320) and so was 126px too wide. It is defined in
+  `@layer components`, not as an `@utility`: a utility is only emitted when the class scanner finds it, and a
+  long-running dev server does not re-scan for a newly defined one.
+- **About hero wash.** The design puts white 46-62px type over parts of the hero photograph at 2.29:1 (p95), below
+  the 3:1 large-text minimum - measured on the frame's own render. Overall brightness now matches the design
+  (mean luminance 179 against 182), with a soft ellipse darkening only the text column: worst case 5.36:1.
+  Checked by `scripts/qa/hero-contrast.mjs`.
+- **Clients ring is gated to `xl`, not `lg`.** The nine logo tiles are absolutely positioned at percentage
+  `left` offsets with a fixed 174px width; between 1024 and 1279 they overflowed the narrowed container and the
+  page scrolled sideways by 11-20px. Below `xl` the logos are a plain grid.
+- **Draft notes are deliberately compact** (12px, tight padding). They exist for the reviewer, and a tall box pushes
+  every band below it out of step with the frame the same preview is measured against.
+- **The case-study "facts strip" is not in the Figma frame.** Round 7 recorded it as Figma y 1260-1400; there is no
+  such band in 274:8299, and the band it was scored against is the top edge of the executive-summary panel. It is
+  our own addition and is on the allowed-differences list.
+- **Contact and footer are one Figma group** (Group 21307, on both About and Cloud Services). Scoring our contact
+  section against the whole group is what produced the old "44%"; split correctly it is 91% and the footer 95%.

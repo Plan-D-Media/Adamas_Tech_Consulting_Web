@@ -26,8 +26,9 @@ const SOCIAL_ICONS: Record<string, IconName> = { facebook: "facebook", linkedin:
 export function Header({ nav, social, regions, region, fallbackRegion }: Props) {
   return (
     <HeaderShell>
-      {/* relative: the mega-menu panel spans this 1312px box (Figma: panel x 304-1616). */}
-      <div className="container-chrome relative">
+      {/* data-menu-anchor: the mega-menu panels are portalled to <body> and take their left edge and width from this
+          1312px box (Figma: panel x 304-1616). See components/nav/MegaMenuPortal.tsx. */}
+      <div className="container-chrome relative" data-menu-anchor>
         <div className="topbar flex h-(--topbar-h) items-center justify-between gap-6 overflow-hidden pt-[17px] transition-[height,padding,opacity] duration-(--duration-base) ease-(--ease-out)">
           <TopBarContacts regions={regions} region={region} fallbackRegion={fallbackRegion} />
           {social.length > 0 && (

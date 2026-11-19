@@ -8,9 +8,17 @@ import { Icon } from "@/components/ui/Icon";
 import { ArrowLink } from "@/components/ui/Button";
 import { Img } from "@/components/media/Img";
 import { shortDate } from "@/lib/dates";
+import { MegaMenuPortal } from "@/components/nav/MegaMenuPortal";
 
 const OPEN_DELAY = 140;
 const CLOSE_DELAY = 200;
+
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+/** Visible, focusable descendants in DOM order. */
+function focusables(root: HTMLElement): HTMLElement[] {
+  return Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE)).filter((el) => el.getClientRects().length > 0);
+}
 
 /** A menu's "overview" link is the child that points at the menu's own page (Services overview, All solutions). */
 function splitChildren(item: NavLink) {
@@ -78,7 +86,9 @@ function Panel({ item, panelId, labelId }: { item: NavLink; panelId: string; lab
   const cols = rich ? (featured ? "nav:grid-cols-[280px_minmax(0,1fr)_280px]" : "nav:grid-cols-[280px_minmax(0,1fr)]") : featured ? "nav:grid-cols-[280px_280px]" : "nav:grid-cols-[280px]";
 
   return (
-    <div id={panelId} role="group" aria-labelledby={labelId} className={cx("glass-panel grid gap-8 rounded-lg px-12 py-10", cols)}>
+    // The entrance animation lives on this element, not on a wrapper: an ancestor at opacity < 1 would itself be a
+    // backdrop root and the blur would sample nothing for the 200ms it ran.
+    <div id={panelId} role="group" aria-labelledby={labelId} className={cx("glass-panel anim-panel-in grid gap-8 rounded-lg px-12 py-10", cols)}>
       {/* Left: categories */}
       <div className={cx(rich && "border-r border-navy-900/10 pr-6")}>
         <p className="label-caps text-grey-700">{item.label}</p>
@@ -170,14 +180,17 @@ function DraftBadge() {
  * Hover intent (140ms open / 200ms close), click or tap toggles, Enter/Space opens, Esc closes and returns focus,
  * the panel closes when focus leaves it. Panels fade and slide in over 200ms (CSS keyframes), none with reduced motion.
  *
- * The open panel is rendered inside its own trigger's <li>, directly after the button, so Tab from the trigger moves
- * into the panel in DOM order (the panel is positioned against the header box, so it looks the same wherever it
- * lives). Rendering every panel after the whole trigger list skipped the panel for all but the last menu (QA BUG-008).
+ * The open panel is rendered through a portal at <body> level (components/nav/MegaMenuPortal.tsx) so that its
+ * backdrop-filter has the page as its backdrop; inside the header it had none and the panel did not blur. The portal
+ * is created from this component's JSX, so React events still bubble to the <nav> below - but **DOM order is lost**,
+ * so Tab into and out of the panel is driven here instead (it used to come free from rendering inside the trigger's
+ * <li>; QA BUG-008 is the regression test for it).
  */
 export function MegaMenu({ items }: { items: NavLink[] }) {
   const [openKey, setOpenKey] = useState<string | null>(null);
   const timer = useRef<number | null>(null);
   const navRef = useRef<HTMLElement>(null);
+  const hostRef = useRef<HTMLDivElement>(null);
   const uid = useId();
 
   const clear = () => {
@@ -197,26 +210,68 @@ export function MegaMenu({ items }: { items: NavLink[] }) {
     setOpenKey(null);
   }, []);
 
+  const triggerFor = useCallback((key: string) => navRef.current?.querySelector<HTMLButtonElement>(`button[data-menu-key="${key}"]`) ?? null, []);
+
   useEffect(() => clear, []);
   useEffect(() => {
     if (!openKey) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
-      const trigger = navRef.current?.querySelector<HTMLButtonElement>(`button[data-menu-key="${openKey}"]`);
+      const trigger = triggerFor(openKey);
       close();
       trigger?.focus();
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [openKey, close]);
+  }, [openKey, close, triggerFor]);
 
   // Close when focus leaves the open trigger and its panel (another trigger, the switcher, the page). Pointer
-  // clicks on triggers are handled by onClick, so a click on another trigger still toggles cleanly.
+  // clicks on triggers are handled by onClick, so a click on another trigger still toggles cleanly. The panel now
+  // lives outside the <li>, so containment is tested against the portal's wrapper as well.
   const onBlur = (e: React.FocusEvent) => {
     if (!openKey) return;
     const next = e.relatedTarget as Node | null;
     const owner = navRef.current?.querySelector(`li[data-menu-item="${openKey}"]`);
-    if (!next || !owner?.contains(next)) close();
+    if (!next) return close();
+    if (owner?.contains(next)) return;
+    if (hostRef.current?.contains(next)) return;
+    close();
+  };
+
+  /** Tab from the trigger moves into the open panel, as DOM order used to. */
+  const onTriggerKeyDown = (e: React.KeyboardEvent, key: string) => {
+    if (e.key !== "Tab" || e.shiftKey || openKey !== key) return;
+    const host = hostRef.current;
+    if (!host) return;
+    const first = focusables(host)[0];
+    if (!first) return;
+    e.preventDefault();
+    first.focus();
+  };
+
+  /** Shift+Tab off the panel's first link returns to the trigger; Tab off its last link leaves the menu and closes it. */
+  const onPanelKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key !== "Tab" || !openKey) return;
+    const host = hostRef.current;
+    if (!host) return;
+    const items = focusables(host);
+    if (items.length === 0) return;
+    const active = document.activeElement as HTMLElement | null;
+    const trigger = triggerFor(openKey);
+    if (e.shiftKey && active === items[0]) {
+      e.preventDefault();
+      close();
+      trigger?.focus();
+      return;
+    }
+    if (!e.shiftKey && active === items[items.length - 1]) {
+      e.preventDefault();
+      close();
+      // Continue the header's tab order: the focusable after the trigger, skipping the panel itself.
+      const after = focusables(document.body).filter((el) => !host.contains(el));
+      const i = trigger ? after.indexOf(trigger) : -1;
+      (i >= 0 ? after[i + 1] : undefined)?.focus();
+    }
   };
 
   return (
@@ -240,6 +295,7 @@ export function MegaMenu({ items }: { items: NavLink[] }) {
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   aria-haspopup="true"
+                  onKeyDown={(e) => onTriggerKeyDown(e, key)}
                   onClick={() => {
                     clear();
                     setOpenKey(isOpen ? null : key);
@@ -253,13 +309,19 @@ export function MegaMenu({ items }: { items: NavLink[] }) {
                   {item.label}
                 </Link>
               )}
-              {/* The hover zone starts at the bar's bottom edge: the 45px gap in Figma is transparent padding, so the pointer can cross it. */}
               {hasMenu && isOpen && (
-                <div className="absolute left-0 right-0 top-full pt-[45px]" onPointerEnter={clear} onPointerLeave={scheduleClose}>
-                  <div className="anim-panel-in rounded-lg">
-                    <Panel item={item} panelId={panelId} labelId={labelId} />
-                  </div>
-                </div>
+                <MegaMenuPortal
+                  navRef={navRef}
+                  hostRef={hostRef}
+                  onPointerEnter={clear}
+                  onPointerLeave={scheduleClose}
+                  onScrimEnter={scheduleClose}
+                  onScrimClick={close}
+                  onKeyDown={onPanelKeyDown}
+                  onBlur={onBlur}
+                >
+                  <Panel item={item} panelId={panelId} labelId={labelId} />
+                </MegaMenuPortal>
               )}
             </li>
           );

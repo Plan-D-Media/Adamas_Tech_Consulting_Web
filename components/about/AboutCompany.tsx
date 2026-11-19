@@ -3,13 +3,16 @@ import { cx } from "@/lib/cx";
 import type { StatData } from "@/lib/data/home";
 import { Icon } from "@/components/ui/Icon";
 import { Eyebrow, Heading2 } from "@/components/ui/SectionHeader";
+import { DraftTag } from "@/components/ui/DraftTag";
 
 interface Props {
   eyebrow: string | null;
   heading: string | null;
   paragraphs: string[];
-  /** The verified "years of experience" stat, shown as the large figure. Nothing is drawn when none is verified. */
+  /** The verified "years of experience" stat, shown as the large figure. */
   figure: StatData | null;
+  /** The design's unverified figure, used only while drafts are previewed and no verified Stat row exists. */
+  draftFigure: { value: string; label: string } | null;
   ctaLabel?: string | null;
   ctaHref?: string | null;
   /** Review-only: the copy withheld for an unconfirmed figure, with the reason. Drafts preview only. */
@@ -25,8 +28,12 @@ interface Props {
  * Stat table and only when that row is verified, so the column simply collapses while the client has not confirmed
  * one (docs/qa/evidence/phase2/client-content-request.md).
  */
-export function AboutCompany({ eyebrow, heading, paragraphs, figure, ctaLabel, ctaHref, held, pendingLabel }: Props) {
+export function AboutCompany({ eyebrow, heading, paragraphs, figure, draftFigure, ctaLabel, ctaHref, held, pendingLabel }: Props) {
   if (paragraphs.length === 0 && !heading) return null;
+  // The design always draws the figure column. A verified Stat row wins; otherwise the preview shows the design's
+  // "12 Years' Experience In It" with a Draft tag, and the public build still collapses the column.
+  const shown = figure ?? (draftFigure ? { prefix: null, value: draftFigure.value, suffix: null, label: draftFigure.label } : null);
+  const isDraft = !figure && !!draftFigure;
   return (
     <section data-compare="about-company" aria-labelledby="about-company-heading" className="bg-white py-14 lg:py-[88px]">
       <div className="container-site">
@@ -39,17 +46,20 @@ export function AboutCompany({ eyebrow, heading, paragraphs, figure, ctaLabel, c
             "mt-10 grid gap-10 lg:mt-[62px] lg:gap-[90px]",
             // Without a verified figure there is one column, centred on the same measure as the header, rather
             // than a text column pushed to the left of an empty one.
-            figure ? "lg:grid-cols-[minmax(0,460px)_minmax(0,1fr)]" : "mx-auto max-w-[820px]",
+            shown ? "lg:grid-cols-[minmax(0,460px)_minmax(0,1fr)]" : "mx-auto max-w-[820px]",
           )}
         >
-          {figure && (
+          {shown && (
             <div className="flex items-start gap-4" data-reveal>
               <span className="font-heading text-[clamp(5rem,3rem+9vw,13.75rem)] font-bold leading-[0.82] tracking-[-0.04em] text-blue-600">
-                {figure.prefix}
-                {figure.value}
-                {figure.suffix}
+                {shown.prefix}
+                {shown.value}
+                {shown.suffix}
               </span>
-              <span className="mt-2 max-w-[120px] font-heading text-[1.25rem] leading-[1.45] text-grey-600">{figure.label}</span>
+              <span className="mt-2 max-w-[120px] font-heading text-[1.25rem] leading-[1.45] text-grey-600">
+                {shown.label}
+                {isDraft && <DraftTag className="ml-0 mt-2 block w-fit" title="Unverified figure from the design" />}
+              </span>
             </div>
           )}
           <div className="max-w-[640px]" data-reveal>

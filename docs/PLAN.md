@@ -275,3 +275,26 @@ Summary: stat conflicts; no House of Lords details; AI Product A/B and AI soluti
 Work held until the client signs off the content, so it isn't done twice.
 
 - **Real 404 status codes for unknown slugs.** Today an unknown slug on a dynamic route (e.g. `/solutions/nope`, `/case-studies/nope`, `/services/nope`, `/insights/events/nope`) renders the 404 page with `noindex`, but with HTTP **200**: with `cacheComponents`, params that `generateStaticParams` did not list are served from the prerendered fallback shell, and `dynamicParams = false` is not available. Once the slug lists are final, return a real 404 the same way unknown regions already do in `proxy.ts` (check the path against the published slugs, rewrite unknown ones to an unmatched path), and add the routes to the QA script that checks `/fr/` and `/zz`.
+
+---
+
+## 9. Phase 2 prerequisite: publishing must stop needing a redeploy
+
+Logged 18 November 2026 (round 8), to be built before the CMS goes live - **not built now**.
+
+Publishing a row today requires a **redeploy**, not just a revalidation. `scripts/prebuild.ts` compiles
+`lib/generated/redirects.json` and `lib/generated/unpublished.json` from the database at build time, and
+`proxy.ts` reads those files to answer legacy URLs and to 307 unpublished rows to their listing. A row published
+in Neon after a deploy is therefore still treated as unpublished by the proxy until the next build.
+
+Before the CMS is handed to the client this has to become on-demand. Two workable shapes:
+
+1. **Revalidation plus a runtime lookup.** The publish webhook calls `/api/revalidate` (it already exists) and the
+   proxy stops reading the generated files, querying the published-slug set instead through a short-lived cache.
+   Costs a lookup on the paths the proxy guards; needs the database reachable from the proxy runtime.
+2. **Edge Config.** The publish webhook writes the redirect and unpublished maps into Vercel Edge Config and the
+   proxy reads them from there. No database in the request path and the read is sub-millisecond, at the cost of one
+   more moving part to keep in step with the seed.
+
+Either way the generated files stay as the build-time fallback, so a cold deploy still has a correct map.
+See `docs/deploy.md` and the build-pipeline memory note.

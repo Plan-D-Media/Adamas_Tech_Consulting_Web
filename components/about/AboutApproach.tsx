@@ -25,7 +25,7 @@ export function AboutApproach({ eyebrow, heading, body, steps }: Props) {
         {/* The contour artwork is busy enough to drop the eyebrow and the intro below AA on their own, so the
             band carries a navy wash over it (docs/design-notes.md: the design relies on the raw image). */}
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(4_18_45/0.86)_0%,rgb(4_18_45/0.72)_60%,rgb(4_18_45/0.9)_100%)]" aria-hidden="true" />
-        <div className="container-site flex flex-col gap-6 text-white lg:flex-row lg:items-start lg:justify-between">
+        <div className="container-about flex flex-col gap-6 text-white lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-[620px]" data-reveal>
             {eyebrow && <p className="eyebrow !text-[1.25rem] !text-sky-300">{eyebrow}</p>}
             {heading && (
@@ -41,7 +41,7 @@ export function AboutApproach({ eyebrow, heading, body, steps }: Props) {
           </p>
         </div>
       </div>
-      <div className="container-site -mt-[130px] lg:-mt-[170px]">
+      <div className="container-about -mt-[130px] lg:-mt-[170px]">
         <ol className={cx("grid gap-5 sm:grid-cols-2", steps.length % 4 === 0 ? "lg:grid-cols-4" : "lg:grid-cols-3")} role="list">
           {steps.map((s, i) => (
             <li key={s.title} className="relative rounded-lg bg-white px-[26px] pb-[30px] pt-[34px] shadow-lift ring-1 ring-grey-200" data-reveal>

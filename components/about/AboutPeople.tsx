@@ -36,7 +36,7 @@ export function AboutPeople({ eyebrow, heading, body, people, ctaLabel, ctaHref,
   const Head = headingLevel;
   return (
     <section data-compare="about-people" aria-labelledby="about-people-heading" className="bg-white py-14 lg:py-[96px]">
-      <div className="container-site">
+      <div className="container-about">
         <div className="max-w-[760px]" data-reveal>
           {eyebrow && <Eyebrow className="!text-[1.25rem] !tracking-normal">{eyebrow}</Eyebrow>}
           {heading &&

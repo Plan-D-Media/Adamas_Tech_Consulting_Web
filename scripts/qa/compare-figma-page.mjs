@@ -29,15 +29,27 @@ const PAGES = {
     route: "/about",
     render: "design-ref/renders/about-us.png",
     frameHeight: 12605,
+    // All sixteen bands of the frame, in order (round 8). Read off the frame with scripts/qa/figma-band.mjs
+    // --sections; the gaps between them are the frame's own section spacing.
     sections: {
       "about-hero": [0, 530],
       "about-company": [588, 1094],
       "about-approach": [1192, 1824],
+      "about-partners": [1894, 1999],
+      "about-commitment": [2089, 3081],
+      "about-direction": [3164, 3747],
+      "about-progress": [3859, 4664],
       "about-expertise": [4774, 5469],
       "about-journey": [5580, 6330],
-      "about-credentials": [6440, 6877],
+      "about-clients": [6440, 6877],
+      "about-statement": [6997, 7972],
+      "about-life": [8092, 9111],
+      "about-cta": [9474, 10052],
       "about-people": [10172, 10770],
-      contact: [11119, 11900],
+      "about-awards": [10886, 11016],
+      // Group 21307 is the contact card AND the footer; our DOM splits them, so the band is split too.
+      contact: [11119, 11849],
+      footer: [11849, 12605],
     },
   },
   "case-detail": {
@@ -45,14 +57,39 @@ const PAGES = {
     render: "design-ref/renders/case-study.png",
     frameHeight: 12307,
     sections: {
-      // The frame runs the photograph to y 850 and hangs the facts strip off its bottom edge (850-940).
-      "case-hero": [0, 850],
-      "case-facts": [850, 940],
-      "case-summary": [943, 1400],
+      // Round 8 correction: the frame has NO facts strip. The band previously mapped to "case-facts" (850-940) is
+      // the top edge of the executive-summary panel, so that row reported a meaningless number. The strip is our
+      // own addition (industry / focus / service / technology / region) and is on the allowed-differences list, so
+      // it is left out of the comparison rather than scored against someone else's band.
+      "case-hero": [0, 530],
+      "case-strip": [564, 799],
+      "case-summary": [833, 1535],
       "case-challenge": [1635, 2210],
       "case-solution": [3957, 6070],
       "case-tech": [7000, 7699],
       "case-results": [8585, 9509],
+    },
+  },
+  // Cloud Services (Figma 292:24608). All twelve bands of the frame, read off with figma-band.mjs --sections.
+  "cloud-services": {
+    route: "/services/cloud-services",
+    render: "design-ref/renders/cloud-services.png",
+    frameHeight: 11313,
+    sections: {
+      hero: [0, 530],
+      intro: [661, 1197],
+      difference: [1328, 2251],
+      expertise: [2361, 2811],
+      platforms: [2921, 3688],
+      industries: [3688, 4884],
+      capabilities: [4884, 6158],
+      cases: [6267, 7011],
+      ecosystem: [7168, 7910],
+      quality: [7910, 8804],
+      faq: [8804, 9673],
+      // Group 21307 is the contact card AND the footer; our DOM splits them, so the band is split too.
+      contact: [9779, 10509],
+      footer: [10509, 11313],
     },
   },
   careers: {

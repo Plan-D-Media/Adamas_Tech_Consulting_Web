@@ -10,6 +10,7 @@ import { Img } from "@/components/media/Img";
 import { Icon } from "@/components/ui/Icon";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Eyebrow, Heading2 } from "@/components/ui/SectionHeader";
+import { DraftTag } from "@/components/ui/DraftTag";
 import { CaseCard } from "@/components/cases/CaseCard";
 import { ContactSection } from "@/components/home/ContactSection";
 
@@ -53,7 +54,14 @@ export function CaseStudyPage({ study, blocks, crumbs }: { study: CaseStudyPageD
     <RevealScope>
       {/* Hero (Figma band y 0-1535): label, title, and the executive summary card overlapping the band below. */}
       <section data-dark-hero data-compare="case-hero" className="relative isolate overflow-hidden bg-navy-950 pb-[120px] text-white lg:pb-[180px]">
-        {study.image && <Img src={study.image} alt="" fill priority fetchPriority="high" sizes="100vw" className="-z-10 object-cover" />}
+        {/* The client has not supplied case-study photography. The row's image is used when it has one; otherwise
+            the drafts preview falls back to the frame's own hero photograph so the band has the weight the design
+            gives it, and the public build keeps the plain navy. */}
+        {study.image ? (
+          <Img src={study.image} alt="" fill priority fetchPriority="high" sizes="100vw" className="-z-10 object-cover" />
+        ) : (
+          previewingDrafts && <Img src="images/case-studies/draft-hero.webp" alt="" fill priority fetchPriority="high" sizes="100vw" className="-z-10 object-cover" />
+        )}
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(0_12_51/0.58)_0%,rgb(0_12_51/0.78)_100%)]" aria-hidden="true" />
         <div className="container-site pt-10 text-center lg:pt-[56px]">
           <Breadcrumb crumbs={crumbs} className="flex justify-center [&_a]:text-white/75 [&_a:hover]:text-white [&_li]:text-white/60 [&_span[aria-current]]:text-white" />
@@ -70,10 +78,35 @@ export function CaseStudyPage({ study, blocks, crumbs }: { study: CaseStudyPageD
         </div>
       </section>
 
+      {/* The frame puts a 1349x235 photograph between the hero and the executive summary (y 564-799). No client
+          photography exists for it, so the design's own is shown as a Draft placeholder in the preview and the
+          band is simply absent in public. */}
+      {previewingDrafts && (
+        <div data-compare="case-strip" className="relative z-10 -mt-[60px] lg:-mt-[80px]">
+          <div className="container-site">
+            <figure className="m-0" data-reveal>
+              <Img
+                src="images/case-studies/draft-strip.webp"
+                alt="Illustrative photograph from the design"
+                width={1349}
+                height={235}
+                sizes="(min-width: 1400px) 1349px, 100vw"
+                className="h-[140px] w-full rounded-lg object-cover shadow-lift lg:h-[235px]"
+              />
+              <figcaption className="mt-2 font-body text-[0.75rem] leading-[1.35] text-grey-500">
+                <DraftTag className="ml-0 mr-2" />
+                Photograph from the design. Awaiting the client&rsquo;s own imagery.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      )}
+
       {/*
-        The facts strip the design hangs off the bottom of the hero (Figma y 1260-1400: INDUSTRY, FOCUS AREA,
-        SOLUTION, TECHNOLOGY, PROJECT TYPE). Each cell is filled from the row's own relations, so a case study that
-        carries no industry or no technology simply shows fewer cells, and the strip disappears when it has none.
+        A facts strip (industry, focus area, service, technology, region) that the frame does not have: round 8
+        confirmed there is no such band in 274:8299, so this is our own addition and is on the allowed-differences
+        list. Each cell is filled from the row's own relations, so a case study that carries no industry or no
+        technology simply shows fewer cells, and the strip disappears when it has none.
       */}
       {facts.length > 0 && (
         <div data-compare="case-facts" className="relative z-10 -mt-[70px] lg:-mt-[86px]">
@@ -155,16 +188,37 @@ export function CaseStudyPage({ study, blocks, crumbs }: { study: CaseStudyPageD
       {(overview.length > 0 || study.solution.length > 0) && (
         <section data-compare="case-solution" aria-labelledby="case-solution-heading" className="bg-tint-50 py-14 lg:py-[88px]">
           <div className="container-site">
-            <div className={sectionHead} data-reveal>
-              <Eyebrow className="!text-[1rem] !tracking-[0.08em]">Our solution</Eyebrow>
-              <Heading2 id="case-solution-heading" className="mt-3">
-                How we approached it
-              </Heading2>
-              {overview.map((p) => (
-                <p key={p.slice(0, 40)} className="mt-4 font-body text-[1.125rem] leading-[1.65] text-grey-700">
-                  {p}
-                </p>
-              ))}
+            {/* The frame sets this band in two columns, the copy beside a 600x400 product screenshot (Figma
+                y 4109-4609). No client screenshot exists yet, so the design's own is shown as a Draft placeholder
+                while drafts are previewed and the band falls back to a single centred column in public. */}
+            <div className={previewingDrafts ? "grid gap-10 lg:grid-cols-[minmax(0,1fr)_600px] lg:items-center" : sectionHead} data-reveal>
+              <div className={previewingDrafts ? "max-w-[620px]" : undefined}>
+                <Eyebrow className="!text-[1rem] !tracking-[0.08em]">Our solution</Eyebrow>
+                <Heading2 id="case-solution-heading" className="mt-3">
+                  How we approached it
+                </Heading2>
+                {overview.map((p) => (
+                  <p key={p.slice(0, 40)} className="mt-4 font-body text-[1.125rem] leading-[1.65] text-grey-700">
+                    {p}
+                  </p>
+                ))}
+              </div>
+              {previewingDrafts && (
+                <figure className="m-0">
+                  <Img
+                    src="images/case-studies/draft-solution.webp"
+                    alt="Illustrative treasury forecasting dashboard from the design"
+                    width={600}
+                    height={400}
+                    sizes="(min-width: 1024px) 600px, 100vw"
+                    className="w-full rounded-lg shadow-lift ring-1 ring-grey-200"
+                  />
+                  <figcaption className="mt-2 font-body text-[0.75rem] leading-[1.35] text-grey-500">
+                    <DraftTag className="ml-0 mr-2" />
+                    Illustrative interface from the design. Awaiting the client&rsquo;s own product screenshot.
+                  </figcaption>
+                </figure>
+              )}
             </div>
             {study.solution.length > 0 && (
               <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-[52px] lg:grid-cols-3" role="list">

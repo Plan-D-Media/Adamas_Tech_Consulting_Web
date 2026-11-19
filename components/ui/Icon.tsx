@@ -49,6 +49,8 @@ const ICONS = {
   layers: { viewBox: "0 0 16 16", html: "<path stroke=\"currentColor\" stroke-width=\"1.3\" stroke-linejoin=\"round\" d=\"M8 2 2 5.5 8 9l6-3.5zM2 8.5 8 12l6-3.5M2 11.5 8 15l6-3.5\"/>" },
   chart: { viewBox: "0 0 16 16", html: "<path stroke=\"currentColor\" stroke-width=\"1.3\" stroke-linecap=\"round\" d=\"M2 14h12M4 11V7M8 11V4M12 11V6\"/>" },
   check: { viewBox: "0 0 16 16", html: "<path stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m3 8.5 3 3 7-7\"/>" },
+  // Solid play triangle for the About page's video cards (Figma "play-circle"); the ring is drawn by the component.
+  play: { viewBox: "0 0 16 16", html: "<path fill=\"currentColor\" d=\"M5.6 3.3a.6.6 0 0 1 .92-.5l6 4.7a.6.6 0 0 1 0 1l-6 4.7a.6.6 0 0 1-.92-.5z\"/>" },
 } as const;
 
 export type IconName = keyof typeof ICONS;

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: { default: "AdamasTech Consulting", template: "%s | AdamasTech Consulting" },
   robots: blockIndexing ? { index: false, follow: false } : undefined,
 };
-
+///
 export const viewport: Viewport = {
   themeColor: "#000c33",
   width: "device-width",

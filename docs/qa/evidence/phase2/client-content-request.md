@@ -446,3 +446,26 @@ straight away, and we will send you an updated version of this list as it shorte
 
 The House of Lords event page is the one genuinely time-critical item: the event is on 26 November 2026, so we would
 be grateful for the title, time, agenda and speakers as soon as you can.
+
+## Round 8 additions (18 November 2026)
+
+Every About section in the Figma frame is now built, so the bands that were previously absent are visible in the
+drafts preview with Draft markers. What the client has to supply for each, before it can go public:
+
+| Band | What we need |
+|---|---|
+| Our Company | Confirmation of the "12 Years' Experience" figure (currently DRAFT, from the design). |
+| Our Commitment (blue band) | Approval of the designer's copy, and the film for the video card. |
+| Our Strategic Direction | Approval of the designer's copy and the five direction statements. Note "Middle East" is rendered "GCC". |
+| Progress in Numbers | **Nine figures and their labels.** The design's numbers belong to HCLTech and are never shown. |
+| Our Expertise | Which three of the six expertise items belong in the design's three card slots; and three photographs. |
+| Our Journey | The years for the 2020-2029 rail. |
+| Clients & Partners | The client logo set (the design's are Lorem Ipsum, "Happy Marts" and HP, which we never show), and confirmation of "150+ Satisfied Clients. 1M+ ROI Increased". |
+| Statement + testimonials | Real client quotes, names and written permission to publish them. The design repeats one stock testimonial. |
+| Life at Adamas | Office and team photography, and a film. The design's photographs are stock. |
+| CTA band + statistics | Four statistics and their labels. The design's 1790 / 491 / 245 / 1090 are the template's. |
+| Award badges | Real award and certification marks. The design's five are the template's. |
+| Case-study detail | Hero photography, a photo strip image and a product screenshot per case study (or one illustration reused - please confirm which). |
+
+Also outstanding from earlier rounds and unchanged: leadership profiles and bios, certificate numbers and validity
+dates, the RICE Adamas Group description.
