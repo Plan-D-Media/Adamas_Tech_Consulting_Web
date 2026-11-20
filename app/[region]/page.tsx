@@ -6,7 +6,6 @@ import { REGION_SLUGS, isRegionSlug, slugToCode } from "@/lib/region";
 import { openGraphFor, siteUrl } from "@/lib/seo";
 import { RevealScope } from "@/components/motion/RevealScope";
 import { Hero } from "@/components/home/Hero";
-import { TopStories } from "@/components/home/TopStories";
 import { Partners } from "@/components/home/Partners";
 import { About } from "@/components/home/About";
 import { Services } from "@/components/home/Services";
@@ -73,7 +72,10 @@ async function RegionHome({ params }: { params: PageProps<"/[region]">["params"]
       <link rel="alternate" hrefLang="x-default" href={`${siteUrl}/`} />
       <div lang={regionInfo?.locale}>
         <Hero block={b("home.hero")} cards={home.slides} claims={home.claims} />
-        <TopStories block={b("home.topStories")} />
+        {/* "Top Stories" ("Latest Insights, Success Stories and What's Next") was removed from all three homepages
+            on the client's decision, 19-20 Nov 2026 (docs/design-notes.md). The `home.topStories` row is kept in
+            the database as DRAFT and components/home/TopStories.tsx is kept with it, so the band can be restored by
+            publishing the row and putting this line back. */}
         {home.showTrustStrip && <Partners block={b("home.trust")} logos={home.logos} />}
         <About block={b("home.about")} />
         <Services block={b("home.whatWeDo")} pillars={home.pillars} />

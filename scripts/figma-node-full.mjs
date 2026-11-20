@@ -21,7 +21,13 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
-const FILE_KEY = "vpITDkp55Gla7w1HEP6zaL";
+/**
+ * The approved v2 file. The November 2026 revamp lives in a second file, so the key can be overridden:
+ *   node scripts/figma-node-full.mjs --file IldSD5373EYodtZ2XH17uk 8705:3814
+ */
+const DEFAULT_FILE_KEY = "vpITDkp55Gla7w1HEP6zaL";
+const fileIdx = process.argv.indexOf("--file");
+const FILE_KEY = fileIdx >= 0 ? process.argv[fileIdx + 1] : DEFAULT_FILE_KEY;
 const OUT_DIR = join(root, "design-ref", "figma", "full");
 const RENDER_DIR = join(root, "design-ref", "renders");
 

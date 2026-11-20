@@ -242,10 +242,13 @@ export const contentBlocks: ContentBlockSeed[] = [
         },
       ],
     },
-    status: "PUBLISHED",
+    // REMOVED FROM THE HOMEPAGES on the client's decision, 19-20 Nov 2026. The row stays here, and in the database,
+    // as DRAFT so nothing is lost: publishing it again and restoring the <TopStories> line in app/[region]/page.tsx
+    // brings the band back exactly as it was.
+    status: "DRAFT",
     sortOrder: 10,
     needsReview: true,
-    editorNote: "Copy from the approved Figma Home Page (236:1395), 13 Nov 2026. \"Whats's Next\" corrected to \"What's Next\"; \"Al-driven\" to \"AI-driven\". Story 1 is the Figma filler story (date 29 Oct 2026); stories 2 and 3 point at the real event and case study with interim summaries. Editorial filler from the Figma design, not real content: replace before launch (CONTENT_TODO, round 5).",
+    editorNote: "WITHDRAWN (client decision, 19-20 Nov 2026): the \"Top Stories\" band is no longer on the homepages, so this row is DRAFT rather than deleted. Copy from the approved Figma Home Page (236:1395), 13 Nov 2026. \"Whats's Next\" corrected to \"What's Next\"; \"Al-driven\" to \"AI-driven\". Story 1 is the Figma filler story (date 29 Oct 2026); stories 2 and 3 point at the real event and case study with interim summaries.",
   },
   {
     key: "home.about",

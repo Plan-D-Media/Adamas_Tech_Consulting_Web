@@ -5,7 +5,16 @@ import { getBlocks } from "@/lib/data/site";
 import { plain } from "@/lib/placeholder";
 import { NO_CONTENT_SLUG, atLeastOne } from "@/lib/static-params";
 import { redirectIfUnpublished } from "@/lib/data/unpublished";
+import { getClientLogos } from "@/lib/data/pages";
 import { PillarPage } from "@/components/services/PillarPage";
+import { CloudServicesPage } from "@/components/services/cloud/CloudServicesPage";
+
+/**
+ * Cloud Services was rebuilt to the November 2026 revamp (Figma IldSD5373EYodtZ2XH17uk, frame 8705:3814) and has
+ * its own layout. Every other pillar - Digital Transformation, Data & AI - and every sub-service page still
+ * renders the shared `PillarPage` template, which this round did not touch.
+ */
+const REBUILT = new Set(["cloud-services"]);
 
 /** With no visible pillar the placeholder param keeps the build alive; it renders the 404 page (BUG-001). */
 export async function generateStaticParams() {
@@ -43,5 +52,6 @@ async function Pillar({ params }: { params: PageProps<"/services/[pillar]">["par
     await redirectIfUnpublished("services", pillar);
     notFound();
   }
+  if (REBUILT.has(pillar)) return <CloudServicesPage clientLogos={await getClientLogos()} />;
   return <PillarPage pillar={p} blocks={blocks} />;
 }

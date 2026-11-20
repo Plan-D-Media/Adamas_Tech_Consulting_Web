@@ -23,18 +23,25 @@ const manifest = JSON.parse(fs.readFileSync(path.join(root, "scripts/assets.mani
 const only = process.argv.includes("--only") ? process.argv[process.argv.indexOf("--only") + 1] : null;
 const outRoot = path.join(root, "public/media");
 
-/** Returns a raster buffer from a file: PNG/JPEG/WebP as-is, or the base64 image embedded in an SVG wrapper. */
-function rasterFrom(file) {
+/**
+ * Returns a raster buffer from a file: PNG/JPEG/WebP as-is, the base64 image embedded in an SVG wrapper, or a
+ * rasterisation of a true vector at `width` px (used for the brand logos, which are real SVGs).
+ */
+async function rasterFrom(file, width = 2048) {
   const buf = fs.readFileSync(file);
   if (!file.toLowerCase().endsWith(".svg")) return buf;
   const svg = buf.toString("utf8");
   const m = svg.match(/data:image\/(png|jpe?g|webp);base64,([A-Za-z0-9+/=\s]+)/);
-  if (!m) throw new Error(`${file}: no embedded raster found`);
-  return Buffer.from(m[2].replace(/\s/g, ""), "base64");
+  if (m) return Buffer.from(m[2].replace(/\s/g, ""), "base64");
+  // A true vector (the brand logos): rasterise it, large enough for the biggest scale the entry asks for. The
+  // designer's other SVGs are raster wrappers, which is why the embedded-image path comes first.
+  const target = Math.max(1, Math.round(width * 2));
+  return await sharp(buf, { density: 600 }).resize({ width: target }).png().toBuffer();
 }
 
 async function processRaster(entry) {
-  let src = rasterFrom(path.join(root, entry.src));
+  const maxScale = Math.max(...(entry.scales ?? [1, 2]));
+  let src = await rasterFrom(path.join(root, entry.src), entry.width * maxScale);
   let meta = await sharp(src).metadata();
   if (entry.crop) {
     const [l, t, w, h] = entry.crop;
@@ -65,7 +72,14 @@ async function processRaster(entry) {
     await base.clone().webp({ quality: entry.webpQuality ?? 80 }).toFile(`${outBase}.webp`);
     const a = fs.statSync(`${outBase}.avif`).size;
     const w = fs.statSync(`${outBase}.webp`).size;
-    results.push(`${scale}x ${width}${height ? "x" + height : ""} avif ${(a / 1024).toFixed(0)}KB webp ${(w / 1024).toFixed(0)}KB`);
+    // `png: true` for assets that have to work where AVIF/WebP do not: Organization JSON-LD (Google asks for a
+    // raster in a widely supported format) and HTML email clients.
+    let p = 0;
+    if (entry.png) {
+      await base.clone().png({ compressionLevel: 9, palette: true }).toFile(`${outBase}.png`);
+      p = fs.statSync(`${outBase}.png`).size;
+    }
+    results.push(`${scale}x ${width}${height ? "x" + height : ""} avif ${(a / 1024).toFixed(0)}KB webp ${(w / 1024).toFixed(0)}KB${p ? ` png ${(p / 1024).toFixed(0)}KB` : ""}`);
   }
   if (entry.blur) {
     const b = await sharp(src).resize({ width: 16 }).webp({ quality: 40 }).toBuffer();

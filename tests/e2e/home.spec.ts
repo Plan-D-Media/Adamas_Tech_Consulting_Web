@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { settleReveals } from "./helpers";
+// settleReveals was only needed by the withdrawn Top Stories test (round 9).
 
 /** Homepage behaviours fixed in the QA round: hero autoplay, Top Stories loop, industries, sliders, SEO head. */
 
@@ -46,24 +46,17 @@ test("idle homepage does not re-render in a loop (BUG-005)", async ({ page }) =>
   expect(layouts).toBeLessThan(5);
 });
 
-test("Top Stories: every slide and both copies are visible; prev from the first story shows a card (BUG-006)", async ({ page }) => {
-  await page.goto("/in/");
-  const stories = page.locator("[data-compare='stories'] article");
-  const total = await stories.count();
-  test.skip(total < 4, "fewer than two stories in this configuration");
-  await page.locator("[data-compare='stories']").scrollIntoViewIfNeeded();
-  await page.waitForTimeout(1500);
-  await settleReveals(page);
-  await page.waitForTimeout(1200);
-  const opacities = await stories.evaluateAll((els) => els.map((el) => parseFloat(getComputedStyle(el).opacity)));
-  expect(opacities.every((o) => o >= 0.99), opacities.join(",")).toBe(true);
-  await page.locator("[aria-label='Previous stories']").click();
-  await page.waitForTimeout(900);
-  const counter = page.locator("[aria-label='stories controls'] p");
-  await expect(counter).toHaveText(/0\d \/ 0\d/);
-  expect(await counter.evaluate((el) => el.getClientRects().length)).toBe(1);
-  const box = await counter.boundingBox();
-  expect(box!.height).toBeLessThan(30); // one line (BUG-019)
+/**
+ * "Top Stories" was removed from all three homepages on the client's decision, 19-20 Nov 2026
+ * (docs/design-notes.md). The BUG-006 / BUG-019 slider regressions it used to guard went with it; the component
+ * and its DRAFT content row are kept, so if the band is ever restored that test should be restored with it.
+ */
+test("Top Stories is no longer on any homepage", async ({ page }) => {
+  for (const region of ["/in/", "/uk/", "/gcc/"]) {
+    await page.goto(region);
+    expect(await page.locator("[data-compare='stories']").count(), region).toBe(0);
+    await expect(page.getByText("Latest Insights, Success Stories", { exact: false })).toHaveCount(0);
+  }
 });
 
 test("Industries: the last item can be selected and Next disables at the end (BUG-010)", async ({ page }) => {

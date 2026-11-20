@@ -62,7 +62,8 @@ export async function Footer({ nav, legal, social, regions, offices, region, fal
       <div className="container-chrome pt-16 lg:pt-24">
         <div className="grid gap-12 lg:grid-cols-[384px_minmax(0,1fr)] lg:gap-8">
           <div>
-            <LogoLink regions={regions} region={region} fallbackRegion={fallbackRegion} width={178} height={52} />
+            {/* The footer band is navy-900, so it takes the supplied reversed artwork. */}
+            <LogoLink regions={regions} region={region} fallbackRegion={fallbackRegion} width={178} tone="white" />
             <ul className="mt-8 grid gap-3" role="list">
               {regions.map((r) => (
                 <li key={r.code}>

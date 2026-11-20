@@ -25,7 +25,9 @@ fs.mkdirSync(outDir, { recursive: true });
 // Figma Home Page (236:1395) section bands in frame pixels.
 const SECTIONS: { id: string; name: string; from: number; to: number }[] = [
   { id: "hero", name: "Hero", from: 0, to: 961 },
-  { id: "stories", name: "Top Stories", from: 961, to: 1813 },
+  // The frame's "Top Stories" band (y 961-1813) is deliberately not built: the client withdrew the section from
+  // all three homepages on 19-20 Nov 2026 (docs/design-notes.md). Leaving the row here would report it as a
+  // missing section on every run.
   { id: "partners", name: "Partners & Certifications", from: 1813, to: 2217 },
   { id: "about", name: "About Adamas", from: 2217, to: 2997 },
   { id: "services", name: "Our Services", from: 2997, to: 4121 },

@@ -48,8 +48,23 @@ const COUNTRY_HEADERS = ["cloudfront-viewer-country", "x-vercel-ip-country", "cf
 /** Paths the routing rules below never touch (Next internals, API routes, media and files with an extension). */
 const PASS_THROUGH = /^\/(?:_next\/|api\/|media\/)|\.[\w]+$/;
 
-/** Root-level files the app serves (metadata routes); any other single-segment "file" is a 404, not a region. */
-const ROOT_FILES = new Set(["/robots.txt", "/sitemap.xml", "/favicon.ico"]);
+/**
+ * Root-level files the app serves (metadata routes and the app icons); any other single-segment "file" is a 404,
+ * not a region. Everything Next's metadata file conventions emit at the root has to be listed here, or the
+ * hardening below turns the browser's icon and manifest requests into 404s (round 9: the new favicon set).
+ */
+const ROOT_FILES = new Set([
+  "/robots.txt",
+  "/sitemap.xml",
+  "/favicon.ico",
+  // app/icon.svg, app/apple-icon.png and app/manifest.ts (Next adds the <link> tags itself).
+  "/icon.svg",
+  "/apple-icon.png",
+  "/manifest.webmanifest",
+  // public/, referenced by the web app manifest.
+  "/icon-192.png",
+  "/icon-512.png",
+]);
 
 function withSecurityHeaders<T extends NextResponse>(res: T): T {
   for (const { key, value } of securityHeaders()) res.headers.set(key, value);

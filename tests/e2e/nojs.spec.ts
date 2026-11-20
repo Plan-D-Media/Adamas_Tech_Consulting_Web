@@ -21,10 +21,14 @@ test("homepage: every section renders visibly, nothing is left at opacity 0", as
   );
   expect(hidden).toEqual([]);
   await expect(page.locator("h1")).toBeVisible();
-  // The slider track is a plain scroll container: all stories are in the DOM, no copies.
-  const stories = page.locator("[data-compare='stories'] article");
-  expect(await stories.count()).toBeGreaterThan(0);
-  expect(await page.locator("[data-compare='stories'] article[aria-hidden='true']").count()).toBe(0);
+  // The slider tracks are plain scroll containers without JavaScript: every card is in the DOM and none is hidden
+  // from assistive technology. This used to be checked on Top Stories, which was removed from the homepages on
+  // 19-20 Nov 2026; the solutions rail is the remaining homepage slider.
+  const cards = page.locator("[data-compare='solutions'] article");
+  expect(await cards.count()).toBeGreaterThan(0);
+  expect(await page.locator("[data-compare='solutions'] article[aria-hidden='true']").count()).toBe(0);
+  // And the withdrawn band really is gone.
+  expect(await page.locator("[data-compare='stories']").count()).toBe(0);
 });
 
 test("service template and event page render without JavaScript", async ({ page }) => {

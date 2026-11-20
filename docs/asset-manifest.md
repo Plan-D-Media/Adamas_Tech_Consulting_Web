@@ -6,7 +6,11 @@ Processed output lives under `public/media/` and is served through `MEDIA_BASE_U
 
 | Processed file | Source | Figma node | Rendered size | Used in |
 |---|---|---|---|---|
-| `brand/logo.{avif,webp}` | Figma fill `c995b7a7...` (236x69, the live-site logo) | 236:2165 "logo 1" | 205x60 header, 178x52 footer | Header, footer |
+| `brand/logo.svg` | `design-src/brand/adamas-tech-consulting-logo.svg` (client, 20 Nov 2026), viewBox tightened | - | 205 wide header (48 tall) | Header, mobile drawer |
+| `brand/logo-white.svg` | `design-src/brand/adamas-tech-consulting-logo-white.svg` (client, 20 Nov 2026) | - | 178 wide footer (42 tall) | Footer (navy) |
+| `brand/mark.svg` | the monogram cropped out of the colour lockup | - | square | `app/icon.svg`, every generated icon |
+| `brand/logo[@2x].{avif,webp,png}` | rasterised from the colour SVG | - | 420x99 | Organization JSON-LD (`.png`) |
+| `brand/logo-white[@2x].{avif,webp,png}` | rasterised from the white SVG | - | 420x100 | Event confirmation email (`.png`) |
 | `flags/in[@2x,@3x].{avif,webp}` | Figma node export at 4x | 262:1595 "IND" | 24x14 | Region switcher, drawer |
 | `flags/uk[@2x,@3x].{avif,webp}` | Figma node export at 4x | 262:1599 "UK" | 24x14 | Region switcher, drawer |
 | `flags/gcc[@2x,@3x].{avif,webp}` | Figma node export at 4x | 262:1603 "GCC" | 24x14 | Region switcher, drawer |
@@ -31,9 +35,27 @@ Live-site images migrated in the prototype round (`public/media/images/**`: part
 | `thumbs-up`, `shield` | Figma SVG export | 262:223, 262:226 (hero trust row) |
 | `menu`, `close`, `globe`, `external`, `chevron-right` | Drawn (not in Figma), 1.5px stroke style | - |
 
+## App icons (round 9, 20 November 2026)
+
+Generated from `design-src/brand/mark.svg` by `node scripts/make-icons.mjs`. The full lockup is unreadable at
+16px, so every icon is the circular monogram alone; the PNGs sit on white, inset 18%, which also survives an
+Android adaptive-icon mask.
+
+| File | Size | Served at | Notes |
+|---|---|---|---|
+| `app/favicon.ico` | 16, 32, 48 | `/favicon.ico` | PNG-encoded inside the ICO container, transparent |
+| `app/icon.svg` | any | `/icon.svg` | the mark; `sizes="any"` |
+| `app/apple-icon.png` | 180x180 | `/apple-icon.png` | on white (iOS composites transparency onto black) |
+| `public/icon-192.png` | 192x192 | `/icon-192.png` | web app manifest |
+| `public/icon-512.png` | 512x512 | `/icon-512.png` | web app manifest |
+| `app/manifest.ts` | - | `/manifest.webmanifest` | name, theme colour, the two PNG icons |
+
+Every one of these paths is listed in `ROOT_FILES` in `proxy.ts`. The proxy rewrites any other single-segment
+path with a file extension to a 404 (hardening against `/.env`, `/wp-login.php`), so a root-level metadata file
+that is not listed there is served as a 404.
+
 ## Still needed from the designer or Figma (later milestones)
 
-- Vector logo (only a 236x69 raster exists).
 - World map: Figma has one flattened raster (1717x916) with pins and arcs baked in; pins and arcs are needed as separate layers to animate.
 - "Why Organisations Choose Adamas" diagram: a flat 1536x1024 raster in Figma; it will be rebuilt in HTML/SVG from the six `The adamas difference*.svg` icons and the centre image (`Ellipse 658`, `Glowing Blue Geometric Network`).
 - Partner logos are 600x315 rasters (AWS Partner Network, Cloudera, SAP Partner Open Ecosystem, Google Developers Agency Program); vectors preferred.

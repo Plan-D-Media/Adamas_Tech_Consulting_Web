@@ -3,17 +3,53 @@
   "assets": [
     {
       "id": "logo",
+      "kind": "vector",
+      "src": "design-src/brand/logo-tight.svg",
+      "out": "brand/logo"
+    },
+    {
+      "id": "logo-white",
+      "kind": "vector",
+      "src": "design-src/brand/logo-white-tight.svg",
+      "out": "brand/logo-white"
+    },
+    {
+      "id": "logo-mark",
+      "kind": "vector",
+      "src": "design-src/brand/mark.svg",
+      "out": "brand/mark"
+    },
+    {
+      "id": "logo-raster",
       "kind": "raster",
-      "src": "design-ref/fills/c995b7a775247aa6431f6e2209070382a889eefe.png",
+      "src": "design-src/brand/logo-tight.svg",
       "out": "brand/logo",
-      "width": 205,
-      "height": 60,
+      "width": 420,
+      "height": 99,
       "fit": "inside",
       "scales": [
-        1
+        1,
+        2
       ],
-      "webpQuality": 90,
-      "avifQuality": 70
+      "webpQuality": 92,
+      "avifQuality": 80,
+      "png": true
+    },
+    {
+      "id": "logo-white-raster",
+      "kind": "raster",
+      "src": "design-src/brand/logo-white-tight.svg",
+      "out": "brand/logo-white",
+      "width": 420,
+      "height": 100,
+      "fit": "inside",
+      "scales": [
+        1,
+        2
+      ],
+      "webpQuality": 92,
+      "avifQuality": 80,
+      "png": true
     },
     {
       "id": "flag-in",
@@ -1013,6 +1049,338 @@
       "fit": "cover",
       "blur": true,
       "enlarge": true
+    },
+    {
+      "id": "cs-hero-bg",
+      "kind": "raster",
+      "src": "design-ref/fills/358885a06d4313a54671b6f48c819fe10cb9ca6b.png",
+      "out": "images/services/cloud/hero-bg",
+      "width": 1440,
+      "height": 720,
+      "scales": [
+        1
+      ],
+      "avifQuality": 50,
+      "webpQuality": 72,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "cs-stack-aws",
+      "kind": "raster",
+      "src": "design-ref/fills/4488a84d93f3153a695d36d0d439be0ff9537842.png",
+      "out": "images/services/cloud/stack-aws",
+      "width": 130,
+      "height": 86,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-stack-azure",
+      "kind": "raster",
+      "src": "design-ref/fills/e7048dcfe9940dad5815b72578f8bd9d11169441.png",
+      "out": "images/services/cloud/stack-azure",
+      "width": 70,
+      "height": 47,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-stack-gcp",
+      "kind": "raster",
+      "src": "design-ref/fills/34e5bc20960539518cac48fcce8f0d1776c7980f.png",
+      "out": "images/services/cloud/stack-gcp",
+      "width": 84,
+      "height": 56,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-stack-cloudflare",
+      "kind": "raster",
+      "src": "design-ref/fills/c2e10938ce3eff73b88112e31f7d80fe6bc922f4.png",
+      "out": "images/services/cloud/stack-cloudflare",
+      "width": 128,
+      "height": 86,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-stack-terraform",
+      "kind": "raster",
+      "src": "design-ref/fills/7513b22b8fddc72ea29d9d197977439243b57cb1.png",
+      "out": "images/services/cloud/stack-terraform",
+      "width": 105,
+      "height": 70,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-stack-grafana",
+      "kind": "raster",
+      "src": "design-ref/fills/145e011a579177c2e45ff8c353e75375ae07c567.png",
+      "out": "images/services/cloud/stack-grafana",
+      "width": 106,
+      "height": 70,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-stack-prometheus",
+      "kind": "raster",
+      "src": "design-ref/fills/ec1e57f3e9dbda02ed6da4203d7ae8e9ba142bbf.png",
+      "out": "images/services/cloud/stack-prometheus",
+      "width": 90,
+      "height": 60,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-case-healthtech",
+      "kind": "raster",
+      "src": "design-ref/fills/3e66efec0ecb5fdf08e3c7c1565642c0368c8066.png",
+      "out": "images/services/cloud/case-healthtech",
+      "width": 317,
+      "height": 160,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "cs-case-cement",
+      "kind": "raster",
+      "src": "design-ref/fills/b54c4f60444f6797690fe888e02b3ea16b96be0c.png",
+      "out": "images/services/cloud/case-cement",
+      "width": 317,
+      "height": 160,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "cs-badge-advanced",
+      "kind": "raster",
+      "src": "design-ref/fills/daabf53bb6789b12b877ff5e300cbf4138ae57c4.png",
+      "out": "images/services/cloud/badge-advanced-tier",
+      "width": 120,
+      "height": 120,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-badge-aiml",
+      "kind": "raster",
+      "src": "design-ref/fills/90f6fc41f2329c77a9e5e9c7ff1e1ba151581bb8.png",
+      "out": "images/services/cloud/badge-ai-ml",
+      "width": 120,
+      "height": 120,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-badge-education",
+      "kind": "raster",
+      "src": "design-ref/fills/f1e6317a5bfd8ee6651f9fe624deeb786b509466.png",
+      "out": "images/services/cloud/badge-education",
+      "width": 120,
+      "height": 120,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-badge-storage",
+      "kind": "raster",
+      "src": "design-ref/fills/f6e5c18fa6d8ec32bdb4ba071cffb8ededc31312.png",
+      "out": "images/services/cloud/badge-storage",
+      "width": 120,
+      "height": 120,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-badge-managed",
+      "kind": "raster",
+      "src": "design-ref/fills/34a409b27043478d3f17571905192b8a38523fb0.png",
+      "out": "images/services/cloud/badge-managed-services",
+      "width": 120,
+      "height": 120,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-badge-delivery",
+      "kind": "raster",
+      "src": "design-ref/fills/87c5e470bf68dfd3ed86baef4685e1280dad1fcd.png",
+      "out": "images/services/cloud/badge-delivery",
+      "width": 80,
+      "height": 80,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
+    },
+    {
+      "id": "cs-industry-education",
+      "kind": "raster",
+      "src": "design-ref/fills/7fc9d373de1b6efb928c26f7479457852e3f1abf.png",
+      "out": "images/services/cloud/industry-education",
+      "width": 294,
+      "height": 280,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "cover",
+      "blur": true
+    },
+    {
+      "id": "cs-avatar-1",
+      "kind": "raster",
+      "src": "design-ref/fills/6c64139ee959dadbc05a7febfca500eb4d4f2687.png",
+      "out": "images/services/cloud/avatar-1",
+      "width": 40,
+      "height": 40,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "cover"
+    },
+    {
+      "id": "cs-avatar-2",
+      "kind": "raster",
+      "src": "design-ref/fills/4b66197f9eb7e0792df1f70079064ea2dc357fc6.png",
+      "out": "images/services/cloud/avatar-2",
+      "width": 40,
+      "height": 40,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "cover"
+    },
+    {
+      "id": "cs-avatar-3",
+      "kind": "raster",
+      "src": "design-ref/fills/67c90a837e44730a31df035a9538c9c84ac81b4f.png",
+      "out": "images/services/cloud/avatar-3",
+      "width": 40,
+      "height": 40,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "cover"
+    },
+    {
+      "id": "cs-avatar-4",
+      "kind": "raster",
+      "src": "design-ref/fills/8b16a312dddd0bf9f5fb07a6f48d538f3fd30aeb.png",
+      "out": "images/services/cloud/avatar-4",
+      "width": 40,
+      "height": 40,
+      "scales": [
+        1,
+        2
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "cover"
+    },
+    {
+      "id": "cs-credits-art",
+      "kind": "raster",
+      "src": "design-ref/fills/bc1d99bfb99435372241d050f04d8205674f8599.png",
+      "out": "images/services/cloud/credits-art",
+      "width": 1235,
+      "height": 235,
+      "scales": [
+        1
+      ],
+      "avifQuality": 60,
+      "webpQuality": 82,
+      "fit": "contain"
     }
   ]
 }

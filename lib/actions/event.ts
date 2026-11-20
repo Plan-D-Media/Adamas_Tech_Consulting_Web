@@ -143,6 +143,7 @@ export async function registerForEvent(_prev: RegistrationState, fd: FormData): 
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3f8fd;padding:32px 16px"><tr><td align="center">
 <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:16px;border:1px solid #d5e0eb">
 <tr><td style="background:#071c36;border-radius:16px 16px 0 0;padding:28px 32px;color:#ffffff">
+<img src="${siteUrl}/media/brand/logo-white.png" width="150" height="36" alt="AdamasTech Consulting" style="display:block;border:0;outline:none;text-decoration:none;height:auto;margin:0 0 18px">
 <p style="margin:0;font:800 12px/1.2 Manrope,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#70c7f0">Registration confirmed</p>
 <h1 style="margin:12px 0 0;font:700 24px/1.25 Manrope,Arial,sans-serif;color:#ffffff">${escapeHtml(title)}</h1></td></tr>
 <tr><td style="padding:28px 32px;font-size:16px;line-height:1.6">

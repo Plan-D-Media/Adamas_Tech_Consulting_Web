@@ -69,7 +69,8 @@ export function organizationJsonLd(opts: { sameAs: string[]; phones: { phone: st
     "@type": "Organization",
     name: SITE_NAME,
     url: `${siteUrl}/`,
-    logo: absoluteUrl(mediaUrl("brand/logo.webp")),
+    // A raster, not the SVG the site renders: Google asks for a widely supported raster format here.
+    logo: absoluteUrl(mediaUrl("brand/logo.png")),
     ...(opts.sameAs.length ? { sameAs: opts.sameAs } : {}),
     ...(opts.phones.length
       ? { contactPoint: opts.phones.map((p) => ({ "@type": "ContactPoint", telephone: p.phone, contactType: "sales", areaServed: p.region })) }

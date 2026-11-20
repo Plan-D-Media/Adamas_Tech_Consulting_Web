@@ -249,3 +249,66 @@ The four that sit below 80% are all content, not layout:
   our own addition and is on the allowed-differences list.
 - **Contact and footer are one Figma group** (Group 21307, on both About and Cloud Services). Scoring our contact
   section against the whole group is what produced the old "44%"; split correctly it is 91% and the footer 95%.
+
+## Round 9 (19-20 November 2026)
+
+### "Top Stories" removed from the homepages (client decision)
+
+The client asked on 19-20 November for the **"Top Stories"** band - eyebrow "Top Stories", heading "Latest
+Insights, Success Stories and What's Next", the slider directly under the hero - to come off **/in/, /uk/ and
+/gcc/**. It is a removal, not a deletion:
+
+- `app/[region]/page.tsx` no longer renders `<TopStories>`; a comment marks where it was.
+- `content/blocks.ts` keeps the `home.topStories` row with its three stories and turns it **DRAFT**, so the
+  content survives in the database and the band returns by publishing the row and restoring one line.
+- `components/home/TopStories.tsx` and `components/home/StoriesSlider.tsx` are kept for the same reason. They
+  are still exercised by the design fixture at `/figma-fixture` (FIGMA_FIXTURE=1), which is a replica of the
+  approved Figma frame and deliberately still shows the band.
+- `scripts/compare-figma.mts` no longer expects the frame's y 961-1813 band, and the e2e specs no longer test the
+  slider: `home.spec.ts` now asserts the band is absent from all three homepages, and the no-JS slider check in
+  `nojs.spec.ts` moved to the solutions rail (the only remaining homepage slider that clones cards).
+
+Note that **"Latest Perspectives & Updates" also carries the eyebrow "Top Stories"** in the approved design
+(`home.perspectives`). That section stays; only the band under the hero was withdrawn. If the client wants that
+eyebrow changed now that the real "Top Stories" band is gone, it is a one-field edit.
+
+The BUG-006 (slider copies) and BUG-019 (two-line counter) regressions were guarded by the removed test. If the
+band is ever restored, restore that test with it.
+
+### New logo, favicon set and the Cloud Services revamp (20 November 2026)
+
+**Brand.** The client supplied two SVGs: a full-colour lockup and a reversed ("white") one, both the same
+horizontal mark. The colour file arrived on a 1004x591 canvas with the artwork occupying about 60% of it, so
+`scripts/tighten-svg.mjs` rewrites the root viewBox to the artwork (721.25 x 169.75, 4.25:1) before the asset
+pipeline sees it; the white file was already tight (4.21:1). Both are shipped as **SVG** - one file, sharp at any
+device pixel ratio - with rasters alongside for the two places SVG will not do: Organization JSON-LD (Google asks
+for a raster) and HTML email.
+
+- Header and mobile drawer use the colour artwork. The header bar is white glass in **both** its normal and its
+  scrolled state (`.headerbar::before` stays `bg-white/80` when `.site-header` turns navy), so there is no
+  second state to handle.
+- The footer is navy-900 and uses the supplied reversed artwork. Note it is not flat white: the designer's file
+  uses a white-to-silver gradient, which is what renders.
+- The logo's aspect changed from the old 3.4:1 to 4.25:1, so `LogoLink` now derives `height` from `width`
+  rather than taking both as props. Declaring the old 205x60 would have shifted the header on first paint.
+- **Icons:** every icon is the circular monogram alone, cropped out of the lockup - the full lockup is unreadable
+  at 16px. `scripts/make-icons.mjs` writes favicon.ico (16/32/48, PNG inside the ICO container), app/icon.svg,
+  app/apple-icon.png (180, on white, because iOS composites transparency onto black) and the 192/512 PNGs for the
+  web app manifest.
+- **A trap worth remembering:** `proxy.ts` rewrites any single-segment path with a file extension to a 404
+  (hardening against `/.env`, `/wp-login.php`). Every root-level metadata file Next emits has to be added to
+  `ROOT_FILES` or the browser's icon and manifest requests come back as 404s. That is what happened to
+  /icon.svg, /apple-icon.png, /manifest.webmanifest and the two PNGs on the first pass.
+
+**Cloud Services.** Rebuilt to the revamp frame (file `IldSD5373EYodtZ2XH17uk`, node `8705:3814`, 1440x6695) as
+a **template variant**: `app/(site)/services/[pillar]` routes only `cloud-services` to the new layout and every
+other pillar and sub-service still renders the untouched shared `PillarPage`. Two design-system differences are
+scoped to the page rather than adopted site-wide, both under `.cloud-v2`:
+
+- a **1200** content column (the revamp lays out at 1440 on x 120-1320; `container-site` gives 1344 there);
+- **Poppins** and **DM Sans**, loaded by that page alone, with the frame's **Inter mapped to DM Sans** rather than
+  loading a third family for two bands.
+
+Both should move into `@theme` if the revamp rolls out site-wide. Full inventory, the content held back for the
+client and the question about the other pillars:
+`docs/qa/evidence/inner-pages/CLOUD_SERVICES_V2.md`.

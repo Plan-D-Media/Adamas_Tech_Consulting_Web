@@ -71,6 +71,26 @@ const PAGES = {
     },
   },
   // Cloud Services (Figma 292:24608). All twelve bands of the frame, read off with figma-band.mjs --sections.
+  // Rebuilt November 2026 to the revamp frame (file IldSD5373EYodtZ2XH17uk, node 8705:3814), drawn at 1440.
+  "cloud-v2": {
+    route: "/services/cloud-services",
+    render: "design-ref/renders/cloud.png",
+    frameHeight: 6695,
+    width: 1440,
+    sections: {
+      "cs-hero": [109, 724],
+      "cs-clients": [724, 875],
+      "cs-stack": [875, 1365],
+      "cs-capabilities": [1365, 2204],
+      "cs-cases": [2204, 3069],
+      "cs-framework": [3069, 3939],
+      "cs-credentials": [3939, 5089],
+      "cs-industries": [5089, 5822],
+      "cs-testimonials": [5822, 6340],
+      "cs-credits": [6340, 6695],
+    },
+  },
+  // The previous design, kept for reference while the revamp rolls out.
   "cloud-services": {
     route: "/services/cloud-services",
     render: "design-ref/renders/cloud-services.png",
@@ -144,7 +164,9 @@ async function compare(slug, ours, figma, maxWidth = 960) {
 
 const browser = await chromium.launch();
 try {
-  const ctx = await browser.newContext({ viewport: { width: 1920, height: 1080 }, reducedMotion: "reduce", deviceScaleFactor: 1 });
+    // The November 2026 revamp frames are drawn at 1440; the approved v2 frames are 1920.
+  const viewportWidth = page.width ?? 1920;
+  const ctx = await browser.newContext({ viewport: { width: viewportWidth, height: 1080 }, reducedMotion: "reduce", deviceScaleFactor: 1 });
   const tab = await ctx.newPage();
   await tab.goto(`${base}${page.route}`, { waitUntil: "load", timeout: 45000 });
   await tab.addStyleTag({ content: "[data-reveal]{opacity:1!important;transform:none!important} *{transition:none!important;animation:none!important} nextjs-portal{display:none!important}" });

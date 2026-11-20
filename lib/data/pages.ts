@@ -305,3 +305,21 @@ export async function getMilestones(): Promise<MilestoneData[]> {
     draft: badge(m.status),
   }));
 }
+
+// ── Client logos, outside a regional homepage ───────────────────────────
+
+/**
+ * Visible CLIENT logos, for pages that are not regional (the rebuilt /services/cloud-services strip). The
+ * homepage reads its own through `getHome(region)`, which filters by region; this takes the lot in seed order.
+ */
+export async function getClientLogos(): Promise<{ name: string; logo: Media | null }[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("logos", "blocks");
+  const rows = await db.logoItem.findMany({
+    where: { ...visible, kind: "CLIENT" },
+    include: { logo: mediaSelect },
+    orderBy: { sortOrder: "asc" },
+  });
+  return rows.map((l) => ({ name: l.name, logo: toMedia(l.logo) }));
+}

@@ -14,9 +14,11 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
-const FILE_KEY = "vpITDkp55Gla7w1HEP6zaL";
+// The November 2026 revamp lives in a second Figma file; pass --file <key> to read its fills instead.
+const fileIdx = process.argv.indexOf("--file");
+const FILE_KEY = fileIdx >= 0 ? process.argv[fileIdx + 1] : "vpITDkp55Gla7w1HEP6zaL";
 const FILLS_DIR = join(root, "design-ref", "fills");
-const INDEX = join(root, "design-ref", "figma", "image-fills.json");
+const INDEX = join(root, "design-ref", "figma", fileIdx >= 0 ? `image-fills-${FILE_KEY}.json` : "image-fills.json");
 
 function readToken() {
   for (const f of [".env.local", ".env"]) {
@@ -56,7 +58,7 @@ async function loadIndex(force) {
   }
   const j = await res.json();
   writeFileSync(INDEX, JSON.stringify(j, null, 2));
-  console.log(`refreshed design-ref/figma/image-fills.json (${Object.keys(j.meta?.images ?? j.images ?? {}).length} fills)`);
+  console.log(`refreshed ${INDEX} (${Object.keys(j.meta?.images ?? j.images ?? {}).length} fills)`);
   return j.meta?.images ?? j.images;
 }
 
