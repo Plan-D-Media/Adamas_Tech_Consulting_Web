@@ -43,7 +43,6 @@
     ".next-gtm/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "handoff"
+    "node_modules"
   ]
 }

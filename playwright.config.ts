@@ -54,7 +54,16 @@ export default defineConfig({
     httpCredentials: process.env.E2E_PREVIEW_USERNAME ? { username: process.env.E2E_PREVIEW_USERNAME, password: process.env.E2E_PREVIEW_PASSWORD ?? "" } : undefined,
   },
   projects: [
-    { name: "chromium", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1440, height: 900 },
+        // SwiftShader so the homepage's 3D orb has a WebGL context in headless; without it the suite would only
+        // ever exercise the poster fallback (components/home/DifferenceOrb.tsx).
+        launchOptions: { args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] },
+      },
+    },
     ...(all
       ? [
           { name: "firefox", use: { ...devices["Desktop Firefox"], viewport: { width: 1440, height: 900 } } },

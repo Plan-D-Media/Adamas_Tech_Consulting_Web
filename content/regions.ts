@@ -52,9 +52,9 @@ export const regions: RegionSeed[] = [
  * Mirrored in CONTENT_TODO.md.
  */
 export const regionNotes: Record<RegionSeed["code"], string> = {
-  IN: "Email marketing@adamastech.in is shared by all regions: confirm one inbox per region. WhatsApp missing. Featured office Bengaluru, or Kolkata? Confirm.",
-  UK: "Email marketing@adamastech.in is shared by all regions: confirm one inbox per region. WhatsApp missing. Phone is the London mobile (no UK landline on the site).",
-  GCC: "Email marketing@adamastech.in is shared by all regions: confirm one inbox per region (adamastech.ae domain also in use). WhatsApp missing.",
+  IN: "One shared inbox for all regions is confirmed (client, 23 Nov 2026): marketing@adamastech.in both displayed and delivered to. WhatsApp missing. Featured office Bengaluru, or Kolkata? Confirm.",
+  UK: "One shared inbox for all regions is confirmed (client, 23 Nov 2026). WhatsApp missing. Phone is the London mobile (no UK landline on the site).",
+  GCC: "One shared inbox for all regions is confirmed (client, 23 Nov 2026); the adamastech.ae domain is also in use for the site itself. WhatsApp missing.",
 };
 
 const PIN = "Map pin is approximate (geocoded from the address, city/street level). Confirm.";

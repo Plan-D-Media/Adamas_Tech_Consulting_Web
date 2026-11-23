@@ -90,6 +90,87 @@ const PAGES = {
       "cs-credits": [6340, 6695],
     },
   },
+  /**
+   * The FINALISED designs, 23 November 2026. These four are compared against a render of the supplied SVG, not
+   * against a Figma frame: the Figma frames on page 7586:47704 are older drafts (Cloud 6695 vs 8480 tall,
+   * Managed Services 5997 vs 7252, Kubernetes 4152 vs 4867). Bands were measured off the render with
+   * scripts/qa/detect-bands.mjs plus the slices in design-ref/renders/new-design/slices/.
+   *
+   * The design includes the site's own header, contact block and footer. The header band is left out (it is
+   * chrome, not page content); the contact band is included, because the page renders it.
+   */
+  "cloud-final": {
+    route: "/services/cloud-services",
+    render: "design-ref/renders/new-design/Cloud.png",
+    frameHeight: 8480,
+    width: 1440,
+    // The clientele marquee and the testimonial row fall back to a static wrapping row / grid under reduced
+    // motion, which is a different layout from the one the design draws.
+    reducedMotion: false,
+    sections: {
+      // Our header overlays the dark hero, so the band starts at the top of the design too.
+      "cs-hero": [0, 770],
+      "cs-clients": [770, 911],
+      "cs-stack": [911, 1405],
+      "cs-capabilities": [1405, 2459],
+      "cs-cases": [2459, 3306],
+      "cs-framework": [3306, 4189],
+      "cs-credentials": [4189, 5370],
+      "cs-industries": [5370, 6050],
+      "cs-testimonials": [6082, 6600],
+      "cs-credits": [6600, 6930],
+      "cs-contact": [6930, 7690],
+    },
+  },
+  "managed-final": {
+    route: "/services/cloud-services/managed-services",
+    render: "design-ref/renders/new-design/Managed Services.png",
+    frameHeight: 7252,
+    width: 1440,
+    sections: {
+      // Our header overlays the dark hero, so the band starts at the top of the design too.
+      "sub-hero": [0, 764],
+      "sub-overview": [764, 1390],
+      "sub-benefits": [1390, 2031],
+      "sub-manage": [2031, 2947],
+      "sub-value": [2947, 3900],
+      "sub-cases": [3960, 4620],
+      "sub-related": [4620, 5330],
+      "sub-cta": [5330, 5620],
+      "sub-contact": [5620, 6404],
+    },
+  },
+  "case-sap-final": {
+    route: "/case-studies/sap-disaster-recovery-cement",
+    render: "design-ref/renders/new-design/Case Study_SAP_Cement industry.png",
+    frameHeight: 4262,
+    width: 1440,
+    sections: {
+      // This export draws an older page header and a template footer branded "SYNCK"; neither is built, so
+      // neither is scored. The hero band starts below that header.
+      "case-hero": [167, 681],
+      "case-challenge": [1180, 1380],
+      "case-solution": [1400, 2060],
+      "case-outcomes": [2060, 2490],
+      "case-stack": [2690, 3040],
+      "case-cta": [3070, 3310],
+    },
+  },
+  "case-kubernetes-final": {
+    route: "/case-studies/kubernetes-operations-healthtech",
+    render: "design-ref/renders/new-design/Case Study_Kubernetes.png",
+    frameHeight: 4867,
+    width: 1440,
+    sections: {
+      "case-hero": [0, 695],
+      "case-challenge": [1190, 1390],
+      "case-solution": [1420, 2030],
+      "case-outcomes": [2030, 2460],
+      "case-stack": [2650, 2950],
+      "case-cta": [3000, 3230],
+      "case-contact": [3290, 4037],
+    },
+  },
   // The previous design, kept for reference while the revamp rolls out.
   "cloud-services": {
     route: "/services/cloud-services",
@@ -133,7 +214,10 @@ if (!page) {
   process.exit(1);
 }
 
-const outDir = path.join("docs", "qa", "evidence", "inner-pages", "compare", name);
+// The finalised-design comparisons have their own evidence folder (brief of 23 November 2026).
+const outDir = name.endsWith("-final")
+  ? path.join("docs", "qa", "evidence", "cloud-final", name)
+  : path.join("docs", "qa", "evidence", "inner-pages", "compare", name);
 fs.mkdirSync(outDir, { recursive: true });
 
 async function toPng(buf, width, height) {
@@ -166,7 +250,14 @@ const browser = await chromium.launch();
 try {
     // The November 2026 revamp frames are drawn at 1440; the approved v2 frames are 1920.
   const viewportWidth = page.width ?? 1920;
-  const ctx = await browser.newContext({ viewport: { width: viewportWidth, height: 1080 }, reducedMotion: "reduce", deviceScaleFactor: 1 });
+  // Reduced motion is the default because it freezes entrance animations and makes the shot repeatable. A page
+  // whose design includes a marquee or a scroll-velocity row has to be captured WITHOUT it, or the static
+  // fallback is what gets compared - which is a different layout. Those pages set reducedMotion: false.
+  const ctx = await browser.newContext({
+    viewport: { width: viewportWidth, height: 1080 },
+    reducedMotion: page.reducedMotion === false ? "no-preference" : "reduce",
+    deviceScaleFactor: 1,
+  });
   const tab = await ctx.newPage();
   await tab.goto(`${base}${page.route}`, { waitUntil: "load", timeout: 45000 });
   await tab.addStyleTag({ content: "[data-reveal]{opacity:1!important;transform:none!important} *{transition:none!important;animation:none!important} nextjs-portal{display:none!important}" });

@@ -1,43 +1,61 @@
 import Link from "next/link";
 import { DM_Sans, Poppins } from "next/font/google";
-import type { Media } from "@/lib/media";
+import type { Block } from "@/lib/data/site";
+import { mediaUrl } from "@/lib/media";
+import type { RegionSlug } from "@/lib/region";
 import { cloudServices } from "@/lib/cloud-services-content";
 import { Img } from "@/components/media/Img";
-import { Icon, type IconName } from "@/components/ui/Icon";
+import { Icon } from "@/components/ui/Icon";
+import { breadcrumbJsonLd, serviceJsonLd, type Crumb } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { RevealScope } from "@/components/motion/RevealScope";
+import { ContactSection } from "@/components/home/ContactSection";
+import { CaseCarousel } from "@/components/services/cloud/CaseCarousel";
+import { ClientMarquee } from "@/components/services/cloud/ClientMarquee";
 import { CloudFramework } from "@/components/services/cloud/CloudFramework";
 import { CloudIndustries } from "@/components/services/cloud/CloudIndustries";
+import { VelocityTestimonials } from "@/components/services/cloud/VelocityTestimonials";
 
 /**
- * /services/cloud-services, rebuilt to the November 2026 revamp
- * (Figma "ATC Website Revamp" IldSD5373EYodtZ2XH17uk, frame 8705:3814 "Cloud ", 1440x6695).
+ * /services/cloud-services, built to the FINALISED design `design-ref/exports/new-design/Cloud.svg`
+ * (1440x8480, supplied 23 November 2026), which supersedes Figma frames 292:24608 and 8705:3814 and every
+ * earlier Cloud export.
  *
  * This is a **template variant**, not a change to the shared service template: `app/(site)/services/[pillar]`
- * routes only `cloud-services` here and every other pillar still renders `components/services/PillarPage.tsx`
- * untouched. Whether the rest should follow is a question for the client (see the round 9 report).
+ * routes only `cloud-services` here. The other pillars still render `components/services/PillarPage.tsx`; the
+ * six Cloud sub-services now render `components/services/sub/SubServicePage.tsx`, built to `Managed Services.svg`.
  *
- * The frame is drawn at 1440, where the old file was 1920, and the content column is 1200 wide. Copy comes from
- * `lib/cloud-services-content.ts`, which says which fields were held back for the client.
+ * Eleven bands, in the design's order. Copy comes from `lib/cloud-services-content.ts`, which records every
+ * string transcribed from the render and everything flagged for proofreading.
+ *
+ * The design draws the site's own header, contact block and footer around the page. The chrome supplies the
+ * header and footer; the contact block is rendered here, because the design places it on this page.
  */
 
 // Scoped to this page: the revamp's type system. `preload: false` keeps them off every other route's critical path.
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"], variable: "--font-poppins", display: "swap", preload: false });
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans", display: "swap", preload: false });
 
-const CARD_ICON: Record<string, IconName> = {
-  migration: "layers",
-  devops: "chart",
-  managed: "shield",
-  aiml: "difference-3",
-  automation: "difference-5",
-  advisory: "user",
-};
+const PATH = "/services/cloud-services";
 
-export function CloudServicesPage({ clientLogos }: { clientLogos: { name: string; logo: Media | null }[] }) {
+/**
+ * The design draws no breadcrumb trail on this hero, so none is rendered - but the structured data still has to
+ * be here. It used to come from `PillarPage`, which this page replaced in round 9.
+ */
+const CRUMBS: Crumb[] = [
+  { name: "Services", path: "/services" },
+  { name: "Cloud Services", path: PATH },
+];
+
+export function CloudServicesPage({ contactBlock, fallbackRegion }: { contactBlock: Block | null; fallbackRegion: RegionSlug }) {
   const c = cloudServices;
 
   return (
     <RevealScope>
+      <JsonLd data={breadcrumbJsonLd(CRUMBS)} />
+      <JsonLd
+        data={serviceJsonLd({ name: "Cloud Services", description: c.hero.intro, path: PATH, image: mediaUrl("images/services/cloud-services.webp") })}
+      />
       <div className={`cloud-v2 ${poppins.variable} ${dmSans.variable}`}>
         {/* 1. Hero (y 109-724) */}
         <section data-dark-hero data-compare="cs-hero" className="relative isolate flex min-h-[420px] items-center overflow-hidden bg-[#02081C] lg:min-h-[615px]">
@@ -54,21 +72,13 @@ export function CloudServicesPage({ clientLogos }: { clientLogos: { name: string
           </div>
         </section>
 
-        {/* 2. Client logo strip (y 724-875). Fed from the Logo table: the frame's logos are our own clients. */}
-        {clientLogos.length > 0 && (
-          <section data-compare="cs-clients" aria-label="Clients" className="overflow-hidden border-y border-[#EDF1F7] bg-[#F8FAFD] py-7">
-            <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 px-6" role="list">
-              {clientLogos.filter((l) => l.logo).slice(0, 8).map((l) => (
-                <li key={l.name} className="relative h-[46px] w-[120px] shrink-0 opacity-80">
-                  <Img src={l.logo!} alt={l.name} fill sizes="120px" className="object-contain" />
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
+        {/* 2. Clientele strip (y 770-911): an infinite right-to-left marquee, paused on hover, focus or the button. */}
+        <section data-compare="cs-clients" aria-label={c.clients.label} className="border-y border-[#EDF1F7] bg-[#F8FAFD] py-7">
+          <ClientMarquee items={c.clients.items} />
+        </section>
 
         {/* 3. Our tech stack (y 875-1365) */}
-        <section data-compare="cs-stack" aria-labelledby="cs-stack-heading" className="bg-[#F8FAFD] py-12 lg:py-[70px]">
+        <section data-compare="cs-stack" aria-labelledby="cs-stack-heading" className="bg-[#F8FAFD] py-12 lg:py-[100px]">
           <div className="container-cloud grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-[80px]">
             <div data-reveal>
               <p className="text-[0.75rem] font-bold uppercase tracking-[0.14em] text-blue-600">{c.techStack.eyebrow}</p>
@@ -77,6 +87,7 @@ export function CloudServicesPage({ clientLogos }: { clientLogos: { name: string
               </h2>
               <p className="mt-5 max-w-[509px] text-[1.0625rem] leading-[1.6] text-[#55617A] lg:text-[1.25rem]">{c.techStack.body}</p>
             </div>
+            {/* The design leaves the seventh tile alone on a third row rather than filling the grid. */}
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3" role="list">
               {c.techStack.tiles.map((t) => (
                 <li key={t.name} className="flex h-[86px] items-center justify-center rounded-xl border border-[#E6EBF3] bg-white p-4" data-reveal>
@@ -98,9 +109,18 @@ export function CloudServicesPage({ clientLogos }: { clientLogos: { name: string
             </h2>
             <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:mt-[44px] lg:grid-cols-3" role="list">
               {c.capabilities.cards.map((card) => (
-                <li key={card.title} className="flex flex-col rounded-xl bg-[#F6F8FC] p-6" data-reveal>
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#E3EDFF] text-blue-600" aria-hidden="true">
-                    <Icon name={CARD_ICON[card.icon] ?? "layers"} size={20} />
+                <li key={card.title} className="flex flex-col rounded-xl bg-[#F6F8FC] p-5" data-reveal>
+                  {/* `fill` rather than width/height: the card fixes the height and lets the width flex, which
+                      next/image warns about when only one of the two is overridden. */}
+                  <span className="relative block h-[141px] w-full overflow-hidden rounded-lg">
+                    <Img
+                      src={card.image}
+                      alt=""
+                      aria-hidden="true"
+                      fill
+                      sizes="(min-width:1024px) 360px, (min-width:640px) 45vw, 90vw"
+                      className="object-cover"
+                    />
                   </span>
                   <h3 className="u-display mt-5 text-[1.25rem] font-semibold text-[#0B1B33]">{card.title}</h3>
                   <p className="mt-3 text-[0.875rem] leading-[1.7] text-[#55617A]">{card.body}</p>
@@ -119,31 +139,7 @@ export function CloudServicesPage({ clientLogos }: { clientLogos: { name: string
           <div className="container-cloud">
             <p className="text-[0.75rem] font-bold uppercase tracking-[0.14em] text-blue-500">{c.cases.eyebrow}</p>
             <h2 id="cs-cases-heading" className="u-display mt-2 text-[clamp(1.5rem,1.1rem+1.2vw,1.75rem)] font-semibold text-white">{c.cases.heading}</h2>
-            <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:mt-[44px] lg:grid-cols-3" role="list">
-              {c.cases.items.map((item) => (
-                <li key={item.title} className="flex flex-col rounded-2xl bg-white p-4" data-reveal>
-                  <Img src={item.image} alt="" aria-hidden="true" width={317} height={160} sizes="(min-width:1024px) 317px, 100vw" className="h-[160px] w-full rounded-lg object-cover" />
-                  <p className="mt-5 text-[0.75rem] font-medium uppercase tracking-[0.1em] text-blue-600">{item.label}</p>
-                  <h3 className="u-display mt-2 text-[1.25rem] font-bold leading-[1.3] text-[#0B1B33]">{item.title}</h3>
-                  <p className="mt-3 text-[0.75rem] leading-[1.6] text-[#55617A]">{item.body}</p>
-                  <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2" role="list">
-                    {item.tags.map((t) => (
-                      <li key={t} className="flex items-center gap-1.5 text-[0.625rem] text-[#55617A]">
-                        <Icon name="check" size={12} className="shrink-0 text-blue-600" />
-                        {t}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href={item.href}
-                    className="mt-5 ml-auto flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white hover:bg-blue-500"
-                    aria-label={`Read more: ${item.title}`}
-                  >
-                    <Icon name="arrow" size={16} className="-rotate-45" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <CaseCarousel items={c.cases.items} />
           </div>
         </section>
 
@@ -201,31 +197,11 @@ export function CloudServicesPage({ clientLogos }: { clientLogos: { name: string
               {c.testimonials.heading}
             </h2>
           </div>
-          {/* The frame runs the row off both edges; it scrolls rather than animating, so it works without JS. */}
-          {/* The row starts at the content column and runs off the right edge, as the frame draws it. */}
-          <ul
-            className="mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 lg:mt-[44px] scrollbar-none"
-            style={{ paddingInline: "max(var(--gutter), calc((100vw - 75rem) / 2))" }}
-            role="list"
-          >
-            {c.testimonials.items.map((t) => (
-              <li key={t.name} className="w-[320px] shrink-0 snap-start rounded-xl bg-black p-6 text-white lg:w-[388px]">
-                <h3 className="u-display text-[1.125rem] font-extrabold">&ldquo;{t.quote}&rdquo;</h3>
-                <p className="mt-3 text-[0.875rem] leading-[1.7] text-white/75">{t.body}</p>
-                <div className="mt-5 flex items-center gap-3">
-                  <Img src={t.avatar} alt="" aria-hidden="true" width={40} height={40} sizes="40px" className="h-10 w-10 rounded-full object-cover" />
-                  <span>
-                    <span className="block text-[0.875rem] font-bold">{t.name}</span>
-                    <span className="block text-[0.75rem] text-white/65">{t.role}</span>
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <VelocityTestimonials items={c.testimonials.items} />
         </section>
 
         {/* 10. Free cloud credits (y 6340-6695) */}
-        <section data-compare="cs-credits" aria-labelledby="cs-credits-heading" className="bg-white py-10 lg:py-[56px]">
+        <section data-compare="cs-credits" aria-labelledby="cs-credits-heading" className="bg-white py-10 lg:py-[40px]">
           <div className="container-cloud">
             <div className="relative overflow-hidden rounded-2xl bg-[#F6F8FC] p-7 lg:p-[48px]">
               <Img src="images/services/cloud/credits-art.webp" alt="" aria-hidden="true" width={1235} height={235} sizes="60vw" className="pointer-events-none absolute -right-10 bottom-0 hidden w-[60%] opacity-50 lg:block" />
@@ -236,7 +212,7 @@ export function CloudServicesPage({ clientLogos }: { clientLogos: { name: string
                     {c.credits.heading}
                   </h2>
                   <p className="mt-5 max-w-[997px] text-[1rem] leading-[1.6] text-[#55617A] lg:text-[1.125rem]">{c.credits.body}</p>
-                  <p className="mt-2 max-w-[700px] text-[0.6875rem] leading-[1.5] text-[#8A94A8]">{c.credits.footnote}</p>
+                  <p className="mt-2 max-w-[700px] text-[0.6875rem] leading-[1.5] text-[#5A6578]">{c.credits.footnote}</p>
                 </div>
                 <Link href={c.credits.ctaHref} className="inline-flex min-h-[40px] shrink-0 items-center rounded-md bg-blue-600 px-5 text-[0.75rem] font-semibold text-white hover:bg-blue-500">
                   {c.credits.ctaLabel}
@@ -245,6 +221,14 @@ export function CloudServicesPage({ clientLogos }: { clientLogos: { name: string
             </div>
           </div>
         </section>
+
+        {/* 11. Contact (y 6948-7583). The design ends the page with the site's standard enquiry block; its
+            submissions go to MAIL_TO_ENQUIRIES like every other form. */}
+        {contactBlock && (
+          <div data-compare="cs-contact">
+            <ContactSection block={contactBlock} regionSlug={null} fallbackRegion={fallbackRegion} sourcePath={PATH} />
+          </div>
+        )}
       </div>
     </RevealScope>
   );

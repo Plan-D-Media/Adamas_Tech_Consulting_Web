@@ -738,10 +738,13 @@ export const caseStudies: CaseStudySeed[] = [
     pillars: ["cloud-services"],
     image: "images/case-studies/kubernetes-operations-healthtech.webp",
     legacyPath: "/case-study/case-study_kubernetes/",
-    status: "DRAFT",
+    // PUBLISHED 23 Nov 2026: the client supplied the finalised design for this page
+    // (design-ref/exports/new-design/Case Study_Kubernetes.svg), so it goes live with the launch. The other
+    // eighteen case studies stay DRAFT.
+    status: "PUBLISHED",
     sortOrder: 18,
     needsReview: true,
-    editorNote: `${CLEARANCE} MISSING: the page has no headline number, so headlineMetric/metricLabel are placeholders: a measured outcome is needed. The page's "Business Outcomes" are qualitative with no figures, so no results are seeded: Clear, centralized visibility across Kubernetes workloads and infrastructure health · Standardized EKS operations and lifecycle management · Structured incident response with clear escalation paths · Continuous AWS cost governance and optimization · Reduced day-to-day operational burden on the customer’s engineering team. Summary = the card on /cloud-services/. Title verbatim from the page. Image is only 317×160 px on the live site: higher-resolution image needed. ${NO_REGION}`,
+    editorNote: `${CLEARANCE} MISSING: the page has no headline number, so headlineMetric/metricLabel are placeholders: a measured outcome is needed. The page's "Business Outcomes" are qualitative with no figures, so no results are seeded: Clear, centralized visibility across Kubernetes workloads and infrastructure health · Standardized EKS operations and lifecycle management · Structured incident response with clear escalation paths · Continuous AWS cost governance and optimization · Reduced day-to-day operational burden on the customer’s engineering team. Summary = the card on /cloud-services/. Title verbatim from the page. Image replaced 23 Nov 2026 with the 1672x941 bitmap from the finalised design (640x360 card, 1200x230 banner). The Business Outcomes listed above are now real content in lib/aws-case-studies.ts, which the new layout renders. ${NO_REGION}`,
   },
   {
     slug: "sap-disaster-recovery-cement",
@@ -785,9 +788,10 @@ export const caseStudies: CaseStudySeed[] = [
     pillars: ["cloud-services"],
     image: "images/case-studies/sap-disaster-recovery-cement.webp",
     legacyPath: "/case-study/case-study_sap_cement-industry/",
-    status: "DRAFT",
+    // PUBLISHED 23 Nov 2026: see the Kubernetes row above.
+    status: "PUBLISHED",
     sortOrder: 19,
     needsReview: true,
-    editorNote: `${CLEARANCE} No headline number on the page: "24×7" is taken from its Business Outcomes ("24×7 monitoring across AWS and SAP environments"). A measured outcome (e.g. tested RTO/RPO) would be stronger. The other outcomes are qualitative and not seeded as results: Stronger business continuity and disaster recovery readiness · Structured SAP HANA replication and recovery management · Proactive alerting and standardized incident response · Improved infrastructure and cloud governance · Reduced operational overhead for the customer’s IT and SAP teams. Label: page "Leading Manufacturing Cement Company"; /cloud-services/ card "Manufacturing / Cement". Summary = the /cloud-services/ card. Image is only 317×160 px: higher-resolution image needed. Industry mapped to Manufacturing and Supply Chain. ${NO_REGION}`,
+    editorNote: `${CLEARANCE} No headline number on the page: "24×7" is taken from its Business Outcomes ("24×7 monitoring across AWS and SAP environments"). A measured outcome (e.g. tested RTO/RPO) would be stronger. The other outcomes are qualitative and not seeded as results: Stronger business continuity and disaster recovery readiness · Structured SAP HANA replication and recovery management · Proactive alerting and standardized incident response · Improved infrastructure and cloud governance · Reduced operational overhead for the customer’s IT and SAP teams. Label: page "Leading Manufacturing Cement Company"; /cloud-services/ card "Manufacturing / Cement". Summary = the /cloud-services/ card. Image replaced 23 Nov 2026 with the 1672x941 bitmap from the finalised design (640x360 card, 1200x230 banner). The Business Outcomes listed above are now real content in lib/aws-case-studies.ts, which the new layout renders. Industry mapped to Manufacturing and Supply Chain. ${NO_REGION}`,
   },
 ];

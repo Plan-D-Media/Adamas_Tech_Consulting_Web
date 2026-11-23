@@ -51,6 +51,16 @@ const ICONS = {
   check: { viewBox: "0 0 16 16", html: "<path stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m3 8.5 3 3 7-7\"/>" },
   // Solid play triangle for the About page's video cards (Figma "play-circle"); the ring is drawn by the component.
   play: { viewBox: "0 0 16 16", html: "<path fill=\"currentColor\" d=\"M5.6 3.3a.6.6 0 0 1 .92-.5l6 4.7a.6.6 0 0 1 0 1l-6 4.7a.6.6 0 0 1-.92-.5z\"/>" },
+  // Read time on the AWS case studies (Case Study_*.svg, 23 Nov 2026).
+  clock: {
+    viewBox: "0 0 16 16",
+    html: "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"8\" r=\"6.2\"/><path d=\"M8 4.6V8l2.3 1.4\"/></g>",
+  },
+  // "Business Challenge" on the AWS case studies.
+  alert: {
+    viewBox: "0 0 16 16",
+    html: "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7.13 2.6a1 1 0 0 1 1.74 0l5.1 8.9a1 1 0 0 1-.87 1.5H2.9a1 1 0 0 1-.87-1.5z\"/><path d=\"M8 6.2v2.9\"/><path d=\"M8 11.1h.01\"/></g>",
+  },
 } as const;
 
 export type IconName = keyof typeof ICONS;

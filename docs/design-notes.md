@@ -312,3 +312,107 @@ scoped to the page rather than adopted site-wide, both under `.cloud-v2`:
 Both should move into `@theme` if the revamp rolls out site-wide. Full inventory, the content held back for the
 client and the question about the other pillars:
 `docs/qa/evidence/inner-pages/CLOUD_SERVICES_V2.md`.
+
+### The finalised Cloud pages, two case studies and one lead inbox (23 November 2026)
+
+The client sent a zip of finalised designs (`Adamas_web_new design.zip`, extracted to
+`design-ref/exports/new-design/`). **`Cloud.svg` supersedes every earlier Cloud reference** — Figma frames
+`292:24608` and `8705:3814`, `Cloud_Services.svg`, `Cloud (1).svg`, `Frame 1000005184.svg` and the page built in
+round 9. For these pages the brief overrides the earlier decision about design tokens: the designs' own fonts,
+column width and spacing are followed exactly, scoped to `.cloud-v2` so the rest of the site is unaffected.
+
+**Every page SVG has its text outlined to paths**, and three of the four matching Figma frames are older than the
+zip (Cloud 6695 against 8480, Managed Services 5997 against 7252, Kubernetes 4152 against 4867), so the Figma text
+could not be used. All the copy was transcribed from renders instead, and every transcribed block is listed for
+proofreading in `docs/qa/evidence/cloud-final/`. New tooling for that: `scripts/qa/render-new-design.mjs`
+(rasterise), `scripts/qa/slice-design.mjs` (readable bands), `scripts/qa/detect-bands.mjs` (section boundaries
+from the pixels, since there is no Figma geometry) and `scripts/extract-svg-images.mjs` (pull the embedded
+bitmaps out for the asset pipeline).
+
+**Five corrections made in round 9 were reverted.** "How we helping Business", the repeated "Our tech stack"
+eyebrow, the government-sovereignty text on the Advanced Tier badge, the duplicated Storage Consulting body and
+the repeated Delivery Validations body are all still in the finalised design, and the client has signed it off.
+They are built as drawn, per "don't redesign, reorder, shorten or improve anything", and every one is listed in
+the report instead. The `$5,000*` credits figure is published for the same reason.
+
+**Three new page types.**
+
+- `/services/cloud-services` gains a clientele marquee, photographs on the six capability cards, carousel dots on
+  the case-study rail, artwork in the phase explorer and — new — the site's contact block, which the design
+  places on the page. Eleven bands where there were ten; nothing removed, nothing reordered.
+- The **six Cloud sub-services** share a new template built to `Managed Services.svg`. Managed Services uses that
+  design's copy word for word; the other five use their own content in the same structure and **never** another
+  page's words. A slot with no content for that service renders a Draft note, visible in the preview, hidden
+  publicly. Digital Transformation, Data & AI and their children are untouched.
+- The **two client case studies** get their own layout, separate from the generic one the other eighteen still
+  use. Both are now PUBLISHED; the rest stay DRAFT.
+
+**Two motion components, both with the fallbacks built in rather than bolted on.** `ClientMarquee` and
+`VelocityTestimonials` make the animation **opt-in after hydration**, which is what makes the required behaviour
+fall out for free: the server HTML *is* the static row/grid, so no-JavaScript and `prefers-reduced-motion` are
+satisfied by the same code path, and the duplicated set is never rendered in either case (so every logo and quote
+is announced exactly once). The reduced-motion query is read in JavaScript rather than left to CSS for that
+reason. `VelocityTestimonials` is written from scratch against `motion` — React Bits' Scroll Velocity behaviour,
+none of its code, so no attribution notice attaches.
+
+Two details worth remembering:
+
+- **A marquee's spacing must not be a `gap`.** With the set duplicated and the track translated −50%, a flex
+  `gap` leaves one set exactly half a gap narrower than the translate, which shows as a jump at the loop point.
+  Spacing goes on the items as a trailing margin instead.
+- **A comparison harness that forces `reducedMotion: reduce` compares the wrong layout** on a page whose design
+  includes a marquee. `scripts/qa/compare-figma-page.mjs` now takes `reducedMotion: false` per page.
+
+**One inbox for every lead.** `MAIL_TO_ENQUIRIES` was already the single recipient for the contact form, the
+event registration's organiser copy and the newsletter notification, with no per-region routing anywhere. What
+changed: the rate-limit notice shown to visitors used to print `enquiriesInbox()`, which would leak the delivery
+address if it ever became a CRM dropbox — it now uses a separate `PUBLIC_CONTACT_EMAIL` constant. `.env.example`
+documents the SMTP block properly (the unused `AWS_REGION` is gone, and `MAILER` no longer claims a `ses` mode
+that does not exist), and `docs/deploy.md` gains a launch checklist with the real-send test.
+
+**Accessibility fixes found by axe in this round:** the breadcrumb on a dark hero was rendering in its
+light-background colours (about 1.5:1) — `Breadcrumb` now takes a `tone` prop; the phase explorer's inactive
+numbers were 3.1:1 and its active subtitle 3.4:1; and the mega-menu portal host is now a labelled `<nav>`, since
+a direct child of `<body>` otherwise puts the open panel outside every landmark.
+
+### The ecosystem orb becomes 3D, and one inbox detail (23 November 2026, later)
+
+**The flat polyhedron at the centre of "Why Organisations Choose Adamas" is now the handoff's three.js lattice.**
+It appeared in exactly one place on the site - `components/home/Difference.tsx`, rendered on `/in/`, `/uk/` and
+`/gcc/`. (`images/about/globe.webp` on the About page is a different shape and is untouched; `ServiceDifference`
+on the pillar pages has no polyhedron at all.)
+
+The handoff moved from `handoff/` into `components/polynode/`, its `.js` became a typed `.ts`, and the
+`tsconfig`/`eslint` exclusions that kept it out of the gates are gone. `three` is pinned at **0.187.0** exact,
+with `@types/three` to match. Four things were added to the scene for this brief: the nodes pulse while idle and
+brighten on hover, the spin is **integrated from a frame delta** rather than read off a running clock (so hover
+can speed it up without the rotation jumping, and a hidden tab resumes where it left off), a tap drives the same
+response once on touch, and rendering stops on `visibilitychange` as well as when the orb leaves the viewport.
+`THREE.Clock` is deprecated in 0.187 and warned on every page; `performance.now()` replaced it.
+
+**`three` is never in the initial bundle, and usually never downloaded at all.** `polynode-orb.ts` imports only
+*types* from three and takes the namespace as an argument, so nothing pulls the library in by reference;
+`DifferenceOrb` is the gate and checks, in order: reduced motion, a viewport under 768px, `saveData`, and a
+throwaway WebGL context. Only then does a 400px-margin IntersectionObserver trigger the client-only dynamic
+import. The flat artwork is the poster in the server HTML at its final size and stays as the fallback, so the
+box never changes and the LCP candidate is unaffected.
+
+**Two things worth remembering:**
+
+- **`:not([data-drawn])` is not a scope.** The entrance sequence's pre-state was first written as
+  `:not([data-drawn]) > .ecosystem-card`; since the cards sit inside a `<ul>` whose parent is the stage, the
+  selector never stopped matching and every card stayed invisible. Anchor to the stage itself -
+  `[data-stage="ecosystem"]:not([data-drawn]) .ecosystem-card`.
+- **A scale transform is not a layout shift.** The orb's entrance scales it to 0.82, which `getBoundingClientRect`
+  reports and `offsetWidth` does not. The e2e test measures the latter, because that is what CLS counts.
+
+**Also fixed in the same pass:** `inert: "" as unknown as boolean` on the testimonial row's duplicated cards -
+React 19 wants a real boolean and logs "Received an empty string for a boolean attribute inert" otherwise. The
+clientele marquee had the same cast. And nine next/image "width or height modified, but not the other" warnings
+on the Cloud and sub-service pages: those images fix a height in CSS and let the width flex, which is what `fill`
+is for, so they now use it inside a positioned box.
+
+`scripts/qa/console-check.mjs` reports next/image's "detected as the Largest Contentful Paint" advice separately
+from real faults. Scrolling a page to the bottom makes a below-the-fold image the largest thing ever painted, so
+the advisory fires for images that are not the LCP - and acting on it would make LCP worse. `--no-scroll` judges
+the page the way that warning means it.

@@ -469,3 +469,63 @@ drafts preview with Draft markers. What the client has to supply for each, befor
 
 Also outstanding from earlier rounds and unchanged: leadership profiles and bios, certificate numbers and validity
 dates, the RICE Adamas Group description.
+
+---
+
+## Round 10 additions (23 November 2026) — the finalised Cloud pages
+
+### Part B: permissions
+
+- **Written permission to display each client logo.** The fourteen logos supplied in `client-logos/` now run in
+  the clientele strip on `/services/cloud-services`: AAF International, AmritHub, DavaIndia, Eloquent Solutions,
+  GTPL, Healync, Humanize, JMR Infotech, Kofuku Technologies, Saatvik Green Energy, Senco Gold & Diamonds,
+  Star Cement, SteelMint and University of Kalyani. **We need written permission from each of them**, as we
+  already do for the logos on the homepage strip (Q5.5).
+- **Written permission for the four testimonials** on the Cloud page (Sunita Kulkarni, Anjali Trivedi,
+  Aditya Sharma, Raghavendra M.S.) — already on this list, repeated because they are now in a prominent moving
+  row.
+- **Confirmation that the two published case studies may stay published** with the client identified only as
+  "a leading HealthTech company" and "a leading manufacturing cement company".
+
+### The logo files themselves
+
+| Problem | Effect | What we need |
+|---|---|---|
+| Every supplied logo is **already greyscale** | The design's "greyscale → full colour on hover" has no colour to reveal; only the fade-in and the slight lift are visible | The **colour** versions, ideally SVG |
+| Every supplied logo is **60 px tall** | The strip is capped at a 32 px row if the 2× is to be real pixels; the design draws them at about 40 px | Higher-resolution or vector files |
+| The supplied set is **not the set in the design** | The design shows seven companies already in our Logo table (United Foods, GRSE, WorkIndia, Aldar, Webel, IISc, Gulf Processing); the folder holds fourteen different ones, so the design's order could not be followed | Confirm which set belongs on this strip, and in what order |
+
+### Copy to approve or correct
+
+Built exactly as the designs draw them, each one edit from being fixed:
+
+1. **"How we helping Business"** — the case-study heading on the Cloud page and on all six sub-service pages.
+2. **"Our tech stack"** used twice as an eyebrow on the Cloud page, on consecutive bands.
+3. **"Advanced Tier Service Partner"** described as a government digital-sovereignty offering.
+4. **"Storage Consulting" and "Managed Services Provider"** carrying the same sentence word for word.
+5. **"Our Delivery Validations"** repeating the section body above it.
+6. **"day-2000 operations"** in the Cloud hero (the framework heading says "day-two operations").
+7. **"$5,000\*" in cloud credits** — a provider-set figure; the design's own footnote says it is assessed case by
+   case.
+8. **"on cloud" vs "on AWS"** — the SAP case study's card title differs between `Cloud.svg` and
+   `Managed Services.svg`.
+9. **"Application Mordernazation"** in the related-services row (built as "Application Modernisation").
+10. **"on AWS Web Services"** in the Migration hero title.
+11. **"Talk to our Managed cloud team"** as the hero CTA on the Migration page as well as Managed Services.
+12. **Five carousel dots under three case-study cards** — are two more case studies coming?
+
+### Content still missing for the sub-service pages
+
+| Page | What is missing |
+|---|---|
+| Migration & Modernisation | Bodies for the four use-case cards (the frame fills all four with "Outcome-led service framing for &lt;title&gt; on AWS"); a benefits section |
+| DevOps & SecOps | The "how this service creates value" band |
+| AI/ML Ops | Everything below the hero |
+| Cloud Automation | Everything below the hero — and **its database row currently holds the Oracle NetSuite for Construction copy**, which is a different service and needs a page of its own |
+| Cloud Advisory & Consultation | A benefits section and a value section |
+| All six | Per-service photography; the design supplies one shared AWS-themed set |
+
+### Lead delivery
+
+Not content, but it belongs on the same list: **leads are saved but not emailed** until the client's IT team
+supplies SMTP credentials. See the launch checklist in `docs/deploy.md`.

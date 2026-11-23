@@ -185,21 +185,31 @@ export const pillars: PillarSeed[] = [
       {
         slug: "ai-ml-ops",
         name: "AI/ML Ops",
-        descriptor: "[Placeholder] One line on running SAP on the cloud.",
-        summary: "[Placeholder] Short introduction to SAP on Cloud services.",
-        // DRAFT: BUG-014 sweep, 17 Nov 2026: placeholder descriptor and summary (Q5.2)
-        status: "DRAFT",
+        descriptor:
+          "Deploy, monitor and retrain models in production with proper versioning, drift detection and cost guardrails.",
+        summary:
+          "Deploy, monitor and retrain models in production with proper versioning, drift detection and cost guardrails - the part most pilots never reach.",
+        // PUBLISHED 23 Nov 2026: the placeholder descriptor and summary (which described SAP, not AI/ML Ops) are
+        // replaced by the line the finalised Cloud design gives this capability. The page itself is the new
+        // sub-service template; its body sections show a Draft note until the client supplies copy. It has to be
+        // published because the Cloud page's "Learn more" card links to it.
+        status: "PUBLISHED",
         sortOrder: 3,
         needsReview: true,
         editorNote:
-          'MISSING: no old page. Case-study-backed facts available: "Strengthening SAP Resilience and Disaster Recovery on AWS" (SAP HANA System Replication, AWS Backup, CloudWatch). Copy needed. Name to confirm (Q5.3).',
+          'MISSING: no old page and no frame. Only the hero line is real copy (from the Cloud page capability card); the service overview, benefits, "what we manage" and value sections have no content and are hidden in the public build. Case-study-backed facts available: "Strengthening SAP Resilience and Disaster Recovery on AWS" (SAP HANA System Replication, AWS Backup, CloudWatch). Copy needed. Name to confirm (Q5.3).',
       },
       {
         slug: "cloud-automation",
         name: "Cloud Automation",
-        descriptor: "Unified Cloud ERP for Modern Construction",
+        // 23 Nov 2026: the descriptor and summary were the Oracle NetSuite for Construction copy, which is a
+        // different service and was feeding this page's title and meta description. Replaced with the line the
+        // finalised Cloud design gives this capability. The NetSuite material below is left in the row so it is
+        // not lost - it needs a home of its own; see the editorNote.
+        descriptor:
+          "Infrastructure-as-code, policy-as-code and self-healing runbooks that remove repetitive manual work.",
         summary:
-          "Adamas Tech Consulting helps Construction, Engineering, EPC, and Contracting companies transform their operations with Oracle NetSuite — the world’s #1 true cloud ERP. Built for end-to-end project visibility and designed to eliminate fragmentation, NetSuite delivers real-time financial, operational, and project control for GCC companies.",
+          "Infrastructure-as-code, policy-as-code and self-healing runbooks that remove the repetitive manual work quietly consuming your team's capacity.",
         whoFor:
           "NetSuite includes purpose-built capabilities for contractors, EPC firms, MEP providers, and engineering organisations.",
         whatWeDo: [
@@ -243,7 +253,7 @@ export const pillars: PillarSeed[] = [
         sortOrder: 4,
         needsReview: true,
         editorNote:
-          'From /oracle-netsuite-solutions/, which is written for Construction & Engineering in the GCC: confirm that focus for a global page. Descriptor is the /in/ homepage card line. Unverified claims: "the world’s #1 true cloud ERP", "USD 3.4M" saving (from "our comparison matrix"), "NetSuite-certified consultants". The "Why NetSuite Outperforms SAP for Construction" comparison is not migrated (sensitive next to the SAP practice): confirm. Placement and name to confirm (Q2.3, Q5.3).',
+          'WRONG PAGE: everything below the descriptor is the Oracle NetSuite for Construction copy from /oracle-netsuite-solutions/, which is not Cloud Automation. It needs its own page; it is kept here only so it is not lost. From /oracle-netsuite-solutions/, which is written for Construction & Engineering in the GCC: confirm that focus for a global page. Descriptor is the /in/ homepage card line. Unverified claims: "the world’s #1 true cloud ERP", "USD 3.4M" saving (from "our comparison matrix"), "NetSuite-certified consultants". The "Why NetSuite Outperforms SAP for Construction" comparison is not migrated (sensitive next to the SAP practice): confirm. Placement and name to confirm (Q2.3, Q5.3).',
       },
       {
         slug: "cloud-advisory-consultation",

@@ -3,16 +3,17 @@ import { notFound } from "next/navigation";
 import { getPillar, getPillars } from "@/lib/data/services";
 import { getBlocks } from "@/lib/data/site";
 import { plain } from "@/lib/placeholder";
+import { defaultRegion } from "@/lib/region";
 import { NO_CONTENT_SLUG, atLeastOne } from "@/lib/static-params";
 import { redirectIfUnpublished } from "@/lib/data/unpublished";
-import { getClientLogos } from "@/lib/data/pages";
 import { PillarPage } from "@/components/services/PillarPage";
 import { CloudServicesPage } from "@/components/services/cloud/CloudServicesPage";
 
 /**
- * Cloud Services was rebuilt to the November 2026 revamp (Figma IldSD5373EYodtZ2XH17uk, frame 8705:3814) and has
- * its own layout. Every other pillar - Digital Transformation, Data & AI - and every sub-service page still
- * renders the shared `PillarPage` template, which this round did not touch.
+ * Cloud Services is built to the finalised design `design-ref/exports/new-design/Cloud.svg` (23 Nov 2026) and has
+ * its own layout. Every other pillar - Digital Transformation, Data & AI - still renders the shared `PillarPage`
+ * template, which this round did not touch. The six Cloud sub-services have their own template, built to
+ * `Managed Services.svg`; see `app/(site)/services/[pillar]/[service]/page.tsx`.
  */
 const REBUILT = new Set(["cloud-services"]);
 
@@ -52,6 +53,6 @@ async function Pillar({ params }: { params: PageProps<"/services/[pillar]">["par
     await redirectIfUnpublished("services", pillar);
     notFound();
   }
-  if (REBUILT.has(pillar)) return <CloudServicesPage clientLogos={await getClientLogos()} />;
+  if (REBUILT.has(pillar)) return <CloudServicesPage contactBlock={blocks["home.contact"] ?? null} fallbackRegion={defaultRegion()} />;
   return <PillarPage pillar={p} blocks={blocks} />;
 }

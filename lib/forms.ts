@@ -88,7 +88,22 @@ export async function sendMail(msg: MailMessage): Promise<boolean> {
   return mailer === "console";
 }
 
+/**
+ * Where leads are delivered. ONE inbox for the whole site and all three regions (client decision, 23 Nov 2026):
+ * the contact form on /in/, /uk/ and /gcc/, /contact (which every "Talk to an expert" and "Discuss This Service"
+ * button on the service, sub-service and case-study pages links to), the event registration's organiser copy and
+ * the newsletter notification all send here. There is deliberately no per-region routing.
+ *
+ * Set it in the environment. The fallback exists only so a local checkout without a .env still works.
+ */
 export const enquiriesInbox = () => process.env.MAIL_TO_ENQUIRIES ?? "marketing@adamastech.in";
+
+/**
+ * The address shown TO VISITORS (the rate-limit notice). Deliberately a constant, not `enquiriesInbox()`: where a
+ * lead is delivered may change to a CRM dropbox or a routing alias, and that address must never appear on the page.
+ * The addresses in the footer, top bar and contact cards come from the seeded region/page content, not from here.
+ */
+export const PUBLIC_CONTACT_EMAIL = "marketing@adamastech.in";
 
 /** Honeypot: a hidden field real people never fill. */
 export const HONEYPOT = "company_website";

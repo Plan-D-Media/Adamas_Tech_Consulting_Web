@@ -6,8 +6,16 @@ import { optionalCopy, plain } from "@/lib/placeholder";
 import { NO_CONTENT_SLUG, atLeastOne } from "@/lib/static-params";
 import { redirectIfUnpublished } from "@/lib/data/unpublished";
 import { articleJsonLd, breadcrumbJsonLd, openGraphFor, type Crumb } from "@/lib/seo";
+import { defaultRegion } from "@/lib/region";
+import { awsCaseStudies } from "@/lib/aws-case-studies";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CaseStudyPage } from "@/components/cases/CaseStudyPage";
+import { AwsCaseStudyPage } from "@/components/cases/AwsCaseStudyPage";
+
+/**
+ * The two client-supplied AWS case studies have their own designs (23 Nov 2026) and render
+ * `AwsCaseStudyPage`; the other eighteen still render the generic `CaseStudyPage`, untouched.
+ */
 
 /** With no visible case study (all DRAFT) the placeholder param keeps the build alive; it renders the 404 page (BUG-001). */
 export async function generateStaticParams() {
@@ -63,7 +71,17 @@ async function CaseStudy({ params }: { params: PageProps<"/case-studies/[slug]">
           modified: c.updatedAt ?? null,
         })}
       />
-      <CaseStudyPage study={c} blocks={blocks} crumbs={crumbs} />
+      {awsCaseStudies[c.slug] ? (
+        <AwsCaseStudyPage
+          study={c}
+          extra={awsCaseStudies[c.slug]}
+          contactBlock={blocks["home.contact"] ?? null}
+          fallbackRegion={defaultRegion()}
+          crumbs={crumbs}
+        />
+      ) : (
+        <CaseStudyPage study={c} blocks={blocks} crumbs={crumbs} />
+      )}
     </>
   );
 }

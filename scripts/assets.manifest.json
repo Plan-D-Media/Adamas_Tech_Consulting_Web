@@ -1381,6 +1381,653 @@
       "avifQuality": 60,
       "webpQuality": 82,
       "fit": "contain"
+    },
+    {
+      "id": "client-aaf-international",
+      "kind": "raster",
+      "src": "design-src/client-logos/aaf-logo-red-retina_gray 1.png",
+      "out": "images/clients/aaf-international",
+      "width": 65,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-amrithub",
+      "kind": "raster",
+      "src": "design-src/client-logos/amrithub_gray 1.png",
+      "out": "images/clients/amrithub",
+      "width": 44,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-davaindia",
+      "kind": "raster",
+      "src": "design-src/client-logos/davaindia_gray 1.png",
+      "out": "images/clients/davaindia",
+      "width": 162,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-eloquent-solutions",
+      "kind": "raster",
+      "src": "design-src/client-logos/Eloquent_Solutions_gray 1.png",
+      "out": "images/clients/eloquent-solutions",
+      "width": 32,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-gtpl",
+      "kind": "raster",
+      "src": "design-src/client-logos/GTPL_gray 1.png",
+      "out": "images/clients/gtpl",
+      "width": 87,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-healync",
+      "kind": "raster",
+      "src": "design-src/client-logos/Healync_Private_Health_gray 1.png",
+      "out": "images/clients/healync",
+      "width": 202,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-humanize",
+      "kind": "raster",
+      "src": "design-src/client-logos/humanize-logo_gray 1.png",
+      "out": "images/clients/humanize",
+      "width": 210,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-jmr-infotech",
+      "kind": "raster",
+      "src": "design-src/client-logos/JMR_Infotech___A_Leading_Technology_Services_Company_gray 1.png",
+      "out": "images/clients/jmr-infotech",
+      "width": 96,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-kofuku-technologies",
+      "kind": "raster",
+      "src": "design-src/client-logos/Kofuku_Technologies_gray 1.png",
+      "out": "images/clients/kofuku-technologies",
+      "width": 117,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-saatvik-green-energy",
+      "kind": "raster",
+      "src": "design-src/client-logos/Saatvik_Green_Energy_gray 1.png",
+      "out": "images/clients/saatvik-green-energy",
+      "width": 138,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-senco-gold-diamonds",
+      "kind": "raster",
+      "src": "design-src/client-logos/Senco_Gold_Diamonds_gray 1.png",
+      "out": "images/clients/senco-gold-diamonds",
+      "width": 95,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-star-cement",
+      "kind": "raster",
+      "src": "design-src/client-logos/star-cement-logo 1.png",
+      "out": "images/clients/star-cement",
+      "width": 32,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-steelmint",
+      "kind": "raster",
+      "src": "design-src/client-logos/Steel mint 1.png",
+      "out": "images/clients/steelmint",
+      "width": 144,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "client-university-of-kalyani",
+      "kind": "raster",
+      "src": "design-src/client-logos/University_of_Kalyani_gray 1.png",
+      "out": "images/clients/university-of-kalyani",
+      "width": 32,
+      "height": 32,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 70,
+      "webpQuality": 90
+    },
+    {
+      "id": "cs-card-migration",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/cloud/18_image17_401_1267.png",
+      "out": "images/services/cloud/card-migration",
+      "width": 360,
+      "height": 141,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "blur": true
+    },
+    {
+      "id": "cs-card-devops",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/cloud/19_image18_401_1267.jpg",
+      "out": "images/services/cloud/card-devops",
+      "width": 360,
+      "height": 141,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "blur": true
+    },
+    {
+      "id": "cs-card-managed",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/cloud/20_image19_401_1267.jpg",
+      "out": "images/services/cloud/card-managed",
+      "width": 360,
+      "height": 141,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "blur": true
+    },
+    {
+      "id": "cs-card-aiml",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/cloud/21_image20_401_1267.png",
+      "out": "images/services/cloud/card-aiml",
+      "width": 360,
+      "height": 141,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "blur": true
+    },
+    {
+      "id": "cs-card-automation",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/cloud/22_image21_401_1267.png",
+      "out": "images/services/cloud/card-automation",
+      "width": 360,
+      "height": 141,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "blur": true
+    },
+    {
+      "id": "cs-card-advisory",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/cloud/23_image22_401_1267.jpg",
+      "out": "images/services/cloud/card-advisory",
+      "width": 360,
+      "height": 141,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "blur": true
+    },
+    {
+      "id": "cs-framework-advisory",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/cloud/27_image26_401_1267.png",
+      "out": "images/services/cloud/framework-advisory",
+      "width": 290,
+      "height": 210,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 60,
+      "webpQuality": 82
+    },
+    {
+      "id": "ms-hero-art",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/03_image2_401_641.jpg",
+      "out": "images/services/managed/hero-art",
+      "width": 700,
+      "height": 620,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 80,
+      "blur": true
+    },
+    {
+      "id": "ms-overview",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/04_image3_401_641.jpg",
+      "out": "images/services/managed/overview",
+      "width": 490,
+      "height": 290,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 80,
+      "blur": true
+    },
+    {
+      "id": "ms-why-1",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/05_image4_401_641.png",
+      "out": "images/services/managed/why-1",
+      "width": 110,
+      "height": 110,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 55,
+      "webpQuality": 80
+    },
+    {
+      "id": "ms-why-2",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/06_image5_401_641.png",
+      "out": "images/services/managed/why-2",
+      "width": 110,
+      "height": 110,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 55,
+      "webpQuality": 80
+    },
+    {
+      "id": "ms-why-3",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/07_image6_401_641.png",
+      "out": "images/services/managed/why-3",
+      "width": 110,
+      "height": 110,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 55,
+      "webpQuality": 80
+    },
+    {
+      "id": "ms-why-4",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/08_image7_401_641.png",
+      "out": "images/services/managed/why-4",
+      "width": 110,
+      "height": 110,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 55,
+      "webpQuality": 80
+    },
+    {
+      "id": "ms-why-5",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/09_image8_401_641.png",
+      "out": "images/services/managed/why-5",
+      "width": 110,
+      "height": 110,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 55,
+      "webpQuality": 80
+    },
+    {
+      "id": "ms-why-6",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/10_image9_401_641.png",
+      "out": "images/services/managed/why-6",
+      "width": 110,
+      "height": 110,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 55,
+      "webpQuality": 80
+    },
+    {
+      "id": "ms-video-poster",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/11_image10_401_641.png",
+      "out": "images/services/managed/video-poster",
+      "width": 512,
+      "height": 330,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 80,
+      "blur": true
+    },
+    {
+      "id": "ms-value-1",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/12_image11_401_641.png",
+      "out": "images/services/managed/value-1",
+      "width": 268,
+      "height": 124,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 80,
+      "blur": true
+    },
+    {
+      "id": "ms-value-2",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/13_image12_401_641.png",
+      "out": "images/services/managed/value-2",
+      "width": 268,
+      "height": 124,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 80,
+      "blur": true
+    },
+    {
+      "id": "ms-value-3",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/14_image13_401_641.png",
+      "out": "images/services/managed/value-3",
+      "width": 268,
+      "height": 124,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 80,
+      "blur": true
+    },
+    {
+      "id": "ms-value-4",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/15_image14_401_641.png",
+      "out": "images/services/managed/value-4",
+      "width": 268,
+      "height": 124,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 80,
+      "blur": true
+    },
+    {
+      "id": "ms-related-1",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/18_image17_401_641.png",
+      "out": "images/services/managed/related-1",
+      "width": 100,
+      "height": 90,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 55,
+      "webpQuality": 80
+    },
+    {
+      "id": "ms-related-2",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/19_image18_401_641.png",
+      "out": "images/services/managed/related-2",
+      "width": 100,
+      "height": 90,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 55,
+      "webpQuality": 80
+    },
+    {
+      "id": "ms-related-3",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/20_image19_401_641.png",
+      "out": "images/services/managed/related-3",
+      "width": 100,
+      "height": 90,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 55,
+      "webpQuality": 80
+    },
+    {
+      "id": "ms-related-4",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/21_image20_401_641.png",
+      "out": "images/services/managed/related-4",
+      "width": 100,
+      "height": 90,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "contain",
+      "avifQuality": 55,
+      "webpQuality": 80
+    },
+    {
+      "id": "case-kubernetes-banner",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/16_image15_401_641.png",
+      "out": "images/case-studies/kubernetes-operations-healthtech-banner",
+      "width": 1200,
+      "height": 230,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "blur": true
+    },
+    {
+      "id": "case-cement-banner",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/17_image16_401_641.png",
+      "out": "images/case-studies/sap-disaster-recovery-cement-banner",
+      "width": 1200,
+      "height": 230,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "blur": true
+    },
+    {
+      "id": "case-kubernetes-card",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/16_image15_401_641.png",
+      "out": "images/case-studies/kubernetes-operations-healthtech",
+      "width": 640,
+      "height": 360,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "blur": true
+    },
+    {
+      "id": "case-cement-card",
+      "kind": "raster",
+      "src": "design-ref/exports/new-design/images/managed-services/17_image16_401_641.png",
+      "out": "images/case-studies/sap-disaster-recovery-cement",
+      "width": 640,
+      "height": 360,
+      "scales": [
+        1,
+        2
+      ],
+      "fit": "cover",
+      "avifQuality": 55,
+      "webpQuality": 78,
+      "blur": true
     }
   ]
 }

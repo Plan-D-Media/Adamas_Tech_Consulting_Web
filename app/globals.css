@@ -482,6 +482,105 @@
     animation-play-state: paused;
   }
 
+  /* Clientele strip on /services/cloud-services (components/services/cloud/ClientMarquee.tsx).
+     The default is the static, centred, wrapping row the brief asks for without JavaScript and under reduced
+     motion; the component sets data-animate after hydration to turn it into the marquee. Spacing is a trailing
+     margin on each item rather than a gap, because a gap makes one set exactly half a gap narrower than the -50%
+     the keyframe translates by, which shows as a jump at the loop point. */
+  .logo-marquee {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem 3rem;
+  }
+  .logo-marquee[data-animate] {
+    width: max-content;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 0;
+    animation: marquee var(--marquee-duration, 36s) linear infinite;
+  }
+  .logo-marquee[data-animate] > li {
+    margin-inline-end: 3rem;
+  }
+  .logo-marquee-viewport:hover .logo-marquee,
+  .logo-marquee-viewport:focus-within .logo-marquee,
+  [data-paused] .logo-marquee {
+    animation-play-state: paused;
+  }
+  .logo-marquee-item {
+    opacity: 0.55;
+    filter: grayscale(1);
+    transition:
+      opacity 240ms ease,
+      filter 240ms ease,
+      transform 240ms ease;
+  }
+  .logo-marquee li:hover .logo-marquee-item,
+  .logo-marquee li:focus-within .logo-marquee-item {
+    opacity: 1;
+    filter: grayscale(0);
+    transform: scale(1.05);
+  }
+
+  /* "Why Organisations Choose Adamas": the entrance sequence (components/home/DifferenceStage.tsx).
+     The orb scales up, the six connectors draw out from the centre, then the cards stagger in behind them.
+
+     Every pre-state is anchored to `[data-stage="ecosystem"]:not([data-drawn])`, never a bare
+     `:not([data-drawn])` - that would match any ancestor without the attribute, which for a card nested inside
+     the <ul> means it never stops matching and the cards stay invisible. Gated on `scripting: enabled`, so
+     without JavaScript the diagram is simply there. */
+  @media (scripting: enabled) {
+    .ecosystem-orb {
+      transition:
+        opacity 0.7s var(--ease-out, ease-out),
+        transform 0.9s var(--ease-out, ease-out);
+    }
+    [data-stage="ecosystem"]:not([data-drawn]) .ecosystem-orb {
+      opacity: 0;
+      transform: scale(0.82);
+    }
+
+    .ecosystem-line {
+      stroke-dasharray: var(--len, 200);
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 0.65s var(--ease-out, ease-out);
+      transition-delay: calc(0.35s + var(--i, 0) * 0.08s);
+    }
+    [data-stage="ecosystem"]:not([data-drawn]) .ecosystem-line {
+      stroke-dashoffset: var(--len, 200);
+    }
+
+    .ecosystem-connector circle {
+      transition: opacity 0.35s linear;
+      transition-delay: calc(0.75s + var(--i, 0) * 0.08s);
+    }
+    [data-stage="ecosystem"]:not([data-drawn]) .ecosystem-connector circle {
+      opacity: 0;
+    }
+
+    .ecosystem-card {
+      transition:
+        opacity 0.6s var(--ease-out, ease-out),
+        transform 0.6s var(--ease-out, ease-out);
+      transition-delay: calc(0.95s + var(--i, 0) * 0.09s);
+    }
+    [data-stage="ecosystem"]:not([data-drawn]) .ecosystem-card {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ecosystem-orb,
+      .ecosystem-line,
+      .ecosystem-connector circle,
+      .ecosystem-card {
+        transition: none;
+      }
+    }
+  }
+
   /* "Why Organisations Choose Adamas" diagram: a gentle pulse on the centre and the outer ring. */
   .difference-pulse {
     animation: difference-pulse 4s ease-in-out infinite;
@@ -585,8 +684,24 @@
   }
   .marquee-track,
   .difference-pulse,
-  .difference-ring {
+  .difference-ring,
+  .logo-marquee[data-animate],
+  .velocity-row[data-animate] {
     animation: none;
+  }
+  /* Belt and braces: ClientMarquee/VelocityRow never set data-animate under reduced motion, but if the setting
+     changes before React reacts the row must not be left as a clipped single line. */
+  .logo-marquee[data-animate] {
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem 3rem;
+  }
+  .logo-marquee[data-animate] > li {
+    margin-inline-end: 0;
+  }
+  .logo-marquee-item {
+    transition: none;
   }
   .marquee-track {
     transform: none;

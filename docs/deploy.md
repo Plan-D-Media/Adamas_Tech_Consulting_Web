@@ -85,7 +85,7 @@ Check these before the push (Settings > Environment Variables, Production and Pr
 | `MAILER` | `smtp` to send mail, `console` to only log it | contact, event registration and newsletter forms |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | the relay's values (Google Workspace: `smtp.gmail.com`, `587`, the mailbox, an app password; or Amazon SES SMTP credentials) | `MAILER=smtp` (new in round 7) |
 | `MAIL_FROM` | `AdamasTech Consulting <marketing@adamastech.in>` (a sender the relay is allowed to use) | the From header (new in round 7) |
-| `MAIL_TO_ENQUIRIES` | the inbox that receives enquiries and registrations | all forms |
+| `MAIL_TO_ENQUIRIES` | `marketing@adamastech.in` | **the single recipient for every lead form on the site**, all three regions, no per-region routing (client decision, 23 Nov 2026) |
 | `NEXT_PUBLIC_GTM_ID` | the container ID, e.g. `GTM-XXXXXXX`; leave empty to ship no analytics at all | Google Tag Manager and the consent banner (wired 17 Nov 2026) |
 | `PREVIEW_USERNAME`, `PREVIEW_PASSWORD` | set both on the staging preview; leave both unset at launch | Basic Auth challenge on every route in `proxy.ts` (new in the QA fix round, 16 Nov 2026) |
 | `CAREERS_APPLY_URL` or `CAREERS_EMAIL` | leave unset until the client decides where applications go | the Apply buttons on /about/careers; with neither set none is rendered (17 Nov 2026) |
@@ -213,7 +213,7 @@ the build reads `.env.local`.
 | `REVALIDATE_SECRET` | a long random string | `POST /api/revalidate`, and the salt for the hashed client IP in rate limiting |
 | `MAILER` | `console` | **No SMTP credentials have arrived yet.** The forms work and store the enquiry; the message is logged instead of sent. Switch to `smtp` the moment the relay exists |
 | `MAIL_FROM` | `AdamasTech Consulting <marketing@adamastech.in>` | the From header; must be an address the relay is allowed to use |
-| `MAIL_TO_ENQUIRIES` | `marketing@adamastech.in` | where enquiries and registrations go |
+| `MAIL_TO_ENQUIRIES` | `marketing@adamastech.in` | the single recipient for every lead form, all regions. Delivery only - the addresses shown in the footer, top bar and contact cards come from the seeded content and are not read from here |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | leave unset on Wednesday | only read when `MAILER=smtp` |
 | `NEXT_PUBLIC_GTM_ID` | **empty** | with no container ID the site ships no Google script, no `dataLayer`, no consent cookie and no banner. It is inlined at build time, so changing it later needs a rebuild |
 | `CAREERS_APPLY_URL` or `CAREERS_EMAIL` | leave both unset | with neither set, the Careers page shows no Apply button at all, which is correct until you decide where applications go |
@@ -282,3 +282,145 @@ In this order, because each one would mask the next:
   arrive at `MAIL_TO_ENQUIRIES` with the right From address. Do that before launch, not on launch day.
 - **Analytics.** `NEXT_PUBLIC_GTM_ID` stays empty until the client's legal adviser has read the Cookie Policy.
 - **The Careers page** is DRAFT and the `Job` table is empty, so it is review-only.
+
+## Launch checklist, 24 November 2026
+
+### Lead delivery
+
+Every lead form on the site delivers to **one** inbox, `MAIL_TO_ENQUIRIES` (`marketing@adamastech.in`): the contact
+form on `/in/`, `/uk/` and `/gcc/`, `/contact` (where every "Talk to an expert" and "Discuss This Service" button
+on the service, sub-service and case-study pages lands), the event registration's organiser copy, and the
+newsletter notification. There is no per-region routing and no hard-coded recipient anywhere in the code or the
+seed. Every submission is written to the database **before** the mail is attempted, so a send failure never loses
+a lead and never fails the visitor's submission.
+
+**Leads are saved but NOT emailed until all of this is set on Vercel (Production and Preview):**
+
+| Variable | Value | Who has to supply it |
+|---|---|---|
+| `MAILER` | `smtp` | you, once the four below exist |
+| `SMTP_HOST` | e.g. `smtp.gmail.com` (Google Workspace), `smtp-relay.brevo.com`, `email-smtp.<region>.amazonaws.com` (SES) | the client's IT team |
+| `SMTP_PORT` | `587` (STARTTLS) or `465` (implicit TLS) | the client's IT team |
+| `SMTP_USER` | the mailbox or SMTP username | the client's IT team |
+| `SMTP_PASS` | the password. **Google Workspace needs an app password**, not the account password, and that needs 2-step verification on the mailbox | the client's IT team |
+| `MAIL_FROM` | a sender the relay is **allowed** to use, e.g. `AdamasTech Consulting <marketing@adamastech.in>`. A From address the relay does not own is rejected or lands in spam | the client's IT team confirms which |
+
+Also worth asking the client's IT team for, though the forms work without them:
+
+- **SPF, DKIM and DMARC** on the sending domain. Without them Gmail and Outlook will mark the notifications as
+  spam, which looks exactly like "the form is broken".
+- Whether `marketing@adamastech.in` is a **mailbox or a distribution list**. A list that rejects external senders
+  will bounce every notification.
+
+### The real-send test (do this before announcing the site)
+
+With `MAILER=smtp` and the `SMTP_*` variables live:
+
+1. Submit the **contact form** on `/contact`. Confirm it arrives at `marketing@adamastech.in`, that the From header
+   is `MAIL_FROM`, and that Reply-To is the enquirer's own address.
+2. Submit one **event registration**. Confirm two messages: the organiser copy to `marketing@adamastech.in`, and
+   the visitor's confirmation with the `.ics` attached.
+3. Check the database rows for both have `mailedAt` set. A row with `mailedAt` null means the send failed and the
+   reason is in the Vercel function logs (`[mail] smtp send failed`).
+4. `nodemailer` is on 10.6.0 and **no message has yet been sent through a real relay on that version**, so step 1
+   is the first real test of the send path, not a formality.
+
+---
+
+## Release of 24 November 2026 — the finalised Cloud pages
+
+Run these in **PowerShell**, in this order, from the project root.
+
+### 1. Does Neon need a migration?
+
+**No new migration this round.** `prisma/schema.prisma` is unchanged: every new field for the Cloud page, the
+sub-service template and the two case studies lives in code (`lib/cloud-services-content.ts`,
+`lib/sub-service-content.ts`, `lib/aws-case-studies.ts`), not in new columns.
+
+Confirm Neon already has the six earlier migrations before seeding:
+
+```powershell
+$env:DATABASE_URL = "<neon pooled connection string>"
+$env:DIRECT_URL   = "<neon direct connection string>"
+npx prisma migrate status
+Remove-Item Env:DATABASE_URL, Env:DIRECT_URL
+```
+
+It should report "Database schema is up to date!". If it lists `20261113120000_region_gcc` or
+`20261117174539_add_job` as pending, apply them with `npx prisma migrate deploy` in the same shell before step 2.
+
+### 2. Seed Neon
+
+**This step is required**: the release publishes three rows that are DRAFT in the current preview database — the
+two case studies and `ai-ml-ops` — and corrects `cloud-automation`'s descriptor and summary.
+
+```powershell
+$env:DATABASE_URL = "<neon pooled connection string>"
+$env:DIRECT_URL   = "<neon direct connection string>"
+npx prisma db seed
+Remove-Item Env:DATABASE_URL, Env:DIRECT_URL
+```
+
+Check the output ends with `Seed complete` and that it mentions `case studies` and `services`. Then confirm the
+variables are gone, so nothing later in the session writes to Neon by accident:
+
+```powershell
+Get-ChildItem Env: | Where-Object Name -in 'DATABASE_URL','DIRECT_URL'
+```
+
+That should print nothing.
+
+### 3. Vercel environment variables
+
+Settings → Environment Variables, **Production and Preview**:
+
+| Variable | Value | Note |
+|---|---|---|
+| `MAIL_TO_ENQUIRIES` | `marketing@adamastech.in` | the single recipient for every lead form, all regions |
+| `MAILER` | `smtp` — **only once the four below are set**; otherwise leave `console` | with `console`, leads are saved but not emailed |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | from the client's IT team | see the launch checklist above |
+| `MAIL_FROM` | a sender the relay is allowed to use | e.g. `AdamasTech Consulting <marketing@adamastech.in>` |
+
+Nothing else changes. `PREVIEW_DRAFTS` stays as it is: `true` keeps the eighteen draft case studies and the
+sub-service Draft notes visible for review; `false` shows only the two published case studies and hides the
+notes. Neither setting affects the two case studies themselves — they are PUBLISHED.
+
+### 3b. Nothing to configure for the 3D orb
+
+`three` and `@types/three` are new dependencies, pinned exact at **0.187.0**. Vercel's `npm ci` picks them up
+from the lockfile; there is no environment variable and no build flag. The library is only ever fetched by the
+browser on a desktop-width viewport with WebGL and without reduced motion or Save-Data, and even then only when
+the "Why Organisations Choose Adamas" section is nearly in view, so it is not in the initial bundle on any page
+and is never downloaded at all on a phone.
+
+### 4. Commit and push
+
+```powershell
+git add -A
+git status            # read it before committing: ~120 files, including the deleted client-logos/ originals
+git commit -m "Finalised Cloud page, six sub-service pages, two published case studies, one lead inbox"
+git push
+```
+
+`client-logos/` is deliberately deleted from the repo: the originals moved to `design-src/client-logos/`, which
+is gitignored, and the processed output is in `public/media/images/clients/`.
+
+### 5. Verify the live preview
+
+1. `/services/cloud-services` — the clientele strip scrolls right to left and pauses on hover and on its button;
+   the six capability cards carry photographs; the case-study cards link to the two case studies; the testimonial
+   row drifts and speeds up as you scroll; the contact form is at the foot of the page.
+2. All six sub-service routes return 200: `/services/cloud-services/` +
+   `migration-modernization`, `devops-secops`, `managed-services`, `ai-ml-ops`, `cloud-automation`,
+   `cloud-advisory-consultation`.
+3. `/case-studies` lists **Modernising Kubernetes Operations…** and **Strengthening SAP Resilience…**, and both
+   pages return 200 with their own layout (read time, three meta cards, the section rail, Business Outcomes).
+4. `/services/digital-transformation`, `/services/ai-services` and `/services/digital-transformation/sap` are
+   unchanged.
+5. Submit the contact form on `/contact` and confirm it lands on `/thank-you` and that the row appears in the
+   database. With `MAILER=console` the message is in the Vercel function logs, not an inbox — that is expected
+   until the SMTP credentials arrive.
+6. On a **desktop** browser, scroll `/in/` to "Why Organisations Choose Adamas": the centre polyhedron should be
+   a rotating 3D lattice that tilts towards the pointer, and the six connectors should draw out before the cards
+   arrive. On a **phone** it stays the flat image, by design, as it does with reduced motion turned on, with
+   Save-Data, and on a machine without WebGL.

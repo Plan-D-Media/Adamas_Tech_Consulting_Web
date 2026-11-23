@@ -408,3 +408,126 @@
 [2026-11-20 09:03:00] preflight: free memory -> 1766 MB (floor 4096 MB)
 [2026-11-20 09:03:00] preflight: port 3000 -> IN USE, port 3100 -> free
 [2026-11-20 09:03:00] preflight FAILED with 2 problem(s):
+[2026-11-23 09:16:08] ==============================================================================
+[2026-11-23 09:16:08] Phase 2 chain starting (from step 0)
+[2026-11-23 09:16:08] --dry: plan only
+[2026-11-23 09:16:08]   step 0 - check:config
+[2026-11-23 09:16:08]   step 1 - drafts build
+[2026-11-23 09:16:08]   step 2 - public build
+[2026-11-23 09:16:08]   step 3 - final regression (e2e, public build)
+[2026-11-23 09:16:08]   step 4a - GTM dummy-container build
+[2026-11-23 09:16:08]   step 4b - GTM dummy-container check (consent suite)
+[2026-11-23 09:16:08]   step 6 - review server: next start -p 3000 against .next-drafts (left running)
+[2026-11-23 09:16:08] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-23 09:16:08] preflight: free memory -> 2938 MB (floor 4096 MB)
+[2026-11-23 09:16:08] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-23 09:16:08] preflight FAILED with 1 problem(s):
+[2026-11-23 09:56:55] ==============================================================================
+[2026-11-23 09:56:55] Phase 2 chain starting (from step 0)
+[2026-11-23 09:56:55] --dry: plan only
+[2026-11-23 09:56:55]   step 0 - check:config
+[2026-11-23 09:56:55]   step 1 - drafts build
+[2026-11-23 09:56:55]   step 2 - public build
+[2026-11-23 09:56:55]   step 3 - final regression (e2e, public build)
+[2026-11-23 09:56:55]   step 4a - GTM dummy-container build
+[2026-11-23 09:56:55]   step 4b - GTM dummy-container check (consent suite)
+[2026-11-23 09:56:55]   step 6 - review server: next start -p 3000 against .next-drafts (left running)
+[2026-11-23 09:56:55] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-23 09:56:55] preflight: free memory -> 3593 MB (floor 4096 MB)
+[2026-11-23 09:56:55] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-23 09:56:55] preflight FAILED with 1 problem(s):
+[2026-11-23 09:58:26] ==============================================================================
+[2026-11-23 09:58:26] Phase 2 chain starting (from step 0)
+[2026-11-23 09:58:26] --dry: plan only
+[2026-11-23 09:58:26]   step 0 - check:config
+[2026-11-23 09:58:26]   step 1 - drafts build
+[2026-11-23 09:58:26]   step 2 - public build
+[2026-11-23 09:58:26]   step 3 - final regression (e2e, public build)
+[2026-11-23 09:58:26]   step 4a - GTM dummy-container build
+[2026-11-23 09:58:26]   step 4b - GTM dummy-container check (consent suite)
+[2026-11-23 09:58:26]   step 6 - review server: next start -p 3000 against .next-drafts (left running)
+[2026-11-23 09:58:26] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-23 09:58:26] preflight: free memory -> 3857 MB (floor 4096 MB)
+[2026-11-23 09:58:26] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-23 09:58:26] preflight FAILED with 1 problem(s):
+[2026-11-23 10:02:38] ==============================================================================
+[2026-11-23 10:02:38] Phase 2 chain starting (from step 0)
+[2026-11-23 10:02:38] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-23 10:02:38] preflight: free memory -> 4287 MB (floor 4096 MB)
+[2026-11-23 10:02:38] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-23 10:02:38] preflight OK
+[2026-11-23 10:02:38] START step 0 - check:config: npm run check:config --silent
+[2026-11-23 10:02:39]       memory: free 4281 MB at start, lowest 4281 MB, 0 MB taken during the step
+[2026-11-23 10:02:39] PASS  step 0 - check:config (1s) -> chain-0-check-config.log
+[2026-11-23 10:02:39] START step 1 - drafts build: npx next build
+[2026-11-23 10:03:17]       memory: free 4249 MB at start, lowest 2692 MB, 1557 MB taken during the step
+[2026-11-23 10:03:17] PASS  step 1 - drafts build (38s) -> chain-1-build-drafts.log
+[2026-11-23 10:03:17] START step 2 - public build: npx next build
+[2026-11-23 10:03:56]       memory: free 4015 MB at start, lowest 2601 MB, 1414 MB taken during the step
+[2026-11-23 10:03:56] PASS  step 2 - public build (40s) -> chain-2-build-public.log
+[2026-11-23 10:03:56] START step 3 - final regression: npm run test:e2e
+[2026-11-23 10:06:57]       memory: free 3547 MB at start, lowest 281 MB, 3266 MB taken during the step
+[2026-11-23 10:06:57] FAIL  step 3 - final regression (exit 1, 181s) -> chain-3-e2e-public.log
+[2026-11-23 10:06:57] CHAIN STOPPED at step 3 - final regression (e2e, public build). Later steps not run.
+[2026-11-23 10:06:57] ------------------------------------------------------------------------------
+[2026-11-23 10:06:57] memory per step (machine total 16150 MB, floor 4096 MB)
+[2026-11-23 10:06:57]   step 0 - check:config                      start  4281 MB  lowest  4281 MB  used     0 MB
+[2026-11-23 10:06:57]   step 1 - drafts build                      start  4249 MB  lowest  2692 MB  used  1557 MB
+[2026-11-23 10:06:57]   step 2 - public build                      start  4015 MB  lowest  2601 MB  used  1414 MB
+[2026-11-23 10:06:57]   step 3 - final regression                  start  3547 MB  lowest   281 MB  used  3266 MB
+[2026-11-23 10:06:57]   worst moment: 281 MB free during "step 3 - final regression"
+[2026-11-23 10:06:57] ------------------------------------------------------------------------------
+[2026-11-23 10:07:04] Resume with: node scripts/qa/phase2-chain.mjs --from 3
+[2026-11-23 11:53:21] ==============================================================================
+[2026-11-23 11:53:21] Phase 2 chain starting (from step 0)
+[2026-11-23 11:53:21] --dry: plan only
+[2026-11-23 11:53:21]   step 0 - check:config
+[2026-11-23 11:53:21]   step 1 - drafts build
+[2026-11-23 11:53:21]   step 2 - public build
+[2026-11-23 11:53:21]   step 3 - final regression (e2e, public build)
+[2026-11-23 11:53:21]   step 4a - GTM dummy-container build
+[2026-11-23 11:53:21]   step 4b - GTM dummy-container check (consent suite)
+[2026-11-23 11:53:21]   step 6 - review server: next start -p 3000 against .next-drafts (left running)
+[2026-11-23 11:53:21] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-23 11:53:21] preflight: free memory -> 2919 MB (floor 4096 MB)
+[2026-11-23 11:53:21] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-23 11:53:21] preflight FAILED with 1 problem(s):
+[2026-11-23 12:17:41] ==============================================================================
+[2026-11-23 12:17:41] Phase 2 chain starting (from step 0)
+[2026-11-23 12:17:41] preflight: PostgreSQL on 127.0.0.1:5432 -> reachable
+[2026-11-23 12:17:41] preflight: free memory -> 4252 MB (floor 4096 MB)
+[2026-11-23 12:17:41] preflight: port 3000 -> free, port 3100 -> free
+[2026-11-23 12:17:41] preflight OK
+[2026-11-23 12:17:41] START step 0 - check:config: npm run check:config --silent
+[2026-11-23 12:17:42]       memory: free 4251 MB at start, lowest 4251 MB, 0 MB taken during the step
+[2026-11-23 12:17:42] PASS  step 0 - check:config (1s) -> chain-0-check-config.log
+[2026-11-23 12:17:42] START step 1 - drafts build: npx next build
+[2026-11-23 12:18:32]       memory: free 4223 MB at start, lowest 2443 MB, 1780 MB taken during the step
+[2026-11-23 12:18:32] PASS  step 1 - drafts build (50s) -> chain-1-build-drafts.log
+[2026-11-23 12:18:32] START step 2 - public build: npx next build
+[2026-11-23 12:18:54]       memory: free 4104 MB at start, lowest 2516 MB, 1589 MB taken during the step
+[2026-11-23 12:18:54] PASS  step 2 - public build (21s) -> chain-2-build-public.log
+[2026-11-23 12:18:54] START step 3 - final regression: npm run test:e2e
+[2026-11-23 12:24:10]       memory: free 4007 MB at start, lowest 3015 MB, 992 MB taken during the step
+[2026-11-23 12:24:10] PASS  step 3 - final regression (316s) -> chain-3-e2e-public.log
+[2026-11-23 12:24:10] START step 4a - GTM dummy-container build: npx next build
+[2026-11-23 12:24:59]       memory: free 4175 MB at start, lowest 2430 MB, 1745 MB taken during the step
+[2026-11-23 12:24:59] PASS  step 4a - GTM dummy-container build (50s) -> chain-4a-build-gtm.log
+[2026-11-23 12:24:59] START step 4b - GTM dummy-container check: npx playwright test tests/e2e/consent.spec.ts
+[2026-11-23 12:25:28]       memory: free 4013 MB at start, lowest 3230 MB, 783 MB taken during the step
+[2026-11-23 12:25:28] PASS  step 4b - GTM dummy-container check (28s) -> chain-4b-consent-gtm.log
+[2026-11-23 12:25:28] step 6 - starting the review server on 3000 against the DRAFTS build (.next-drafts)
+[2026-11-23 12:25:30] PASS  step 6 - review server up: http://localhost:3000/in/  (pid 9064, drafts build)
+[2026-11-23 12:25:30] ------------------------------------------------------------------------------
+[2026-11-23 12:25:30] memory per step (machine total 16150 MB, floor 4096 MB)
+[2026-11-23 12:25:30]   step 0 - check:config                      start  4251 MB  lowest  4251 MB  used     0 MB
+[2026-11-23 12:25:30]   step 1 - drafts build                      start  4223 MB  lowest  2443 MB  used  1780 MB
+[2026-11-23 12:25:30]   step 2 - public build                      start  4104 MB  lowest  2516 MB  used  1589 MB
+[2026-11-23 12:25:30]   step 3 - final regression                  start  4007 MB  lowest  3015 MB  used   992 MB
+[2026-11-23 12:25:30]   step 4a - GTM dummy-container build        start  4175 MB  lowest  2430 MB  used  1745 MB
+[2026-11-23 12:25:30]   step 4b - GTM dummy-container check        start  4013 MB  lowest  3230 MB  used   783 MB
+[2026-11-23 12:25:30]   worst moment: 2430 MB free during "step 4a - GTM dummy-container build"
+[2026-11-23 12:25:30] ------------------------------------------------------------------------------
+[2026-11-23 12:25:32] CHAIN COMPLETE. The review server is left running on purpose; stop it when the review is done:
+[2026-11-23 12:25:32]   Stop-Process -Id 9064
+[2026-11-23 12:25:32] ==============================================================================

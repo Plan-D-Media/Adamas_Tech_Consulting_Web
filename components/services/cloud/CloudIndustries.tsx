@@ -59,7 +59,9 @@ export function CloudIndustries({ eyebrow, heading, tabs }: { eyebrow: string; h
           <div className="mt-6 grid gap-5 lg:mt-[24px] lg:grid-cols-[minmax(0,294px)_minmax(0,1fr)]">
             <div className="rounded-xl bg-white p-3">
               {tab.image ? (
-                <Img src={tab.image} alt="" aria-hidden="true" width={294} height={280} sizes="294px" className="h-[200px] w-full rounded-lg object-cover lg:h-[280px]" />
+                <span className="relative block h-[200px] w-full overflow-hidden rounded-lg lg:h-[280px]">
+                  <Img src={tab.image} alt="" aria-hidden="true" fill sizes="294px" className="object-cover" />
+                </span>
               ) : (
                 <div className="flex h-[200px] w-full items-center justify-center rounded-lg bg-[#F2F7FF] text-center text-[0.8125rem] text-[#8A94A8] lg:h-[280px]">
                   Photograph to come

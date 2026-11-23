@@ -86,7 +86,10 @@ export function MegaMenuPortal({ navRef, hostRef, children, onPointerEnter, onPo
           onPointerLeave - the menu used to stay open wherever the pointer went. Reaching the scrim means the pointer
           is off both the header and the panel, which is exactly when the close delay should start. */}
       <div className="anim-scrim-in fixed inset-0 z-[45] bg-navy-950/30" aria-hidden="true" onClick={onScrimClick} onPointerEnter={onScrimEnter} />
-      <div
+      {/* A landmark, not a plain div: the host is a direct child of <body>, so axe's "region" rule counts the
+          open panel as content outside any landmark unless it is one itself (axe, 23 Nov 2026). */}
+      <nav
+        aria-label="Main menu"
         ref={hostRef}
         data-menu-panel-host
         className="fixed z-[60] pt-[45px]"
@@ -99,7 +102,7 @@ export function MegaMenuPortal({ navRef, hostRef, children, onPointerEnter, onPo
         onBlur={onBlur}
       >
         {children}
-      </div>
+      </nav>
     </>,
     document.body,
   );

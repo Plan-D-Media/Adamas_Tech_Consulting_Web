@@ -4,7 +4,7 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { HONEYPOT, clientIpHash, enquiriesInbox, rateLimit, sendMail } from "@/lib/forms";
+import { HONEYPOT, PUBLIC_CONTACT_EMAIL, clientIpHash, enquiriesInbox, rateLimit, sendMail } from "@/lib/forms";
 import { REGION_COOKIE, isRegionSlug, slugToCode } from "@/lib/region";
 import { contactSchema, type ContactField, type ContactState } from "@/lib/contact-schema";
 
@@ -65,7 +65,7 @@ export async function submitContact(_prev: ContactState, fd: FormData): Promise<
   if (!(await rateLimit(`contact:${ipHash}`, 5, 600))) {
     return {
       status: "limited",
-      message: `We have received several messages from this connection. Please try again in a few minutes, or email ${enquiriesInbox()}.`,
+      message: `We have received several messages from this connection. Please try again in a few minutes, or email ${PUBLIC_CONTACT_EMAIL}.`,
       values,
     };
   }

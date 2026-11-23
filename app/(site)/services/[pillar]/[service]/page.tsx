@@ -5,7 +5,16 @@ import { getBlocks } from "@/lib/data/site";
 import { plain } from "@/lib/placeholder";
 import { NO_CONTENT_SLUG, atLeastOne } from "@/lib/static-params";
 import { redirectIfUnpublished } from "@/lib/data/unpublished";
+import { defaultRegion } from "@/lib/region";
+import { subServices } from "@/lib/sub-service-content";
 import { ServicePage } from "@/components/services/ServicePage";
+import { SubServicePage } from "@/components/services/sub/SubServicePage";
+
+/**
+ * The six Cloud sub-services share a template built to the finalised design
+ * `design-ref/exports/new-design/Managed Services.svg` (23 Nov 2026). Every other sub-service - the Digital
+ * Transformation and Data & AI children - still renders the shared `ServicePage`, which this round did not touch.
+ */
 
 /** With no visible service the placeholder param keeps the build alive; it renders the 404 page (BUG-001). */
 export async function generateStaticParams() {
@@ -39,5 +48,7 @@ async function Service({ params }: { params: PageProps<"/services/[pillar]/[serv
     await redirectIfUnpublished("services", service);
     notFound();
   }
+  const sub = pillar === "cloud-services" ? subServices[service] : undefined;
+  if (sub) return <SubServicePage content={sub} contactBlock={blocks["home.contact"] ?? null} fallbackRegion={defaultRegion()} />;
   return <ServicePage service={s} blocks={blocks} />;
 }

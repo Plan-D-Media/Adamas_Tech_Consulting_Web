@@ -10,15 +10,15 @@
   · cpus: 3
 
   Creating an optimized production build ...
-✓ Compiled successfully in 4.1s
+✓ Compiled successfully in 10.9s
   Running TypeScript ...
-  Finished TypeScript in 4.9s ...
+  Finished TypeScript in 27.4s ...
   Collecting page data using 3 workers ...
-  Generating static pages using 3 workers (0/51) ...
-  Generating static pages using 3 workers (12/51) 
-  Generating static pages using 3 workers (25/51) 
-  Generating static pages using 3 workers (38/51) 
-✓ Generating static pages using 3 workers (51/51) in 4.3s
+  Generating static pages using 3 workers (0/56) ...
+  Generating static pages using 3 workers (14/56) 
+  Generating static pages using 3 workers (28/56) 
+  Generating static pages using 3 workers (42/56) 
+✓ Generating static pages using 3 workers (56/56) in 7.2s
   Finalizing page optimization ...
 
 Route (app)                                             Revalidate  Expire
@@ -32,14 +32,17 @@ Route (app)                                             Revalidate  Expire
 ├ ƒ /about/careers                                              1h      1d
 ├ ○ /about/team                                                 1h      1d
 ├ ƒ /api/revalidate
+├ ○ /apple-icon.png
 ├ ƒ /case-studies                                               1h      1d
 ├   /case-studies/[slug]                                        1h      1d
 │ ├ ◐ /case-studies/[slug]                                      1h      1d
-│ └ ○ /case-studies/no-published-content                        1h      1d
+│ ├ ○ /case-studies/kubernetes-operations-healthtech            1h      1d
+│ └ ○ /case-studies/sap-disaster-recovery-cement                1h      1d
 ├ ○ /contact                                                    1h      1d
 ├ ○ /cookie-policy                                              1h      1d
 ├ ○ /credentials                                                1h      1d
 ├ ○ /figma-fixture                                              1h      1d
+├ ○ /icon.svg
 ├ ○ /insights                                                   1h      1d
 ├ ○ /insights/blog                                              1h      1d
 ├ ○ /insights/events                                            1h      1d
@@ -47,6 +50,7 @@ Route (app)                                             Revalidate  Expire
 │ ├ ◐ /insights/events/[slug]                                   1h      1d
 │ └ ○ /insights/events/no-published-content                     1h      1d
 ├ ƒ /insights/events/[slug]/calendar
+├ ○ /manifest.webmanifest
 ├ ○ /privacy-policy                                             1h      1d
 ├ ○ /robots.txt
 ├ ○ /search                                                     1h      1d
@@ -60,7 +64,7 @@ Route (app)                                             Revalidate  Expire
 │ ├ ◐ /services/[pillar]/[service]                              1h      1d
 │ ├ ◐ /services/cloud-services/[service]                        1h      1d
 │ ├ ○ /services/cloud-services/migration-modernization          1h      1d
-│ └ ◐ [+14 more paths]
+│ └ ◐ [+15 more paths]
 ├ ○ /sitemap.xml                                                1h      1d
 ├ ○ /terms-of-use                                               1h      1d
 └ ○ /thank-you                                                  1h      1d

@@ -98,3 +98,27 @@ Entries are added by `scripts/cloud-assets.mjs` (crops read from the node transf
 | `images/services/quality-badge-1@2x, -2, -3` | Figma fills (40x40 badges) | 299:28708-28712 | 40x40 | Delivery-principles artwork |
 
 Still from the designer for this page: the vendor logos for the technology ecosystem (none drawn in), a non-placeholder hero title, and the "Glossy Cloud" icon set as vectors (the crops are rasters).
+
+## The finalised designs (round 10, 23 November 2026)
+
+42 new entries, ids `client-*`, `cs-card-*`, `cs-framework-advisory`, `ms-*` and `case-*-banner`/`case-*-card`.
+
+Their sources are **not** Figma fills this time. The client supplied four page designs as SVGs
+(`design-ref/exports/new-design/`), each with its bitmaps embedded as base64; `scripts/extract-svg-images.mjs`
+writes them out to `design-ref/exports/new-design/images/<page>/` with their natural sizes, and the manifest
+points at those files. 40 bitmaps came out of `Cloud.svg`, 24 out of `Managed Services.svg`, 5 and 7 out of the
+two case studies.
+
+| Group | Processed files | Source | Rendered size | Used in |
+|---|---|---|---|---|
+| Clientele strip | `images/clients/{aaf-international, amrithub, davaindia, eloquent-solutions, gtpl, healync, humanize, jmr-infotech, kofuku-technologies, saatvik-green-energy, senco-gold-diamonds, star-cement, steelmint, university-of-kalyani}[@2x].{avif,webp}` | `design-src/client-logos/` (client, 23 Nov 2026; originals moved out of the project root) | 32 tall, width per logo | The marquee on `/services/cloud-services` |
+| Capability cards | `images/services/cloud/card-{migration,devops,managed,aiml,automation,advisory}[@2x].{avif,webp}` + `.blur.txt` | `Cloud.svg` bitmaps 18-23 | 360x141 | The six "Six ways" cards |
+| Phase explorer | `images/services/cloud/framework-advisory[@2x].{avif,webp}` | `Cloud.svg` bitmap 27 | 290x210 | The phase-01 service card |
+| Sub-service template | `images/services/managed/{hero-art, overview, why-1..6, video-poster, value-1..4, related-1..4}[@2x].{avif,webp}` | `Managed Services.svg` bitmaps 3-21 | hero 700x620, overview 490x290, why 110x110, poster 512x330, value 268x124, related 100x90 | All six Cloud sub-service pages |
+| Case studies | `images/case-studies/{kubernetes-operations-healthtech, sap-disaster-recovery-cement}[@2x].{avif,webp}` and `...-banner.{avif,webp}` | `Managed Services.svg` bitmaps 16-17 (1672x941) | card 640x360, banner 1200x230 | The two published case studies, the listing cards, and the case-study bands on the Cloud and sub-service pages |
+
+Two notes on the supplied client logos: every file is **already desaturated**, so the design's greyscale-to-colour
+hover has nothing to reveal, and every file is **60 px tall**, which is what caps the strip at a 32 px row with a
+true 2x. Both are on the content request.
+
+The banners skip their 2x (`source 1672px < 2400px`); the originals are not large enough and were not upscaled.

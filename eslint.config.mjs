@@ -15,7 +15,6 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     // Unintegrated drop-in brief (three.js orb), not site source and not in the tsconfig program either.
-    "handoff/**",
     // QA evidence (Playwright HTML reports, traces) is generated output, not source.
     "docs/qa/evidence/**",
   ]),
